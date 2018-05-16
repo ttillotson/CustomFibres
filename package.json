@@ -1,5 +1,5 @@
 {
-    "name": "tiptoptomes",
+    "name": "customfibres",
     "private": true,
     "dependencies": {
         "babel-core": "^6.26.0",
@@ -20,7 +20,7 @@
     "devDependencies": {
         "redux-logger": "^3.0.6"
     },
-    "description": "TipTopTomes is an application for viewing, collecting and reviewing books.",
+    "description": "CustomFibres is a application designed to display custom fiber pieces created by Erik Baker.",
     "version": "1.0.0",
     "main": "index.js",
     "directories": {
@@ -41,10 +41,10 @@
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ttillotson/GoodReads.git"
+        "url": "git+https://github.com/ttillotson/CustomFibres.git"
     },
     "bugs": {
-        "url": "https://github.com/ttillotson/GoodReads/issues"
+        "url": "https://github.com/ttillotson/CustomFibres/issues"
     },
-    "homepage": "https://github.com/ttillotson/GoodReads#readme"
+    "homepage": "https://github.com/ttillotson/CustomFibres#readme"
 }
