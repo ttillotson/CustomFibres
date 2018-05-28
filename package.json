@@ -20,7 +20,7 @@
     "devDependencies": {
         "redux-logger": "^3.0.6"
     },
-    "description": "CustomFibres is a application designed to display custom fiber pieces created by Erik Baker.",
+    "description": "CustomFibres is a application designed to display carbon fiber pieces created by Erik Baker.",
     "version": "1.0.0",
     "main": "index.js",
     "directories": {
