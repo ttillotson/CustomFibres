@@ -1,24 +1,19 @@
-# README
+# CustomFibres
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## What is it
 
-Things you may want to cover:
+CustomFibres is a showcase of Erik Baker's side business of producing quality carbon fiber products. Though most of his work is creating carbon fiber covers for car pieces, he does do construction.
 
-* Ruby version
+## How does it work
 
-* System dependencies
+### Covers
 
-* Configuration
+Wrap the piece in carbon fiber and apply multiple layers of resin. Polish and reduce resin layer for a presentable piece.
 
-* Database creation
+### Construction
 
-* Database initialization
+Wrap the piece in carbon fiber, apply resin. Repeat before removing piece mold and applying several additional layers to the inside. Apply appropriate framing to make piece structually sound.
 
-* How to run the test suite
+## Constructed Pieces
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Showcase
