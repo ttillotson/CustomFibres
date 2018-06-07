@@ -17,3 +17,5 @@ const Admin = () => (
         </Switch>
     </main>
 );
+
+export default Admin;
