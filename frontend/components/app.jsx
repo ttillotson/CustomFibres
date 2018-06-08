@@ -1,5 +1,7 @@
 import React from 'react';
+import SplashContainer from './splash/splash_container';
 import {
+    Route,
     Redirect
 } from 'react-router-dom';
 
@@ -9,7 +11,7 @@ const App = () => (
         </header>
         <section>
             <Switch>
-                <Redirect to='/' />
+                <Route path='/' component={SplashContainer} />
             </Switch>
         </section>
     </main>
