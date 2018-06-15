@@ -25679,6 +25679,10 @@ var _app = __webpack_require__(212);
 
 var _app2 = _interopRequireDefault(_app);
 
+var _admin = __webpack_require__(222);
+
+var _admin2 = _interopRequireDefault(_admin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Root = function Root(_ref) {
@@ -25692,12 +25696,13 @@ var Root = function Root(_ref) {
             _react2.default.createElement(
                 _reactRouterDom.Switch,
                 null,
+                _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _admin2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { component: _app2.default })
             )
         )
     );
 };
-// import AdminSessionPage from './admin/session_page';
+
 exports.default = Root;
 
 /***/ }),
@@ -30266,6 +30271,182 @@ exports.default = function () {
         _react2.default.createElement('span', { className: 'email' })
     );
 };
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(23);
+
+var _routes_util = __webpack_require__(223);
+
+var _session_page = __webpack_require__(224);
+
+var _session_page2 = _interopRequireDefault(_session_page);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Admin = function Admin() {
+    return _react2.default.createElement(
+        'main',
+        { className: 'admin_container' },
+        _react2.default.createElement(
+            _reactRouterDom.Switch,
+            null,
+            _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page2.default })
+        )
+    );
+};
+
+exports.default = Admin;
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.AuthRoute = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(22);
+
+var _reactRouterDom = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Auth = function Auth(_ref) {
+    var exact = _ref.exact,
+        path = _ref.path,
+        loggedIn = _ref.loggedIn,
+        Component = _ref.component;
+    return _react2.default.createElement(_reactRouterDom.Route, { path: path, exact: exact, render: function render(props) {
+            return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });
+        } });
+};
+
+var mapStateToDispatch = function mapStateToDispatch(state) {
+    return {
+        loggedIn: Boolean(state.session.admin)
+    };
+};
+
+var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(Auth));
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminForm = function (_React$Component) {
+    _inherits(AdminForm, _React$Component);
+
+    function AdminForm(props) {
+        _classCallCheck(this, AdminForm);
+
+        var _this = _possibleConstructorReturn(this, (AdminForm.__proto__ || Object.getPrototypeOf(AdminForm)).call(this, props));
+
+        _this.state = {
+            user: "",
+            password: ""
+        };
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
+    }
+
+    _createClass(AdminForm, [{
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+            this.props.clearErrors([]);
+        }
+    }, {
+        key: "update",
+        value: function update(field) {
+            var _this2 = this;
+
+            return function (e) {
+                _this2.setState({
+                    field: e.target.value
+                });
+            };
+        }
+    }, {
+        key: "handleSubmit",
+        value: function handleSubmit(e) {
+            e.preventDefault();
+            this.props.signIn(this.state);
+        }
+    }, {
+        key: "renderErrors",
+        value: function renderErrors() {}
+    }, {
+        key: "render",
+        value: function render() {
+
+            return _react2.default.createElement(
+                "form",
+                null,
+                _react2.default.createElement(
+                    "label",
+                    null,
+                    "Username",
+                    _react2.default.createElement("input", { type: "text",
+                        value: this.state.user,
+                        onChange: this.update('user')
+                    })
+                ),
+                _react2.default.createElement(
+                    "label",
+                    null,
+                    "Password",
+                    _react2.default.createElement("input", { type: "password" })
+                )
+            );
+        }
+    }]);
+
+    return AdminForm;
+}(_react2.default.Component);
+
+exports.default = AdminForm;
 
 /***/ })
 /******/ ]);
