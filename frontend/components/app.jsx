@@ -1,5 +1,7 @@
 import React from 'react';
 import SplashContainer from './splash/splash_container';
+import Logo from './header/logo';
+import NavBar from './header/nav_bar';
 import {
     Route,
     Redirect,
@@ -9,6 +11,8 @@ import {
 const App = () => (
     <main className='main_container'>
         <header>
+            <Logo />
+            <NavBar />
         </header>
         <section>
             <Switch>

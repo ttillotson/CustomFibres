@@ -26828,6 +26828,14 @@ var _splash_container = __webpack_require__(115);
 
 var _splash_container2 = _interopRequireDefault(_splash_container);
 
+var _logo = __webpack_require__(216);
+
+var _logo2 = _interopRequireDefault(_logo);
+
+var _nav_bar = __webpack_require__(218);
+
+var _nav_bar2 = _interopRequireDefault(_nav_bar);
+
 var _reactRouterDom = __webpack_require__(39);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26836,7 +26844,12 @@ var App = function App() {
     return _react2.default.createElement(
         'main',
         { className: 'main_container' },
-        _react2.default.createElement('header', null),
+        _react2.default.createElement(
+            'header',
+            null,
+            _react2.default.createElement(_logo2.default, null),
+            _react2.default.createElement(_nav_bar2.default, null)
+        ),
         _react2.default.createElement(
             'section',
             null,
@@ -29959,6 +29972,81 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
+
+/***/ }),
+/* 215 */,
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(39);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'section',
+        { className: 'logo_container' },
+        _react2.default.createElement(
+            'h1',
+            { className: 'logo' },
+            'Custom Fibres'
+        )
+    );
+};
+
+/***/ }),
+/* 217 */,
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(39);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'nav',
+        null,
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/' },
+            'Home'
+        ),
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/development' },
+            'The Process'
+        ),
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/samples' },
+            'Showcase'
+        ),
+        _react2.default.createElement('span', { className: 'email' })
+    );
+};
 
 /***/ })
 /******/ ]);
