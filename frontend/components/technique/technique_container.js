@@ -1,6 +1,6 @@
 import Technique from './technique';
-import {} from ''; // API Calls
-import { connect } from 'react-router-dom';
+// import {} from ''; // API Calls
+import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
 

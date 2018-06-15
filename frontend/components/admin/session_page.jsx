@@ -49,3 +49,5 @@ class AdminForm extends React.Component {
         );
     }
 }
+
+export default AdminForm;

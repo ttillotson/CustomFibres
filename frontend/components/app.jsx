@@ -1,5 +1,7 @@
 import React from 'react';
 import SplashContainer from './splash/splash_container';
+import TechniqueContainer from './technique/technique_container';
+import ShowcaseContainer from './showcase/showcase_container';
 import Logo from './header/logo';
 import NavBar from './header/nav_bar';
 import {
@@ -15,7 +17,9 @@ const App = () => (
             <NavBar />
         </header>
         <section>
-            <Switch>
+            <Switch> 
+                <Route path='/technique' component={TechniqueContainer} />
+                <Route path='/showcase' component={ShowcaseContainer} />
                 <Route path='/' component={SplashContainer} />
             </Switch>
         </section>
