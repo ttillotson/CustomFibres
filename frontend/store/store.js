@@ -16,3 +16,5 @@ const configStore = (preloadedState = {}) => {
         applyMiddleware(...middlewares)
     );
 }; 
+
+export default configStore;

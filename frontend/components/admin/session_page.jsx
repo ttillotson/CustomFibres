@@ -35,13 +35,16 @@ class AdminForm extends React.Component {
 
         return(
             <form>
-                <label >Username</label>
-                <input type='text' />
-
-                <label>
-                    Password
+                <label>Username
+                    <input type='text'
+                    value={this.state.user}
+                    onChange={this.update('user')}
+                    />
                 </label>
-                <input type='password' />
+
+                <label>Password
+                    <input type='password' />
+                </label>
             </form>
         );
     }
