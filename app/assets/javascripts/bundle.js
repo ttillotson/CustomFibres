@@ -30036,12 +30036,12 @@ exports.default = function () {
         ),
         _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/development' },
+            { to: '/technique' },
             'The Process'
         ),
         _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/samples' },
+            { to: '/showcase' },
             'Showcase'
         ),
         _react2.default.createElement('span', { className: 'email' })

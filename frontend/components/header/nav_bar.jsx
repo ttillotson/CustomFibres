@@ -7,10 +7,10 @@ export default () => (
         <Link to={'/'}> 
             Home
         </Link>
-        <Link to={'/development'}> 
+        <Link to={'/technique'}> 
             The Process
         </Link>
-        <Link to={'/samples'}> 
+        <Link to={'/showcase'}> 
             Showcase
         </Link>
         <span className='email'/>
