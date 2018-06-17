@@ -29895,7 +29895,7 @@ var withRouter = function withRouter(Component) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.AuthRoute = undefined;
+exports.NonAuthRoute = exports.AuthRoute = undefined;
 
 var _react = __webpack_require__(0);
 
@@ -29917,13 +29917,24 @@ var Auth = function Auth(_ref) {
         } });
 };
 
+var NonAuth = function NonAuth(_ref2) {
+    var exact = _ref2.exact,
+        path = _ref2.path,
+        loggedIn = _ref2.loggedIn,
+        Component = _ref2.component;
+    return _react2.default.createElement(_reactRouterDom.Route, { path: path, exact: exact, render: function render(props) {
+            return !loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin/dashboard' });
+        } });
+};
+
 var mapStateToDispatch = function mapStateToDispatch(state) {
     return {
-        loggedIn: Boolean(state.session.admin)
+        loggedIn: Boolean(state.session.currentUser)
     };
 };
 
 var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(Auth));
+var NonAuthRoute = exports.NonAuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(NonAuth));
 
 /***/ }),
 /* 224 */,
@@ -30370,7 +30381,7 @@ var Admin = function Admin() {
             _reactRouterDom.Switch,
             null,
             _react2.default.createElement(_routes_util.AuthRoute, { exact: true, path: '/admin/dashboard', component: _dashboard_container2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page_container2.default })
+            _react2.default.createElement(_routes_util.NonAuthRoute, { to: '/admin', component: _session_page_container2.default })
         )
     );
 };
