@@ -4,7 +4,7 @@ class AdminForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: "",
+            username: "",
             password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,7 +17,7 @@ class AdminForm extends React.Component {
     update(field){
         return (e) => {
             this.setState({
-                field: e.target.value,
+                [field]: e.target.value,
             });
         };
     }
@@ -48,12 +48,14 @@ class AdminForm extends React.Component {
                 <label>Username
                     <input type='text'
                     value={this.state.user}
-                    onChange={this.update('user')}
+                    onChange={this.update('username')}
                     />
                 </label>
 
                 <label>Password
-                    <input type='password' />
+                    <input type='password'
+                    value={this.state.password}
+                    onChange={this.update('password')}/>
                 </label>
 
                 <button onClick={this.handleSubmit}>Sign In</button>
