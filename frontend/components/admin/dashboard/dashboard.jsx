@@ -10,7 +10,11 @@ class Dashboard extends React.Component {
     }
 
     render() {
-
+        return (
+            <main className='dashboard_container'>
+                <h1>Admin DashBoard</h1>
+            </main>
+        );
     }
 }
 

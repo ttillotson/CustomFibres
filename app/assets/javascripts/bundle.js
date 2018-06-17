@@ -4166,7 +4166,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener('DOMContentLoaded', function () {
     var root = document.getElementById('root');
     var store = void 0;
-    // if (window.currentUser) {e32
+    // if (window.currentUser) {
     //     const preLoadedState = { session: {currentUser: window.currentUser}};
     //     store = configStore(preLoadedState);
     //     delete window.currentUser;
@@ -4174,6 +4174,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //     store = configStore();
     // }
     store = (0, _store2.default)();
+    window.state = store.getState();
 
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -23437,6 +23438,8 @@ var _merge = __webpack_require__(106);
 
 var _merge2 = _interopRequireDefault(_merge);
 
+var _session_actions = __webpack_require__(239);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaultState = { admin: null };
@@ -23448,6 +23451,8 @@ var SessionReducer = function SessionReducer() {
     Object.freeze(state);
     var newState = (0, _merge2.default)({}, state);
     switch (action.type) {
+        case _session_actions.RECEIVE_CURRENT_USER:
+            return (0, _merge2.default)(newState, { currentUser: action.user });
         default:
             return state;
     }
@@ -29877,7 +29882,46 @@ var withRouter = function withRouter(Component) {
 /* 220 */,
 /* 221 */,
 /* 222 */,
-/* 223 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.AuthRoute = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(22);
+
+var _reactRouterDom = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Auth = function Auth(_ref) {
+    var exact = _ref.exact,
+        path = _ref.path,
+        loggedIn = _ref.loggedIn,
+        Component = _ref.component;
+    return _react2.default.createElement(_reactRouterDom.Route, { path: path, exact: exact, render: function render(props) {
+            return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });
+        } });
+};
+
+var mapStateToDispatch = function mapStateToDispatch(state) {
+    return {
+        loggedIn: Boolean(state.session.admin)
+    };
+};
+
+var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(Auth));
+
+/***/ }),
 /* 224 */,
 /* 225 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -30302,11 +30346,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(23);
 
-var _routes_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/routes_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _routes_util = __webpack_require__(223);
 
-var _session_page = __webpack_require__(236);
+var _session_page_container = __webpack_require__(241);
 
-var _session_page2 = _interopRequireDefault(_session_page);
+var _session_page_container2 = _interopRequireDefault(_session_page_container);
 
 var _dashboard_container = __webpack_require__(237);
 
@@ -30322,7 +30366,7 @@ var Admin = function Admin() {
             _reactRouterDom.Switch,
             null,
             _react2.default.createElement(_routes_util.AuthRoute, { exact: true, path: '/admin/dashboard', component: _dashboard_container2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page_container2.default })
         )
     );
 };
@@ -30463,6 +30507,8 @@ var _dashboard2 = _interopRequireDefault(_dashboard);
 
 var _reactRedux = __webpack_require__(22);
 
+var _session_actions = __webpack_require__(239);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -30470,7 +30516,14 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        signOut: function signOut() {
+            return dispatch((0, _session_actions.signOut)());
+        },
+        clearErrors: function clearErrors(errors) {
+            return dispatch((0, _session_actions.receiveErrors)(errors));
+        }
+    };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default);
@@ -30516,13 +30569,143 @@ var Dashboard = function (_React$Component) {
         }
     }, {
         key: 'render',
-        value: function render() {}
+        value: function render() {
+            return _react2.default.createElement(
+                'main',
+                { className: 'dashboard_container' },
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Admin DashBoard'
+                )
+            );
+        }
     }]);
 
     return Dashboard;
 }(_react2.default.Component);
 
 exports.default = Dashboard;
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.signOut = exports.signIn = exports.receiveSessionErrors = exports.receiveCurrentUser = exports.RECEIVE_SESSION_ERRORS = exports.RECEIVE_CURRENT_USER = undefined;
+
+var _session_api_util = __webpack_require__(240);
+
+var SessionApiUtil = _interopRequireWildcard(_session_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+var RECEIVE_SESSION_ERRORS = exports.RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+
+var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(user) {
+    return {
+        type: RECEIVE_CURRENT_USER,
+        user: user
+    };
+};
+
+var receiveSessionErrors = exports.receiveSessionErrors = function receiveSessionErrors(errors) {
+    return {
+        type: RECEIVE_SESSION_ERRORS,
+        errors: errors
+    };
+};
+
+var signIn = exports.signIn = function signIn(user) {
+    return function (dispatch) {
+        return SessionApiUtil.signIn(user).then(function (ajaxUser) {
+            return dispatch(receiveCurrentUser(ajaxUser));
+        }, function (errors) {
+            return dispatch(receiveSessionErrors(errors.responseJSON));
+        });
+    };
+};
+
+var signOut = exports.signOut = function signOut() {
+    return function (dispatch) {
+        return SessionApiUtil.signOut().then(function () {
+            return dispatch(receiveCurrentUser());
+        }, function (errors) {
+            return dispatch(receiveSessionErrors(errors.responseJSON));
+        });
+    };
+};
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var signIn = exports.signIn = function signIn(user) {
+    return $.ajax({
+        url: 'api/session',
+        method: 'POST',
+        data: { user: user }
+    });
+};
+
+var signOut = exports.signOut = function signOut() {
+    return $.ajax({
+        url: 'api/session',
+        method: 'DELETE'
+    });
+};
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = __webpack_require__(22);
+
+var _session_page = __webpack_require__(236);
+
+var _session_page2 = _interopRequireDefault(_session_page);
+
+var _session_actions = __webpack_require__(239);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        session: state.session.currentUser
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        signIn: function signIn(user) {
+            return dispatch((0, _session_actions.signIn)(user));
+        },
+        clearErrors: function clearErrors(errors) {
+            return dispatch((0, _session_actions.receiveSessionErrors)(errors));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_page2.default);
 
 /***/ })
 /******/ ]);
