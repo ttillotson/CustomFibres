@@ -23417,10 +23417,15 @@ var _session_reducer = __webpack_require__(105);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
+var _errors_reducer = __webpack_require__(242);
+
+var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-    session: _session_reducer2.default
+    session: _session_reducer2.default,
+    errors: _errors_reducer2.default
 });
 
 /***/ }),
@@ -23442,7 +23447,7 @@ var _session_actions = __webpack_require__(239);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultState = { admin: null };
+var defaultState = { currentUser: null };
 
 var SessionReducer = function SessionReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
@@ -30706,6 +30711,68 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_page2.default);
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(27);
+
+var _session_errors_reducer = __webpack_require__(243);
+
+var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    session: _session_errors_reducer2.default
+});
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _merge = __webpack_require__(106);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _session_actions = __webpack_require__(239);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultState = { sessionErrors: [] };
+
+var SessionErrorsReducer = function SessionErrorsReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+    var action = arguments[1];
+
+    Object.freeze(state);
+    var newState = (0, _merge2.default)({}, state);
+    switch (action.type) {
+        case _session_actions.RECEIVE_SESSION_ERRORS:
+            return action.errors;
+        case _session_actions.RECEIVE_CURRENT_USER:
+            return [];
+        default:
+            return state;
+    }
+};
+
+exports.default = SessionErrorsReducer;
 
 /***/ })
 /******/ ]);
