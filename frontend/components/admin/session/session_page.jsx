@@ -28,13 +28,23 @@ class AdminForm extends React.Component {
     }
 
     renderErrors(){
-
+        if (this.props.errors) {
+            return (
+                <ul>
+                    {this.props.errors.map((error, i) => (
+                        <li key={`${i}`}>
+                            {error}
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
     }
 
     render() {
 
         return(
-            <form>
+            <form className='admin_session_form'>
                 <label>Username
                     <input type='text'
                     value={this.state.user}
@@ -45,6 +55,10 @@ class AdminForm extends React.Component {
                 <label>Password
                     <input type='password' />
                 </label>
+
+                <button onClick={this.handleSubmit}>Sign In</button>
+
+                {this.renderErrors()}
             </form>
         );
     }

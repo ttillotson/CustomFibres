@@ -5,15 +5,15 @@ import {
     Redirect,
 } from 'react-router-dom';
 import { AuthRoute } from '../util/routes_util';
-import AdminSessionPage from './admin/session_page';
+import AdminSessionPage from './session/session_page';
+import DashboardContainer from './dashboard/dashboard_container';
 
 
 const Admin = () => (
     <main className={'admin_container'}>
         <Switch>
-            {/* <AuthRoute exact path='/admin/dashboard' component={edit content} /> */}
+            <AuthRoute exact path='/admin/dashboard' component={DashboardContainer} />
             <Route to='/admin' component={AdminSessionPage} />
-            {/* <Redirect to='/admin' /> */}
         </Switch>
     </main>
 );

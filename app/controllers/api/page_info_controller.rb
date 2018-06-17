@@ -34,6 +34,6 @@ class Api::PageInfoController < ApplicationController
     private
 
     def info_params
-        params.require(:info).permit(:title, :body)
+        params.require(:info).permit(:title, :body, :images [])
     end
 end

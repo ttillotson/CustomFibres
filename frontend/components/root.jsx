@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import App from './app';
-import Admin from './admin';
+import App from './app/app';
+import Admin from './admin/admin';
 import {
     Route,
     Redirect,

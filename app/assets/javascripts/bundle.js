@@ -25675,11 +25675,11 @@ var _reactRedux = __webpack_require__(22);
 
 var _reactRouterDom = __webpack_require__(23);
 
-var _app = __webpack_require__(212);
+var _app = __webpack_require__(225);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _admin = __webpack_require__(222);
+var _admin = __webpack_require__(235);
 
 var _admin2 = _interopRequireDefault(_admin);
 
@@ -29866,7 +29866,20 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 212 */
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29880,23 +29893,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _splash_container = __webpack_require__(213);
+var _splash_container = __webpack_require__(226);
 
 var _splash_container2 = _interopRequireDefault(_splash_container);
 
-var _technique_container = __webpack_require__(215);
+var _technique_container = __webpack_require__(228);
 
 var _technique_container2 = _interopRequireDefault(_technique_container);
 
-var _showcase_container = __webpack_require__(217);
+var _showcase_container = __webpack_require__(230);
 
 var _showcase_container2 = _interopRequireDefault(_showcase_container);
 
-var _logo = __webpack_require__(220);
+var _logo = __webpack_require__(233);
 
 var _logo2 = _interopRequireDefault(_logo);
 
-var _nav_bar = __webpack_require__(221);
+var _nav_bar = __webpack_require__(234);
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
 
@@ -29931,7 +29944,7 @@ var App = function App() {
 exports.default = App;
 
 /***/ }),
-/* 213 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29943,7 +29956,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(22);
 
-var _splash = __webpack_require__(214);
+var _splash = __webpack_require__(227);
 
 var _splash2 = _interopRequireDefault(_splash);
 
@@ -29960,7 +29973,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_splash2.default);
 
 /***/ }),
-/* 214 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29989,7 +30002,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 215 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29999,7 +30012,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _technique = __webpack_require__(216);
+var _technique = __webpack_require__(229);
 
 var _technique2 = _interopRequireDefault(_technique);
 
@@ -30020,7 +30033,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_technique2.default);
 
 /***/ }),
-/* 216 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30086,7 +30099,7 @@ var Technique = function (_React$Component) {
 exports.default = Technique;
 
 /***/ }),
-/* 217 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30096,7 +30109,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _showcase = __webpack_require__(218);
+var _showcase = __webpack_require__(231);
 
 var _showcase2 = _interopRequireDefault(_showcase);
 
@@ -30117,7 +30130,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_showcase2.default);
 
 /***/ }),
-/* 218 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30133,7 +30146,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _showcase_item = __webpack_require__(219);
+var _showcase_item = __webpack_require__(232);
 
 var _showcase_item2 = _interopRequireDefault(_showcase_item);
 
@@ -30181,7 +30194,7 @@ var Showcase = function (_React$Component) {
 exports.default = Showcase;
 
 /***/ }),
-/* 219 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30200,7 +30213,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 220 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30231,7 +30244,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 221 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30273,7 +30286,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 222 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30289,11 +30302,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(23);
 
-var _routes_util = __webpack_require__(223);
+var _routes_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/routes_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-var _session_page = __webpack_require__(224);
+var _session_page = __webpack_require__(236);
 
 var _session_page2 = _interopRequireDefault(_session_page);
+
+var _dashboard_container = __webpack_require__(237);
+
+var _dashboard_container2 = _interopRequireDefault(_dashboard_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30304,6 +30321,7 @@ var Admin = function Admin() {
         _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
+            _react2.default.createElement(_routes_util.AuthRoute, { exact: true, path: '/admin/dashboard', component: _dashboard_container2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page2.default })
         )
     );
@@ -30312,47 +30330,7 @@ var Admin = function Admin() {
 exports.default = Admin;
 
 /***/ }),
-/* 223 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.AuthRoute = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(22);
-
-var _reactRouterDom = __webpack_require__(23);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Auth = function Auth(_ref) {
-    var exact = _ref.exact,
-        path = _ref.path,
-        loggedIn = _ref.loggedIn,
-        Component = _ref.component;
-    return _react2.default.createElement(_reactRouterDom.Route, { path: path, exact: exact, render: function render(props) {
-            return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });
-        } });
-};
-
-var mapStateToDispatch = function mapStateToDispatch(state) {
-    return {
-        loggedIn: Boolean(state.session.admin)
-    };
-};
-
-var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(Auth));
-
-/***/ }),
-/* 224 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30416,14 +30394,28 @@ var AdminForm = function (_React$Component) {
         }
     }, {
         key: "renderErrors",
-        value: function renderErrors() {}
+        value: function renderErrors() {
+            if (this.props.errors) {
+                return _react2.default.createElement(
+                    "ul",
+                    null,
+                    this.props.errors.map(function (error, i) {
+                        return _react2.default.createElement(
+                            "li",
+                            { key: "" + i },
+                            error
+                        );
+                    })
+                );
+            }
+        }
     }, {
         key: "render",
         value: function render() {
 
             return _react2.default.createElement(
                 "form",
-                null,
+                { className: "admin_session_form" },
                 _react2.default.createElement(
                     "label",
                     null,
@@ -30438,7 +30430,13 @@ var AdminForm = function (_React$Component) {
                     null,
                     "Password",
                     _react2.default.createElement("input", { type: "password" })
-                )
+                ),
+                _react2.default.createElement(
+                    "button",
+                    { onClick: this.handleSubmit },
+                    "Sign In"
+                ),
+                this.renderErrors()
             );
         }
     }]);
@@ -30447,6 +30445,84 @@ var AdminForm = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = AdminForm;
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _dashboard = __webpack_require__(238);
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
+
+var _reactRedux = __webpack_require__(22);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default);
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Dashboard = function (_React$Component) {
+    _inherits(Dashboard, _React$Component);
+
+    function Dashboard(props) {
+        _classCallCheck(this, Dashboard);
+
+        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+    }
+
+    _createClass(Dashboard, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            // API Calls
+        }
+    }, {
+        key: 'render',
+        value: function render() {}
+    }]);
+
+    return Dashboard;
+}(_react2.default.Component);
+
+exports.default = Dashboard;
 
 /***/ })
 /******/ ]);
