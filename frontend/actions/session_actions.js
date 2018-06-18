@@ -23,7 +23,7 @@ export const signIn = (user) => (dispatch) => (
 
 export const signOut = () => (dispatch) => (
     SessionApiUtil.signOut().then(() => 
-        (dispatch(receiveCurrentUser())
+        (dispatch(receiveCurrentUser(null))
     ), errors => (
         dispatch(receiveSessionErrors(errors.responseJSON))
     ))

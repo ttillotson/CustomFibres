@@ -25706,7 +25706,7 @@ var Root = function Root(_ref) {
                 _reactRouterDom.Switch,
                 null,
                 _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _admin2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { component: _app2.default })
+                _react2.default.createElement(_reactRouterDom.Redirect, { component: _app2.default })
             )
         )
     );
@@ -30589,8 +30589,14 @@ var Dashboard = function (_React$Component) {
             // API Calls
         }
     }, {
+        key: 'handleSignOut',
+        value: function handleSignOut() {
+            this.props.signout();
+        }
+    }, {
         key: 'render',
         value: function render() {
+
             return _react2.default.createElement(
                 'main',
                 { className: 'dashboard_container' },
@@ -30657,7 +30663,7 @@ var signIn = exports.signIn = function signIn(user) {
 var signOut = exports.signOut = function signOut() {
     return function (dispatch) {
         return SessionApiUtil.signOut().then(function () {
-            return dispatch(receiveCurrentUser());
+            return dispatch(receiveCurrentUser(null));
         }, function (errors) {
             return dispatch(receiveSessionErrors(errors.responseJSON));
         });
@@ -30809,7 +30815,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (_ref) {
-    var signout = _ref.signout;
+    var signOut = _ref.signOut;
     return _react2.default.createElement(
         'header',
         { className: 'admin_header' },
@@ -30820,7 +30826,7 @@ exports.default = function (_ref) {
         ),
         _react2.default.createElement(
             'button',
-            { onClick: signout },
+            { onClick: signOut },
             'Sign Out'
         )
     );

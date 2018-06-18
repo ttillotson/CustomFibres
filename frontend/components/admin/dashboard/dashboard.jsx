@@ -10,12 +10,17 @@ class Dashboard extends React.Component {
         // API Calls
     }
 
+    handleSignOut() {
+        this.props.signout();
+    }
+
     render() {
+
         return (
             <main className='dashboard_container'>
                 <AdminHeading signOut={this.props.signOut} />
                 <h1>DashBoard</h1>
-                
+
             </main>
         );
     }
