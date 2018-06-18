@@ -1,4 +1,5 @@
 import React from 'react';
+import AdminHeading from './admin_heading';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -12,7 +13,9 @@ class Dashboard extends React.Component {
     render() {
         return (
             <main className='dashboard_container'>
-                <h1>Admin DashBoard</h1>
+                <AdminHeading signOut={this.props.signOut} />
+                <h1>DashBoard</h1>
+                
             </main>
         );
     }
