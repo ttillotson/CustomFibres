@@ -23412,6 +23412,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(27);
 
+var _field_reducer = __webpack_require__(246);
+
+var _field_reducer2 = _interopRequireDefault(_field_reducer);
+
+var _loading_reducer = __webpack_require__(247);
+
+var _loading_reducer2 = _interopRequireDefault(_loading_reducer);
+
 var _session_reducer = __webpack_require__(105);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
@@ -23423,6 +23431,8 @@ var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
+    field: _field_reducer2.default,
+    loading: _loading_reducer2.default,
     session: _session_reducer2.default,
     errors: _errors_reducer2.default
 });
@@ -30752,9 +30762,14 @@ var _session_errors_reducer = __webpack_require__(243);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
+var _field_errors_reducer = __webpack_require__(248);
+
+var _field_errors_reducer2 = _interopRequireDefault(_field_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
+    field: _field_errors_reducer2.default,
     session: _session_errors_reducer2.default
 });
 
@@ -30777,10 +30792,10 @@ var _session_actions = __webpack_require__(239);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultState = { sessionErrors: [] };
+// const defaultState = { sessionErrors: [] };
 
 var SessionErrorsReducer = function SessionErrorsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
     Object.freeze(state);
@@ -30831,6 +30846,192 @@ exports.default = function (_ref) {
         )
     );
 };
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
+
+var _field_api_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/field_api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var FieldAPIUtil = _interopRequireWildcard(_field_api_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_ALL_FIELDS = exports.RECEIVE_ALL_FIELDS = 'RECEIVE_FIELDS';
+var RECEIVE_FIELD = exports.RECEIVE_FIELD = 'RECEIVE_FIELD';
+var START_LOADING_ALL_FIELDS = exports.START_LOADING_ALL_FIELDS = 'START_LOADING_ALL_FIELDS';
+var START_LOADING_FIELD = exports.START_LOADING_FIELD = 'START_LOADING_FIELD';
+var RECEIVE_FIELD_ERRORS = exports.RECEIVE_FIELD_ERRORS = 'RECEIVE_FIELD_ERRORS';
+
+var receiveAllFields = function receiveAllFields(fields) {
+    return {
+        type: RECEIVE_ALL_FIELDS,
+        fields: fields
+    };
+};
+
+var receiveField = function receiveField(field) {
+    return {
+        type: RECEIVE_FIELD,
+        field: field
+    };
+};
+
+var startLoadingAllFields = function startLoadingAllFields() {
+    return {
+        type: START_LOADING_ALL_FIELDS
+    };
+};
+
+var startLoadingField = function startLoadingField() {
+    return {
+        type: START_LOADING_FIELD
+    };
+};
+
+var receiveFieldErrors = function receiveFieldErrors() {
+    return {
+        type: RECEIVE_FIELD_ERRORS
+    };
+};
+
+var fetchAllFields = exports.fetchAllFields = function fetchAllFields(pageId) {
+    return function (dispatch) {
+        dispatch(startLoadingAllFields());
+        return FieldAPIUtil.fetchFields().then(function (ajaxFields) {
+            return dispatch(receiveAllFields(ajaxFields));
+        }, function (errors) {
+            return dispatch(receiveFieldErrors(errors.responseJSON));
+        });
+    };
+};
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _merge2 = __webpack_require__(106);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+var _field_actions = __webpack_require__(245);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var FieldReducer = function FieldReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments[1];
+
+    Object.freeze(state);
+    var newState = (0, _merge3.default)({}, state);
+    switch (action.type) {
+        case _field_actions.RECEIVE_ALL_FIELDS:
+            return (0, _merge3.default)(newState, action.fields);
+        case _field_actions.RECEIVE_FIELD:
+            return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
+        default:
+            return state;
+    }
+};
+
+exports.default = FieldReducer;
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _merge = __webpack_require__(106);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _field_actions = __webpack_require__(245);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+    fieldsLoading: false
+};
+
+var LoadingReducer = function LoadingReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    Object.freeze(state);
+    var newState = (0, _merge2.default)({}, state);
+    switch (action.type) {
+        case _field_actions.START_LOADING_ALL_FIELDS:
+            return (0, _merge2.default)(newState, { fieldsLoading: true });
+        case _field_actions.RECEIVE_ALL_FIELDS:
+            return (0, _merge2.default)(newState, { fieldsLoading: false });
+        default:
+            return state;
+    }
+};
+
+exports.default = LoadingReducer;
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _merge = __webpack_require__(106);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _field_actions = __webpack_require__(245);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FieldErrorsReducer = function FieldErrorsReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    Object.freeze(state);
+    var newState = (0, _merge2.default)([], state);
+    switch (action.type) {
+        case _field_actions.RECEIVE_ALL_FIELDS:
+            return [];
+        case _field_actions.RECEIVE_FIELD:
+            return [];
+        case _field_actions.RECEIVE_FIELD_ERRORS:
+            return action.errors;
+        default:
+            return state;
+    }
+};
+
+exports.default = FieldErrorsReducer;
 
 /***/ })
 /******/ ]);
