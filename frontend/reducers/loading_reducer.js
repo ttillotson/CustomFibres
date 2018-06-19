@@ -1,9 +1,12 @@
 import merge from 'lodash/merge';
 import { START_LOADING_ALL_FIELDS,
          RECEIVE_ALL_FIELDS } from '../actions/field_actions';
+import { START_LOADING_PAGES,
+         RECEIVE_PAGES } from '../actions/pages_actions';
 
 const initialState = {
-    fieldsLoading: false
+    fieldsLoading: false,
+    pagesLoading: false,
 };
 
 const LoadingReducer = (state = initialState, action) => {
@@ -14,6 +17,10 @@ const LoadingReducer = (state = initialState, action) => {
             return merge(newState, {fieldsLoading: true});
         case RECEIVE_ALL_FIELDS: 
             return merge(newState, {fieldsLoading: false});
+        case START_LOADING_PAGES: 
+            return merge(newState, {pagesLoading: true});
+        case RECEIVE_PAGES:
+            return merge(newState, {pagesLoading: false});
         default: 
             return state;
     }
