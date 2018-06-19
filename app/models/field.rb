@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: page_infos
+# Table name: fields
 #
 #  id         :bigint(8)        not null, primary key
 #  title      :string
@@ -10,7 +10,7 @@
 #  page_id    :integer
 #
 
-class PageInfo < ApplicationRecord
+class Field < ApplicationRecord
     belongs_to :page,
     class_name: :Page,
     foreign_key: :page_id
