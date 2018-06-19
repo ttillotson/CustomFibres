@@ -1,4 +1,4 @@
-import * as PageAPIUtil from '../util/page_api_util';
+import * as PageAPIUtil from '../util/pages_api_util';
 
 export const RECEIVE_PAGES = 'RECEIVE_PAGES';
 export const RECEIVE_PAGE_ERRORS = 'RECEIVE_PAGE_ERRORS';

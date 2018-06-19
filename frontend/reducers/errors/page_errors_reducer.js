@@ -1,4 +1,4 @@
-import merge from 'lodashmerge';
+import merge from 'lodash/merge';
 import { RECEIVE_PAGES, RECEIVE_PAGE_ERRORS } from '../../actions/page_actions';
 
 const PagesErrorReducer = (state = [], action) => {

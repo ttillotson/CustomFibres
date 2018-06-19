@@ -2,7 +2,7 @@ import merge from 'lodash/merge';
 import { START_LOADING_ALL_FIELDS,
          RECEIVE_ALL_FIELDS } from '../actions/field_actions';
 import { START_LOADING_PAGES,
-         RECEIVE_PAGES } from '../actions/pages_actions';
+         RECEIVE_PAGES } from '../actions/page_actions';
 
 const initialState = {
     fieldsLoading: false,

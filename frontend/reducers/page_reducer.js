@@ -1,4 +1,4 @@
-import merge from 'lodashmerge';
+import merge from 'lodash/merge';
 import { RECEIVE_PAGES } from '../actions/page_actions';
 
 const PagesReducer = (state={}, action) => {

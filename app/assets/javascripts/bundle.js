@@ -30910,7 +30910,7 @@ var _merge2 = _interopRequireDefault(_merge);
 
 var _field_actions = __webpack_require__(245);
 
-var _pages_actions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/pages_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _page_actions = __webpack_require__(254);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30930,9 +30930,9 @@ var LoadingReducer = function LoadingReducer() {
             return (0, _merge2.default)(newState, { fieldsLoading: true });
         case _field_actions.RECEIVE_ALL_FIELDS:
             return (0, _merge2.default)(newState, { fieldsLoading: false });
-        case _pages_actions.START_LOADING_PAGES:
+        case _page_actions.START_LOADING_PAGES:
             return (0, _merge2.default)(newState, { pagesLoading: true });
-        case _pages_actions.RECEIVE_PAGES:
+        case _page_actions.RECEIVE_PAGES:
             return (0, _merge2.default)(newState, { pagesLoading: false });
         default:
             return state;
@@ -31104,9 +31104,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _lodashmerge = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"lodashmerge\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _merge = __webpack_require__(106);
 
-var _lodashmerge2 = _interopRequireDefault(_lodashmerge);
+var _merge2 = _interopRequireDefault(_merge);
 
 var _page_actions = __webpack_require__(254);
 
@@ -31141,9 +31141,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchPages = exports.START_LOADING_PAGES = exports.RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGES = undefined;
 
-var _page_api_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/page_api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _pages_api_util = __webpack_require__(256);
 
-var PageAPIUtil = _interopRequireWildcard(_page_api_util);
+var PageAPIUtil = _interopRequireWildcard(_pages_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31192,9 +31192,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _lodashmerge = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"lodashmerge\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _merge = __webpack_require__(106);
 
-var _lodashmerge2 = _interopRequireDefault(_lodashmerge);
+var _merge2 = _interopRequireDefault(_merge);
 
 var _page_actions = __webpack_require__(254);
 
@@ -31205,16 +31205,30 @@ var PagesReducer = function PagesReducer() {
     var action = arguments[1];
 
     Object.freeze(state);
-    var newState = (0, _lodashmerge2.default)({}, state);
+    var newState = (0, _merge2.default)({}, state);
     switch (action.type) {
         case _page_actions.RECEIVE_PAGES:
-            return (0, _lodashmerge2.default)(newState, action.pages);
+            return (0, _merge2.default)(newState, action.pages);
         default:
             return state;
     }
 };
 
 exports.default = PagesReducer;
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fetchPages = function fetchPages() {
+    return $.ajax({
+        url: '/api/pages',
+        method: 'GET'
+    });
+};
 
 /***/ })
 /******/ ]);
