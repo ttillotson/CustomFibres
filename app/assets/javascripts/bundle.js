@@ -23424,7 +23424,7 @@ var _session_reducer = __webpack_require__(105);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
-var _errors_reducer = __webpack_require__(242);
+var _errors_reducer = __webpack_require__(249);
 
 var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
 
@@ -30746,73 +30746,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_page2.default);
 
 /***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(27);
-
-var _session_errors_reducer = __webpack_require__(243);
-
-var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
-
-var _field_errors_reducer = __webpack_require__(248);
-
-var _field_errors_reducer2 = _interopRequireDefault(_field_errors_reducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-    field: _field_errors_reducer2.default,
-    session: _session_errors_reducer2.default
-});
-
-/***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _merge = __webpack_require__(106);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _session_actions = __webpack_require__(239);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// const defaultState = { sessionErrors: [] };
-
-var SessionErrorsReducer = function SessionErrorsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
-
-    Object.freeze(state);
-    var newState = (0, _merge2.default)({}, state);
-    switch (action.type) {
-        case _session_actions.RECEIVE_SESSION_ERRORS:
-            return action.errors;
-        case _session_actions.RECEIVE_CURRENT_USER:
-            return [];
-        default:
-            return state;
-    }
-};
-
-exports.default = SessionErrorsReducer;
-
-/***/ }),
+/* 242 */,
+/* 243 */,
 /* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30859,9 +30794,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
 
-var _field_api_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/field_api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _fields_api_util = __webpack_require__(252);
 
-var FieldAPIUtil = _interopRequireWildcard(_field_api_util);
+var FieldAPIUtil = _interopRequireWildcard(_fields_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30995,7 +30930,75 @@ var LoadingReducer = function LoadingReducer() {
 exports.default = LoadingReducer;
 
 /***/ }),
-/* 248 */
+/* 248 */,
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(27);
+
+var _session_errors_reducer = __webpack_require__(250);
+
+var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
+
+var _field_errors_reducer = __webpack_require__(251);
+
+var _field_errors_reducer2 = _interopRequireDefault(_field_errors_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    field: _field_errors_reducer2.default,
+    session: _session_errors_reducer2.default
+});
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _merge = __webpack_require__(106);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _session_actions = __webpack_require__(239);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// const defaultState = { sessionErrors: [] };
+
+var SessionErrorsReducer = function SessionErrorsReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    Object.freeze(state);
+    var newState = (0, _merge2.default)({}, state);
+    switch (action.type) {
+        case _session_actions.RECEIVE_SESSION_ERRORS:
+            return action.errors;
+        case _session_actions.RECEIVE_CURRENT_USER:
+            return [];
+        default:
+            return state;
+    }
+};
+
+exports.default = SessionErrorsReducer;
+
+/***/ }),
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31032,6 +31035,50 @@ var FieldErrorsReducer = function FieldErrorsReducer() {
 };
 
 exports.default = FieldErrorsReducer;
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fetchFields = function fetchFields(pageId) {
+    return $.ajax({
+        url: '/api/pages/' + pageId + '/fields',
+        method: 'GET'
+    });
+};
+
+var fetchField = function fetchField(fieldId) {
+    return $.ajax({
+        url: '/api/fields/' + fieldId,
+        method: 'GET'
+    });
+};
+
+var createField = function createField(field) {
+    return $.ajax({
+        url: '/api/fields',
+        method: 'POST',
+        data: { field: field }
+    });
+};
+
+var updateField = function updateField(field) {
+    return $.ajax({
+        url: '/api/fields/' + field.id,
+        method: 'PATCH',
+        data: { field: field }
+    });
+};
+
+var destroyField = function destroyField(fieldId) {
+    return $.ajax({
+        url: '/api/fields/' + fieldId,
+        method: 'DELETE'
+    });
+};
 
 /***/ })
 /******/ ]);

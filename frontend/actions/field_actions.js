@@ -1,4 +1,4 @@
-import * as FieldAPIUtil from '../util/field_api_util';
+import * as FieldAPIUtil from '../util/fields_api_util';
 
 export const RECEIVE_ALL_FIELDS = 'RECEIVE_FIELDS';
 export const RECEIVE_FIELD = 'RECEIVE_FIELD';

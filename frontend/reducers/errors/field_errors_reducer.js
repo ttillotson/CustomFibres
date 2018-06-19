@@ -2,7 +2,7 @@ import merge from 'lodash/merge';
 import { RECEIVE_ALL_FIELDS,
          RECEIVE_FIELD,
          RECEIVE_FIELD_ERRORS
-        } from '../actions/field_actions';
+        } from '../../actions/field_actions';
 
 const FieldErrorsReducer = (state = [], action) => {
     Object.freeze(state);
