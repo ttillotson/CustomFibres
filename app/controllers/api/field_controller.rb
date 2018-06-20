@@ -1,10 +1,10 @@
-class Api::PageInfoController < ApplicationController
+class Api::FieldController < ApplicationController
     def index
-        @info = PageInfo.all
+        @info = Field.all
     end
 
     def create
-        @info = PageInfo.new(info_params)
+        @info = Field.new(info_params)
 
         if @info.save 
             render :show
@@ -14,7 +14,7 @@ class Api::PageInfoController < ApplicationController
     end
 
     def update
-        @info = PageInfo.find_by(params[:id])
+        @info = Field.find_by(params[:id])
 
         if @info.update_attributes(info_params)
             render :show
@@ -24,7 +24,7 @@ class Api::PageInfoController < ApplicationController
     end
 
     def destroy
-        @info = PageInfo.find_by(params[:id])
+        @info = Field.find_by(params[:id])
 
         unless @info.destroy 
             render json: @info.errors.full_messages, status: 422

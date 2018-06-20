@@ -1,6 +1,6 @@
 import React from 'react';
 
-class InfoSection extends React.Component {
+class FieldSection extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,4 +48,4 @@ class InfoSection extends React.Component {
     }
 }
 
-export default InfoSection;
+export default FieldSection;

@@ -25720,8 +25720,7 @@ var Root = function Root(_ref) {
             _react2.default.createElement(
                 _reactRouterDom.Switch,
                 null,
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _admin2.default }),
-                _react2.default.createElement(_reactRouterDom.Redirect, { component: _app2.default })
+                _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _admin2.default })
             )
         )
     );
@@ -29910,7 +29909,7 @@ var withRouter = function withRouter(Component) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.NonAuthRoute = exports.AuthRoute = undefined;
+exports.AuthRoute = undefined;
 
 var _react = __webpack_require__(0);
 
@@ -29932,15 +29931,15 @@ var Auth = function Auth(_ref) {
         } });
 };
 
-var NonAuth = function NonAuth(_ref2) {
-    var exact = _ref2.exact,
-        path = _ref2.path,
-        loggedIn = _ref2.loggedIn,
-        Component = _ref2.component;
-    return _react2.default.createElement(_reactRouterDom.Route, { path: path, exact: exact, render: function render(props) {
-            return !loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin/dashboard' });
-        } });
-};
+// const NonAuth = ({ exact, path, loggedIn, component: Component }) => (
+//     <Route path={path} exact={exact} render={(props) => (
+//         !loggedIn ? (
+//             <Component {...props} />
+//         ) : (
+//             <Redirect to='/admin/dashboard' />
+//         )
+//     )} />
+// );
 
 var mapStateToDispatch = function mapStateToDispatch(state) {
     return {
@@ -29949,7 +29948,7 @@ var mapStateToDispatch = function mapStateToDispatch(state) {
 };
 
 var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(Auth));
-var NonAuthRoute = exports.NonAuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToDispatch, null)(NonAuth));
+// export const NonAuthRoute = withRouter(connect(mapStateToDispatch, null)(NonAuth));
 
 /***/ }),
 /* 224 */,
@@ -30396,7 +30395,7 @@ var Admin = function Admin() {
             _reactRouterDom.Switch,
             null,
             _react2.default.createElement(_routes_util.AuthRoute, { exact: true, path: '/admin/dashboard', component: _dashboard_container2.default }),
-            _react2.default.createElement(_routes_util.NonAuthRoute, { to: '/admin', component: _session_page_container2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { to: '/admin', component: _session_page_container2.default })
         )
     );
 };
@@ -30595,7 +30594,10 @@ var Dashboard = function (_React$Component) {
     function Dashboard(props) {
         _classCallCheck(this, Dashboard);
 
-        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+        _this.handleSignOut = _this.handleSignOut.bind(_this);
+        return _this;
     }
 
     _createClass(Dashboard, [{
@@ -30606,7 +30608,13 @@ var Dashboard = function (_React$Component) {
     }, {
         key: 'handleSignOut',
         value: function handleSignOut() {
-            this.props.signout();
+            var _this2 = this;
+
+            // console.log(this.props.history);
+            // debugger;
+            this.props.signOut().then(function () {
+                return _this2.props.history.push('/');
+            });
         }
     }, {
         key: 'render',
@@ -30615,7 +30623,7 @@ var Dashboard = function (_React$Component) {
             return _react2.default.createElement(
                 'main',
                 { className: 'dashboard_container' },
-                _react2.default.createElement(_admin_heading2.default, { signOut: this.props.signOut }),
+                _react2.default.createElement(_admin_heading2.default, { signOut: this.handleSignOut }),
                 _react2.default.createElement(
                     'h1',
                     null,
@@ -30970,8 +30978,8 @@ var _page_errors_reducer2 = _interopRequireDefault(_page_errors_reducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-    field: _field_errors_reducer2.default,
     page: _page_errors_reducer2.default,
+    field: _field_errors_reducer2.default,
     session: _session_errors_reducer2.default
 });
 

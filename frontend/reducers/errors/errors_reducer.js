@@ -5,7 +5,7 @@ import page from './page_errors_reducer';
 
 
 export default combineReducers({
-    field,
     page,
+    field,
     session,
 });
