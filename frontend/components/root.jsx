@@ -15,7 +15,7 @@ const Root = ({ store }) => (
         <HashRouter>
             <Switch>
                 <Route path={`/admin`} component={Admin}/>
-                {/* <Route component={App} /> */}
+                <Route component={App} />
             </Switch>
         </HashRouter>
     </Provider>

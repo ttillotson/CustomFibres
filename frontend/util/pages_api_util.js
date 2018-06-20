@@ -4,3 +4,10 @@ const fetchPages = () => (
         method: 'GET'
     })
 );
+
+const fetchPage = (pageId) => (
+    $.ajax({
+        url: '/api/page',
+        method: 'GET'
+    })
+);
