@@ -1,0 +1,1 @@
+json.partial! 'api/page/page', page: @page, fields: @fields

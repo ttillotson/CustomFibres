@@ -7,5 +7,6 @@ class Api::PageController < ApplicationController
     def show
         debugger;
         @page = Pages.find(params[:page][:pageId]).includes(:fields)
+        @fields = @page.fields
     end
 end

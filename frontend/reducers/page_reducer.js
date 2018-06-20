@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { RECEIVE_PAGES } from '../actions/page_actions';
+import { RECEIVE_PAGES, RECEIVE_PAGE } from '../actions/page_actions';
 
 const PagesReducer = (state={}, action) => {
     Object.freeze(state);
@@ -7,6 +7,8 @@ const PagesReducer = (state={}, action) => {
     switch (action.type) {
         case RECEIVE_PAGES: 
             return merge(newState, action.pages);
+        case RECEIVE_PAGE: 
+            return merge(newState, {[action.page.id]: action.page});
         default: 
             return state;
     }

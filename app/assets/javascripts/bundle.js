@@ -30920,6 +30920,8 @@ var _merge3 = _interopRequireDefault(_merge2);
 
 var _field_actions = __webpack_require__(245);
 
+var _page_actions = __webpack_require__(254);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -30935,6 +30937,8 @@ var FieldReducer = function FieldReducer() {
             return (0, _merge3.default)(newState, action.fields);
         case _field_actions.RECEIVE_FIELD:
             return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
+        case _page_actions.RECEIVE_PAGE:
+            return (0, _merge3.default)(newState, action.fields);
         default:
             return state;
     }
@@ -31267,23 +31271,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _merge = __webpack_require__(106);
+var _merge2 = __webpack_require__(106);
 
-var _merge2 = _interopRequireDefault(_merge);
+var _merge3 = _interopRequireDefault(_merge2);
 
 var _page_actions = __webpack_require__(254);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var PagesReducer = function PagesReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var action = arguments[1];
 
     Object.freeze(state);
-    var newState = (0, _merge2.default)({}, state);
+    var newState = (0, _merge3.default)({}, state);
     switch (action.type) {
         case _page_actions.RECEIVE_PAGES:
-            return (0, _merge2.default)(newState, action.pages);
+            return (0, _merge3.default)(newState, action.pages);
+        case _page_actions.RECEIVE_PAGE:
+            return (0, _merge3.default)(newState, _defineProperty({}, action.page.id, action.page));
         default:
             return state;
     }
