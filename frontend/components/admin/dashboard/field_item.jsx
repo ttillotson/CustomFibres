@@ -28,6 +28,8 @@ class FieldItem extends React.Component {
 
     render() {
 
+        let deleteButton = <button onClick={this.removeForm}>Delete</button>;
+
         return (
             <form className='edit_field'>
                 <label> Title
@@ -45,6 +47,8 @@ class FieldItem extends React.Component {
                     onChange={this.update("body")}
                     />
                 </label>
+
+                { this.state.id ? deleteButton : null }
 
                 <button onClick={this.submitForm}>Save</button>
             </form>

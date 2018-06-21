@@ -31316,11 +31316,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
     return _react2.default.createElement(
         'section',
-        { className: 'loading_icon' },
+        { className: 'loader_container' },
         _react2.default.createElement(
-            'h1',
-            null,
-            'LOADING'
+            'div',
+            { className: 'loader' },
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' })
         )
     );
 };
@@ -31639,6 +31643,12 @@ var FieldItem = function (_React$Component) {
         key: 'render',
         value: function render() {
 
+            var deleteButton = _react2.default.createElement(
+                'button',
+                { onClick: this.removeForm },
+                'Delete'
+            );
+
             return _react2.default.createElement(
                 'form',
                 { className: 'edit_field' },
@@ -31662,6 +31672,7 @@ var FieldItem = function (_React$Component) {
                         onChange: this.update("body")
                     })
                 ),
+                this.state.id ? deleteButton : null,
                 _react2.default.createElement(
                     'button',
                     { onClick: this.submitForm },
