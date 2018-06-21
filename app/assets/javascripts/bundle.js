@@ -30030,9 +30030,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(22);
 
-var _splash = __webpack_require__(227);
+var _template = __webpack_require__(262);
 
-var _splash2 = _interopRequireDefault(_splash);
+var _template2 = _interopRequireDefault(_template);
 
 var _page_actions = __webpack_require__(254);
 
@@ -30046,7 +30046,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
-        loading: state.loading.pageLoading
+        loading: state.loading.pageLoading,
+        name: "Splash"
     };
 };
 
@@ -30058,92 +30059,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_splash2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
 
 /***/ }),
-/* 227 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _loading_icon = __webpack_require__(258);
-
-var _loading_icon2 = _interopRequireDefault(_loading_icon);
-
-var _display_field_section = __webpack_require__(261);
-
-var _display_field_section2 = _interopRequireDefault(_display_field_section);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Splash = function (_React$Component) {
-    _inherits(Splash, _React$Component);
-
-    function Splash(props) {
-        _classCallCheck(this, Splash);
-
-        return _possibleConstructorReturn(this, (Splash.__proto__ || Object.getPrototypeOf(Splash)).call(this, props));
-    }
-
-    _createClass(Splash, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.fetchPage('Splash');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _props = this.props,
-                loading = _props.loading,
-                fields = _props.fields;
-
-
-            if (loading) return _react2.default.createElement(_loading_icon2.default, null);
-
-            var fieldItems = fields.map(function (field) {
-                return _react2.default.createElement(_display_field_section2.default, {
-                    title: field.title,
-                    body: field.body,
-                    key: 'key=' + field.id
-                });
-            });
-
-            return _react2.default.createElement(
-                'main',
-                null,
-                _react2.default.createElement(
-                    'h3',
-                    null,
-                    'Splash Page'
-                ),
-                fieldItems
-            );
-        }
-    }]);
-
-    return Splash;
-}(_react2.default.Component);
-
-exports.default = Splash;
-
-/***/ }),
+/* 227 */,
 /* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30154,9 +30073,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _technique = __webpack_require__(229);
+var _template = __webpack_require__(262);
 
-var _technique2 = _interopRequireDefault(_technique);
+var _template2 = _interopRequireDefault(_template);
 
 var _page_actions = __webpack_require__(254);
 
@@ -30167,9 +30086,12 @@ var _selectors = __webpack_require__(257);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages[ownProps.match.params.pageId];
+    var page = state.pages['2'];
+
     return {
-        fields: (0, _selectors.selectPageFields)(state, page)
+        fields: (0, _selectors.selectPageFields)(state, page),
+        loading: state.loading.pageLoading,
+        name: "Technique"
     };
 };
 
@@ -30181,75 +30103,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_technique2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
 
 /***/ }),
-/* 229 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Technique = function (_React$Component) {
-    _inherits(Technique, _React$Component);
-
-    // 3 Sections: Cover Piece && Built Piece && Materials
-    //      2 Sections: Description && pictures
-
-    // Model: Title, text, img urls
-    // Images are separate model?
-    //      -> Talk with Nima on how to handle image upload
-    //      -> Is it a separate model? Attached?
-    function Technique(props) {
-        _classCallCheck(this, Technique);
-
-        return _possibleConstructorReturn(this, (Technique.__proto__ || Object.getPrototypeOf(Technique)).call(this, props));
-    }
-
-    _createClass(Technique, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.fetchPage('Technique');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'section',
-                { className: 'technique_container' },
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    ' Technique Container'
-                )
-            );
-        }
-    }]);
-
-    return Technique;
-}(_react2.default.Component);
-
-exports.default = Technique;
-
-/***/ }),
+/* 229 */,
 /* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31448,6 +31305,91 @@ exports.default = function (props) {
         )
     );
 };
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _loading_icon = __webpack_require__(258);
+
+var _loading_icon2 = _interopRequireDefault(_loading_icon);
+
+var _display_field_section = __webpack_require__(261);
+
+var _display_field_section2 = _interopRequireDefault(_display_field_section);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Template = function (_React$Component) {
+    _inherits(Template, _React$Component);
+
+    function Template(props) {
+        _classCallCheck(this, Template);
+
+        return _possibleConstructorReturn(this, (Template.__proto__ || Object.getPrototypeOf(Template)).call(this, props));
+    }
+
+    _createClass(Template, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchPage(this.props.name);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                loading = _props.loading,
+                fields = _props.fields,
+                name = _props.name;
+
+
+            if (loading) return _react2.default.createElement(_loading_icon2.default, null);
+
+            var fieldItems = fields.map(function (field) {
+                return _react2.default.createElement(_display_field_section2.default, {
+                    title: field.title,
+                    body: field.body,
+                    key: 'key=' + field.id
+                });
+            });
+
+            return _react2.default.createElement(
+                'main',
+                null,
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    name,
+                    ' Page'
+                ),
+                fieldItems
+            );
+        }
+    }]);
+
+    return Template;
+}(_react2.default.Component);
+
+exports.default = Template;
 
 /***/ })
 /******/ ]);

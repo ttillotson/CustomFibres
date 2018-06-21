@@ -1,12 +1,15 @@
-import Technique from './technique';
+import Template from '../template';
 import { fetchPage } from '../../../actions/page_actions';
 import { connect } from 'react-redux';
 import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
-    const page = state.pages[ownProps.match.params.pageId];
+    const page = state.pages['2'];
+    
     return ({
-        fields: selectPageFields(state, page)
+        fields: selectPageFields(state, page),
+        loading: state.loading.pageLoading,
+        name: "Technique"
     });
 };
 
@@ -17,4 +20,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Technique);
+)(Template);

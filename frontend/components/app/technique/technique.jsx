@@ -18,6 +18,8 @@ class Technique extends React.Component {
 
 
     render() {
+        const { loading, fields } = this.props;
+    
         return (
             <section className='technique_container'>
                 <h1> Technique Container

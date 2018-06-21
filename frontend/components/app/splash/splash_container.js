@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Splash from './splash';
+import Template from '../template';
 import { fetchPage } from '../../../actions/page_actions';
 import { selectPageFields } from '../../../reducers/selectors';
 
@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
     return ({
         fields: selectPageFields(state, page),
-        loading: state.loading.pageLoading
+        loading: state.loading.pageLoading,
+        name: "Splash"
     });
 };
 
@@ -20,4 +21,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Splash);
+)(Template);
