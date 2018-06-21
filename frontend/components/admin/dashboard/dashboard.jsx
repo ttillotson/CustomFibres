@@ -10,10 +10,10 @@ class Dashboard extends React.Component {
             currentPage: "Splash"
         };
         this.handleSignOut = this.handleSignOut.bind(this);
+        this.updateTab = this.updateTab.bind(this);
     }
 
     componentDidMount() {
-        // API Calls
         window.scrollTo(0,0);
         this.props.fetchPages();
     }
@@ -25,37 +25,38 @@ class Dashboard extends React.Component {
     }
 
     updateTab(e) {
-        window.scrollTo(0,0);
-        // FLESH THIS METHOD OUT
-        // TABS MAPPING -> this.setState({currentPage: e.target})
+        if (this.state.currentPage !== e.target.textContent ) {
+            window.scrollTo(0,0);
+            this.setState({ currentPage: e.target.textContent });
+        }
     }
 
     render() {
         const { pages, fields, loading, updateField } = this.props;
-        // debugger;
+
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
-        const tabs = Object.values(pages).map((page, idx) => 
-            <li key={`key=${idx}`} className='tab'>
-                {page.name}
-            </li>
-        );
+        const tabs = Object.values(pages).map((page, idx) => {
+            let klass = 'tab';
+            let key = `key=${idx}`;
+            if (this.state.currentPage === page.name) klass += " current";
 
-        // debugger;
+            return (
+                <li key={key} 
+                    className={klass}
+                    onClick={this.updateTab}
+                    >
+                    {page.name}
+                </li>
+            );
+        });
+
         let currentPage = this.props.pages[this.state.currentPage];
 
         const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
 
             return (
-                // <FieldItemContainer 
-                // title={field.title}
-                // body={field.body}
-                // id={field.id}
-                // pageId={currentPage.id}
-                // updateField={updateField}
-                // key={`key=${field.id}`}
-                // />
                 <FieldItemContainer 
                 pageId={currentPage.id}
                 fieldId={field.id}

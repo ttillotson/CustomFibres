@@ -22,7 +22,7 @@ class FieldItem extends React.Component {
 
     submitForm(e) {
         e.preventDefault();
-        this.props.updateInfo(this.state);
+        this.props.submitField(this.state);
         // Need a flag for submission then Update complete
     }
 

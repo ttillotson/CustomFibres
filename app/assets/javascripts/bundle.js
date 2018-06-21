@@ -30485,13 +30485,13 @@ var Dashboard = function (_React$Component) {
             currentPage: "Splash"
         };
         _this.handleSignOut = _this.handleSignOut.bind(_this);
+        _this.updateTab = _this.updateTab.bind(_this);
         return _this;
     }
 
     _createClass(Dashboard, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            // API Calls
             window.scrollTo(0, 0);
             this.props.fetchPages();
         }
@@ -30507,51 +30507,50 @@ var Dashboard = function (_React$Component) {
     }, {
         key: 'updateTab',
         value: function updateTab(e) {
-            window.scrollTo(0, 0);
-            // FLESH THIS METHOD OUT
-            // TABS MAPPING -> this.setState({currentPage: e.target})
+            if (this.state.currentPage !== e.target.textContent) {
+                window.scrollTo(0, 0);
+                this.setState({ currentPage: e.target.textContent });
+            }
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             var _props = this.props,
                 pages = _props.pages,
                 fields = _props.fields,
                 loading = _props.loading,
                 updateField = _props.updateField;
-            // debugger;
+
 
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
             var tabs = Object.values(pages).map(function (page, idx) {
+                var klass = 'tab';
+                var key = 'key=' + idx;
+                if (_this3.state.currentPage === page.name) klass += " current";
+
                 return _react2.default.createElement(
                     'li',
-                    { key: 'key=' + idx, className: 'tab' },
+                    { key: key,
+                        className: klass,
+                        onClick: _this3.updateTab
+                    },
                     page.name
                 );
             });
 
-            // debugger;
             var currentPage = this.props.pages[this.state.currentPage];
 
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 
-                return (
-                    // <FieldItemContainer 
-                    // title={field.title}
-                    // body={field.body}
-                    // id={field.id}
-                    // pageId={currentPage.id}
-                    // updateField={updateField}
-                    // key={`key=${field.id}`}
-                    // />
-                    _react2.default.createElement(_field_item_container2.default, {
-                        pageId: currentPage.id,
-                        fieldId: field.id,
-                        key: 'key=' + field.id
-                    })
-                );
+                return _react2.default.createElement(_field_item_container2.default, {
+                    pageId: currentPage.id,
+                    fieldId: field.id,
+                    key: 'key=' + field.id
+                });
             });
 
             return _react2.default.createElement(
@@ -30753,7 +30752,7 @@ exports.default = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.updateField = exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
+exports.destroyField = exports.updateField = exports.createField = exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.REMOVE_FIELD = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
 
 var _fields_api_util = __webpack_require__(252);
 
@@ -30763,6 +30762,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var RECEIVE_ALL_FIELDS = exports.RECEIVE_ALL_FIELDS = 'RECEIVE_FIELDS';
 var RECEIVE_FIELD = exports.RECEIVE_FIELD = 'RECEIVE_FIELD';
+var REMOVE_FIELD = exports.REMOVE_FIELD = 'REMOVE_FIELD';
 var START_LOADING_ALL_FIELDS = exports.START_LOADING_ALL_FIELDS = 'START_LOADING_ALL_FIELDS';
 var START_LOADING_FIELD = exports.START_LOADING_FIELD = 'START_LOADING_FIELD';
 var RECEIVE_FIELD_ERRORS = exports.RECEIVE_FIELD_ERRORS = 'RECEIVE_FIELD_ERRORS';
@@ -30778,6 +30778,13 @@ var receiveField = function receiveField(field) {
     return {
         type: RECEIVE_FIELD,
         field: field
+    };
+};
+
+var removeField = function removeField(fieldId) {
+    return {
+        type: REMOVE_FIELD,
+        fieldId: fieldId
     };
 };
 
@@ -30810,11 +30817,33 @@ var fetchAllFields = exports.fetchAllFields = function fetchAllFields(pageId) {
     };
 };
 
+var createField = exports.createField = function createField(field) {
+    return function (dispatch) {
+        dispatch(startLoadingField());
+        return FieldAPIUtil.createField(field).then(function (ajaxField) {
+            return dispatch(receiveField(ajaxField));
+        }, function (errors) {
+            return dispatch(receiveFieldErrors(errors.responseJSON));
+        });
+    };
+};
+
 var updateField = exports.updateField = function updateField(field) {
     return function (dispatch) {
         dispatch(startLoadingField());
         return FieldAPIUtil.updateField(field).then(function (ajaxField) {
             return dispatch(receiveField(ajaxField));
+        }, function (errors) {
+            return dispatch(receiveFieldErrors(errors.responseJSON));
+        });
+    };
+};
+
+var destroyField = exports.destroyField = function destroyField(fieldId) {
+    return function (dispatch) {
+        dispatch(startLoadingField());
+        return FieldAPIUtil.destroyField(fieldId).then(function () {
+            return dispatch(removeField(fieldId));
         }, function (errors) {
             return dispatch(receiveFieldErrors(errors.responseJSON));
         });
@@ -30855,6 +30884,9 @@ var FieldReducer = function FieldReducer() {
             return (0, _merge3.default)(newState, action.fields);
         case _field_actions.RECEIVE_FIELD:
             return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
+        case _field_actions.REMOVE_FIELD:
+            delete newState[action.fieldId];
+            return newState;
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge3.default)(newState, action.payload.fields);
         case _page_actions.RECEIVE_PAGES:
@@ -31518,24 +31550,24 @@ var _field_item2 = _interopRequireDefault(_field_item);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    debugger;
-
-    // check ownProps, loading, errors
     return {
         field: state.fields[ownProps.fieldId],
         pageId: ownProps.pageId,
-        loading: state.fieldLoading,
+        loading: state.loading.fieldsLoading,
         errors: state.errors.field
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        updateField: function updateField(field) {
+        submitField: function submitField(field) {
             return dispatch((0, _field_actions.updateField)(field));
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _field_actions.receiveErrors)(errors));
+        },
+        removeField: function removeField(fieldId) {
+            return dispatch((0, _field_actions.destroyField)(fieldId));
         }
     };
 };
@@ -31600,7 +31632,7 @@ var FieldItem = function (_React$Component) {
         key: 'submitForm',
         value: function submitForm(e) {
             e.preventDefault();
-            this.props.updateInfo(this.state);
+            this.props.submitField(this.state);
             // Need a flag for submission then Update complete
         }
     }, {

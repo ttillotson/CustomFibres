@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { updateField,
-         destroyField,
-         receiveErrors } from '../../../actions/field_actions';
+import { createField, receiveErrors } from '../../../actions/field_actions';
 import FieldItem from './field_item';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,9 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    submitField: (field) => dispatch(updateField(field)),
-    clearErrors: (errors) => dispatch(receiveErrors(errors)),
-    removeField: (fieldId) => dispatch(destroyField(fieldId))
+    submitField: (field) => dispatch(createField(field)),
+    clearErrors: (errors) => dispatch(receiveErrors(errors))
 });
 
 export default connect(

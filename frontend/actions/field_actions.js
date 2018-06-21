@@ -2,6 +2,7 @@ import * as FieldAPIUtil from '../util/fields_api_util';
 
 export const RECEIVE_ALL_FIELDS = 'RECEIVE_FIELDS';
 export const RECEIVE_FIELD = 'RECEIVE_FIELD';
+export const REMOVE_FIELD = 'REMOVE_FIELD';
 export const START_LOADING_ALL_FIELDS = 'START_LOADING_ALL_FIELDS';
 export const START_LOADING_FIELD = 'START_LOADING_FIELD';
 export const RECEIVE_FIELD_ERRORS = 'RECEIVE_FIELD_ERRORS';
@@ -14,6 +15,11 @@ const receiveAllFields = (fields) => ({
 const receiveField = (field) => ({
     type: RECEIVE_FIELD,
     field
+});
+
+const removeField = (fieldId) => ({
+    type: REMOVE_FIELD,
+    fieldId
 });
 
 const startLoadingAllFields = () => ({
@@ -37,10 +43,28 @@ export const fetchAllFields = (pageId) => (dispatch) => {
     ));
 };
 
+export const createField = (field) => (dispatch) => {
+    dispatch(startLoadingField());
+    return FieldAPIUtil.createField(field).then(ajaxField => (
+        dispatch(receiveField(ajaxField))
+    ), errors => (
+        dispatch(receiveFieldErrors(errors.responseJSON))
+    ));
+};
+
 export const updateField = (field) => (dispatch) => {
     dispatch(startLoadingField());
     return FieldAPIUtil.updateField(field).then(ajaxField => (
         dispatch(receiveField(ajaxField))
+    ), errors => (
+        dispatch(receiveFieldErrors(errors.responseJSON))
+    ));
+};
+
+export const destroyField = (fieldId) => (dispatch) => {
+    dispatch(startLoadingField());
+    return FieldAPIUtil.destroyField(fieldId).then(() => (
+        dispatch(removeField(fieldId))
     ), errors => (
         dispatch(receiveFieldErrors(errors.responseJSON))
     ));
