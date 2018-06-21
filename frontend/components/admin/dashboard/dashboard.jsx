@@ -68,9 +68,8 @@ class Dashboard extends React.Component {
         return (
             <main className='dashboard_container'>
                 <AdminHeading signOut={this.handleSignOut} />
-                <h1>DashBoard</h1>
                 <nav>
-                    <ul>
+                    <ul className={'tabs_container'}>
                         {tabs}
                     </ul>
                 </nav>

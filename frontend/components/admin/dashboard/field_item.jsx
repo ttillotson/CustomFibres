@@ -28,29 +28,38 @@ class FieldItem extends React.Component {
 
     render() {
 
-        let deleteButton = <button onClick={this.removeForm}>Delete</button>;
+        let deleteButton = <button onClick={this.removeForm}
+                                className='delete_item'
+                                >Delete</button>;
 
         return (
             <form className='edit_field'>
-                <label> Title
+                <section className='form_item'>
+                    <label>Title</label>
                     <input 
                     type='text'
                     value={this.state.title}
                     onChange={this.update('title')}
                     />
-                </label>
+                </section>
 
-                <label>Body
-                    <input 
-                    type='textarea'
+                <section className='form_item'>
+                    <label>Body</label>
+                    <textarea 
+                    className='field_body'
                     value={this.state.body}
                     onChange={this.update("body")}
                     />
-                </label>
+                </section>
 
-                { this.state.id ? deleteButton : null }
+                <section>
+                    { this.state.id ? deleteButton : null }
 
-                <button onClick={this.submitForm}>Save</button>
+                    <button onClick={this.submitForm}
+                            className='save_item'
+                    >Save</button>
+                </section>
+                
             </form>
         );
     }

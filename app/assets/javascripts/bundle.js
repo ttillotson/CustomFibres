@@ -30558,16 +30558,11 @@ var Dashboard = function (_React$Component) {
                 { className: 'dashboard_container' },
                 _react2.default.createElement(_admin_heading2.default, { signOut: this.handleSignOut }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'DashBoard'
-                ),
-                _react2.default.createElement(
                     'nav',
                     null,
                     _react2.default.createElement(
                         'ul',
-                        null,
+                        { className: 'tabs_container' },
                         tabs
                     )
                 ),
@@ -31645,7 +31640,9 @@ var FieldItem = function (_React$Component) {
 
             var deleteButton = _react2.default.createElement(
                 'button',
-                { onClick: this.removeForm },
+                { onClick: this.removeForm,
+                    className: 'delete_item'
+                },
                 'Delete'
             );
 
@@ -31653,9 +31650,13 @@ var FieldItem = function (_React$Component) {
                 'form',
                 { className: 'edit_field' },
                 _react2.default.createElement(
-                    'label',
-                    null,
-                    ' Title',
+                    'section',
+                    { className: 'form_item' },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Title'
+                    ),
                     _react2.default.createElement('input', {
                         type: 'text',
                         value: this.state.title,
@@ -31663,20 +31664,30 @@ var FieldItem = function (_React$Component) {
                     })
                 ),
                 _react2.default.createElement(
-                    'label',
-                    null,
-                    'Body',
-                    _react2.default.createElement('input', {
-                        type: 'textarea',
+                    'section',
+                    { className: 'form_item' },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Body'
+                    ),
+                    _react2.default.createElement('textarea', {
+                        className: 'field_body',
                         value: this.state.body,
                         onChange: this.update("body")
                     })
                 ),
-                this.state.id ? deleteButton : null,
                 _react2.default.createElement(
-                    'button',
-                    { onClick: this.submitForm },
-                    'Save'
+                    'section',
+                    null,
+                    this.state.id ? deleteButton : null,
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.submitForm,
+                            className: 'save_item'
+                        },
+                        'Save'
+                    )
                 )
             );
         }
