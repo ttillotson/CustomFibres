@@ -13,7 +13,7 @@ const Admin = () => (
     <main className={'admin_container'}>
         <Switch>
             <AuthRoute exact path='/admin/dashboard' component={DashboardContainer} />
-            <Route to='/admin' component={SessionContainer} />
+            <NonAuthRoute to='/admin' component={SessionContainer} />
         </Switch>
     </main>
 );
