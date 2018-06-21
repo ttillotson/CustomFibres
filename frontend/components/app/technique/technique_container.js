@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     return ({
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
         pageName: "Technique"
     });
 };

@@ -22,7 +22,7 @@ class Template extends React.Component {
         const { loading, fields, pageName } = this.props;
 
         if (loading) return <LoadingIcon />;
-        // debugger;
+
         const fieldItems = fields.map(field => (
             <DisplayFieldSection
             title={field.title}

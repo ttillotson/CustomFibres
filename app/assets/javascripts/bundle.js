@@ -30042,11 +30042,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages['Splash'];
-    // debugger;
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
         pageName: "Splash"
     };
 };
@@ -30091,6 +30091,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
         pageName: "Technique"
     };
 };
@@ -30404,16 +30405,24 @@ var _reactRedux = __webpack_require__(22);
 
 var _session_actions = __webpack_require__(239);
 
+var _page_actions = __webpack_require__(254);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {};
+    return {
+        pages: state.pages,
+        fields: state.fields
+    };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         signOut: function signOut() {
             return dispatch((0, _session_actions.signOut)());
+        },
+        fetchPages: function fetchPages() {
+            return dispatch((0, _page_actions.fetchPages)());
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
@@ -30444,6 +30453,10 @@ var _admin_heading = __webpack_require__(244);
 
 var _admin_heading2 = _interopRequireDefault(_admin_heading);
 
+var _field_section = __webpack_require__(263);
+
+var _field_section2 = _interopRequireDefault(_field_section);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30460,6 +30473,9 @@ var Dashboard = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 
+        _this.state = {
+            currentPage: "Splash"
+        };
         _this.handleSignOut = _this.handleSignOut.bind(_this);
         return _this;
     }
@@ -30468,14 +30484,13 @@ var Dashboard = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             // API Calls
+            this.props.fetchPages();
         }
     }, {
         key: 'handleSignOut',
         value: function handleSignOut() {
             var _this2 = this;
 
-            // console.log(this.props.history);
-            // debugger;
             this.props.signOut().then(function () {
                 return _this2.props.history.push('/');
             });
@@ -30483,6 +30498,26 @@ var Dashboard = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                pages = _props.pages,
+                fields = _props.fields;
+
+
+            var tabs = pages.map(function (page) {
+                return _react2.default.createElement(
+                    'li',
+                    null,
+                    page.name
+                );
+            });
+
+            var fieldItems = this.props.pages[this.state.currentPage].fieldItems.map(function (fieldId) {
+                var field = fields[fieldId];
+                return _react2.default.createElement(_field_section2.default, {
+                    title: field.title,
+                    body: field.body
+                });
+            });
 
             return _react2.default.createElement(
                 'main',
@@ -30492,7 +30527,17 @@ var Dashboard = function (_React$Component) {
                     'h1',
                     null,
                     'DashBoard'
-                )
+                ),
+                _react2.default.createElement(
+                    'nav',
+                    null,
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        tabs
+                    )
+                ),
+                fields
             );
         }
     }]);
@@ -31369,7 +31414,7 @@ var Template = function (_React$Component) {
 
 
             if (loading) return _react2.default.createElement(_loading_icon2.default, null);
-            // debugger;
+
             var fieldItems = fields.map(function (field) {
                 return _react2.default.createElement(_display_field_section2.default, {
                     title: field.title,
@@ -31397,6 +31442,106 @@ var Template = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Template;
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FieldSection = function (_React$Component) {
+    _inherits(FieldSection, _React$Component);
+
+    function FieldSection(props) {
+        _classCallCheck(this, FieldSection);
+
+        var _this = _possibleConstructorReturn(this, (FieldSection.__proto__ || Object.getPrototypeOf(FieldSection)).call(this, props));
+
+        _this.state = {
+            title: _this.props.title,
+            body: _this.props.title
+        };
+        _this.submitForm = _this.submitForm.bind(_this);
+        return _this;
+    }
+
+    _createClass(FieldSection, [{
+        key: 'update',
+        value: function update(field) {
+            var _this2 = this;
+
+            return function (e) {
+                return _this2.setState(_defineProperty({}, field, e.target.value));
+            };
+        }
+    }, {
+        key: 'submitForm',
+        value: function submitForm(e) {
+            e.preventDefault();
+            this.props.updateInfo(this.state);
+            // Need a flag for submission then Update complete
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return _react2.default.createElement(
+                'form',
+                null,
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    ' Title',
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.title,
+                        onChange: this.update('title')
+                    })
+                ),
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'Body',
+                    _react2.default.createElement('input', {
+                        type: 'textarea',
+                        value: this.state.body,
+                        onChange: this.update("body")
+                    })
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.submitForm },
+                    'Save'
+                )
+            );
+        }
+    }]);
+
+    return FieldSection;
+}(_react2.default.Component);
+
+exports.default = FieldSection;
 
 /***/ })
 /******/ ]);

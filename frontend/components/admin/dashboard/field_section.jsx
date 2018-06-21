@@ -3,8 +3,10 @@ import React from 'react';
 class FieldSection extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.state;
+        this.state = {
+            title: this.props.title,
+            body: this.props.title,
+        };
         this.submitForm = this.submitForm.bind(this);
     }
 
