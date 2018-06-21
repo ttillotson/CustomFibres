@@ -5,7 +5,9 @@ class FieldSection extends React.Component {
         super(props);
         this.state = {
             title: this.props.title,
-            body: this.props.title,
+            body: this.props.body,
+            id: this.props.id,
+            pageId: this.props.pageId
         };
         this.submitForm = this.submitForm.bind(this);
     }
@@ -27,7 +29,7 @@ class FieldSection extends React.Component {
     render() {
 
         return (
-            <form>
+            <form className='edit_field'>
                 <label> Title
                     <input 
                     type='text'

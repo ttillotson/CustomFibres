@@ -1,6 +1,7 @@
 import React from 'react';
 import AdminHeading from './admin_heading';
 import FieldSection from './field_section';
+import LoadingIcon from '../../loading_icon';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         // API Calls
+        window.scrollTo(0,0);
         this.props.fetchPages();
     }
 
@@ -22,21 +24,35 @@ class Dashboard extends React.Component {
         ));
     }
 
-    render() {
-        const { pages, fields } = this.props;
+    updateTab(e) {
+        window.scrollTo(0,0);
+    }
 
-        const tabs = pages.map(page => 
-            <li>
+    render() {
+        const { pages, fields, loading, updateField } = this.props;
+        // debugger;
+        if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
+
+        const tabs = Object.values(pages).map((page, idx) => 
+            <li key={`key=${idx}`} className='tab'>
                 {page.name}
             </li>
         );
 
-        const fieldItems = this.props.pages[this.state.currentPage].fieldItems.map(fieldId => {
+        // debugger;
+        let currentPage = this.props.pages[this.state.currentPage];
+
+        const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
+
             return (
                 <FieldSection 
                 title={field.title}
                 body={field.body}
+                id={field.id}
+                pageId={currentPage.id}
+                updateField={updateField}
+                key={`key=${field.id}`}
                 />
             );
         });
@@ -50,7 +66,9 @@ class Dashboard extends React.Component {
                         {tabs}
                     </ul>
                 </nav>
-                {fields}
+                <section>
+                    {fieldItems}
+                </section>
             </main>
         );
     }

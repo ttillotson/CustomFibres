@@ -30407,11 +30407,15 @@ var _session_actions = __webpack_require__(239);
 
 var _page_actions = __webpack_require__(254);
 
+var _field_actions = __webpack_require__(245);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
         pages: state.pages,
+        loading: state.loading,
+        errors: state.loading,
         fields: state.fields
     };
 };
@@ -30426,6 +30430,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
+        },
+        updateField: function updateField(field) {
+            return dispatch((0, _field_actions.updateField)(field));
         }
     };
 };
@@ -30457,6 +30464,10 @@ var _field_section = __webpack_require__(263);
 
 var _field_section2 = _interopRequireDefault(_field_section);
 
+var _loading_icon = __webpack_require__(258);
+
+var _loading_icon2 = _interopRequireDefault(_loading_icon);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30484,6 +30495,7 @@ var Dashboard = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             // API Calls
+            window.scrollTo(0, 0);
             this.props.fetchPages();
         }
     }, {
@@ -30496,26 +30508,43 @@ var Dashboard = function (_React$Component) {
             });
         }
     }, {
+        key: 'updateTab',
+        value: function updateTab(e) {
+            window.scrollTo(0, 0);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
                 pages = _props.pages,
-                fields = _props.fields;
+                fields = _props.fields,
+                loading = _props.loading,
+                updateField = _props.updateField;
+            // debugger;
 
+            if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
-            var tabs = pages.map(function (page) {
+            var tabs = Object.values(pages).map(function (page, idx) {
                 return _react2.default.createElement(
                     'li',
-                    null,
+                    { key: 'key=' + idx, className: 'tab' },
                     page.name
                 );
             });
 
-            var fieldItems = this.props.pages[this.state.currentPage].fieldItems.map(function (fieldId) {
+            // debugger;
+            var currentPage = this.props.pages[this.state.currentPage];
+
+            var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
+
                 return _react2.default.createElement(_field_section2.default, {
                     title: field.title,
-                    body: field.body
+                    body: field.body,
+                    id: field.id,
+                    pageId: currentPage.id,
+                    updateField: updateField,
+                    key: 'key=' + field.id
                 });
             });
 
@@ -30537,7 +30566,11 @@ var Dashboard = function (_React$Component) {
                         tabs
                     )
                 ),
-                fields
+                _react2.default.createElement(
+                    'section',
+                    null,
+                    fieldItems
+                )
             );
         }
     }]);
@@ -30806,6 +30839,8 @@ var FieldReducer = function FieldReducer() {
         case _field_actions.RECEIVE_FIELD:
             return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
         case _page_actions.RECEIVE_PAGE:
+            return (0, _merge3.default)(newState, action.payload.fields);
+        case _page_actions.RECEIVE_PAGES:
             return (0, _merge3.default)(newState, action.payload.fields);
         default:
             return state;
@@ -31081,10 +31116,10 @@ var RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGE_ERRORS = 'RECEIVE_PAGE_ERRORS';
 var START_LOADING_PAGE = exports.START_LOADING_PAGE = 'START_LOADING_PAGE';
 var START_LOADING_PAGES = exports.START_LOADING_PAGES = 'START_LOADING_PAGES';
 
-var receivePages = function receivePages(pages) {
+var receivePages = function receivePages(payload) {
     return {
         type: RECEIVE_PAGES,
-        pages: pages
+        payload: payload
     };
 };
 
@@ -31162,7 +31197,7 @@ var PagesReducer = function PagesReducer() {
     var newState = (0, _merge2.default)({}, state);
     switch (action.type) {
         case _page_actions.RECEIVE_PAGES:
-            return (0, _merge2.default)(newState, action.pages);
+            return (0, _merge2.default)(newState, action.payload.page);
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge2.default)(newState, action.payload.page);
         default:
@@ -31480,7 +31515,9 @@ var FieldSection = function (_React$Component) {
 
         _this.state = {
             title: _this.props.title,
-            body: _this.props.title
+            body: _this.props.body,
+            id: _this.props.id,
+            pageId: _this.props.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
         return _this;
@@ -31508,7 +31545,7 @@ var FieldSection = function (_React$Component) {
 
             return _react2.default.createElement(
                 'form',
-                null,
+                { className: 'edit_field' },
                 _react2.default.createElement(
                     'label',
                     null,

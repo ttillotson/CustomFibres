@@ -6,7 +6,7 @@ const PagesReducer = (state={}, action) => {
     let newState = merge({}, state);
     switch (action.type) {
         case RECEIVE_PAGES: 
-            return merge(newState, action.pages);
+            return merge(newState, action.payload.page);
         case RECEIVE_PAGE: 
             return merge(newState, action.payload.page);
         default: 

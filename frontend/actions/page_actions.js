@@ -6,9 +6,9 @@ export const RECEIVE_PAGE_ERRORS = 'RECEIVE_PAGE_ERRORS';
 export const START_LOADING_PAGE = 'START_LOADING_PAGE';
 export const START_LOADING_PAGES = 'START_LOADING_PAGES';
 
-const receivePages = (pages) => ({
+const receivePages = (payload) => ({
     type: RECEIVE_PAGES,
-    pages
+    payload
 });
 
 const receivePage = (payload) => ({
