@@ -4,13 +4,13 @@ import { fetchPage } from '../../../actions/page_actions';
 import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
-    const page = state.pages['1'];
+    const page = state.pages['Splash'];
     // debugger;
 
     return ({
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
-        name: "Splash"
+        pageName: "Splash"
     });
 };
 

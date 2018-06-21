@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
-    const page = state.pages['2'];
-    
+    const page = state.pages['Technique'];
+
     return ({
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
-        name: "Technique"
+        pageName: "Technique"
     });
 };
 

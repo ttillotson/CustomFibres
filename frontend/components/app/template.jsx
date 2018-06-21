@@ -9,19 +9,26 @@ class Template extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchPage(this.props.name);
+        window.scrollTo(0,0);
+
+        // Only Request if Store doesn't already have it
+        // Having static content enables this behavior
+        if (!Object.values(this.props.fields).length) {
+            this.props.fetchPage(this.props.pageName);
+        }
     }
 
     render() {
-        const { loading, fields, name } = this.props;
+        const { loading, fields, pageName } = this.props;
 
         if (loading) return <LoadingIcon />;
-
+        // debugger;
         const fieldItems = fields.map(field => (
             <DisplayFieldSection
             title={field.title}
             body={field.body}
             key={`key=${field.id}`}
+            pageName={pageName}
             />
         ));
 

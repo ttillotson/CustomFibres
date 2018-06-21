@@ -30041,13 +30041,13 @@ var _selectors = __webpack_require__(257);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages['1'];
+    var page = state.pages['Splash'];
     // debugger;
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
-        name: "Splash"
+        pageName: "Splash"
     };
 };
 
@@ -30086,12 +30086,12 @@ var _selectors = __webpack_require__(257);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages['2'];
+    var page = state.pages['Technique'];
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
-        name: "Technique"
+        pageName: "Technique"
     };
 };
 
@@ -31351,7 +31351,13 @@ var Template = function (_React$Component) {
     _createClass(Template, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.props.fetchPage(this.props.name);
+            window.scrollTo(0, 0);
+
+            // Only Request if Store doesn't already have it
+            // Having static content enables this behavior
+            if (!Object.values(this.props.fields).length) {
+                this.props.fetchPage(this.props.pageName);
+            }
         }
     }, {
         key: 'render',
@@ -31359,16 +31365,17 @@ var Template = function (_React$Component) {
             var _props = this.props,
                 loading = _props.loading,
                 fields = _props.fields,
-                name = _props.name;
+                pageName = _props.pageName;
 
 
             if (loading) return _react2.default.createElement(_loading_icon2.default, null);
-
+            // debugger;
             var fieldItems = fields.map(function (field) {
                 return _react2.default.createElement(_display_field_section2.default, {
                     title: field.title,
                     body: field.body,
-                    key: 'key=' + field.id
+                    key: 'key=' + field.id,
+                    pageName: pageName
                 });
             });
 

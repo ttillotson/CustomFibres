@@ -1,5 +1,5 @@
 json.page do 
-    json.set! page.id do 
+    json.set! page.name do 
         json.extract! page, :id, :name
         json.fieldIds do 
             json.array! fields.pluck(:id)
