@@ -36,3 +36,12 @@ export const fetchAllFields = (pageId) => (dispatch) => {
         dispatch(receiveFieldErrors(errors.responseJSON))
     ));
 };
+
+export const updateField = (field) => (dispatch) => {
+    dispatch(startLoadingField());
+    return FieldAPIUtil.updateField(field).then(ajaxField => (
+        dispatch(receiveField(ajaxField))
+    ), errors => (
+        dispatch(receiveFieldErrors(errors.responseJSON))
+    ));
+};

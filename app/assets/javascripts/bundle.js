@@ -30407,8 +30407,6 @@ var _session_actions = __webpack_require__(239);
 
 var _page_actions = __webpack_require__(254);
 
-var _field_actions = __webpack_require__(245);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -30420,6 +30418,8 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
+// Clear Page and Session Errors?
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         signOut: function signOut() {
@@ -30430,9 +30430,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
-        },
-        updateField: function updateField(field) {
-            return dispatch((0, _field_actions.updateField)(field));
         }
     };
 };
@@ -30460,9 +30457,9 @@ var _admin_heading = __webpack_require__(244);
 
 var _admin_heading2 = _interopRequireDefault(_admin_heading);
 
-var _field_section = __webpack_require__(263);
+var _field_item_container = __webpack_require__(264);
 
-var _field_section2 = _interopRequireDefault(_field_section);
+var _field_item_container2 = _interopRequireDefault(_field_item_container);
 
 var _loading_icon = __webpack_require__(258);
 
@@ -30511,6 +30508,8 @@ var Dashboard = function (_React$Component) {
         key: 'updateTab',
         value: function updateTab(e) {
             window.scrollTo(0, 0);
+            // FLESH THIS METHOD OUT
+            // TABS MAPPING -> this.setState({currentPage: e.target})
         }
     }, {
         key: 'render',
@@ -30538,14 +30537,21 @@ var Dashboard = function (_React$Component) {
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 
-                return _react2.default.createElement(_field_section2.default, {
-                    title: field.title,
-                    body: field.body,
-                    id: field.id,
-                    pageId: currentPage.id,
-                    updateField: updateField,
-                    key: 'key=' + field.id
-                });
+                return (
+                    // <FieldItemContainer 
+                    // title={field.title}
+                    // body={field.body}
+                    // id={field.id}
+                    // pageId={currentPage.id}
+                    // updateField={updateField}
+                    // key={`key=${field.id}`}
+                    // />
+                    _react2.default.createElement(_field_item_container2.default, {
+                        pageId: currentPage.id,
+                        fieldId: field.id,
+                        key: 'key=' + field.id
+                    })
+                );
             });
 
             return _react2.default.createElement(
@@ -30747,7 +30753,7 @@ exports.default = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
+exports.updateField = exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
 
 var _fields_api_util = __webpack_require__(252);
 
@@ -30798,6 +30804,17 @@ var fetchAllFields = exports.fetchAllFields = function fetchAllFields(pageId) {
         dispatch(startLoadingAllFields());
         return FieldAPIUtil.fetchFields().then(function (ajaxFields) {
             return dispatch(receiveAllFields(ajaxFields));
+        }, function (errors) {
+            return dispatch(receiveFieldErrors(errors.responseJSON));
+        });
+    };
+};
+
+var updateField = exports.updateField = function updateField(field) {
+    return function (dispatch) {
+        dispatch(startLoadingField());
+        return FieldAPIUtil.updateField(field).then(function (ajaxField) {
+            return dispatch(receiveField(ajaxField));
         }, function (errors) {
             return dispatch(receiveFieldErrors(errors.responseJSON));
         });
@@ -31479,7 +31496,54 @@ var Template = function (_React$Component) {
 exports.default = Template;
 
 /***/ }),
-/* 263 */
+/* 263 */,
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = __webpack_require__(22);
+
+var _field_actions = __webpack_require__(245);
+
+var _field_item = __webpack_require__(265);
+
+var _field_item2 = _interopRequireDefault(_field_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    debugger;
+
+    // check ownProps, loading, errors
+    return {
+        field: state.fields[ownProps.fieldId],
+        pageId: ownProps.pageId,
+        loading: state.fieldLoading,
+        errors: state.errors.field
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        updateField: function updateField(field) {
+            return dispatch((0, _field_actions.updateField)(field));
+        },
+        clearErrors: function clearErrors(errors) {
+            return dispatch((0, _field_actions.receiveErrors)(errors));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_field_item2.default);
+
+/***/ }),
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31505,25 +31569,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var FieldSection = function (_React$Component) {
-    _inherits(FieldSection, _React$Component);
+var FieldItem = function (_React$Component) {
+    _inherits(FieldItem, _React$Component);
 
-    function FieldSection(props) {
-        _classCallCheck(this, FieldSection);
+    function FieldItem(props) {
+        _classCallCheck(this, FieldItem);
 
-        var _this = _possibleConstructorReturn(this, (FieldSection.__proto__ || Object.getPrototypeOf(FieldSection)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (FieldItem.__proto__ || Object.getPrototypeOf(FieldItem)).call(this, props));
 
         _this.state = {
-            title: _this.props.title,
-            body: _this.props.body,
-            id: _this.props.id,
-            pageId: _this.props.pageId
+            title: props.field.title,
+            body: props.field.body,
+            id: props.field.id,
+            pageId: props.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
         return _this;
     }
 
-    _createClass(FieldSection, [{
+    _createClass(FieldItem, [{
         key: 'update',
         value: function update(field) {
             var _this2 = this;
@@ -31575,10 +31639,10 @@ var FieldSection = function (_React$Component) {
         }
     }]);
 
-    return FieldSection;
+    return FieldItem;
 }(_react2.default.Component);
 
-exports.default = FieldSection;
+exports.default = FieldItem;
 
 /***/ })
 /******/ ]);

@@ -1,13 +1,13 @@
 import React from 'react';
 
-class FieldSection extends React.Component {
+class FieldItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: this.props.title,
-            body: this.props.body,
-            id: this.props.id,
-            pageId: this.props.pageId
+            title: props.field.title,
+            body: props.field.body,
+            id: props.field.id,
+            pageId: props.pageId
         };
         this.submitForm = this.submitForm.bind(this);
     }
@@ -52,4 +52,4 @@ class FieldSection extends React.Component {
     }
 }
 
-export default FieldSection;
+export default FieldItem;

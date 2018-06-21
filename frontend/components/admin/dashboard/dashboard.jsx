@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminHeading from './admin_heading';
-import FieldSection from './field_section';
+import FieldItemContainer from './field_item_container';
 import LoadingIcon from '../../loading_icon';
 
 class Dashboard extends React.Component {
@@ -26,6 +26,8 @@ class Dashboard extends React.Component {
 
     updateTab(e) {
         window.scrollTo(0,0);
+        // FLESH THIS METHOD OUT
+        // TABS MAPPING -> this.setState({currentPage: e.target})
     }
 
     render() {
@@ -46,12 +48,17 @@ class Dashboard extends React.Component {
             let field = fields[fieldId];
 
             return (
-                <FieldSection 
-                title={field.title}
-                body={field.body}
-                id={field.id}
+                // <FieldItemContainer 
+                // title={field.title}
+                // body={field.body}
+                // id={field.id}
+                // pageId={currentPage.id}
+                // updateField={updateField}
+                // key={`key=${field.id}`}
+                // />
+                <FieldItemContainer 
                 pageId={currentPage.id}
-                updateField={updateField}
+                fieldId={field.id}
                 key={`key=${field.id}`}
                 />
             );
