@@ -30042,7 +30042,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages[ownProps.match.params.pageId];
-
     return {
         fields: (0, _selectors.selectPageFields)(state, page)
     };
@@ -30050,8 +30049,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        fetchPage: function fetchPage(pageId) {
-            return dispatch((0, _page_actions.fetchPage)(pageId));
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
         }
     };
 };
@@ -30094,7 +30093,9 @@ var Splash = function (_React$Component) {
 
     _createClass(Splash, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {}
+        value: function componentDidMount() {
+            this.props.fetchPage('Splash');
+        }
     }, {
         key: 'render',
         value: function render() {
@@ -30130,18 +30131,27 @@ var _technique = __webpack_require__(229);
 
 var _technique2 = _interopRequireDefault(_technique);
 
+var _page_actions = __webpack_require__(254);
+
 var _reactRedux = __webpack_require__(22);
+
+var _selectors = __webpack_require__(257);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state) {
-    return {};
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var page = state.pages[ownProps.match.params.pageId];
+    return {
+        fields: (0, _selectors.selectPageFields)(state, page)
+    };
 };
-// import {} from ''; // API Calls
-
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
+        }
+    };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_technique2.default);
@@ -30190,7 +30200,7 @@ var Technique = function (_React$Component) {
     _createClass(Technique, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            // API Call
+            this.props.fetchPage('Technique');
         }
     }, {
         key: 'render',
@@ -30938,7 +30948,7 @@ var FieldReducer = function FieldReducer() {
         case _field_actions.RECEIVE_FIELD:
             return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
         case _page_actions.RECEIVE_PAGE:
-            return (0, _merge3.default)(newState, action.fields);
+            return (0, _merge3.default)(newState, action.payload.fields);
         default:
             return state;
     }
@@ -31109,21 +31119,24 @@ exports.default = FieldErrorsReducer;
 "use strict";
 
 
-var fetchFields = function fetchFields(pageId) {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var fetchFields = exports.fetchFields = function fetchFields(pageId) {
     return $.ajax({
         url: '/api/pages/' + pageId + '/fields',
         method: 'GET'
     });
 };
 
-var fetchField = function fetchField(fieldId) {
+var fetchField = exports.fetchField = function fetchField(fieldId) {
     return $.ajax({
         url: '/api/fields/' + fieldId,
         method: 'GET'
     });
 };
 
-var createField = function createField(field) {
+var createField = exports.createField = function createField(field) {
     return $.ajax({
         url: '/api/fields',
         method: 'POST',
@@ -31131,7 +31144,7 @@ var createField = function createField(field) {
     });
 };
 
-var updateField = function updateField(field) {
+var updateField = exports.updateField = function updateField(field) {
     return $.ajax({
         url: '/api/fields/' + field.id,
         method: 'PATCH',
@@ -31139,7 +31152,7 @@ var updateField = function updateField(field) {
     });
 };
 
-var destroyField = function destroyField(fieldId) {
+var destroyField = exports.destroyField = function destroyField(fieldId) {
     return $.ajax({
         url: '/api/fields/' + fieldId,
         method: 'DELETE'
@@ -31213,10 +31226,10 @@ var receivePages = function receivePages(pages) {
     };
 };
 
-var receivePage = function receivePage(page) {
+var receivePage = function receivePage(payload) {
     return {
         type: RECEIVE_PAGE,
-        page: page
+        payload: payload
     };
 };
 
@@ -31238,10 +31251,10 @@ var startLoadingPage = function startLoadingPage() {
     };
 };
 
-var fetchPage = exports.fetchPage = function fetchPage(pageId) {
+var fetchPage = exports.fetchPage = function fetchPage(pageName) {
     return function (dispatch) {
         dispatch(startLoadingPage());
-        return PageAPIUtil.fetchPage().then(function (ajaxPage) {
+        return PageAPIUtil.fetchPage(pageName).then(function (ajaxPage) {
             return dispatch(receivePage(ajaxPage));
         }, function (errors) {
             return dispatch(receivePageErrors(errors.responseJSON));
@@ -31271,27 +31284,25 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _merge2 = __webpack_require__(106);
+var _merge = __webpack_require__(106);
 
-var _merge3 = _interopRequireDefault(_merge2);
+var _merge2 = _interopRequireDefault(_merge);
 
 var _page_actions = __webpack_require__(254);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var PagesReducer = function PagesReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var action = arguments[1];
 
     Object.freeze(state);
-    var newState = (0, _merge3.default)({}, state);
+    var newState = (0, _merge2.default)({}, state);
     switch (action.type) {
         case _page_actions.RECEIVE_PAGES:
-            return (0, _merge3.default)(newState, action.pages);
+            return (0, _merge2.default)(newState, action.pages);
         case _page_actions.RECEIVE_PAGE:
-            return (0, _merge3.default)(newState, _defineProperty({}, action.page.id, action.page));
+            return (0, _merge2.default)(newState, action.payload.page);
         default:
             return state;
     }
@@ -31306,16 +31317,19 @@ exports.default = PagesReducer;
 "use strict";
 
 
-var fetchPages = function fetchPages() {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var fetchPages = exports.fetchPages = function fetchPages() {
     return $.ajax({
         url: '/api/pages',
         method: 'GET'
     });
 };
 
-var fetchPage = function fetchPage(pageId) {
+var fetchPage = exports.fetchPage = function fetchPage(pageName) {
     return $.ajax({
-        url: '/api/page',
+        url: '/api/pages/' + pageName,
         method: 'GET'
     });
 };
@@ -31331,8 +31345,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var selectPageFields = exports.selectPageFields = function selectPageFields(state, page) {
-    return page ? page.fields.map(function (field) {
-        return state.fields[field.id];
+    return page ? page.fieldIds.map(function (fieldId) {
+        return state.fields[fieldId];
     }) : [];
 };
 

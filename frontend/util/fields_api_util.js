@@ -1,18 +1,18 @@
-const fetchFields = (pageId) => (
+export const fetchFields = (pageId) => (
     $.ajax({
         url: `/api/pages/${pageId}/fields`,
         method: 'GET'
     })
 );
 
-const fetchField = (fieldId) => (
+export const fetchField = (fieldId) => (
     $.ajax({
         url: `/api/fields/${fieldId}`,
         method: 'GET'
     })
 );
 
-const createField = (field) => (
+export const createField = (field) => (
     $.ajax({
         url: `/api/fields`,
         method: 'POST',
@@ -20,7 +20,7 @@ const createField = (field) => (
     })
 );
 
-const updateField = (field) => (
+export const updateField = (field) => (
     $.ajax({
         url: `/api/fields/${field.id}`,
         method: 'PATCH',
@@ -28,7 +28,7 @@ const updateField = (field) => (
     })
 );
 
-const destroyField = (fieldId) => (
+export const destroyField = (fieldId) => (
     $.ajax({
         url: `/api/fields/${fieldId}`,
         method: 'DELETE'

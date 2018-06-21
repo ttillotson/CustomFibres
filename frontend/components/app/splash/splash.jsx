@@ -7,7 +7,7 @@ class Splash extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.fetchPage('Splash');
     }
 
     render() {

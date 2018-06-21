@@ -1,3 +1,3 @@
 export const selectPageFields = (state, page) => (
-    page ? page.fields.map(field => state.fields[field.id]) : []
+    page ? page.fieldIds.map(fieldId => state.fields[fieldId]) : []
 );

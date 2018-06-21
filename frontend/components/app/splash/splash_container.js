@@ -5,14 +5,13 @@ import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
     const page = state.pages[ownProps.match.params.pageId];
-
     return ({
         fields: selectPageFields(state, page)
     });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchPage: (pageId) => dispatch(fetchPage(pageId)),
+    fetchPage: (pageName) => dispatch(fetchPage(pageName)),
 });
 
 export default connect(

@@ -1,13 +1,13 @@
-const fetchPages = () => (
+export const fetchPages = () => (
     $.ajax({
         url: '/api/pages',
         method: 'GET'
     })
 );
 
-const fetchPage = (pageId) => (
+export const fetchPage = (pageName) => (
     $.ajax({
-        url: '/api/page',
+        url: `/api/pages/${pageName}`,
         method: 'GET'
     })
 );

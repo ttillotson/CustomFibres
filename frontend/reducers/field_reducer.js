@@ -13,7 +13,7 @@ const FieldReducer = (state={}, action) => {
         case RECEIVE_FIELD:
             return merge(newState, {[action.field.id]: action.field});
         case RECEIVE_PAGE:
-            return merge(newState, action.fields);
+            return merge(newState, action.payload.fields);
         default: 
             return state;
     }

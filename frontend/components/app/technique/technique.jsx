@@ -13,7 +13,7 @@ class Technique extends React.Component {
     }
 
     componentDidMount(){
-        // API Call
+        this.props.fetchPage('Technique');
     }
 
 

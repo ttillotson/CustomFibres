@@ -11,9 +11,9 @@ const receivePages = (pages) => ({
     pages
 });
 
-const receivePage = (page) => ({
+const receivePage = (payload) => ({
     type: RECEIVE_PAGE,
-    page
+    payload
 });
 
 const receivePageErrors = () => ({
@@ -28,9 +28,9 @@ const startLoadingPage = () => ({
     type: START_LOADING_PAGE
 });
 
-export const fetchPage = (pageId) => (dispatch) => {
+export const fetchPage = (pageName) => (dispatch) => {
     dispatch(startLoadingPage());
-    return PageAPIUtil.fetchPage().then(ajaxPage => (
+    return PageAPIUtil.fetchPage(pageName).then(ajaxPage => (
         dispatch(receivePage(ajaxPage))
     ), errors => (
         dispatch(receivePageErrors(errors.responseJSON))
