@@ -4,9 +4,12 @@ import { fetchPage } from '../../../actions/page_actions';
 import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
-    const page = state.pages[ownProps.match.params.pageId];
+    const page = state.pages['1'];
+    // debugger;
+
     return ({
-        fields: selectPageFields(state, page)
+        fields: selectPageFields(state, page),
+        loading: state.loading.pageLoading
     });
 };
 

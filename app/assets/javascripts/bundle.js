@@ -29979,11 +29979,11 @@ var _showcase_container = __webpack_require__(230);
 
 var _showcase_container2 = _interopRequireDefault(_showcase_container);
 
-var _logo = __webpack_require__(233);
+var _logo = __webpack_require__(259);
 
 var _logo2 = _interopRequireDefault(_logo);
 
-var _nav_bar = __webpack_require__(234);
+var _nav_bar = __webpack_require__(260);
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
 
@@ -30041,9 +30041,12 @@ var _selectors = __webpack_require__(257);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages[ownProps.match.params.pageId];
+    var page = state.pages['1'];
+    // debugger;
+
     return {
-        fields: (0, _selectors.selectPageFields)(state, page)
+        fields: (0, _selectors.selectPageFields)(state, page),
+        loading: state.loading.pageLoading
     };
 };
 
@@ -30074,6 +30077,14 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _loading_icon = __webpack_require__(258);
+
+var _loading_icon2 = _interopRequireDefault(_loading_icon);
+
+var _display_field_section = __webpack_require__(261);
+
+var _display_field_section2 = _interopRequireDefault(_display_field_section);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30099,6 +30110,21 @@ var Splash = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                loading = _props.loading,
+                fields = _props.fields;
+
+
+            if (loading) return _react2.default.createElement(_loading_icon2.default, null);
+
+            var fieldItems = fields.map(function (field) {
+                return _react2.default.createElement(_display_field_section2.default, {
+                    title: field.title,
+                    body: field.body,
+                    key: 'key=' + field.id
+                });
+            });
+
             return _react2.default.createElement(
                 'main',
                 null,
@@ -30106,7 +30132,8 @@ var Splash = function (_React$Component) {
                     'h3',
                     null,
                     'Splash Page'
-                )
+                ),
+                fieldItems
             );
         }
     }]);
@@ -30337,79 +30364,8 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 233 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(23);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-    return _react2.default.createElement(
-        'section',
-        { className: 'logo_container' },
-        _react2.default.createElement(
-            'h1',
-            { className: 'logo' },
-            'Custom Fibres'
-        )
-    );
-};
-
-/***/ }),
-/* 234 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(23);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-    return _react2.default.createElement(
-        'nav',
-        null,
-        _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
-        ),
-        _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/technique' },
-            'The Process'
-        ),
-        _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/showcase' },
-            'Showcase'
-        ),
-        _react2.default.createElement('span', { className: 'email' })
-    );
-};
-
-/***/ }),
+/* 233 */,
+/* 234 */,
 /* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30979,7 +30935,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var initialState = {
     fieldsLoading: false,
-    pagesLoading: false
+    pageLoading: false
 };
 
 var LoadingReducer = function LoadingReducer() {
@@ -30991,12 +30947,16 @@ var LoadingReducer = function LoadingReducer() {
     switch (action.type) {
         case _field_actions.START_LOADING_ALL_FIELDS:
             return (0, _merge2.default)(newState, { fieldsLoading: true });
+        case _page_actions.START_LOADING_PAGES:
+            return (0, _merge2.default)(newState, { pageLoading: true });
+        case _page_actions.START_LOADING_PAGE:
+            return (0, _merge2.default)(newState, { pageLoading: true });
         case _field_actions.RECEIVE_ALL_FIELDS:
             return (0, _merge2.default)(newState, { fieldsLoading: false });
-        case _page_actions.START_LOADING_PAGES:
-            return (0, _merge2.default)(newState, { pagesLoading: true });
         case _page_actions.RECEIVE_PAGES:
-            return (0, _merge2.default)(newState, { pagesLoading: false });
+            return (0, _merge2.default)(newState, { pageLoading: false });
+        case _page_actions.RECEIVE_PAGE:
+            return (0, _merge2.default)(newState, { pageLoading: false });
         default:
             return state;
     }
@@ -31348,6 +31308,145 @@ var selectPageFields = exports.selectPageFields = function selectPageFields(stat
     return page ? page.fieldIds.map(function (fieldId) {
         return state.fields[fieldId];
     }) : [];
+};
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'section',
+        { className: 'loading_icon' },
+        _react2.default.createElement(
+            'h1',
+            null,
+            'LOADING'
+        )
+    );
+};
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'section',
+        { className: 'logo_container' },
+        _react2.default.createElement(
+            'h1',
+            { className: 'logo' },
+            'Custom Fibres'
+        )
+    );
+};
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'nav',
+        null,
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/' },
+            'Home'
+        ),
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/technique' },
+            'The Process'
+        ),
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/showcase' },
+            'Showcase'
+        ),
+        _react2.default.createElement('span', { className: 'email' })
+    );
+};
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+    var title = props.title,
+        body = props.body;
+
+    return _react2.default.createElement(
+        "section",
+        { className: "field_item" },
+        _react2.default.createElement(
+            "h2",
+            null,
+            title
+        ),
+        _react2.default.createElement(
+            "p",
+            null,
+            body
+        )
+    );
 };
 
 /***/ })
