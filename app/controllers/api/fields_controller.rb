@@ -1,39 +1,39 @@
-class Api::FieldController < ApplicationController
+class Api::FieldsController < ApplicationController
     def index
-        @info = Field.all
+        @field = Field.all
     end
 
     def create
-        @info = Field.new(info_params)
+        @field = Field.new(field_params)
 
-        if @info.save 
+        if @field.save 
             render :show
         else 
-            render json: @info.errors.full_messages, status: 422
+            render json: @field.errors.full_messages, status: 422
         end
     end
 
     def update
-        @info = Field.find_by(params[:id])
+        @field = Field.find(params[:id])
 
-        if @info.update_attributes(info_params)
+        if @field.update_attributes(field_params)
             render :show
         else
-            render json: @info.errors.full_messages, status: 422
+            render json: @field.errors.full_messages, status: 422
         end
     end
 
     def destroy
-        @info = Field.find_by(params[:id])
+        @field = Field.find_by(params[:id])
 
-        unless @info.destroy 
-            render json: @info.errors.full_messages, status: 422
+        unless @field.destroy 
+            render json: @field.errors.full_messages, status: 422
         end
     end
 
     private
 
-    def info_params
-        params.require(:info).permit(:title, :body, :images [])
+    def field_params
+        params.require(:field).permit(:title, :body, :page_id)
     end
 end

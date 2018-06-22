@@ -30461,6 +30461,10 @@ var _field_item_container = __webpack_require__(264);
 
 var _field_item_container2 = _interopRequireDefault(_field_item_container);
 
+var _new_field_item_container = __webpack_require__(266);
+
+var _new_field_item_container2 = _interopRequireDefault(_new_field_item_container);
+
 var _loading_icon = __webpack_require__(258);
 
 var _loading_icon2 = _interopRequireDefault(_loading_icon);
@@ -30553,6 +30557,8 @@ var Dashboard = function (_React$Component) {
                 });
             });
 
+            var addFieldItem = _react2.default.createElement(_new_field_item_container2.default, null);
+
             return _react2.default.createElement(
                 'main',
                 { className: 'dashboard_container' },
@@ -30569,7 +30575,8 @@ var Dashboard = function (_React$Component) {
                 _react2.default.createElement(
                     'section',
                     null,
-                    fieldItems
+                    fieldItems,
+                    addFieldItem
                 )
             );
         }
@@ -31612,7 +31619,7 @@ var FieldItem = function (_React$Component) {
             title: props.field.title,
             body: props.field.body,
             id: props.field.id,
-            pageId: props.pageId
+            page_id: props.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
         return _this;
@@ -31697,6 +31704,49 @@ var FieldItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FieldItem;
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = __webpack_require__(22);
+
+var _field_actions = __webpack_require__(245);
+
+var _field_item = __webpack_require__(265);
+
+var _field_item2 = _interopRequireDefault(_field_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    return {
+        field: state.fields[ownProps.fieldId],
+        pageId: ownProps.pageId,
+        loading: state.loading.fieldsLoading,
+        errors: state.errors.field
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        submitField: function submitField(field) {
+            return dispatch((0, _field_actions.createField)(field));
+        },
+        clearErrors: function clearErrors(errors) {
+            return dispatch((0, _field_actions.receiveErrors)(errors));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_field_item2.default);
 
 /***/ })
 /******/ ]);

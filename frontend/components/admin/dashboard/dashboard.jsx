@@ -1,6 +1,7 @@
 import React from 'react';
 import AdminHeading from './admin_heading';
 import FieldItemContainer from './field_item_container';
+import NewFieldItemContainer from './new_field_item_container';
 import LoadingIcon from '../../loading_icon';
 
 class Dashboard extends React.Component {
@@ -65,6 +66,8 @@ class Dashboard extends React.Component {
             );
         });
 
+        const addFieldItem = <NewFieldItemContainer />;
+
         return (
             <main className='dashboard_container'>
                 <AdminHeading signOut={this.handleSignOut} />
@@ -74,7 +77,8 @@ class Dashboard extends React.Component {
                     </ul>
                 </nav>
                 <section>
-                    {fieldItems}
+                    { fieldItems }
+                    { addFieldItem }
                 </section>
             </main>
         );
