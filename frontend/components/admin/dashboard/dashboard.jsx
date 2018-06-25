@@ -78,7 +78,7 @@ class Dashboard extends React.Component {
                 </nav>
                 <section>
                     { fieldItems }
-                    { addFieldItem }
+                    {/* { addFieldItem } */}
                 </section>
             </main>
         );

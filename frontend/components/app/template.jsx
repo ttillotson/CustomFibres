@@ -33,8 +33,8 @@ class Template extends React.Component {
         ));
 
         return (
-            <main>
-                <h3>{name} Page</h3>
+            <main className='template_container'>
+                <h3>{pageName} Page</h3>
                 {fieldItems}
             </main>
         );

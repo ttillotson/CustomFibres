@@ -7,7 +7,7 @@ class FieldItem extends React.Component {
             title: props.field.title,
             body: props.field.body,
             id: props.field.id,
-            page_id: props.pageId
+            page_id: props.field.pageId
         };
         this.submitForm = this.submitForm.bind(this);
     }

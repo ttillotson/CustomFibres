@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 export default () => (
-    <nav>
+    <nav className='app_nav'>
         <Link to={'/'}> 
             Home
         </Link>

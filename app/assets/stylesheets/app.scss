@@ -1,0 +1,71 @@
+#root {
+    font-family: 'PT Sans', sans-serif;
+    background-image: url(http://res.cloudinary.com/tiptoptomes/image/upload/v1529636065/WZnjFBT-carbon-fiber-wallpaper.jpg);
+    min-height: 100vh;
+    color: white;
+}
+
+.main_container {
+    // padding: ;
+    padding-top: 3vh;
+    // background-color: rgb(70, 70, 70);
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #242424;
+        margin: 0 2vw;
+
+        .logo_container {
+            display: flex;
+            justify-content: center;
+            
+            .logo {
+                font-size: 72px;
+            }
+        }
+        
+        .app_nav {
+            display: flex;
+            justify-content: space-between;
+            
+            a {
+                font-size: 24px;
+            }
+        }
+    }
+    
+    
+    .template_container {
+        
+        
+        .field_item {
+            
+            // &.technique {}
+            
+            .field_title {
+                font-size: 36px;
+            }
+            
+            .field_body {
+                
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 480px) {
+
+}
+
+@media only screen and (min-width: 760px) {
+    
+}
+
+@media only screen and (min-width: 960px) {
+    
+}
+
+@media only screen and (min-width: 1400px) {
+    
+}

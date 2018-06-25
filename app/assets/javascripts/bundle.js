@@ -30575,8 +30575,7 @@ var Dashboard = function (_React$Component) {
                 _react2.default.createElement(
                     'section',
                     null,
-                    fieldItems,
-                    addFieldItem
+                    fieldItems
                 )
             );
         }
@@ -31384,7 +31383,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
     return _react2.default.createElement(
         'nav',
-        null,
+        { className: 'app_nav' },
         _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -31423,19 +31422,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (props) {
     var title = props.title,
-        body = props.body;
+        body = props.body,
+        pageName = props.pageName;
 
     return _react2.default.createElement(
         "section",
         { className: "field_item" },
         _react2.default.createElement(
             "h2",
-            null,
+            { className: "field_title " + pageName },
             title
         ),
         _react2.default.createElement(
             "p",
-            null,
+            { className: "field_body " + pageName },
             body
         )
     );
@@ -31516,11 +31516,11 @@ var Template = function (_React$Component) {
 
             return _react2.default.createElement(
                 'main',
-                null,
+                { className: 'template_container' },
                 _react2.default.createElement(
                     'h3',
                     null,
-                    name,
+                    pageName,
                     ' Page'
                 ),
                 fieldItems
@@ -31619,7 +31619,7 @@ var FieldItem = function (_React$Component) {
             title: props.field.title,
             body: props.field.body,
             id: props.field.id,
-            page_id: props.pageId
+            page_id: props.field.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
         return _this;
