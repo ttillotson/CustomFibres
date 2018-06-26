@@ -30497,8 +30497,16 @@ var Dashboard = function (_React$Component) {
 
     _createClass(Dashboard, [{
         key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps() {
+        value: function componentWillReceiveProps(nextProps) {
             // remove toggle for new FieldSet
+            var currentPage = this.props.pages[this.state.currentPage];
+            if (currentPage) {
+
+                var currentIds = this.props.pages[this.state.currentPage].fieldIds;
+                var newIds = nextProps.pages[this.state.currentPage].fieldIds;
+
+                if (currentIds.length !== newIds.length) this.setState({ newField: false });
+            }
         }
     }, {
         key: 'componentDidMount',
@@ -30559,7 +30567,7 @@ var Dashboard = function (_React$Component) {
                 );
             });
 
-            var currentPage = this.props.pages[this.state.currentPage];
+            var currentPage = pages[this.state.currentPage];
 
             // Set Fields for Current Page
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
@@ -30807,10 +30815,10 @@ var receiveField = function receiveField(field) {
     };
 };
 
-var removeField = function removeField(fieldId) {
+var removeField = function removeField(field) {
     return {
         type: REMOVE_FIELD,
-        fieldId: fieldId
+        field: field
     };
 };
 
@@ -30868,8 +30876,8 @@ var updateField = exports.updateField = function updateField(field) {
 var destroyField = exports.destroyField = function destroyField(fieldId) {
     return function (dispatch) {
         dispatch(startLoadingField());
-        return FieldAPIUtil.destroyField(fieldId).then(function () {
-            return dispatch(removeField(fieldId));
+        return FieldAPIUtil.destroyField(fieldId).then(function (removedField) {
+            return dispatch(removeField(removedField));
         }, function (errors) {
             return dispatch(receiveFieldErrors(errors.responseJSON));
         });
@@ -30911,7 +30919,7 @@ var FieldReducer = function FieldReducer() {
         case _field_actions.RECEIVE_FIELD:
             return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
         case _field_actions.REMOVE_FIELD:
-            delete newState[action.fieldId];
+            delete newState[action.field.id];
             return newState;
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge3.default)(newState, action.payload.fields);
@@ -31262,6 +31270,8 @@ var _merge2 = _interopRequireDefault(_merge);
 
 var _page_actions = __webpack_require__(254);
 
+var _field_actions = __webpack_require__(245);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PagesReducer = function PagesReducer() {
@@ -31275,6 +31285,16 @@ var PagesReducer = function PagesReducer() {
             return (0, _merge2.default)(newState, action.payload.page);
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge2.default)(newState, action.payload.page);
+        case _field_actions.RECEIVE_FIELD:
+            newState[action.field.page_name].fieldIds.push(action.field.id);
+            return newState;
+        case _field_actions.REMOVE_FIELD:
+            var ids = newState[action.field.page_name].fieldIds;
+            var newIds = ids.filter(function (id) {
+                return id !== action.field.id;
+            });
+            newState[action.field.page_name].fieldIds = newIds;
+            return newState;
         default:
             return state;
     }
@@ -31647,6 +31667,7 @@ var FieldItem = function (_React$Component) {
             page_id: props.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
+        _this.removeForm = _this.removeForm.bind(_this);
         return _this;
     }
 
@@ -31658,6 +31679,11 @@ var FieldItem = function (_React$Component) {
             return function (e) {
                 return _this2.setState(_defineProperty({}, field, e.target.value));
             };
+        }
+    }, {
+        key: 'removeForm',
+        value: function removeForm() {
+            this.props.removeField(this.state.id);
         }
     }, {
         key: 'submitForm',
@@ -31754,7 +31780,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var newField = { title: "",
         body: "" };
-    debugger;
     return {
         field: newField,
         pageId: ownProps.pageId,

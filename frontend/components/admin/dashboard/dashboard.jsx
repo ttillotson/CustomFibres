@@ -16,8 +16,16 @@ class Dashboard extends React.Component {
         this.toggleNewField = this.toggleNewField.bind(this);
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
         // remove toggle for new FieldSet
+        const currentPage = this.props.pages[this.state.currentPage];
+        if (currentPage) {
+
+            const currentIds = this.props.pages[this.state.currentPage].fieldIds;
+            const newIds = nextProps.pages[this.state.currentPage].fieldIds;
+            
+            if (currentIds.length !== newIds.length) this.setState({ newField: false });
+        }
     }
 
     componentDidMount() {
@@ -64,7 +72,7 @@ class Dashboard extends React.Component {
             );
         });
 
-        let currentPage = this.props.pages[this.state.currentPage];
+        let currentPage = pages[this.state.currentPage];
 
         // Set Fields for Current Page
         const fieldItems = currentPage.fieldIds.map(fieldId => {

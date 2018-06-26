@@ -17,9 +17,9 @@ const receiveField = (field) => ({
     field
 });
 
-const removeField = (fieldId) => ({
+const removeField = (field) => ({
     type: REMOVE_FIELD,
-    fieldId
+    field
 });
 
 const startLoadingAllFields = () => ({
@@ -63,8 +63,8 @@ export const updateField = (field) => (dispatch) => {
 
 export const destroyField = (fieldId) => (dispatch) => {
     dispatch(startLoadingField());
-    return FieldAPIUtil.destroyField(fieldId).then(() => (
-        dispatch(removeField(fieldId))
+    return FieldAPIUtil.destroyField(fieldId).then((removedField) => (
+        dispatch(removeField(removedField))
     ), errors => (
         dispatch(receiveFieldErrors(errors.responseJSON))
     ));

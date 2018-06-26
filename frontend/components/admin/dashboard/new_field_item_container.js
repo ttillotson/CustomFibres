@@ -5,7 +5,6 @@ import FieldItem from './field_item';
 const mapStateToProps = (state, ownProps) => {
     const newField = { title: "",
                         body: ""};
-    debugger;
     return ({
         field: newField,
         pageId: ownProps.pageId,

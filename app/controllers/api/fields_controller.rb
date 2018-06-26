@@ -4,10 +4,7 @@ class Api::FieldsController < ApplicationController
     end
 
     def create
-        debugger
         @field = Field.new(field_params)
-
-        debugger
 
         if @field.save 
             render :show
@@ -27,7 +24,7 @@ class Api::FieldsController < ApplicationController
     end
 
     def destroy
-        @field = Field.find_by(params[:id])
+        @field = Field.find(params[:id])
 
         unless @field.destroy 
             render json: @field.errors.full_messages, status: 422

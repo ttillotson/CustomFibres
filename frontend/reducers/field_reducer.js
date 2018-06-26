@@ -15,7 +15,7 @@ const FieldReducer = (state={}, action) => {
         case RECEIVE_FIELD:
             return merge(newState, {[action.field.id]: action.field});
         case REMOVE_FIELD:
-            delete newState[action.fieldId];
+            delete newState[action.field.id];
             return newState;
         case RECEIVE_PAGE:
             return merge(newState, action.payload.fields);

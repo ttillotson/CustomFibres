@@ -10,6 +10,7 @@ class FieldItem extends React.Component {
             page_id: props.pageId
         };
         this.submitForm = this.submitForm.bind(this);
+        this.removeForm = this.removeForm.bind(this);
     }
 
     update(field) {
@@ -18,6 +19,10 @@ class FieldItem extends React.Component {
                 [field]: e.target.value
             })
         );
+    }
+
+    removeForm() {
+        this.props.removeField(this.state.id);
     }
 
     submitForm(e) {

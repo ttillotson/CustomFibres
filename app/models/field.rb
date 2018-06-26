@@ -14,4 +14,8 @@ class Field < ApplicationRecord
     belongs_to :page,
     class_name: :Page,
     foreign_key: :page_id
+
+    def page_name 
+        page.name
+    end
 end
