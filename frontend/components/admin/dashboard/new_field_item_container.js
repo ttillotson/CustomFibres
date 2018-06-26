@@ -3,8 +3,11 @@ import { createField, receiveErrors } from '../../../actions/field_actions';
 import FieldItem from './field_item';
 
 const mapStateToProps = (state, ownProps) => {
+    const newField = { title: "",
+                        body: ""};
+    debugger;
     return ({
-        field: state.fields[ownProps.fieldId],
+        field: newField,
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
         errors: state.errors.field,

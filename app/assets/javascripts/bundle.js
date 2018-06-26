@@ -30486,14 +30486,21 @@ var Dashboard = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 
         _this.state = {
-            currentPage: "Splash"
+            currentPage: "Splash",
+            newField: false
         };
         _this.handleSignOut = _this.handleSignOut.bind(_this);
         _this.updateTab = _this.updateTab.bind(_this);
+        _this.toggleNewField = _this.toggleNewField.bind(_this);
         return _this;
     }
 
     _createClass(Dashboard, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps() {
+            // remove toggle for new FieldSet
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             window.scrollTo(0, 0);
@@ -30509,11 +30516,17 @@ var Dashboard = function (_React$Component) {
             });
         }
     }, {
+        key: 'toggleNewField',
+        value: function toggleNewField() {
+            this.setState({ newField: true });
+        }
+    }, {
         key: 'updateTab',
         value: function updateTab(e) {
             if (this.state.currentPage !== e.target.textContent) {
                 window.scrollTo(0, 0);
-                this.setState({ currentPage: e.target.textContent });
+                this.setState({ currentPage: e.target.textContent,
+                    newField: false });
             }
         }
     }, {
@@ -30530,6 +30543,7 @@ var Dashboard = function (_React$Component) {
 
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
+            // Create Page Tabs
             var tabs = Object.values(pages).map(function (page, idx) {
                 var klass = 'tab';
                 var key = 'key=' + idx;
@@ -30547,6 +30561,7 @@ var Dashboard = function (_React$Component) {
 
             var currentPage = this.props.pages[this.state.currentPage];
 
+            // Set Fields for Current Page
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 
@@ -30557,7 +30572,16 @@ var Dashboard = function (_React$Component) {
                 });
             });
 
-            var addFieldItem = _react2.default.createElement(_new_field_item_container2.default, null);
+            // Add Field Logic
+            var newFieldItem = _react2.default.createElement(_new_field_item_container2.default, { pageId: currentPage.id });
+
+            var addButton = _react2.default.createElement(
+                'button',
+                { onClick: this.toggleNewField },
+                'Add New Field'
+            );
+
+            var fieldLogic = this.state.newField ? newFieldItem : addButton;
 
             return _react2.default.createElement(
                 'main',
@@ -30575,7 +30599,8 @@ var Dashboard = function (_React$Component) {
                 _react2.default.createElement(
                     'section',
                     null,
-                    fieldItems
+                    fieldItems,
+                    fieldLogic
                 )
             );
         }
@@ -31619,7 +31644,7 @@ var FieldItem = function (_React$Component) {
             title: props.field.title,
             body: props.field.body,
             id: props.field.id,
-            page_id: props.field.pageId
+            page_id: props.pageId
         };
         _this.submitForm = _this.submitForm.bind(_this);
         return _this;
@@ -31727,8 +31752,11 @@ var _field_item2 = _interopRequireDefault(_field_item);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var newField = { title: "",
+        body: "" };
+    debugger;
     return {
-        field: state.fields[ownProps.fieldId],
+        field: newField,
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
         errors: state.errors.field

@@ -8,10 +8,16 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: "Splash"
+            currentPage: "Splash",
+            newField: false
         };
         this.handleSignOut = this.handleSignOut.bind(this);
         this.updateTab = this.updateTab.bind(this);
+        this.toggleNewField = this.toggleNewField.bind(this);
+    }
+
+    componentWillReceiveProps() {
+        // remove toggle for new FieldSet
     }
 
     componentDidMount() {
@@ -25,10 +31,15 @@ class Dashboard extends React.Component {
         ));
     }
 
+    toggleNewField() {
+        this.setState({ newField: true});
+    }
+
     updateTab(e) {
         if (this.state.currentPage !== e.target.textContent ) {
             window.scrollTo(0,0);
-            this.setState({ currentPage: e.target.textContent });
+            this.setState({ currentPage: e.target.textContent,
+                            newField: false });
         }
     }
 
@@ -37,6 +48,7 @@ class Dashboard extends React.Component {
 
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
+        // Create Page Tabs
         const tabs = Object.values(pages).map((page, idx) => {
             let klass = 'tab';
             let key = `key=${idx}`;
@@ -54,6 +66,7 @@ class Dashboard extends React.Component {
 
         let currentPage = this.props.pages[this.state.currentPage];
 
+        // Set Fields for Current Page
         const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
 
@@ -66,7 +79,12 @@ class Dashboard extends React.Component {
             );
         });
 
-        const addFieldItem = <NewFieldItemContainer />;
+        // Add Field Logic
+        const newFieldItem = <NewFieldItemContainer pageId={currentPage.id} />;
+
+        const addButton = <button onClick={this.toggleNewField}>Add New Field</button>
+
+        const fieldLogic = this.state.newField ? newFieldItem : addButton ;
 
         return (
             <main className='dashboard_container'>
@@ -78,7 +96,7 @@ class Dashboard extends React.Component {
                 </nav>
                 <section>
                     { fieldItems }
-                    {/* { addFieldItem } */}
+                    { fieldLogic }
                 </section>
             </main>
         );

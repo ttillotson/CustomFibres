@@ -4,7 +4,10 @@ class Api::FieldsController < ApplicationController
     end
 
     def create
+        debugger
         @field = Field.new(field_params)
+
+        debugger
 
         if @field.save 
             render :show
