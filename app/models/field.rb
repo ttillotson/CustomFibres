@@ -15,6 +15,9 @@ class Field < ApplicationRecord
     class_name: :Page,
     foreign_key: :page_id
 
+    has_many_attached :images
+    has_one_attached :picture
+
     def page_name 
         page.name
     end

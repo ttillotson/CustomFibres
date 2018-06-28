@@ -7,21 +7,33 @@ class FieldItem extends React.Component {
             title: props.field.title,
             body: props.field.body,
             id: props.field.id,
-            page_id: props.pageId
+            page_id: props.pageId,
+            images: []
         };
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
+        this.fileInput = this.fileInput.bind(this);
     }
 
     update(field) {
-        return (e) => (
+        return (e) => {
+        if (field === "images") debugger;
             this.setState({
                 [field]: e.target.value
-            })
-        );
+            });
+        };
+        // );
     }
 
-    removeForm() {
+    fileInput(e) {
+        debugger;
+        // console.log(e)
+        // e.target.files => file list with uploads
+        React.createRef();
+    }
+
+    removeForm(e) {
+        e.preventDefault();
         this.props.removeField(this.state.id);
     }
 
@@ -54,6 +66,16 @@ class FieldItem extends React.Component {
                     className='field_body'
                     value={this.state.body}
                     onChange={this.update("body")}
+                    />
+                </section>
+
+                <section className='form_item'>
+                    <label>Images</label>
+                    <input
+                    type='file'
+                    multiple={true}
+                    // value=
+                    onChange={(e) => this.fileInput(e)}
                     />
                 </section>
 

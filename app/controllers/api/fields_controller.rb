@@ -5,6 +5,7 @@ class Api::FieldsController < ApplicationController
 
     def create
         @field = Field.new(field_params)
+        debugger;
 
         if @field.save 
             render :show
@@ -34,6 +35,6 @@ class Api::FieldsController < ApplicationController
     private
 
     def field_params
-        params.require(:field).permit(:title, :body, :page_id)
+        params.require(:field).permit(:title, :body, :page_id, images: [])
     end
 end
