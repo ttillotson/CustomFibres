@@ -34,7 +34,7 @@ class Template extends React.Component {
 
         return (
             <main className='template_container'>
-                <h3>{pageName} Page</h3>
+                {/* <h3>{pageName} Page</h3> */}
                 {fieldItems}
             </main>
         );

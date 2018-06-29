@@ -4500,12 +4500,6 @@ var Template = function (_React$Component) {
             return _react2.default.createElement(
                 'main',
                 { className: 'template_container' },
-                _react2.default.createElement(
-                    'h3',
-                    null,
-                    pageName,
-                    ' Page'
-                ),
                 fieldItems
             );
         }
@@ -31693,7 +31687,7 @@ var Dashboard = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'section',
-                    null,
+                    { className: 'fields_container' },
                     fieldItems,
                     fieldLogic
                 )

@@ -17,6 +17,10 @@ span, article, footer, time, small {
   -webkit-appearance: none;
 }
 
+textarea {
+  resize: none;
+}
+
 ul {
   list-style: none;
 }
