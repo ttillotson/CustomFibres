@@ -3,7 +3,8 @@ import AdminForm from './session_page';
 import { signIn, receiveSessionErrors } from '../../../actions/session_actions';
 
 const mapStateToProps = (state) => ({
-    session: state.session.currentUser
+    session: state.session.currentUser,
+    errors: state.errors.session
 });
 
 const mapDispatchToProps = (dispatch) => ({

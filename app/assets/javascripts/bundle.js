@@ -31331,7 +31331,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
-        session: state.session.currentUser
+        session: state.session.currentUser,
+        errors: state.errors.session
     };
 };
 
@@ -31417,7 +31418,7 @@ var AdminForm = function (_React$Component) {
             if (this.props.errors) {
                 return _react2.default.createElement(
                     "ul",
-                    null,
+                    { className: "errors" },
                     this.props.errors.map(function (error, i) {
                         return _react2.default.createElement(
                             "li",
@@ -31433,31 +31434,39 @@ var AdminForm = function (_React$Component) {
         value: function render() {
 
             return _react2.default.createElement(
-                "form",
-                { className: "admin_session_form" },
+                "section",
+                { className: "admin_session_container" },
                 _react2.default.createElement(
-                    "label",
-                    null,
-                    "Username",
+                    "form",
+                    { className: "admin_session_form" },
+                    _react2.default.createElement(
+                        "label",
+                        null,
+                        "Username"
+                    ),
                     _react2.default.createElement("input", { type: "text",
                         value: this.state.user,
                         onChange: this.update('username')
-                    })
-                ),
-                _react2.default.createElement(
-                    "label",
-                    null,
-                    "Password",
+                    }),
+                    _react2.default.createElement(
+                        "label",
+                        null,
+                        "Password"
+                    ),
                     _react2.default.createElement("input", { type: "password",
                         value: this.state.password,
-                        onChange: this.update('password') })
-                ),
-                _react2.default.createElement(
-                    "button",
-                    { onClick: this.handleSubmit },
-                    "Sign In"
-                ),
-                this.renderErrors()
+                        onChange: this.update('password') }),
+                    _react2.default.createElement(
+                        "section",
+                        null,
+                        _react2.default.createElement(
+                            "button",
+                            { onClick: this.handleSubmit },
+                            "Sign In"
+                        )
+                    ),
+                    this.renderErrors()
+                )
             );
         }
     }]);

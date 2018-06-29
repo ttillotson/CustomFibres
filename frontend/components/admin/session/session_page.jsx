@@ -30,7 +30,7 @@ class AdminForm extends React.Component {
     renderErrors(){
         if (this.props.errors) {
             return (
-                <ul>
+                <ul className='errors'>
                     {this.props.errors.map((error, i) => (
                         <li key={`${i}`}>
                             {error}
@@ -44,24 +44,27 @@ class AdminForm extends React.Component {
     render() {
 
         return(
-            <form className='admin_session_form'>
-                <label>Username
+            <section className ='admin_session_container'>
+                <form className='admin_session_form'>
+                    
+                    <label>Username</label>
                     <input type='text'
                     value={this.state.user}
                     onChange={this.update('username')}
                     />
-                </label>
 
-                <label>Password
+                    <label>Password</label>
                     <input type='password'
                     value={this.state.password}
                     onChange={this.update('password')}/>
-                </label>
+                    
+                    <section>
+                        <button onClick={this.handleSubmit}>Sign In</button>
+                    </section>
 
-                <button onClick={this.handleSubmit}>Sign In</button>
-
-                {this.renderErrors()}
-            </form>
+                    {this.renderErrors()}
+                </form>
+            </section>
         );
     }
 }

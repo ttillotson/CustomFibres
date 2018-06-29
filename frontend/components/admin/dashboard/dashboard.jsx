@@ -90,7 +90,7 @@ class Dashboard extends React.Component {
         // Add Field Logic
         const newFieldItem = <NewFieldItemContainer pageId={currentPage.id} />;
 
-        const addButton = <button onClick={this.toggleNewField}>Add New Field</button>
+        const addButton = <button onClick={this.toggleNewField}>Add New Field</button>;
 
         const fieldLogic = this.state.newField ? newFieldItem : addButton ;
 
