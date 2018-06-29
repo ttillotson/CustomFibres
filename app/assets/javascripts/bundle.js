@@ -30859,9 +30859,9 @@ var _logo = __webpack_require__(236);
 
 var _logo2 = _interopRequireDefault(_logo);
 
-var _mobile_logo = __webpack_require__(247);
+var _emblem = __webpack_require__(248);
 
-var _mobile_logo2 = _interopRequireDefault(_mobile_logo);
+var _emblem2 = _interopRequireDefault(_emblem);
 
 var _nav_bar = __webpack_require__(237);
 
@@ -30879,7 +30879,7 @@ var App = function App() {
             'header',
             null,
             _react2.default.createElement(_logo2.default, null),
-            _react2.default.createElement(_mobile_logo2.default, null),
+            _react2.default.createElement(_emblem2.default, null),
             _react2.default.createElement(_nav_bar2.default, null)
         ),
         _react2.default.createElement(
@@ -31833,7 +31833,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_field_item2.default);
 
 /***/ }),
-/* 247 */
+/* 247 */,
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31854,13 +31855,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
     return _react2.default.createElement(
         'section',
-        { className: 'logo_container' },
+        { className: 'emblem_container' },
         _react2.default.createElement(
             _reactRouterDom.Link,
             { to: "/" },
             _react2.default.createElement(
                 'h1',
-                { className: 'mobile_logo' },
+                { className: 'emblem' },
                 'CF'
             )
         )

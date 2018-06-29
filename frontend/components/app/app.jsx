@@ -3,7 +3,7 @@ import SplashContainer from './splash/splash_container';
 import TechniqueContainer from './technique/technique_container';
 import ShowcaseContainer from './showcase/showcase_container';
 import Logo from './shared/logo';
-import MobileLogo from './shared/mobile_logo';
+import Emblem from './shared/emblem';
 import NavBar from './shared/nav_bar';
 import {
     Route,
@@ -15,7 +15,7 @@ const App = () => (
     <main className='main_container'>
         <header>
             <Logo />
-            <MobileLogo />
+            <Emblem />
             <NavBar />
         </header>
         <section>
