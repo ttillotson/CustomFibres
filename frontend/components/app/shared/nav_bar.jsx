@@ -13,6 +13,8 @@ export default () => (
         <Link to={'/showcase'}> 
             Showcase
         </Link>
-        <span className='email'/>
+        <Link to={'/'} className='email'>
+            Request a Quote
+        </Link>
     </nav>
 );

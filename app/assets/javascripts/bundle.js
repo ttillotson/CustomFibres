@@ -4609,7 +4609,8 @@ var FieldItem = function (_React$Component) {
         };
         _this.submitForm = _this.submitForm.bind(_this);
         _this.removeForm = _this.removeForm.bind(_this);
-        _this.fileInput = _this.fileInput.bind(_this);
+        _this.handleFileInput = _this.handleFileInput.bind(_this);
+        _this.fileInput = _react2.default.createRef();
         return _this;
     }
 
@@ -4619,18 +4620,21 @@ var FieldItem = function (_React$Component) {
             var _this2 = this;
 
             return function (e) {
-                if (field === "images") debugger;
-                _this2.setState(_defineProperty({}, field, e.target.value));
+                return _this2.setState(_defineProperty({}, field, e.target.value));
             };
-            // );
         }
     }, {
-        key: 'fileInput',
-        value: function fileInput(e) {
-            debugger;
+        key: 'handleFileInput',
+        value: function handleFileInput(e) {
+            // debugger;
             // console.log(e)
             // e.target.files => file list with uploads
-            _react2.default.createRef();
+            // const fileArr = Array.from(fileList);
+
+            var fileArr = Array.from(e.target.files);
+            this.setState({ images: fileArr });
+
+            debugger;
         }
     }, {
         key: 'removeForm',
@@ -4642,13 +4646,17 @@ var FieldItem = function (_React$Component) {
         key: 'submitForm',
         value: function submitForm(e) {
             e.preventDefault();
-            this.props.submitField(this.state);
+            var fileRefs = Array.from(this.fileInput.current.files);
+            // // this.setState({ "images": fileRefs });
+            // // this.state.images = fileRefs;
+            // this.state.images = fileRefs;
+            debugger;
+            this.props.submitField(this.state, fileRefs);
             // Need a flag for submission then Update complete
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
 
             var deleteButton = _react2.default.createElement(
                 'button',
@@ -4701,9 +4709,8 @@ var FieldItem = function (_React$Component) {
                         type: 'file',
                         multiple: true
                         // value=
-                        , onChange: function onChange(e) {
-                            return _this3.fileInput(e);
-                        }
+                        // onChange={this.handleFileInput}
+                        , ref: this.fileInput
                     })
                 ),
                 _react2.default.createElement(
@@ -30852,6 +30859,10 @@ var _logo = __webpack_require__(236);
 
 var _logo2 = _interopRequireDefault(_logo);
 
+var _mobile_logo = __webpack_require__(247);
+
+var _mobile_logo2 = _interopRequireDefault(_mobile_logo);
+
 var _nav_bar = __webpack_require__(237);
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
@@ -30868,6 +30879,7 @@ var App = function App() {
             'header',
             null,
             _react2.default.createElement(_logo2.default, null),
+            _react2.default.createElement(_mobile_logo2.default, null),
             _react2.default.createElement(_nav_bar2.default, null)
         ),
         _react2.default.createElement(
@@ -31150,9 +31162,13 @@ exports.default = function () {
         'section',
         { className: 'logo_container' },
         _react2.default.createElement(
-            'h1',
-            { className: 'logo' },
-            'Custom Fibres'
+            _reactRouterDom.Link,
+            { to: '/' },
+            _react2.default.createElement(
+                'h1',
+                { className: 'logo' },
+                'Custom Fibres'
+            )
         )
     );
 };
@@ -31195,7 +31211,11 @@ exports.default = function () {
             { to: '/showcase' },
             'Showcase'
         ),
-        _react2.default.createElement('span', { className: 'email' })
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/', className: 'email' },
+            'Request a Quote'
+        )
     );
 };
 
@@ -31811,6 +31831,41 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_field_item2.default);
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(13);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'section',
+        { className: 'logo_container' },
+        _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: "/" },
+            _react2.default.createElement(
+                'h1',
+                { className: 'mobile_logo' },
+                'CF'
+            )
+        )
+    );
+};
 
 /***/ })
 /******/ ]);

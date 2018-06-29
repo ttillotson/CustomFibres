@@ -12,24 +12,28 @@ class FieldItem extends React.Component {
         };
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
-        this.fileInput = this.fileInput.bind(this);
+        this.handleFileInput = this.handleFileInput.bind(this);
+        this.fileInput = React.createRef();
     }
 
     update(field) {
-        return (e) => {
-        if (field === "images") debugger;
+        return (e) => (
             this.setState({
                 [field]: e.target.value
-            });
-        };
-        // );
+            })
+        );
     }
 
-    fileInput(e) {
-        debugger;
+    handleFileInput(e) {
+        // debugger;
         // console.log(e)
         // e.target.files => file list with uploads
-        React.createRef();
+        // const fileArr = Array.from(fileList);
+        
+        const fileArr = Array.from(e.target.files);
+        this.setState({ images: fileArr });
+
+        debugger;
     }
 
     removeForm(e) {
@@ -39,7 +43,12 @@ class FieldItem extends React.Component {
 
     submitForm(e) {
         e.preventDefault();
-        this.props.submitField(this.state);
+        const fileRefs = Array.from(this.fileInput.current.files);
+        // // this.setState({ "images": fileRefs });
+        // // this.state.images = fileRefs;
+        // this.state.images = fileRefs;
+        debugger;
+        this.props.submitField(this.state, fileRefs);
         // Need a flag for submission then Update complete
     }
 
@@ -75,7 +84,8 @@ class FieldItem extends React.Component {
                     type='file'
                     multiple={true}
                     // value=
-                    onChange={(e) => this.fileInput(e)}
+                    // onChange={this.handleFileInput}
+                    ref={this.fileInput}
                     />
                 </section>
 

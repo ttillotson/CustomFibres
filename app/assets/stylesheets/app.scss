@@ -12,25 +12,34 @@
 
     header {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         background-color: #242424;
         margin: 0 2vw;
 
         .logo_container {
-            display: flex;
+            // display: flex;
             justify-content: center;
+            margin: auto;
             
             .logo {
-                font-size: 72px;
+                display: none;
+            }
+            .mobile_logo {
+                font-size: 40px;
             }
         }
         
         .app_nav {
             display: flex;
             justify-content: space-between;
+            // margin: auto;
+            padding 
             
             a {
                 font-size: 24px;
+                display: block;
+                align-content: center;
             }
         }
     }
@@ -54,18 +63,30 @@
     }
 }
 
-@media only screen and (min-width: 480px) {
-
+@media only screen and (max-width: 767px) {
+    // .app_nav {
+    //     visibility: hidden;
+    // }
+    .logo_container {
+        display: none;
+    }
 }
 
-@media only screen and (min-width: 760px) {
+@media only screen and (max-width: 959px) {
+    .mobile_logo_container {
+        display: none;
+    }
+
+    .logo_container {
+        display: flex;
+        justify-content: center;
+        
+        .logo {
+            font-size: 72px;
+        }
+    }
+}
+
+// @media only screen and (min-width: 1399px) {
     
-}
-
-@media only screen and (min-width: 960px) {
-    
-}
-
-@media only screen and (min-width: 1400px) {
-    
-}
+// }
