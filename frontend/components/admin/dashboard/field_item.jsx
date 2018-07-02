@@ -33,7 +33,7 @@ class FieldItem extends React.Component {
         const fileArr = Array.from(e.target.files);
         this.setState({ images: fileArr });
 
-        debugger;
+        // debugger;
     }
 
     removeForm(e) {
@@ -47,13 +47,13 @@ class FieldItem extends React.Component {
         // // this.setState({ "images": fileRefs });
         // // this.state.images = fileRefs;
         // this.state.images = fileRefs;
-        debugger;
+        // debugger;
         this.props.submitField(this.state, fileRefs);
         // Need a flag for submission then Update complete
     }
 
     render() {
-        let lastUpdated = this.props.field.last_updated;
+        let lastUpdated = <span>Last Updated: {this.props.field.last_updated}</span>;
 
         let deleteButton = <button onClick={this.removeForm}
                                 className='delete_item'
@@ -90,13 +90,15 @@ class FieldItem extends React.Component {
                     />
                 </section>
 
-                <section>
-                    <span>Last Updated: {lastUpdated} </span>
-                    { this.state.id ? deleteButton : null }
+                <section className={'form_logic_section'}>
+                    { this.state.id ? lastUpdated : null }
+                    <section>
+                        { this.state.id ? deleteButton : null }
 
-                    <button onClick={this.submitForm}
-                            className='save_item'
-                    >Save</button>
+                        <button onClick={this.submitForm}
+                                className='save_item'
+                                >Save</button>
+                    </section>
                 </section>
                 
             </form>

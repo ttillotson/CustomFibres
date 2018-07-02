@@ -4628,7 +4628,7 @@ var FieldItem = function (_React$Component) {
             var fileArr = Array.from(e.target.files);
             this.setState({ images: fileArr });
 
-            debugger;
+            // debugger;
         }
     }, {
         key: 'removeForm',
@@ -4644,14 +4644,19 @@ var FieldItem = function (_React$Component) {
             // // this.setState({ "images": fileRefs });
             // // this.state.images = fileRefs;
             // this.state.images = fileRefs;
-            debugger;
+            // debugger;
             this.props.submitField(this.state, fileRefs);
             // Need a flag for submission then Update complete
         }
     }, {
         key: 'render',
         value: function render() {
-            var lastUpdated = this.props.field.last_updated;
+            var lastUpdated = _react2.default.createElement(
+                'span',
+                null,
+                'Last Updated: ',
+                this.props.field.last_updated
+            );
 
             var deleteButton = _react2.default.createElement(
                 'button',
@@ -4710,21 +4715,19 @@ var FieldItem = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'section',
-                    null,
+                    { className: 'form_logic_section' },
+                    this.state.id ? lastUpdated : null,
                     _react2.default.createElement(
-                        'span',
+                        'section',
                         null,
-                        'Last Updated: ',
-                        lastUpdated,
-                        ' '
-                    ),
-                    this.state.id ? deleteButton : null,
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.submitForm,
-                            className: 'save_item'
-                        },
-                        'Save'
+                        this.state.id ? deleteButton : null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: this.submitForm,
+                                className: 'save_item'
+                            },
+                            'Save'
+                        )
                     )
                 )
             );
@@ -26311,7 +26314,9 @@ var PagesReducer = function PagesReducer() {
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge2.default)(newState, action.payload.page);
         case _field_actions.RECEIVE_FIELD:
-            newState[action.field.page_name].fieldIds.push(action.field.id);
+            if (!newState[action.field.page_name].fieldIds.includes(action.field.id)) {
+                newState[action.field.page_name].fieldIds.push(action.field.id);
+            }
             return newState;
         case _field_actions.REMOVE_FIELD:
             var ids = newState[action.field.page_name].fieldIds;
@@ -31668,6 +31673,7 @@ var Dashboard = function (_React$Component) {
             var currentPage = pages[this.state.currentPage];
 
             // Set Fields for Current Page
+            // debugger;
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 

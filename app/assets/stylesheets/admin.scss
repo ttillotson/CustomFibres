@@ -130,21 +130,29 @@
                         vertical-align: top;
                     }
                 }
-                
-                section {
-                    display: flex;
-                    justify-content: flex-end;
-                    
-                    button {
-                        margin-right: 5px;
+                .form_logic_section {
+                    display: flex; 
+                    justify-content: space-between;
+
+                    span {
+                        padding-top: 5px;
                     }
-                    
-                    .delete_item {
-                        background-color: red;
-                    }
-                    
-                    .save_item {
-                        background-color: rgba(115, 255, 22, 0.815);
+
+                    section {
+                        display: flex;
+                        justify-content: flex-end;
+                        
+                        button {
+                            margin-right: 5px;
+                        }
+                        
+                        .delete_item {
+                            background-color: red;
+                        }
+                        
+                        .save_item {
+                            background-color: rgba(115, 255, 22, 0.815);
+                        }
                     }
                 }
             }
