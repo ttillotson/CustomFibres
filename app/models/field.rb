@@ -21,4 +21,9 @@ class Field < ApplicationRecord
     def page_name 
         page.name
     end
+
+    def last_updated
+        # updated_at.strftime("%m/%d/%y %r")
+        updated_at.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%y %r")
+    end
 end

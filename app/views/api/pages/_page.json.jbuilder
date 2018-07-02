@@ -16,7 +16,8 @@ end
 json.fields do 
     fields.each do |field|
         json.set! field.id do 
-            json.extract! field, :id, :title, :body, :page_id
+            # json.extract! field, :id, :title, :body, :page_id
+            json.partial! 'api/fields/field', field: field
         end
     end
 end

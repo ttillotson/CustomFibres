@@ -53,6 +53,7 @@ class FieldItem extends React.Component {
     }
 
     render() {
+        let lastUpdated = this.props.field.last_updated;
 
         let deleteButton = <button onClick={this.removeForm}
                                 className='delete_item'
@@ -90,6 +91,7 @@ class FieldItem extends React.Component {
                 </section>
 
                 <section>
+                    <span>Last Updated: {lastUpdated} </span>
                     { this.state.id ? deleteButton : null }
 
                     <button onClick={this.submitForm}

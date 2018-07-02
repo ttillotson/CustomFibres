@@ -4651,6 +4651,7 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var lastUpdated = this.props.field.last_updated;
 
             var deleteButton = _react2.default.createElement(
                 'button',
@@ -4710,6 +4711,13 @@ var FieldItem = function (_React$Component) {
                 _react2.default.createElement(
                     'section',
                     null,
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'Last Updated: ',
+                        lastUpdated,
+                        ' '
+                    ),
                     this.state.id ? deleteButton : null,
                     _react2.default.createElement(
                         'button',
