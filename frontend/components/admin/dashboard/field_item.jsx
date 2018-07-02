@@ -1,4 +1,5 @@
 import React from 'react';
+import { merge } from 'lodash/merge';
 
 class FieldItem extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class FieldItem extends React.Component {
         this.removeForm = this.removeForm.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
         this.fileInput = React.createRef();
+        this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
     update(field) {
@@ -25,15 +27,34 @@ class FieldItem extends React.Component {
     }
 
     handleFileInput(e) {
-        // debugger;
-        // console.log(e)
-        // e.target.files => file list with uploads
-        // const fileArr = Array.from(fileList);
-        
         const fileArr = Array.from(e.target.files);
-        this.setState({ images: fileArr });
 
-        // debugger;
+        if (fileArr.length > 0) {
+            fileArr.forEach(file => {
+                let fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                
+                fileReader.onloadend = () => {
+                    let imageFile = file;
+                    let imageUrl = fileReader.result;
+                    let newImageObj = { file: imageFile, imageUrl: imageUrl };
+                    let newImageState = this.state.images;
+            
+                    newImageState.push(newImageObj);
+                    this.setState({ images: newImageState });
+                };
+            });
+        }
+    }
+
+    renderImagePreview() {
+        if (this.state.images.length > 0) {
+            return this.state.images.map((img, idx) => {
+                return <img className='image_preview' key={idx} src={img.imageUrl} />;
+            });
+        } else {
+            return null;
+        }
     }
 
     removeForm(e) {
@@ -43,13 +64,19 @@ class FieldItem extends React.Component {
 
     submitForm(e) {
         e.preventDefault();
-        const fileRefs = Array.from(this.fileInput.current.files);
-        // // this.setState({ "images": fileRefs });
-        // // this.state.images = fileRefs;
-        // this.state.images = fileRefs;
-        // debugger;
-        this.props.submitField(this.state, fileRefs);
-        // Need a flag for submission then Update complete
+        const fieldData = new FormData();
+
+        fieldData.append("field[title]", this.state.title);
+        fieldData.append("field[body]", this.state.body);
+        fieldData.append("field[id]", this.state.id);
+        fieldData.append("field[page_id]", this.state.page_id);
+        this.state.images.forEach(img => {
+            fieldData.append("field[images][]", img);
+        });
+
+        debugger;
+        this.props.submitField(this.state);
+
     }
 
     render() {
@@ -58,6 +85,8 @@ class FieldItem extends React.Component {
         let deleteButton = <button onClick={this.removeForm}
                                 className='delete_item'
                                 >Delete</button>;
+
+        console.log(this.state);
 
         return (
             <form className='edit_field'>
@@ -85,9 +114,10 @@ class FieldItem extends React.Component {
                     type='file'
                     multiple={true}
                     // value=
-                    // onChange={this.handleFileInput}
-                    ref={this.fileInput}
+                    onChange={this.handleFileInput}
+                    // ref={this.fileInput}
                     />
+                    { this.renderImagePreview() }
                 </section>
 
                 <section className={'form_logic_section'}>

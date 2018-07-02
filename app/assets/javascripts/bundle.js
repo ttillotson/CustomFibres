@@ -4576,6 +4576,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _merge = __webpack_require__(8);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4605,6 +4607,7 @@ var FieldItem = function (_React$Component) {
         _this.removeForm = _this.removeForm.bind(_this);
         _this.handleFileInput = _this.handleFileInput.bind(_this);
         _this.fileInput = _react2.default.createRef();
+        _this.renderImagePreview = _this.renderImagePreview.bind(_this);
         return _this;
     }
 
@@ -4620,15 +4623,37 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'handleFileInput',
         value: function handleFileInput(e) {
-            // debugger;
-            // console.log(e)
-            // e.target.files => file list with uploads
-            // const fileArr = Array.from(fileList);
+            var _this3 = this;
 
             var fileArr = Array.from(e.target.files);
-            this.setState({ images: fileArr });
 
-            // debugger;
+            if (fileArr.length > 0) {
+                fileArr.forEach(function (file) {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+
+                    fileReader.onloadend = function () {
+                        var imageFile = file;
+                        var imageUrl = fileReader.result;
+                        var newImageObj = { file: imageFile, imageUrl: imageUrl };
+                        var newImageState = _this3.state.images;
+
+                        newImageState.push(newImageObj);
+                        _this3.setState({ images: newImageState });
+                    };
+                });
+            }
+        }
+    }, {
+        key: 'renderImagePreview',
+        value: function renderImagePreview() {
+            if (this.state.images.length > 0) {
+                return this.state.images.map(function (img, idx) {
+                    return _react2.default.createElement('img', { className: 'image_preview', key: idx, src: img.imageUrl });
+                });
+            } else {
+                return null;
+            }
         }
     }, {
         key: 'removeForm',
@@ -4640,13 +4665,18 @@ var FieldItem = function (_React$Component) {
         key: 'submitForm',
         value: function submitForm(e) {
             e.preventDefault();
-            var fileRefs = Array.from(this.fileInput.current.files);
-            // // this.setState({ "images": fileRefs });
-            // // this.state.images = fileRefs;
-            // this.state.images = fileRefs;
-            // debugger;
-            this.props.submitField(this.state, fileRefs);
-            // Need a flag for submission then Update complete
+            var fieldData = new FormData();
+
+            fieldData.append("field[title]", this.state.title);
+            fieldData.append("field[body]", this.state.body);
+            fieldData.append("field[id]", this.state.id);
+            fieldData.append("field[page_id]", this.state.page_id);
+            this.state.images.forEach(function (img) {
+                fieldData.append("field[images][]", img);
+            });
+
+            debugger;
+            this.props.submitField(this.state);
         }
     }, {
         key: 'render',
@@ -4665,6 +4695,8 @@ var FieldItem = function (_React$Component) {
                 },
                 'Delete'
             );
+
+            console.log(this.state);
 
             return _react2.default.createElement(
                 'form',
@@ -4709,9 +4741,10 @@ var FieldItem = function (_React$Component) {
                         type: 'file',
                         multiple: true
                         // value=
-                        // onChange={this.handleFileInput}
-                        , ref: this.fileInput
-                    })
+                        , onChange: this.handleFileInput
+                        // ref={this.fileInput}
+                    }),
+                    this.renderImagePreview()
                 ),
                 _react2.default.createElement(
                     'section',
@@ -31648,8 +31681,7 @@ var Dashboard = function (_React$Component) {
             var _props = this.props,
                 pages = _props.pages,
                 fields = _props.fields,
-                loading = _props.loading,
-                updateField = _props.updateField;
+                loading = _props.loading;
 
 
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
@@ -31673,7 +31705,6 @@ var Dashboard = function (_React$Component) {
             var currentPage = pages[this.state.currentPage];
 
             // Set Fields for Current Page
-            // debugger;
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 

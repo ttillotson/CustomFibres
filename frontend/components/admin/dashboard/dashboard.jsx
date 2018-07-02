@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { pages, fields, loading, updateField } = this.props;
+        const { pages, fields, loading} = this.props;
 
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
@@ -75,7 +75,6 @@ class Dashboard extends React.Component {
         let currentPage = pages[this.state.currentPage];
 
         // Set Fields for Current Page
-        // debugger;
         const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
 

@@ -129,6 +129,11 @@
                         min-height: 120px;
                         vertical-align: top;
                     }
+
+                    .image_preview {
+                        max-height: 120px;
+                        width: auto;
+                    }
                 }
                 .form_logic_section {
                     display: flex; 
