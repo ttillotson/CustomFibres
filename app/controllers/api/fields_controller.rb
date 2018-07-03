@@ -5,7 +5,6 @@ class Api::FieldsController < ApplicationController
 
     def create
         @field = Field.new(field_params)
-        debugger
 
         if @field.save 
             render :show
@@ -15,9 +14,16 @@ class Api::FieldsController < ApplicationController
     end
 
     def update
-        @field = Field.find(params[:id])
+        @field = Field.find(params[:field_id])
 
-        if @field.update_attributes(field_params)
+        @field.title = params[:title]
+        @field.body = params[:body]
+        @field.page_id = params[:page_id]
+        # @field.images.attach(params[:images])
+
+        # if @field.update_attributes(field_params)
+        debugger
+        if @field.save!
             render :show
         else
             render json: @field.errors.full_messages, status: 422

@@ -4667,16 +4667,16 @@ var FieldItem = function (_React$Component) {
             e.preventDefault();
             var fieldData = new FormData();
 
-            fieldData.append("field[title]", this.state.title);
-            fieldData.append("field[body]", this.state.body);
-            fieldData.append("field[id]", this.state.id);
-            fieldData.append("field[page_id]", this.state.page_id);
+            fieldData.append("title", this.state.title);
+            fieldData.append("body", this.state.body);
+            fieldData.append("field_id", this.state.id);
+            fieldData.append("page_id", this.state.page_id);
             this.state.images.forEach(function (img) {
-                fieldData.append("field[images][]", img);
+                fieldData.append("images[]", img.file);
             });
 
             debugger;
-            this.props.submitField(this.state);
+            this.props.submitField(fieldData);
         }
     }, {
         key: 'render',
@@ -26271,7 +26271,10 @@ var createField = exports.createField = function createField(field) {
     return $.ajax({
         url: '/api/fields',
         method: 'POST',
-        data: { field: field }
+        data: field,
+        dataType: "json",
+        processData: false,
+        contentType: false
     });
 };
 
@@ -26279,7 +26282,10 @@ var updateField = exports.updateField = function updateField(field) {
     return $.ajax({
         url: '/api/fields/' + field.id,
         method: 'PATCH',
-        data: { field: field }
+        data: field,
+        dataType: "json",
+        processData: false,
+        contentType: false
     });
 };
 

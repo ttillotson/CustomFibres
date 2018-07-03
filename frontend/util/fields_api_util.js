@@ -16,7 +16,10 @@ export const createField = (field) => (
     $.ajax({
         url: `/api/fields`,
         method: 'POST',
-        data: { field }
+        data: field,
+        dataType: "json",
+        processData: false,
+        contentType: false
     })
 );
 
@@ -24,7 +27,10 @@ export const updateField = (field) => (
     $.ajax({
         url: `/api/fields/${field.id}`,
         method: 'PATCH',
-        data: { field }
+        data:  field,
+        dataType: "json",
+        processData: false,
+        contentType: false
     })
 );
 

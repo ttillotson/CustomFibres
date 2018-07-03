@@ -66,16 +66,16 @@ class FieldItem extends React.Component {
         e.preventDefault();
         const fieldData = new FormData();
 
-        fieldData.append("field[title]", this.state.title);
-        fieldData.append("field[body]", this.state.body);
-        fieldData.append("field[id]", this.state.id);
-        fieldData.append("field[page_id]", this.state.page_id);
+        fieldData.append("title", this.state.title);
+        fieldData.append("body", this.state.body);
+        fieldData.append("field_id", this.state.id);
+        fieldData.append("page_id", this.state.page_id);
         this.state.images.forEach(img => {
-            fieldData.append("field[images][]", img);
+            fieldData.append("images[]", img.file);
         });
 
         debugger;
-        this.props.submitField(this.state);
+        this.props.submitField(fieldData);
 
     }
 

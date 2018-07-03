@@ -23,7 +23,10 @@ class Field < ApplicationRecord
     end
 
     def last_updated
-        # updated_at.strftime("%m/%d/%y %r")
         updated_at.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%y %r")
+    end
+
+    def image_urls
+        url_for(self.images)
     end
 end
