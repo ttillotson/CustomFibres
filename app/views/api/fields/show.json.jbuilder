@@ -1,1 +1,1 @@
-json.partial! "api/fields/field", field: @field
+json.partial! "api/fields/field", field: @field, page: @field.page

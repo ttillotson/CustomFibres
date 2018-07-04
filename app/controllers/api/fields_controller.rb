@@ -1,10 +1,11 @@
 class Api::FieldsController < ApplicationController
     def index
-        @field = Field.all
+        @field = Field.all.with_attached_images
     end
 
     def create
         @field = Field.new(field_params)
+        @field.images.attach(params[:images])
 
         if @field.save 
             render :show
@@ -21,9 +22,7 @@ class Api::FieldsController < ApplicationController
         @field.page_id = params[:page_id]
         # @field.images.attach(params[:images])
 
-        # if @field.update_attributes(field_params)
-        debugger
-        if @field.save!
+        if @field.update_attributes(params[:images]) && @field.save!
             render :show
         else
             render json: @field.errors.full_messages, status: 422

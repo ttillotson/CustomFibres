@@ -11,12 +11,14 @@
 #
 
 class Field < ApplicationRecord
+    scope :with_eager_loaded_images, -> { eager_load(images: :blob) }
+    # scope :with_attached_images, -> { includes(:images) }
+
     belongs_to :page,
     class_name: :Page,
     foreign_key: :page_id
 
     has_many_attached :images
-    has_one_attached :picture
 
     def page_name 
         page.name
@@ -24,9 +26,5 @@ class Field < ApplicationRecord
 
     def last_updated
         updated_at.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%y %r")
-    end
-
-    def image_urls
-        url_for(self.images)
     end
 end
