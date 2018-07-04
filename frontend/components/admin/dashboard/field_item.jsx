@@ -88,9 +88,11 @@ class FieldItem extends React.Component {
 
         console.log(this.state);
 
+        const itemClass = this.state.id ? "form_item" : "form_item new"
+
         return (
             <form className='edit_field'>
-                <section className='form_item'>
+                <section className={{ itemClass }}>
                     <label>Title</label>
                     <input 
                     type='text'
@@ -99,7 +101,7 @@ class FieldItem extends React.Component {
                     />
                 </section>
 
-                <section className='form_item'>
+                <section className={ itemClass }>
                     <label>Body</label>
                     <textarea 
                     className='field_body'
@@ -108,21 +110,19 @@ class FieldItem extends React.Component {
                     />
                 </section>
 
-                <section className='form_item'>
+                <section className={ itemClass }>
                     <label>Images</label>
                     <input
                     type='file'
                     multiple={true}
-                    // value=
                     onChange={this.handleFileInput}
-                    // ref={this.fileInput}
                     />
                     { this.renderImagePreview() }
                 </section>
 
                 <section className={'form_logic_section'}>
                     { this.state.id ? lastUpdated : null }
-                    <section>
+                    <section className="form_buttons" >
                         { this.state.id ? deleteButton : null }
 
                         <button onClick={this.submitForm}

@@ -4698,12 +4698,14 @@ var FieldItem = function (_React$Component) {
 
             console.log(this.state);
 
+            var itemClass = this.state.id ? "form_item" : "form_item new";
+
             return _react2.default.createElement(
                 'form',
                 { className: 'edit_field' },
                 _react2.default.createElement(
                     'section',
-                    { className: 'form_item' },
+                    { className: { itemClass: itemClass } },
                     _react2.default.createElement(
                         'label',
                         null,
@@ -4717,7 +4719,7 @@ var FieldItem = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'section',
-                    { className: 'form_item' },
+                    { className: itemClass },
                     _react2.default.createElement(
                         'label',
                         null,
@@ -4731,7 +4733,7 @@ var FieldItem = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'section',
-                    { className: 'form_item' },
+                    { className: itemClass },
                     _react2.default.createElement(
                         'label',
                         null,
@@ -4739,10 +4741,8 @@ var FieldItem = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'file',
-                        multiple: true
-                        // value=
-                        , onChange: this.handleFileInput
-                        // ref={this.fileInput}
+                        multiple: true,
+                        onChange: this.handleFileInput
                     }),
                     this.renderImagePreview()
                 ),
@@ -4752,7 +4752,7 @@ var FieldItem = function (_React$Component) {
                     this.state.id ? lastUpdated : null,
                     _react2.default.createElement(
                         'section',
-                        null,
+                        { className: 'form_buttons' },
                         this.state.id ? deleteButton : null,
                         _react2.default.createElement(
                             'button',
