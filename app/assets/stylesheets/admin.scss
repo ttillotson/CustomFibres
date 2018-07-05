@@ -12,7 +12,6 @@
     .admin_session_container {
         display: flex;
         height: 94vh;
-        // background: grey;
         
         .admin_session_form {
             display: flex;
@@ -20,7 +19,6 @@
             margin: auto;
             padding: 4vh 7vw;
             background-color: rgb(82, 82, 82);
-            // box-shadow: 2px 2px 2px rgb(51, 51, 51);
             border: 5px solid rgb(51, 51, 51);
 
             .errors {
@@ -44,10 +42,6 @@
             section {
                 display: flex;
                 justify-content: flex-end;
-
-                // button {
-                //     
-                // }
             }
         }
     }
@@ -99,8 +93,6 @@
         
         .fields_container {
             background-color: rgb(82, 82, 82);
-            // border-bottom-left-radius: 5px;
-            // border-bottom-right-radius: 5px;
             border-radius: 5px;
             padding: 2vh 2vw;
 
@@ -121,9 +113,6 @@
                     
                     input, textarea {
                         width: 80%;
-                        // background-color: rgb(98, 98, 98);
-                        // padding: 3px 5px;
-                        // border-radius: 5px;
                     }
                     
                     .field_body {

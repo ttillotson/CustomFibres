@@ -4483,7 +4483,8 @@ var Template = function (_React$Component) {
             var _props = this.props,
                 loading = _props.loading,
                 fields = _props.fields,
-                pageName = _props.pageName;
+                pageName = _props.pageName,
+                pageTitle = _props.pageTitle;
 
 
             if (loading) return _react2.default.createElement(_loading_icon2.default, null);
@@ -4497,9 +4498,16 @@ var Template = function (_React$Component) {
                 });
             });
 
+            var titleElement = _react2.default.createElement(
+                'h2',
+                null,
+                pageTitle
+            );
+
             return _react2.default.createElement(
                 'main',
                 { className: 'template_container' },
+                titleElement,
                 fieldItems
             );
         }
@@ -30918,6 +30926,8 @@ var _reactRouterDom = __webpack_require__(13);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
+    // console.log(window);
+    // const header = window.visualViewport.width > 768 ? <Logo /> : < Emblem />;
     return _react2.default.createElement(
         'main',
         { className: 'main_container' },
@@ -30969,12 +30979,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages['Splash'];
+    var pageTitle = "";
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
-        pageName: "Splash"
+        pageName: "Splash",
+        pageTitle: pageTitle
     };
 };
 
@@ -31051,12 +31063,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages['Technique'];
+    var pageTitle = "Available Options";
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
-        pageName: "Technique"
+        pageName: "Technique",
+        pageTitle: pageTitle
     };
 };
 

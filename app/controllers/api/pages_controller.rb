@@ -6,6 +6,7 @@ class Api::PagesController < ApplicationController
 
     def show
         @page = Page.includes(:fields).find_by(name: params[:name])
-        @fields = @page.fields.with_eager_loaded_images
+        # @fields = @page.fields.with_eager_loaded_images
+        @fields = Field.with_attached_images.where(page_id: @page.id)
     end
 end

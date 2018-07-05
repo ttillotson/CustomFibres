@@ -17,7 +17,7 @@
         box-shadow: 2px 5px 2px #1D2226;
 
         .logo_container {
-            display: none;
+            // display: none;
         }
 
         .emblem_container {
@@ -43,7 +43,7 @@
     
     
     .template_container {
-        padding: 0 7vw;
+        margin: 0 7vw;
         // background: rgb(32, 32, 32);
         
         .field_item {
@@ -61,34 +61,45 @@
     }
 }
 
-@media only screen and (max-width: 767px) {
-    // .app_nav {
-    //     visibility: hidden;
-    // }
+@media only screen and (min-width: 361px) {
     .logo_container {
         display: none;
     }
 }
 
-@media only screen and (max-width: 959px) {
+@media only screen and (min-width: 768px) {
     #root {
         background-image: url(http://res.cloudinary.com/tiptoptomes/image/upload/v1529636065/WZnjFBT-carbon-fiber-wallpaper.jpg);
     }
 
-    .emblem_container {
-        display: none;
-    }
+    .main_container {
+        header {
 
-    .logo_container {
-        display: flex;
-        justify-content: center;
-        
-        .logo {
-            font-size: 72px;
+            .emblem_container {
+                display: none;
+            }
+            
+            .logo_container {
+                display: flex;
+                justify-content: center;
+                
+                .logo {
+                    font-size: 72px;
+                }
+            }
+        }
+
+        .template_container {
+            background-color: rgb(82, 82, 82);
+            padding: 0 3vw;
+            padding-bottom: 3vh;
+
+            .field_item {
+
+                .field_body {
+                    font-size: 2.3vh;
+                }
+            }
         }
     }
 }
-
-// @media only screen and (min-width: 1399px) {
-    
-// }

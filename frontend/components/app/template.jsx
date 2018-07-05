@@ -19,7 +19,7 @@ class Template extends React.Component {
     }
 
     render() {
-        const { loading, fields, pageName } = this.props;
+        const { loading, fields, pageName, pageTitle } = this.props;
 
         if (loading) return <LoadingIcon />;
 
@@ -32,10 +32,12 @@ class Template extends React.Component {
             />
         ));
 
+        const titleElement = <h2>{pageTitle}</h2>;
+
         return (
             <main className='template_container'>
-                {/* <h3>{pageName} Page</h3> */}
-                {fieldItems}
+                { titleElement }
+                { fieldItems }
             </main>
         );
     }

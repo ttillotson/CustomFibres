@@ -5,12 +5,14 @@ import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
     const page = state.pages['Splash'];
+    const pageTitle = "";
 
     return ({
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
-        pageName: "Splash"
+        pageName: "Splash",
+        pageTitle: pageTitle
     });
 };
 

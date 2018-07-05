@@ -88,7 +88,7 @@ class FieldItem extends React.Component {
 
         console.log(this.state);
 
-        const itemClass = this.state.id ? "form_item" : "form_item new"
+        const itemClass = this.state.id ? "form_item" : "form_item new";
 
         return (
             <form className='edit_field'>
