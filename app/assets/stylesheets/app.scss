@@ -14,7 +14,7 @@
         flex-direction: column;
         justify-content: space-between;
         background-color: #24292e;
-        box-shadow: 2px 5px 2px #1D2226;
+        box-shadow: 2px 2px 2px #1D2226;
 
         .logo_container {
             // display: none;
@@ -51,7 +51,7 @@
             // &.
             
             .field_title {
-                font-size: 36px;
+                font-size: 3vh;
             }
             
             .field_body {
@@ -93,6 +93,10 @@
             background-color: rgb(82, 82, 82);
             padding: 0 3vw;
             padding-bottom: 3vh;
+
+            .page_title {
+                font-size: 3.5vh;
+            }
 
             .field_item {
 

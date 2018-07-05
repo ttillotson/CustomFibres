@@ -4500,7 +4500,7 @@ var Template = function (_React$Component) {
 
             var titleElement = _react2.default.createElement(
                 'h2',
-                null,
+                { className: 'page_title' },
                 pageTitle
             );
 

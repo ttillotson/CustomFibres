@@ -32,7 +32,7 @@ class Template extends React.Component {
             />
         ));
 
-        const titleElement = <h2>{pageTitle}</h2>;
+        const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
 
         return (
             <main className='template_container'>
