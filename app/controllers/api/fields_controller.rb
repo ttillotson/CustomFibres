@@ -26,16 +26,23 @@ class Api::FieldsController < ApplicationController
         @field.body = params[:body]
         @field.page_id = params[:page_id]
 
-        if @field.update_attributes(params[:images]) && @field.save!
-            render :show
-        else
-            render json: @field.errors.full_messages, status: 422
+        if params[:images]
+            if @field.update_attributes(params[:images]) && @field.save!
+                render :show
+            else
+                render json: @field.errors.full_messages, status: 422
+            end
+        else 
+            if @field.save
+                render :show
+            else
+                render json: @field.errors.full_messages, status: 422
+            end
         end
     end
 
     def destroy
         @field = Field.find(params[:id])
-        # @page = @field.page
 
         unless @field.destroy 
             render json: @field.errors.full_messages, status: 422
