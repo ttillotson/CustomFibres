@@ -13,8 +13,8 @@ export default () => (
         <NavLink to={'/showcase'} activeClassName="active"> 
             Showcase
         </NavLink>
-        <NavLink to={'/store'} activeClassName="active"> 
-            Store
+        <NavLink to={'/shop'} activeClassName="active"> 
+            Shop
         </NavLink>
         <NavLink to={'/quote'} className='email' activeClassName="active">
             Quote

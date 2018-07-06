@@ -31190,8 +31190,8 @@ exports.default = function () {
         ),
         _react2.default.createElement(
             _reactRouterDom.NavLink,
-            { to: '/store', activeClassName: 'active' },
-            'Store'
+            { to: '/shop', activeClassName: 'active' },
+            'Shop'
         ),
         _react2.default.createElement(
             _reactRouterDom.NavLink,
@@ -32037,7 +32037,7 @@ var _selectors = __webpack_require__(83);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+var mapStateToProps = function mapStateToProps(state) {
     var page = state.pages['Quote'];
     var pageTitle = "";
     var extraEl = _react2.default.createElement(
