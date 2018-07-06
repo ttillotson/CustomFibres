@@ -31999,7 +31999,7 @@ var Shop = function Shop(props) {
 
     return _react2.default.createElement(
         'section',
-        null,
+        { className: 'template_container' },
         _react2.default.createElement(
             'h2',
             null,

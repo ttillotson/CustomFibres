@@ -41,6 +41,11 @@ button, input[type="submit"], input[type="reset"] {
     text-align: inherit;
 }
 
+button {
+  border-radius: 5px;
+  padding: 3px 15px;
+}
+
 input[type="password"],
 input[type="email"],
 input[type="text"],
