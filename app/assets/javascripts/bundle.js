@@ -30897,17 +30897,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _splash_container = __webpack_require__(230);
+var _splash_container = __webpack_require__(249);
 
 var _splash_container2 = _interopRequireDefault(_splash_container);
 
-var _technique_container = __webpack_require__(232);
+var _technique_container = __webpack_require__(250);
 
 var _technique_container2 = _interopRequireDefault(_technique_container);
 
 var _showcase_container = __webpack_require__(233);
 
 var _showcase_container2 = _interopRequireDefault(_showcase_container);
+
+var _shop_container = __webpack_require__(251);
+
+var _shop_container2 = _interopRequireDefault(_shop_container);
 
 var _logo = __webpack_require__(236);
 
@@ -30937,15 +30941,12 @@ var App = function App() {
             _react2.default.createElement(_nav_bar2.default, null)
         ),
         _react2.default.createElement(
-            'section',
+            _reactRouterDom.Switch,
             null,
-            _react2.default.createElement(
-                _reactRouterDom.Switch,
-                null,
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/technique', component: _technique_container2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/showcase', component: _showcase_container2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _splash_container2.default })
-            )
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/technique', component: _technique_container2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/showcase', component: _showcase_container2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/shop', component: _shop_container2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _splash_container2.default })
         )
     );
 };
@@ -30953,52 +30954,7 @@ var App = function App() {
 exports.default = App;
 
 /***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _reactRedux = __webpack_require__(5);
-
-var _template = __webpack_require__(81);
-
-var _template2 = _interopRequireDefault(_template);
-
-var _page_actions = __webpack_require__(10);
-
-var _selectors = __webpack_require__(83);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages['Splash'];
-    var pageTitle = "";
-
-    return {
-        fields: (0, _selectors.selectPageFields)(state, page),
-        loading: state.loading.pageLoading,
-        errors: state.errors.pageLoading,
-        pageName: "Splash",
-        pageTitle: pageTitle
-    };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {
-        fetchPage: function fetchPage(pageName) {
-            return dispatch((0, _page_actions.fetchPage)(pageName));
-        }
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
-
-/***/ }),
+/* 230 */,
 /* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31037,52 +30993,7 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 232 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _template = __webpack_require__(81);
-
-var _template2 = _interopRequireDefault(_template);
-
-var _page_actions = __webpack_require__(10);
-
-var _reactRedux = __webpack_require__(5);
-
-var _selectors = __webpack_require__(83);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var page = state.pages['Technique'];
-    var pageTitle = "Available Options";
-
-    return {
-        fields: (0, _selectors.selectPageFields)(state, page),
-        loading: state.loading.pageLoading,
-        errors: state.errors.pageLoading,
-        pageName: "Technique",
-        pageTitle: pageTitle
-    };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {
-        fetchPage: function fetchPage(pageName) {
-            return dispatch((0, _page_actions.fetchPage)(pageName));
-        }
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
-
-/***/ }),
+/* 232 */,
 /* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31934,6 +31845,159 @@ exports.default = function () {
         )
     );
 };
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = __webpack_require__(5);
+
+var _template = __webpack_require__(81);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _page_actions = __webpack_require__(10);
+
+var _selectors = __webpack_require__(83);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var page = state.pages['Splash'];
+    var pageTitle = "";
+
+    return {
+        fields: (0, _selectors.selectPageFields)(state, page),
+        loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
+        pageName: "Splash",
+        pageTitle: pageTitle
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _template = __webpack_require__(81);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _page_actions = __webpack_require__(10);
+
+var _reactRedux = __webpack_require__(5);
+
+var _selectors = __webpack_require__(83);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var page = state.pages['Technique'];
+    var pageTitle = "Available Options";
+
+    return {
+        fields: (0, _selectors.selectPageFields)(state, page),
+        loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
+        pageName: "Technique",
+        pageTitle: pageTitle
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_template2.default);
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _shop = __webpack_require__(252);
+
+var _shop2 = _interopRequireDefault(_shop);
+
+var _redux = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {};
+};
+
+exports.default = (0, _redux.connect)(mapStateToProps, mapDispatchToProps)(_shop2.default);
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Shop = function Shop(props) {
+
+    return _react2.default.createElement(
+        'section',
+        null,
+        _react2.default.createElement(
+            'h2',
+            null,
+            'The Store is currently under development!'
+        )
+    );
+};
+
+exports.default = Shop;
 
 /***/ })
 /******/ ]);
