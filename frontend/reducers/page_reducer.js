@@ -11,14 +11,14 @@ const PagesReducer = (state={}, action) => {
         case RECEIVE_PAGE: 
             return merge(newState, action.payload.page);
         case RECEIVE_FIELD: 
-            if (!newState[action.field.page_name].fieldIds.includes(action.field.id)) {
-                newState[action.field.page_name].fieldIds.push(action.field.id);
+            if (!newState[action.field.name].fieldIds.includes(action.field.id)) {
+                newState[action.field.name].fieldIds.push(action.field.id);
             }
             return newState;
         case REMOVE_FIELD: 
-            let ids = newState[action.field.page_name].fieldIds;
+            let ids = newState[action.field.name].fieldIds;
             let newIds = ids.filter(id => id !== action.field.id);
-            newState[action.field.page_name].fieldIds = newIds;
+            newState[action.field.name].fieldIds = newIds;
             return newState;
         default: 
             return state;

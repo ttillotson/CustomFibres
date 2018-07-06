@@ -35,6 +35,7 @@ class Api::FieldsController < ApplicationController
 
     def destroy
         @field = Field.find(params[:id])
+        # @page = @field.page
 
         unless @field.destroy 
             render json: @field.errors.full_messages, status: 422

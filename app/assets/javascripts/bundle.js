@@ -26364,16 +26364,16 @@ var PagesReducer = function PagesReducer() {
         case _page_actions.RECEIVE_PAGE:
             return (0, _merge2.default)(newState, action.payload.page);
         case _field_actions.RECEIVE_FIELD:
-            if (!newState[action.field.page_name].fieldIds.includes(action.field.id)) {
-                newState[action.field.page_name].fieldIds.push(action.field.id);
+            if (!newState[action.field.name].fieldIds.includes(action.field.id)) {
+                newState[action.field.name].fieldIds.push(action.field.id);
             }
             return newState;
         case _field_actions.REMOVE_FIELD:
-            var ids = newState[action.field.page_name].fieldIds;
+            var ids = newState[action.field.name].fieldIds;
             var newIds = ids.filter(function (id) {
                 return id !== action.field.id;
             });
-            newState[action.field.page_name].fieldIds = newIds;
+            newState[action.field.name].fieldIds = newIds;
             return newState;
         default:
             return state;
