@@ -30926,8 +30926,6 @@ var _reactRouterDom = __webpack_require__(13);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-    // console.log(window);
-    // const header = window.visualViewport.width > 768 ? <Logo /> : < Emblem />;
     return _react2.default.createElement(
         'main',
         { className: 'main_container' },
@@ -31257,24 +31255,29 @@ exports.default = function () {
         'nav',
         { className: 'app_nav' },
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
+            _reactRouterDom.NavLink,
+            { exact: true, to: '/', activeClassName: 'active' },
             'Home'
         ),
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/technique' },
-            'The Process'
+            _reactRouterDom.NavLink,
+            { to: '/technique', activeClassName: 'active' },
+            'Process'
         ),
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/showcase' },
+            _reactRouterDom.NavLink,
+            { to: '/showcase', activeClassName: 'active' },
             'Showcase'
         ),
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/', className: 'email' },
-            'Request a Quote'
+            _reactRouterDom.NavLink,
+            { to: '/store', activeClassName: 'active' },
+            'Store'
+        ),
+        _react2.default.createElement(
+            _reactRouterDom.NavLink,
+            { to: '/quote', className: 'email', activeClassName: 'active' },
+            'Quote'
         )
     );
 };
@@ -31927,11 +31930,7 @@ exports.default = function () {
         _react2.default.createElement(
             _reactRouterDom.Link,
             { to: "/" },
-            _react2.default.createElement(
-                'h1',
-                { className: 'emblem' },
-                'CF'
-            )
+            _react2.default.createElement('img', { src: 'https://res.cloudinary.com/tiptoptomes/image/upload/v1530830542/logo_3.png', alt: 'Emblem', className: 'emblem' })
         )
     );
 };

@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 export default () => (
     <section className='emblem_container'>
         <Link to={"/"}>
-            <h1 className='emblem'>
-                CF
-            </h1>
+            <img src="https://res.cloudinary.com/tiptoptomes/image/upload/v1530830542/logo_3.png" alt="Emblem" className='emblem'/>
         </Link>
     </section>
 );

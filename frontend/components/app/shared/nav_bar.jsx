@@ -1,20 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default () => (
     <nav className='app_nav'>
-        <Link to={'/'}> 
+        <NavLink exact to={'/'} activeClassName="active"> 
             Home
-        </Link>
-        <Link to={'/technique'}> 
-            The Process
-        </Link>
-        <Link to={'/showcase'}> 
+        </NavLink>
+        <NavLink to={'/technique'} activeClassName="active"> 
+            Process
+        </NavLink>
+        <NavLink to={'/showcase'} activeClassName="active"> 
             Showcase
-        </Link>
-        <Link to={'/'} className='email'>
-            Request a Quote
-        </Link>
+        </NavLink>
+        <NavLink to={'/store'} activeClassName="active"> 
+            Store
+        </NavLink>
+        <NavLink to={'/quote'} className='email' activeClassName="active">
+            Quote
+        </NavLink>
     </nav>
 );

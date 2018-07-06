@@ -11,12 +11,9 @@ import {
 } from 'react-router-dom';
 
 const App = () => {
-    // console.log(window);
-    // const header = window.visualViewport.width > 768 ? <Logo /> : < Emblem />;
     return (
         <main className='main_container'>
             <header>
-                {/* { header } */}
                 <Logo />
                 <Emblem />
                 <NavBar />
@@ -25,6 +22,7 @@ const App = () => {
                 <Switch> 
                     <Route path='/technique' component={TechniqueContainer} />
                     <Route path='/showcase' component={ShowcaseContainer} />
+                    {/* <Route path='/store' component={StoreContainer} /> */}
                     <Route path='/' component={SplashContainer} />
                 </Switch>
             </section>

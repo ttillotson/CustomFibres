@@ -17,7 +17,7 @@
         box-shadow: 2px 2px 2px #1D2226;
 
         .logo_container {
-            // display: none;
+            display: none;
         }
 
         .emblem_container {
@@ -26,17 +26,25 @@
             margin: auto;
 
             .emblem {
-                font-size: 5vh;
+                height: 6vh;
+                width: auto;
             }
         }
         
         .app_nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 7vw 2vh 7vw;
+            padding: 0 0 2vh 7vw;
+            margin: auto;
+            overflow-x: scroll;
+            white-space: nowrap;
+            // color: 
             
             a {
-                font-size: 3vh;
+                font-size: 16px;
+                padding-right: 4vw;
+            }
+
+            .active {
+                font-weight: 700;
             }
         }
     }
@@ -46,17 +54,24 @@
         margin: 0 7vw;
         // background: rgb(32, 32, 32);
         
+        .page_title {
+            font-size: 3.5vh;
+            padding: 1vh 0;
+        }
+
         .field_item {
-            padding-top: 3vh;
+            padding-bottom: 3vh;
             // &.
+
             
             .field_title {
                 font-size: 3vh;
             }
             
             .field_body {
-                font-size: 1.01vh;
+                font-size: 14px;
             }
+            
         }
     }
 }
@@ -71,10 +86,10 @@
     #root {
         background-image: url(http://res.cloudinary.com/tiptoptomes/image/upload/v1529636065/WZnjFBT-carbon-fiber-wallpaper.jpg);
     }
-
+    
     .main_container {
         header {
-
+            
             .emblem_container {
                 display: none;
             }
@@ -87,13 +102,17 @@
                     font-size: 72px;
                 }
             }
+            .app_nav{
+                display: flex;
+                justify-content: space-between;
+            }
         }
-
+        
         .template_container {
             background-color: rgb(82, 82, 82);
             padding: 0 3vw;
             padding-bottom: 3vh;
-
+            
             .page_title {
                 font-size: 3.5vh;
             }
