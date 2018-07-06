@@ -74,7 +74,6 @@ class FieldItem extends React.Component {
             fieldData.append("images[]", img.file);
         });
 
-        debugger;
         this.props.submitField(fieldData);
 
     }
@@ -92,7 +91,7 @@ class FieldItem extends React.Component {
 
         return (
             <form className='edit_field'>
-                <section className={{ itemClass }}>
+                <section className={ itemClass }>
                     <label>Title</label>
                     <input 
                     type='text'

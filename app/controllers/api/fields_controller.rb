@@ -4,8 +4,13 @@ class Api::FieldsController < ApplicationController
     end
 
     def create
-        @field = Field.new(field_params)
-        @field.images.attach(params[:images])
+        # @field = Field.new(field_params)
+        @field = Field.new
+        @field.title = params[:title]
+        @field.body = params[:body]
+        @field.page_id = params[:page_id]
+        
+        @field.images.attach(params[:images]) if params[:images]
 
         if @field.save 
             render :show
@@ -20,7 +25,6 @@ class Api::FieldsController < ApplicationController
         @field.title = params[:title]
         @field.body = params[:body]
         @field.page_id = params[:page_id]
-        # @field.images.attach(params[:images])
 
         if @field.update_attributes(params[:images]) && @field.save!
             render :show

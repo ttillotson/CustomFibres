@@ -4687,7 +4687,6 @@ var FieldItem = function (_React$Component) {
                 fieldData.append("images[]", img.file);
             });
 
-            debugger;
             this.props.submitField(fieldData);
         }
     }, {
@@ -4717,7 +4716,7 @@ var FieldItem = function (_React$Component) {
                 { className: 'edit_field' },
                 _react2.default.createElement(
                     'section',
-                    { className: { itemClass: itemClass } },
+                    { className: itemClass },
                     _react2.default.createElement(
                         'label',
                         null,
@@ -31507,6 +31506,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         fetchPages: function fetchPages() {
             return dispatch((0, _page_actions.fetchPages)());
         },
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
+        },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
         }
@@ -32019,6 +32021,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
 var _reactRedux = __webpack_require__(5);
 
 var _template = __webpack_require__(81);
@@ -32034,13 +32040,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages['Quote'];
     var pageTitle = "";
+    var extraEl = _react2.default.createElement(
+        'a',
+        { href: 'mailto:customfibres4@gmail.com', className: 'button quote_request' },
+        _react2.default.createElement(
+            'button',
+            null,
+            'Request a Quote'
+        )
+    );
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
         pageName: "Quote",
-        pageTitle: pageTitle
+        pageTitle: pageTitle,
+        extras: extraEl
     };
 };
 
