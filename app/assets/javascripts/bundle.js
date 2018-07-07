@@ -4613,7 +4613,7 @@ var FieldItem = function (_React$Component) {
             body: props.field.body,
             id: props.field.id,
             page_id: props.pageId,
-            images: []
+            images: props.images
         };
         _this.submitForm = _this.submitForm.bind(_this);
         _this.removeForm = _this.removeForm.bind(_this);
@@ -30942,10 +30942,13 @@ var App = function App() {
         { className: 'main_container' },
         _react2.default.createElement(
             'header',
-            null,
-            _react2.default.createElement(_logo2.default, null),
-            _react2.default.createElement(_emblem2.default, null),
-            _react2.default.createElement(_nav_bar2.default, null)
+            { className: 'app_header' },
+            _react2.default.createElement(
+                'section',
+                { className: 'header_frame' },
+                _react2.default.createElement(_emblem2.default, null),
+                _react2.default.createElement(_nav_bar2.default, null)
+            )
         ),
         _react2.default.createElement(
             _reactRouterDom.Switch,
@@ -31760,7 +31763,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         field: state.fields[ownProps.fieldId],
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
-        errors: state.errors.field
+        errors: state.errors.field,
+        images: state.fields[ownProps.fieldId].images
     };
 };
 
@@ -31808,7 +31812,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         field: newField,
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
-        errors: state.errors.field
+        errors: state.errors.field,
+        images: []
     };
 };
 

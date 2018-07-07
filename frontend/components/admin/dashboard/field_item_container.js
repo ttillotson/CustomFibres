@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => {
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
         errors: state.errors.field,
+        images: state.fields[ownProps.fieldId].images,
     });
 };
 

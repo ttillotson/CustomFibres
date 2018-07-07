@@ -9,7 +9,7 @@ class FieldItem extends React.Component {
             body: props.field.body,
             id: props.field.id,
             page_id: props.pageId,
-            images: []
+            images: props.images
         };
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);

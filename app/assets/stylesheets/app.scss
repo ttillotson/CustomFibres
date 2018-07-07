@@ -9,42 +9,50 @@
     // padding-top: 3vh;
     // background-color: rgb(70, 70, 70);
 
-    header {
+    .app_header {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         background-color: #24292e;
         box-shadow: 2px 2px 2px #1D2226;
 
-        .logo_container {
-            display: none;
-        }
+        .header_frame {
 
-        .emblem_container {
-            padding: 1.5vh 0;
-            justify-content: center;
-            margin: auto;
-
-            .emblem {
-                height: 6vh;
-                width: auto;
-            }
-        }
-        
-        .app_nav {
-            padding: 0 0 2vh 7vw;
-            margin: auto;
-            overflow-x: scroll;
-            white-space: nowrap;
-            // color: 
             
-            a {
-                font-size: 16px;
-                padding-right: 4vw;
+            .logo_container {
+                display: none;
             }
-
-            .active {
-                font-weight: 700;
+            
+            .emblem_container {
+                padding: 1.5vh 0;
+                justify-content: center;
+                margin: auto;
+                
+                // .emblem {
+                //     height: 6vh;
+                //     width: auto;
+                // }
+                .emblem {
+                    height: 32px;
+                    width: auto;
+                }
+            }
+            
+            .app_nav {
+                padding: 0 0 2vh 7vw;
+                margin: auto;
+                // overflow-x: scroll;
+                white-space: nowrap;
+                // color: 
+                
+                a {
+                    font-size: 16px;
+                    padding-right: 4vw;
+                }
+                
+                .active {
+                    font-weight: 700;
+                }
             }
         }
     }
@@ -88,27 +96,47 @@
     }
     
     .main_container {
-        header {
+        .app_header {
             
-            .emblem_container {
-                display: none;
-            }
-            
-            .logo_container {
+            .header_frame {
                 display: flex;
-                justify-content: center;
-                
-                .logo {
-                    font-size: 72px;
-                }
-            }
-            .app_nav{
-                display: flex;
+                flex-direction: row;
+                width: 85vw;
+                margin: auto;
                 justify-content: space-between;
-                overflow-x: auto;
+                
+                .emblem_container {
+                    margin: 0;
+                    // padding: 1.5vh 0;
+
+                }
+                
+                // .logo_container {
+                    //     display: flex;
+                    //     justify-content: center;
+                    
+                    //     .logo {
+                        //         font-size: 72px;
+                        //     }
+                        // }
+                    .app_nav{
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0;
+                        padding: 0;
+                        align-items: center;
+                        letter-spacing: 0.25px;
+                        a {
+                            display: block;
+                            font-size: 3vh;
+                            padding: 0;
+                            padding-left: 15px;
+                        }
+                        // overflow-x: auto;
+                    }
+                }
+                
             }
-        }
-        
         .template_container {
             background-color: rgb(82, 82, 82);
             padding: 0 3vw;

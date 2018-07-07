@@ -16,10 +16,12 @@ import {
 const App = () => {
     return (
         <main className='main_container'>
-            <header>
-                <Logo />
-                <Emblem />
-                <NavBar />
+            <header className='app_header'>
+                {/* <Logo /> */}
+                <section className="header_frame">
+                    <Emblem />
+                    <NavBar />
+                </section>
             </header>
             <Switch> 
                 <Route path='/technique' component={TechniqueContainer} />
