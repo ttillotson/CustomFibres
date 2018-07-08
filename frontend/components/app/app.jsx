@@ -4,7 +4,6 @@ import TechniqueContainer from './template_containers/technique_container';
 import ShowcaseContainer from './showcase/showcase_container';
 import ShopContainer from './shop/shop_container';
 import QuoteContainer from './template_containers/quote_container';
-import Logo from './shared/logo';
 import Emblem from './shared/emblem';
 import NavBar from './shared/nav_bar';
 import {
@@ -17,7 +16,6 @@ const App = () => {
     return (
         <main className='main_container'>
             <header className='app_header'>
-                {/* <Logo /> */}
                 <section className="header_frame">
                     <Emblem />
                     <NavBar />

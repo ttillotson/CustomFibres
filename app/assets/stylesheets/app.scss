@@ -14,7 +14,7 @@
         flex-direction: column;
         justify-content: space-between;
         background-color: #24292e;
-        box-shadow: 2px 2px 2px #1D2226;
+        box-shadow: 0 0.2vh 2px #1D2226;
 
         .header_frame {
 
@@ -139,6 +139,20 @@
 
                 .field_body {
                     font-size: 2.3vh;
+                }
+
+            }
+
+            .request_options {
+                .quote_request {
+                    // border: 1px solid black;
+                    border-radius: 5px;
+                    background: #1D2226;
+                }
+    
+                .phone {
+                    height: 2vh;
+                    width: auto;
                 }
             }
         }

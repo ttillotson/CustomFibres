@@ -30920,10 +30920,6 @@ var _quote_container = __webpack_require__(253);
 
 var _quote_container2 = _interopRequireDefault(_quote_container);
 
-var _logo = __webpack_require__(236);
-
-var _logo2 = _interopRequireDefault(_logo);
-
 var _emblem = __webpack_require__(248);
 
 var _emblem2 = _interopRequireDefault(_emblem);
@@ -31119,41 +31115,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 236 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(13);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-    return _react2.default.createElement(
-        'section',
-        { className: 'logo_container' },
-        _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            _react2.default.createElement(
-                'h1',
-                { className: 'logo' },
-                'Custom Fibres'
-            )
-        )
-    );
-};
-
-/***/ }),
+/* 236 */,
 /* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32042,17 +32004,38 @@ var _selectors = __webpack_require__(83);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state) {
-    var page = state.pages['Quote'];
-    var pageTitle = "";
-    var extraEl = _react2.default.createElement(
+var emailEl = _react2.default.createElement(
+    'li',
+    null,
+    _react2.default.createElement(
         'a',
         { href: 'mailto:customfibres4@gmail.com', className: 'button quote_request' },
         _react2.default.createElement(
             'button',
             null,
-            'Request a Quote'
+            'Email A Request'
         )
+    )
+);
+var phoneEl = _react2.default.createElement(
+    'li',
+    null,
+    _react2.default.createElement(
+        'a',
+        { href: 'tel:+17607808083' },
+        _react2.default.createElement('img', { className: 'phone', src: 'https://res.cloudinary.com/tiptoptomes/image/upload/v1531088004/logo_2_1.png', alt: 'Phone Number' })
+    )
+);
+
+var mapStateToProps = function mapStateToProps(state) {
+    var page = state.pages['Quote'];
+    var pageTitle = "";
+    var extraEl = _react2.default.createElement(
+        'ul',
+        { className: 'request_options' },
+        phoneEl,
+        ' ',
+        emailEl
     );
 
     return {
