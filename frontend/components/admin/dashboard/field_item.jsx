@@ -9,13 +9,23 @@ class FieldItem extends React.Component {
             body: props.field.body,
             id: props.field.id,
             page_id: props.pageId,
-            images: props.images
+            savedImages: props.savedImages,
+            newImages: []
         };
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
         this.fileInput = React.createRef();
         this.renderImagePreview = this.renderImagePreview.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.savedImages.length !== this.props.savedImages.length) {
+            this.setState = ({ 
+                savedImages: nextProps.savedImages,
+                newImages: []
+            });
+        }
     }
 
     update(field) {
@@ -38,19 +48,24 @@ class FieldItem extends React.Component {
                     let imageFile = file;
                     let imageUrl = fileReader.result;
                     let newImageObj = { file: imageFile, imageUrl: imageUrl };
-                    let newImageState = this.state.images;
+                    let newImageState = this.state.newImages;
             
                     newImageState.push(newImageObj);
-                    this.setState({ images: newImageState });
+                    this.setState({ newImages: newImageState });
                 };
             });
         }
     }
 
     renderImagePreview() {
-        if (this.state.images.length > 0) {
-            return this.state.images.map((img, idx) => {
-                return <li key={idx}><img className='image_preview' src={img.imageUrl} /></li>;
+        // debugger;
+        const combinedImages = this.state.savedImages.concat(this.state.newImages);
+
+        if (combinedImages.length > 0) {
+            return combinedImages.map((img, idx) => {
+                let klass = "image_preview";
+                klass += img.signed_id ? "" : " new";
+                return <li key={idx}><img className={ klass } src={img.imageUrl} /></li>;
             });
         } else {
             return null;
@@ -70,12 +85,20 @@ class FieldItem extends React.Component {
         fieldData.append("body", this.state.body);
         fieldData.append("field_id", this.state.id);
         fieldData.append("page_id", this.state.page_id);
-        this.state.images.forEach(img => {
+        this.state.newImages.forEach(img => {
             fieldData.append("images[]", img.file);
         });
 
         this.props.submitField(fieldData);
 
+        // this.setState = {
+        //     title: this.props.field.title,
+        //     body: this.props.field.body,
+        //     id: this.props.field.id,
+        //     page_id: this.props.pageId,
+        //     savedImages: this.props.savedImages,
+        //     newImages: []
+        // };
     }
 
     render() {
@@ -85,11 +108,9 @@ class FieldItem extends React.Component {
                                 className='delete_item'
                                 >Delete</button>;
 
-        console.log(this.state);
+        // console.log(this.state);
 
         const itemClass = this.state.id ? "form_item" : "form_item new";
-
-        // const imagesPassed = 
 
         return (
             <form className='edit_field'>

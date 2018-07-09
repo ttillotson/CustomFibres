@@ -4613,7 +4613,8 @@ var FieldItem = function (_React$Component) {
             body: props.field.body,
             id: props.field.id,
             page_id: props.pageId,
-            images: props.images
+            savedImages: props.savedImages,
+            newImages: []
         };
         _this.submitForm = _this.submitForm.bind(_this);
         _this.removeForm = _this.removeForm.bind(_this);
@@ -4624,6 +4625,16 @@ var FieldItem = function (_React$Component) {
     }
 
     _createClass(FieldItem, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.savedImages.length !== this.props.savedImages.length) {
+                this.setState = {
+                    savedImages: nextProps.savedImages,
+                    newImages: []
+                };
+            }
+        }
+    }, {
         key: 'update',
         value: function update(field) {
             var _this2 = this;
@@ -4648,10 +4659,10 @@ var FieldItem = function (_React$Component) {
                         var imageFile = file;
                         var imageUrl = fileReader.result;
                         var newImageObj = { file: imageFile, imageUrl: imageUrl };
-                        var newImageState = _this3.state.images;
+                        var newImageState = _this3.state.newImages;
 
                         newImageState.push(newImageObj);
-                        _this3.setState({ images: newImageState });
+                        _this3.setState({ newImages: newImageState });
                     };
                 });
             }
@@ -4659,12 +4670,17 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'renderImagePreview',
         value: function renderImagePreview() {
-            if (this.state.images.length > 0) {
-                return this.state.images.map(function (img, idx) {
+            // debugger;
+            var combinedImages = this.state.savedImages.concat(this.state.newImages);
+
+            if (combinedImages.length > 0) {
+                return combinedImages.map(function (img, idx) {
+                    var klass = "image_preview";
+                    klass += img.signed_id ? "" : " new";
                     return _react2.default.createElement(
                         'li',
                         { key: idx },
-                        _react2.default.createElement('img', { className: 'image_preview', src: img.imageUrl })
+                        _react2.default.createElement('img', { className: klass, src: img.imageUrl })
                     );
                 });
             } else {
@@ -4687,11 +4703,20 @@ var FieldItem = function (_React$Component) {
             fieldData.append("body", this.state.body);
             fieldData.append("field_id", this.state.id);
             fieldData.append("page_id", this.state.page_id);
-            this.state.images.forEach(function (img) {
+            this.state.newImages.forEach(function (img) {
                 fieldData.append("images[]", img.file);
             });
 
             this.props.submitField(fieldData);
+
+            // this.setState = {
+            //     title: this.props.field.title,
+            //     body: this.props.field.body,
+            //     id: this.props.field.id,
+            //     page_id: this.props.pageId,
+            //     savedImages: this.props.savedImages,
+            //     newImages: []
+            // };
         }
     }, {
         key: 'render',
@@ -4711,11 +4736,9 @@ var FieldItem = function (_React$Component) {
                 'Delete'
             );
 
-            console.log(this.state);
+            // console.log(this.state);
 
             var itemClass = this.state.id ? "form_item" : "form_item new";
-
-            // const imagesPassed = 
 
             return _react2.default.createElement(
                 'form',
@@ -31740,7 +31763,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
         errors: state.errors.field,
-        images: state.fields[ownProps.fieldId].images
+        savedImages: state.fields[ownProps.fieldId].images
     };
 };
 
@@ -31789,7 +31812,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         pageId: ownProps.pageId,
         loading: state.loading.fieldsLoading,
         errors: state.errors.field,
-        images: []
+        savedImages: []
     };
 };
 
