@@ -27,7 +27,8 @@ class Api::FieldsController < ApplicationController
         @field.page_id = params[:page_id]
 
         if params[:images]
-            if @field.update_attributes(params[:images]) && @field.save!
+            debugger
+            if @field.update_attributes(images: params[:images]) && @field.save!
                 render :show
             else
                 render json: @field.errors.full_messages, status: 422

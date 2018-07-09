@@ -4711,6 +4711,8 @@ var FieldItem = function (_React$Component) {
 
             var itemClass = this.state.id ? "form_item" : "form_item new";
 
+            // const imagesPassed = 
+
             return _react2.default.createElement(
                 'form',
                 { className: 'edit_field' },

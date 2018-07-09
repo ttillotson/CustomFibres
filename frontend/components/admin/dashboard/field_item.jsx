@@ -89,6 +89,8 @@ class FieldItem extends React.Component {
 
         const itemClass = this.state.id ? "form_item" : "form_item new";
 
+        // const imagesPassed = 
+
         return (
             <form className='edit_field'>
                 <section className={ itemClass }>
@@ -111,6 +113,7 @@ class FieldItem extends React.Component {
 
                 <section className={ itemClass }>
                     <label>Images</label>
+                    {/* { imagesPassed } */}
                     <input
                     type='file'
                     multiple={true}
