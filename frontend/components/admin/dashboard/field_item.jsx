@@ -50,7 +50,7 @@ class FieldItem extends React.Component {
     renderImagePreview() {
         if (this.state.images.length > 0) {
             return this.state.images.map((img, idx) => {
-                return <img className='image_preview' key={idx} src={img.imageUrl} />;
+                return <li key={idx}><img className='image_preview' src={img.imageUrl} /></li>;
             });
         } else {
             return null;
@@ -113,13 +113,16 @@ class FieldItem extends React.Component {
 
                 <section className={ itemClass }>
                     <label>Images</label>
-                    {/* { imagesPassed } */}
-                    <input
-                    type='file'
-                    multiple={true}
-                    onChange={this.handleFileInput}
-                    />
-                    { this.renderImagePreview() }
+                    <section className='image_input'>
+                        <ul className='image_list'>
+                            { this.renderImagePreview() }
+                        </ul>
+                        <input
+                        type='file'
+                        multiple={true}
+                        onChange={this.handleFileInput}
+                        />
+                    </section>
                 </section>
 
                 <section className={'form_logic_section'}>

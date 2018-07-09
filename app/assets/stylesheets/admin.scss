@@ -118,9 +118,17 @@
                         vertical-align: top;
                     }
 
-                    .image_preview {
-                        max-height: 120px;
-                        width: auto;
+                    .image_input {
+                        width: 80%;
+                        
+                        .image_list {
+                            display: flex;
+
+                            .image_preview {
+                                max-height: 120px;
+                                width: auto;
+                            }
+                        }
                     }
                 }
                 

@@ -4661,7 +4661,11 @@ var FieldItem = function (_React$Component) {
         value: function renderImagePreview() {
             if (this.state.images.length > 0) {
                 return this.state.images.map(function (img, idx) {
-                    return _react2.default.createElement('img', { className: 'image_preview', key: idx, src: img.imageUrl });
+                    return _react2.default.createElement(
+                        'li',
+                        { key: idx },
+                        _react2.default.createElement('img', { className: 'image_preview', src: img.imageUrl })
+                    );
                 });
             } else {
                 return null;
@@ -4752,12 +4756,20 @@ var FieldItem = function (_React$Component) {
                         null,
                         'Images'
                     ),
-                    _react2.default.createElement('input', {
-                        type: 'file',
-                        multiple: true,
-                        onChange: this.handleFileInput
-                    }),
-                    this.renderImagePreview()
+                    _react2.default.createElement(
+                        'section',
+                        { className: 'image_input' },
+                        _react2.default.createElement(
+                            'ul',
+                            { className: 'image_list' },
+                            this.renderImagePreview()
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'file',
+                            multiple: true,
+                            onChange: this.handleFileInput
+                        })
+                    )
                 ),
                 _react2.default.createElement(
                     'section',
