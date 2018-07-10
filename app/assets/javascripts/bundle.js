@@ -4697,7 +4697,7 @@ var FieldItem = function (_React$Component) {
                         _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
                         _react2.default.createElement(
                             'span',
-                            { class_name: 'image_removal', onClick: function onClick() {
+                            { className: 'image_removal', onClick: function onClick() {
                                     return _this4.removeImage(img.signed_id);
                                 } },
                             'Remove'
@@ -4718,7 +4718,10 @@ var FieldItem = function (_React$Component) {
         key: 'removeImage',
         value: function removeImage(imageId) {
             // e.preventDefault();
-            this.props.removeImage(imageId);
+            var target = new FormData();
+            target.append("imageId", imageId);
+            target.append("fieldId", this.state.id);
+            this.props.removeImage(target);
         }
     }, {
         key: 'submitForm',
@@ -26362,10 +26365,14 @@ var destroyField = exports.destroyField = function destroyField(fieldId) {
     });
 };
 
-var destroyImage = exports.destroyImage = function destroyImage(imageId) {
+var destroyImage = exports.destroyImage = function destroyImage(payload) {
     return $.ajax({
-        url: '/api/fields/' + imageId + '/destroy_attached_image',
-        method: 'DELETE'
+        url: '/api/fields/' + payload.imageId + '/destroy_attached_image',
+        method: 'DELETE',
+        data: payload,
+        dataType: "json",
+        processData: false,
+        contentType: false
     });
 };
 
@@ -26424,6 +26431,7 @@ var PagesReducer = function PagesReducer() {
         case _page_actions.RECEIVE_PAGES:
             return (0, _merge2.default)(newState, action.payload.page);
         case _page_actions.RECEIVE_PAGE:
+            // debugger;
             return (0, _merge2.default)(newState, action.payload.page);
         case _field_actions.RECEIVE_FIELD:
             if (!newState[action.field.name].fieldIds.includes(action.field.id)) {
@@ -31620,7 +31628,7 @@ var Dashboard = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             window.scrollTo(0, 0);
-            this.props.fetchPages();
+            this.props.fetchPage("Splash");
         }
     }, {
         key: 'handleSignOut',
@@ -31640,9 +31648,12 @@ var Dashboard = function (_React$Component) {
         key: 'updateTab',
         value: function updateTab(e) {
             if (this.state.currentPage !== e.target.textContent) {
+                console.log(e.target.textContent);
                 window.scrollTo(0, 0);
                 this.setState({ currentPage: e.target.textContent,
                     newField: false });
+                // Pull New Page
+                this.props.fetchPage(e.target.textContent);
             }
         }
     }, {
@@ -31659,10 +31670,12 @@ var Dashboard = function (_React$Component) {
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
             // Create Page Tabs
-            var tabs = Object.values(pages).map(function (page, idx) {
+            var tabHeads = ["Splash", "Technique", "Quote"];
+            // const tabs = Object.values(pages).map((page, idx) => {
+            var tabs = tabHeads.map(function (page, idx) {
                 var klass = 'tab';
                 var key = 'key=' + idx;
-                if (_this3.state.currentPage === page.name) klass += " current";
+                if (_this3.state.currentPage === page) klass += " current";
 
                 return _react2.default.createElement(
                     'li',
@@ -31670,7 +31683,7 @@ var Dashboard = function (_React$Component) {
                         className: klass,
                         onClick: _this3.updateTab
                     },
-                    page.name
+                    page
                 );
             });
 

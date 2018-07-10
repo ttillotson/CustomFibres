@@ -129,6 +129,12 @@
                                 width: auto;
                             }
 
+                            .image_removal:hover {
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            } 
+
                             .new {
                                 border: 3px solid green;
                             }

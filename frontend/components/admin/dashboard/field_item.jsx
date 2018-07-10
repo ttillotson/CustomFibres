@@ -69,7 +69,7 @@ class FieldItem extends React.Component {
                 return (
                     <li key={idx}>
                         <img className={ klass } src={img.imageUrl} />
-                        <span class_name='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+                        <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
                     </li>
                 );
             });
@@ -85,7 +85,10 @@ class FieldItem extends React.Component {
 
     removeImage(imageId) {
         // e.preventDefault();
-        this.props.removeImage(imageId);
+        const target = new FormData();
+        target.append("imageId", imageId);
+        target.append("fieldId", this.state.id);
+        this.props.removeImage(target);
     }
 
     submitForm(e) {

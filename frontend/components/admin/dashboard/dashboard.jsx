@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0,0);
-        this.props.fetchPages();
+        this.props.fetchPage("Splash");
     }
 
     handleSignOut() {
@@ -45,9 +45,12 @@ class Dashboard extends React.Component {
 
     updateTab(e) {
         if (this.state.currentPage !== e.target.textContent ) {
+            console.log(e.target.textContent);
             window.scrollTo(0,0);
             this.setState({ currentPage: e.target.textContent,
                             newField: false });
+            // Pull New Page
+            this.props.fetchPage(e.target.textContent);
         }
     }
 
@@ -57,17 +60,19 @@ class Dashboard extends React.Component {
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
         // Create Page Tabs
-        const tabs = Object.values(pages).map((page, idx) => {
+        const tabHeads = ["Splash", "Technique", "Quote"];
+        // const tabs = Object.values(pages).map((page, idx) => {
+        const tabs = tabHeads.map((page, idx) => {
             let klass = 'tab';
             let key = `key=${idx}`;
-            if (this.state.currentPage === page.name) klass += " current";
+            if (this.state.currentPage === page) klass += " current";
 
             return (
                 <li key={key} 
                     className={klass}
                     onClick={this.updateTab}
                     >
-                    {page.name}
+                    {page}
                 </li>
             );
         });
