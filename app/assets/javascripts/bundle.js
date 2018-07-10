@@ -26335,6 +26335,13 @@ var destroyField = exports.destroyField = function destroyField(fieldId) {
     });
 };
 
+var destroyImage = exports.destroyImage = function destroyImage(imageId) {
+    return $.ajax({
+        url: '/api/fields',
+        method: 'DELETE'
+    });
+};
+
 /***/ }),
 /* 181 */
 /***/ (function(module, exports, __webpack_require__) {

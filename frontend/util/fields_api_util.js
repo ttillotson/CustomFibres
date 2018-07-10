@@ -40,3 +40,10 @@ export const destroyField = (fieldId) => (
         method: 'DELETE'
     })
 );
+
+export const destroyImage = (imageId) => (
+    $.ajax({
+        url: `/api/fields`,
+        method: `DELETE`
+    })
+);
