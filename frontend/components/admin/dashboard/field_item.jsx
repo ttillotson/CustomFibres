@@ -58,14 +58,18 @@ class FieldItem extends React.Component {
     }
 
     renderImagePreview() {
-        // debugger;
         const combinedImages = this.state.savedImages.concat(this.state.newImages);
 
         if (combinedImages.length > 0) {
             return combinedImages.map((img, idx) => {
                 let klass = "image_preview";
                 klass += img.signed_id ? "" : " new";
-                return <li key={idx}><img className={ klass } src={img.imageUrl} /></li>;
+
+                return (
+                    <li key={idx}>
+                        <img className={ klass } src={img.imageUrl} />
+                    </li>
+                );
             });
         } else {
             return null;
@@ -91,14 +95,6 @@ class FieldItem extends React.Component {
 
         this.props.submitField(fieldData);
 
-        // this.setState = {
-        //     title: this.props.field.title,
-        //     body: this.props.field.body,
-        //     id: this.props.field.id,
-        //     page_id: this.props.pageId,
-        //     savedImages: this.props.savedImages,
-        //     newImages: []
-        // };
     }
 
     render() {

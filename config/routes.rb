@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :pages, param: :name, only: %i(index show) do 
       resources :fields, only: :index
     end
-    resources :fields, only: %i(show create update destroy)
+    resources :fields, only: %i(show create update destroy) do 
+      member do 
+        delete :destroy_attached_image
+      end
+    end
   end
 
   root to: 'static_pages#root'

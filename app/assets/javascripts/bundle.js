@@ -4670,13 +4670,13 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'renderImagePreview',
         value: function renderImagePreview() {
-            // debugger;
             var combinedImages = this.state.savedImages.concat(this.state.newImages);
 
             if (combinedImages.length > 0) {
                 return combinedImages.map(function (img, idx) {
                     var klass = "image_preview";
                     klass += img.signed_id ? "" : " new";
+
                     return _react2.default.createElement(
                         'li',
                         { key: idx },
@@ -4708,15 +4708,6 @@ var FieldItem = function (_React$Component) {
             });
 
             this.props.submitField(fieldData);
-
-            // this.setState = {
-            //     title: this.props.field.title,
-            //     body: this.props.field.body,
-            //     id: this.props.field.id,
-            //     page_id: this.props.pageId,
-            //     savedImages: this.props.savedImages,
-            //     newImages: []
-            // };
         }
     }, {
         key: 'render',

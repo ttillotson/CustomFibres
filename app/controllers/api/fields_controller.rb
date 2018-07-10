@@ -50,6 +50,13 @@ class Api::FieldsController < ApplicationController
         end
     end
 
+    def destroy_attached_image
+        @image = ActiveStorage::Blob.find_signed(params[:id])
+        @field = @image.field
+        @image.purge
+        render :show
+    end
+
     private
 
     def field_params
