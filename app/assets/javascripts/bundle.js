@@ -734,7 +734,7 @@ module.exports = root;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.destroyField = exports.updateField = exports.createField = exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.REMOVE_FIELD = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
+exports.destroyImage = exports.destroyField = exports.updateField = exports.createField = exports.fetchAllFields = exports.RECEIVE_FIELD_ERRORS = exports.START_LOADING_FIELD = exports.START_LOADING_ALL_FIELDS = exports.REMOVE_FIELD = exports.RECEIVE_FIELD = exports.RECEIVE_ALL_FIELDS = undefined;
 
 var _fields_api_util = __webpack_require__(180);
 
@@ -826,6 +826,17 @@ var destroyField = exports.destroyField = function destroyField(fieldId) {
         dispatch(startLoadingField());
         return FieldAPIUtil.destroyField(fieldId).then(function (removedField) {
             return dispatch(removeField(removedField));
+        }, function (errors) {
+            return dispatch(receiveFieldErrors(errors.responseJSON));
+        });
+    };
+};
+
+var destroyImage = exports.destroyImage = function destroyImage(imageId) {
+    return function (dispatch) {
+        dispatch(startLoadingField());
+        return FieldAPIUtil.destroyImage(imageId).then(function (updatedField) {
+            return dispatch(receiveField(updatedField));
         }, function (errors) {
             return dispatch(receiveFieldErrors(errors.responseJSON));
         });
@@ -4619,7 +4630,8 @@ var FieldItem = function (_React$Component) {
         _this.submitForm = _this.submitForm.bind(_this);
         _this.removeForm = _this.removeForm.bind(_this);
         _this.handleFileInput = _this.handleFileInput.bind(_this);
-        _this.fileInput = _react2.default.createRef();
+        // this.fileInput = React.createRef();
+        _this.removeImage = _this.removeImage.bind(_this);
         _this.renderImagePreview = _this.renderImagePreview.bind(_this);
         return _this;
     }
@@ -4670,6 +4682,8 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'renderImagePreview',
         value: function renderImagePreview() {
+            var _this4 = this;
+
             var combinedImages = this.state.savedImages.concat(this.state.newImages);
 
             if (combinedImages.length > 0) {
@@ -4680,7 +4694,14 @@ var FieldItem = function (_React$Component) {
                     return _react2.default.createElement(
                         'li',
                         { key: idx },
-                        _react2.default.createElement('img', { className: klass, src: img.imageUrl })
+                        _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
+                        _react2.default.createElement(
+                            'span',
+                            { class_name: 'image_removal', onClick: function onClick() {
+                                    return _this4.removeImage(img.signed_id);
+                                } },
+                            'Remove'
+                        )
                     );
                 });
             } else {
@@ -4692,6 +4713,12 @@ var FieldItem = function (_React$Component) {
         value: function removeForm(e) {
             e.preventDefault();
             this.props.removeField(this.state.id);
+        }
+    }, {
+        key: 'removeImage',
+        value: function removeImage(imageId) {
+            // e.preventDefault();
+            this.props.removeImage(imageId);
         }
     }, {
         key: 'submitForm',
@@ -26337,7 +26364,7 @@ var destroyField = exports.destroyField = function destroyField(fieldId) {
 
 var destroyImage = exports.destroyImage = function destroyImage(imageId) {
     return $.ajax({
-        url: '/api/fields',
+        url: '/api/fields/' + imageId + '/destroy_attached_image',
         method: 'DELETE'
     });
 };
@@ -31775,6 +31802,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         removeField: function removeField(fieldId) {
             return dispatch((0, _field_actions.destroyField)(fieldId));
+        },
+        removeImage: function removeImage(imageId) {
+            return dispatch((0, _field_actions.destroyImage)(imageId));
         }
     };
 };

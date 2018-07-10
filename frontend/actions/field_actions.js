@@ -69,3 +69,12 @@ export const destroyField = (fieldId) => (dispatch) => {
         dispatch(receiveFieldErrors(errors.responseJSON))
     ));
 };
+
+export const destroyImage = (imageId) => (dispatch) => {
+    dispatch(startLoadingField());
+    return FieldAPIUtil.destroyImage(imageId).then(updatedField => (
+        dispatch(receiveField(updatedField))
+    ), errors => (
+        dispatch(receiveFieldErrors(errors.responseJSON))
+    ));
+};

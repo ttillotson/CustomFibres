@@ -15,7 +15,8 @@ class FieldItem extends React.Component {
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
-        this.fileInput = React.createRef();
+        // this.fileInput = React.createRef();
+        this.removeImage = this.removeImage.bind(this);
         this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
@@ -68,6 +69,7 @@ class FieldItem extends React.Component {
                 return (
                     <li key={idx}>
                         <img className={ klass } src={img.imageUrl} />
+                        <span class_name='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
                     </li>
                 );
             });
@@ -79,6 +81,11 @@ class FieldItem extends React.Component {
     removeForm(e) {
         e.preventDefault();
         this.props.removeField(this.state.id);
+    }
+
+    removeImage(imageId) {
+        // e.preventDefault();
+        this.props.removeImage(imageId);
     }
 
     submitForm(e) {
