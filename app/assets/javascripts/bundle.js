@@ -4639,11 +4639,12 @@ var FieldItem = function (_React$Component) {
     _createClass(FieldItem, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
+            // debugger;
             if (nextProps.savedImages.length !== this.props.savedImages.length) {
-                this.setState = {
+                this.setState({
                     savedImages: nextProps.savedImages,
                     newImages: []
-                };
+                });
             }
         }
     }, {
@@ -24178,7 +24179,12 @@ var FieldReducer = function FieldReducer() {
         case _field_actions.RECEIVE_ALL_FIELDS:
             return (0, _merge3.default)(newState, action.fields);
         case _field_actions.RECEIVE_FIELD:
-            return (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
+            // Merge will combine the objects
+            (0, _merge3.default)(newState, _defineProperty({}, action.field.id, action.field));
+
+            // Merge, however, will not update the arrays nested within
+            newState[action.field.id].images = action.field.images;
+            return newState;
         case _field_actions.REMOVE_FIELD:
             delete newState[action.field.id];
             return newState;
@@ -26431,7 +26437,6 @@ var PagesReducer = function PagesReducer() {
         case _page_actions.RECEIVE_PAGES:
             return (0, _merge2.default)(newState, action.payload.page);
         case _page_actions.RECEIVE_PAGE:
-            // debugger;
             return (0, _merge2.default)(newState, action.payload.page);
         case _field_actions.RECEIVE_FIELD:
             if (!newState[action.field.name].fieldIds.includes(action.field.id)) {

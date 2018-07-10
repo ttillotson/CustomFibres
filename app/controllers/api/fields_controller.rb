@@ -27,7 +27,6 @@ class Api::FieldsController < ApplicationController
         @field.page_id = params[:page_id]
 
         if params[:images]
-            debugger
             if @field.update_attributes(images: params[:images]) && @field.save!
                 render :show
             else
@@ -52,9 +51,11 @@ class Api::FieldsController < ApplicationController
 
     def destroy_attached_image
         @image = ActiveStorage::Blob.find_signed(params[:imageId])
+        @attachment = ActiveStorage::Attachment.find_by(blob_id: @image.id)
+
         @image.purge
+        @attachment.destroy
         @field = Field.find(params[:fieldId])
-        debugger;
 
         render :show
     end

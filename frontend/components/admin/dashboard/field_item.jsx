@@ -21,8 +21,9 @@ class FieldItem extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // debugger;
         if (nextProps.savedImages.length !== this.props.savedImages.length) {
-            this.setState = ({ 
+            this.setState({ 
                 savedImages: nextProps.savedImages,
                 newImages: []
             });

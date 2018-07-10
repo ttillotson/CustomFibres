@@ -9,7 +9,6 @@ const PagesReducer = (state={}, action) => {
         case RECEIVE_PAGES: 
             return merge(newState, action.payload.page);
         case RECEIVE_PAGE: 
-            // debugger;
             return merge(newState, action.payload.page);
         case RECEIVE_FIELD: 
             if (!newState[action.field.name].fieldIds.includes(action.field.id)) {

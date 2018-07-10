@@ -13,7 +13,12 @@ const FieldReducer = (state={}, action) => {
         case RECEIVE_ALL_FIELDS:
             return merge(newState, action.fields);
         case RECEIVE_FIELD:
-            return merge(newState, {[action.field.id]: action.field});
+            // Merge will combine the objects
+            merge(newState, {[action.field.id]: action.field});
+
+            // Merge, however, will not update the arrays nested within
+            newState[action.field.id].images = action.field.images;
+            return newState;
         case REMOVE_FIELD:
             delete newState[action.field.id];
             return newState;
