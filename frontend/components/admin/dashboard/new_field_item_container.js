@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     submitField: (field) => { 
         dispatch(createField(field)); 
-        return ownProps.removeNewField();
+        return ownProps.toggle();
     },
     clearErrors: (errors) => dispatch(receiveErrors(errors))
 });

@@ -17,22 +17,6 @@ class Dashboard extends React.Component {
         this.removeNewField = this.removeNewField.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     // remove toggle for new FieldSet
-    //     const currentPage = this.props.pages[this.state.currentPage];
-    //     // if (currentPage) {
-
-    //     //     const currentIds = this.props.pages[this.state.currentPage].fieldIds;
-    //     //     const newIds = nextProps.pages[this.state.currentPage].fieldIds;
-            
-    //     //     if (currentIds.length !== newIds.length) this.setState({ newField: false });
-    //     // }
-    // }
-
-    removeNewField() {
-        this.setState({ newField: false });
-    }
-
     componentDidMount() {
         window.scrollTo(0,0);
         this.props.fetchPage("Splash");
@@ -45,7 +29,13 @@ class Dashboard extends React.Component {
     }
 
     toggleNewField() {
-        this.setState({ newField: true});
+        if (this.state.newField) {
+            this.setState({ newField: false});
+        } else {
+            this.setState({ newField: true});
+        }
+        
+        // this.setState({ newField: true});
     }
 
     updateTab(e) {
@@ -98,7 +88,10 @@ class Dashboard extends React.Component {
         });
 
         // Add Field Logic
-        const newFieldItem = <NewFieldItemContainer pageId={currentPage.id} />;
+        const newFieldItem = <NewFieldItemContainer 
+                                pageId={currentPage.id} 
+                                toggle={this.toggleNewField} />
+                                ;
 
         const addButton = <button onClick={this.toggleNewField}>Add New Field</button>;
 
