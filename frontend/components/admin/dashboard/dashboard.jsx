@@ -14,18 +14,23 @@ class Dashboard extends React.Component {
         this.handleSignOut = this.handleSignOut.bind(this);
         this.updateTab = this.updateTab.bind(this);
         this.toggleNewField = this.toggleNewField.bind(this);
+        this.removeNewField = this.removeNewField.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        // remove toggle for new FieldSet
-        const currentPage = this.props.pages[this.state.currentPage];
-        if (currentPage) {
+    // componentWillReceiveProps(nextProps) {
+    //     // remove toggle for new FieldSet
+    //     const currentPage = this.props.pages[this.state.currentPage];
+    //     // if (currentPage) {
 
-            const currentIds = this.props.pages[this.state.currentPage].fieldIds;
-            const newIds = nextProps.pages[this.state.currentPage].fieldIds;
+    //     //     const currentIds = this.props.pages[this.state.currentPage].fieldIds;
+    //     //     const newIds = nextProps.pages[this.state.currentPage].fieldIds;
             
-            if (currentIds.length !== newIds.length) this.setState({ newField: false });
-        }
+    //     //     if (currentIds.length !== newIds.length) this.setState({ newField: false });
+    //     // }
+    // }
+
+    removeNewField() {
+        this.setState({ newField: false });
     }
 
     componentDidMount() {

@@ -14,8 +14,13 @@ const mapStateToProps = (state, ownProps) => {
     });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    submitField: (field) => dispatch(createField(field)),
+
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    submitField: (field) => { 
+        dispatch(createField(field)); 
+        return ownProps.removeNewField();
+    },
     clearErrors: (errors) => dispatch(receiveErrors(errors))
 });
 
