@@ -19,18 +19,6 @@ class FieldItem extends React.Component {
         this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     debugger;
-    //     if (nextProps.savedImages.length !== this.props.savedImages.length) {
-    //         this.setState({ 
-    //             savedImages: nextProps.savedImages,
-    //             newImages: []
-    //         });
-    //     }
-    // }
-
-    // shou
-
     static getDerivedStateFromProps(props, state){
         if (props.savedImages.length !== state.savedImages.length) {
             return ({ 

@@ -12,4 +12,6 @@ class Page < ApplicationRecord
     has_many :fields,
     class_name: :Field,
     foreign_key: :page_id
+
+    has_many_attached :images
 end

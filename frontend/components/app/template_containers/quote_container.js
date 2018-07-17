@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
         errors: state.errors.pageLoading,
         pageName: "Quote",
         pageTitle: pageTitle,
-        extras: extraEl
+        endingExtras: [extraEl]
     });
 };
 

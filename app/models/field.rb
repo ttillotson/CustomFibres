@@ -12,7 +12,6 @@
 
 class Field < ApplicationRecord
     scope :with_eager_loaded_images, -> { eager_load(images: :blob) }
-    # scope :with_attached_images, -> { includes(:images) }
 
     belongs_to :page,
     class_name: :Page,
