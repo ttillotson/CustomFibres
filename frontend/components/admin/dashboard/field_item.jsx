@@ -1,5 +1,5 @@
 import React from 'react';
-import { merge } from 'lodash/merge';
+// import { merge } from 'lodash/merge';
 
 class FieldItem extends React.Component {
     constructor(props) {
@@ -15,18 +15,34 @@ class FieldItem extends React.Component {
         this.submitForm = this.submitForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
-        // this.fileInput = React.createRef();
         this.removeImage = this.removeImage.bind(this);
         this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        // debugger;
-        if (nextProps.savedImages.length !== this.props.savedImages.length) {
-            this.setState({ 
-                savedImages: nextProps.savedImages,
+    // componentWillReceiveProps(nextProps) {
+    //     debugger;
+    //     if (nextProps.savedImages.length !== this.props.savedImages.length) {
+    //         this.setState({ 
+    //             savedImages: nextProps.savedImages,
+    //             newImages: []
+    //         });
+    //     }
+    // }
+
+    // shou
+
+    static getDerivedStateFromProps(props, state){
+        if (props.savedImages.length !== state.savedImages.length) {
+            return ({ 
+                title: props.field.title,
+                body: props.field.body,
+                id: props.field.id,
+                page_id: props.pageId,
+                savedImages: props.savedImages,
                 newImages: []
             });
+        } else {
+            return null;
         }
     }
 
@@ -40,7 +56,6 @@ class FieldItem extends React.Component {
 
     handleFileInput(e) {
         const fileArr = Array.from(e.target.files);
-
         if (fileArr.length > 0) {
             fileArr.forEach(file => {
                 let fileReader = new FileReader();
@@ -51,7 +66,7 @@ class FieldItem extends React.Component {
                     let imageUrl = fileReader.result;
                     let newImageObj = { file: imageFile, imageUrl: imageUrl };
                     let newImageState = this.state.newImages;
-            
+                    
                     newImageState.push(newImageObj);
                     this.setState({ newImages: newImageState });
                 };
@@ -115,7 +130,7 @@ class FieldItem extends React.Component {
                                 className='delete_item'
                                 >Delete</button>;
 
-        // console.log(this.state);
+        console.log(this.state);
 
         const itemClass = this.state.id ? "form_item" : "form_item new";
 

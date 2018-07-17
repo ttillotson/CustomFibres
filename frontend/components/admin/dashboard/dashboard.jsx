@@ -14,7 +14,6 @@ class Dashboard extends React.Component {
         this.handleSignOut = this.handleSignOut.bind(this);
         this.updateTab = this.updateTab.bind(this);
         this.toggleNewField = this.toggleNewField.bind(this);
-        this.removeNewField = this.removeNewField.bind(this);
     }
 
     componentDidMount() {
@@ -34,8 +33,6 @@ class Dashboard extends React.Component {
         } else {
             this.setState({ newField: true});
         }
-        
-        // this.setState({ newField: true});
     }
 
     updateTab(e) {

@@ -4599,8 +4599,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _merge = __webpack_require__(6);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4610,6 +4608,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import { merge } from 'lodash/merge';
 
 var FieldItem = function (_React$Component) {
     _inherits(FieldItem, _React$Component);
@@ -4630,25 +4630,25 @@ var FieldItem = function (_React$Component) {
         _this.submitForm = _this.submitForm.bind(_this);
         _this.removeForm = _this.removeForm.bind(_this);
         _this.handleFileInput = _this.handleFileInput.bind(_this);
-        // this.fileInput = React.createRef();
         _this.removeImage = _this.removeImage.bind(_this);
         _this.renderImagePreview = _this.renderImagePreview.bind(_this);
         return _this;
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     debugger;
+    //     if (nextProps.savedImages.length !== this.props.savedImages.length) {
+    //         this.setState({ 
+    //             savedImages: nextProps.savedImages,
+    //             newImages: []
+    //         });
+    //     }
+    // }
+
+    // shou
+
     _createClass(FieldItem, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            // debugger;
-            if (nextProps.savedImages.length !== this.props.savedImages.length) {
-                this.setState({
-                    savedImages: nextProps.savedImages,
-                    newImages: []
-                });
-            }
-        }
-    }, {
-        key: 'update',
+        key: "update",
         value: function update(field) {
             var _this2 = this;
 
@@ -4657,12 +4657,11 @@ var FieldItem = function (_React$Component) {
             };
         }
     }, {
-        key: 'handleFileInput',
+        key: "handleFileInput",
         value: function handleFileInput(e) {
             var _this3 = this;
 
             var fileArr = Array.from(e.target.files);
-
             if (fileArr.length > 0) {
                 fileArr.forEach(function (file) {
                     var fileReader = new FileReader();
@@ -4681,7 +4680,7 @@ var FieldItem = function (_React$Component) {
             }
         }
     }, {
-        key: 'renderImagePreview',
+        key: "renderImagePreview",
         value: function renderImagePreview() {
             var _this4 = this;
 
@@ -4693,15 +4692,15 @@ var FieldItem = function (_React$Component) {
                     klass += img.signed_id ? "" : " new";
 
                     return _react2.default.createElement(
-                        'li',
+                        "li",
                         { key: idx },
-                        _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
+                        _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
                         _react2.default.createElement(
-                            'span',
-                            { className: 'image_removal', onClick: function onClick() {
+                            "span",
+                            { className: "image_removal", onClick: function onClick() {
                                     return _this4.removeImage(img.signed_id);
                                 } },
-                            'Remove'
+                            "Remove"
                         )
                     );
                 });
@@ -4710,13 +4709,13 @@ var FieldItem = function (_React$Component) {
             }
         }
     }, {
-        key: 'removeForm',
+        key: "removeForm",
         value: function removeForm(e) {
             e.preventDefault();
             this.props.removeField(this.state.id);
         }
     }, {
-        key: 'removeImage',
+        key: "removeImage",
         value: function removeImage(imageId) {
             // e.preventDefault();
             var target = new FormData();
@@ -4725,7 +4724,7 @@ var FieldItem = function (_React$Component) {
             this.props.removeImage(target);
         }
     }, {
-        key: 'submitForm',
+        key: "submitForm",
         value: function submitForm(e) {
             e.preventDefault();
             var fieldData = new FormData();
@@ -4741,99 +4740,115 @@ var FieldItem = function (_React$Component) {
             this.props.submitField(fieldData);
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             var lastUpdated = _react2.default.createElement(
-                'span',
+                "span",
                 null,
-                'Last Updated: ',
+                "Last Updated: ",
                 this.props.field.last_updated
             );
 
             var deleteButton = _react2.default.createElement(
-                'button',
+                "button",
                 { onClick: this.removeForm,
-                    className: 'delete_item'
+                    className: "delete_item"
                 },
-                'Delete'
+                "Delete"
             );
 
-            // console.log(this.state);
+            console.log(this.state);
 
             var itemClass = this.state.id ? "form_item" : "form_item new";
 
             return _react2.default.createElement(
-                'form',
-                { className: 'edit_field' },
+                "form",
+                { className: "edit_field" },
                 _react2.default.createElement(
-                    'section',
+                    "section",
                     { className: itemClass },
                     _react2.default.createElement(
-                        'label',
+                        "label",
                         null,
-                        'Title'
+                        "Title"
                     ),
-                    _react2.default.createElement('input', {
-                        type: 'text',
+                    _react2.default.createElement("input", {
+                        type: "text",
                         value: this.state.title,
                         onChange: this.update('title')
                     })
                 ),
                 _react2.default.createElement(
-                    'section',
+                    "section",
                     { className: itemClass },
                     _react2.default.createElement(
-                        'label',
+                        "label",
                         null,
-                        'Body'
+                        "Body"
                     ),
-                    _react2.default.createElement('textarea', {
-                        className: 'field_body',
+                    _react2.default.createElement("textarea", {
+                        className: "field_body",
                         value: this.state.body,
                         onChange: this.update("body")
                     })
                 ),
                 _react2.default.createElement(
-                    'section',
+                    "section",
                     { className: itemClass },
                     _react2.default.createElement(
-                        'label',
+                        "label",
                         null,
-                        'Images'
+                        "Images"
                     ),
                     _react2.default.createElement(
-                        'section',
-                        { className: 'image_input' },
+                        "section",
+                        { className: "image_input" },
                         _react2.default.createElement(
-                            'ul',
-                            { className: 'image_list' },
+                            "ul",
+                            { className: "image_list" },
                             this.renderImagePreview()
                         ),
-                        _react2.default.createElement('input', {
-                            type: 'file',
+                        _react2.default.createElement("input", {
+                            type: "file",
                             multiple: true,
                             onChange: this.handleFileInput
                         })
                     )
                 ),
                 _react2.default.createElement(
-                    'section',
+                    "section",
                     { className: 'form_logic_section' },
                     this.state.id ? lastUpdated : null,
                     _react2.default.createElement(
-                        'section',
-                        { className: 'form_buttons' },
+                        "section",
+                        { className: "form_buttons" },
                         this.state.id ? deleteButton : null,
                         _react2.default.createElement(
-                            'button',
+                            "button",
                             { onClick: this.submitForm,
-                                className: 'save_item'
+                                className: "save_item"
                             },
-                            'Save'
+                            "Save"
                         )
                     )
                 )
             );
+        }
+    }], [{
+        key: "getDerivedStateFromProps",
+        value: function getDerivedStateFromProps(props, state) {
+            if (props.savedImages.length !== state.savedImages.length) {
+                return {
+                    title: props.field.title,
+                    body: props.field.body,
+                    id: props.field.id,
+                    page_id: props.pageId,
+                    savedImages: props.savedImages,
+                    newImages: []
+                };
+            } else {
+                return null;
+            }
         }
     }]);
 
@@ -31875,7 +31890,6 @@ var Dashboard = function (_React$Component) {
         _this.handleSignOut = _this.handleSignOut.bind(_this);
         _this.updateTab = _this.updateTab.bind(_this);
         _this.toggleNewField = _this.toggleNewField.bind(_this);
-        _this.removeNewField = _this.removeNewField.bind(_this);
         return _this;
     }
 
@@ -31902,8 +31916,6 @@ var Dashboard = function (_React$Component) {
             } else {
                 this.setState({ newField: true });
             }
-
-            // this.setState({ newField: true});
         }
     }, {
         key: 'updateTab',
