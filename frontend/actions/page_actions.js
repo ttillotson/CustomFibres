@@ -45,3 +45,12 @@ export const fetchPages = () => (dispatch) => {
         dispatch(receivePageErrors(errors.responseJSON))
     ));
 };
+
+export const updatePage = (pageName) => (dispatch) => {
+    dispatch(startLoadingPage());
+    return PageAPIUtil.updatePage(pageName).then(ajaxPage => (
+        dispatch(receivePage(ajaxPage))
+    ), errors => (
+        dispatch(receivePageErrors(errors.responseJSON))
+    ));
+};

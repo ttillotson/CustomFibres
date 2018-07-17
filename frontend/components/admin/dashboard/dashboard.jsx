@@ -3,6 +3,7 @@ import AdminHeading from './admin_heading';
 import FieldItemContainer from './field_item_container';
 import NewFieldItemContainer from './new_field_item_container';
 import LoadingIcon from '../../loading_icon';
+import PageGallery from './page_gallery';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -47,13 +48,12 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { pages, fields, loading} = this.props;
+        const { pages, fields, loading, updatePage } = this.props;
 
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
         // Create Page Tabs
         const tabHeads = ["Splash", "Technique", "Quote"];
-        // const tabs = Object.values(pages).map((page, idx) => {
         const tabs = tabHeads.map((page, idx) => {
             let klass = 'tab';
             let key = `key=${idx}`;
@@ -72,7 +72,6 @@ class Dashboard extends React.Component {
         let currentPage = pages[this.state.currentPage];
 
         // Set Fields for Current Page
-        debugger;
         const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
 
@@ -107,6 +106,7 @@ class Dashboard extends React.Component {
                     { fieldItems }
                     { fieldLogic }
                 </section>
+                <PageGallery currentPage={currentPage} updatePage={updatePage} />
             </main>
         );
     }

@@ -2,7 +2,6 @@ json.page do
     json.set! page.name do 
         json.extract! page, :id, :name
         json.fieldIds do 
-            debugger
             json.array! fields.pluck(:id).uniq
         end
     end

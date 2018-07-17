@@ -502,7 +502,7 @@ module.exports = merge;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.fetchPages = exports.fetchPage = exports.START_LOADING_PAGES = exports.START_LOADING_PAGE = exports.RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGE = exports.RECEIVE_PAGES = undefined;
+exports.updatePage = exports.fetchPages = exports.fetchPage = exports.START_LOADING_PAGES = exports.START_LOADING_PAGE = exports.RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGE = exports.RECEIVE_PAGES = undefined;
 
 var _pages_api_util = __webpack_require__(181);
 
@@ -564,6 +564,17 @@ var fetchPages = exports.fetchPages = function fetchPages() {
         dispatch(startLoadingPages());
         return PageAPIUtil.fetchPages().then(function (ajaxPages) {
             return dispatch(receivePages(ajaxPages));
+        }, function (errors) {
+            return dispatch(receivePageErrors(errors.responseJSON));
+        });
+    };
+};
+
+var updatePage = exports.updatePage = function updatePage(pageName) {
+    return function (dispatch) {
+        dispatch(startLoadingPage());
+        return PageAPIUtil.updatePage(pageName).then(function (ajaxPage) {
+            return dispatch(receivePage(ajaxPage));
         }, function (errors) {
             return dispatch(receivePageErrors(errors.responseJSON));
         });
@@ -26413,6 +26424,17 @@ var fetchPage = exports.fetchPage = function fetchPage(pageName) {
     });
 };
 
+var updatePage = exports.updatePage = function updatePage(page) {
+    return $.ajax({
+        url: '/api/pages/' + page.name,
+        method: 'PATCH',
+        data: page,
+        dataType: "json",
+        processData: false,
+        contentType: false
+    });
+};
+
 /***/ }),
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31812,8 +31834,6 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
-// Clear Page and Session Errors?
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         signOut: function signOut() {
@@ -31824,6 +31844,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         fetchPage: function fetchPage(pageName) {
             return dispatch((0, _page_actions.fetchPage)(pageName));
+        },
+        updatePage: function updatePage(page) {
+            return dispatch((0, _page_actions.updatePage)(page));
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
@@ -31865,6 +31888,10 @@ var _new_field_item_container2 = _interopRequireDefault(_new_field_item_containe
 var _loading_icon = __webpack_require__(83);
 
 var _loading_icon2 = _interopRequireDefault(_loading_icon);
+
+var _page_gallery = __webpack_require__(260);
+
+var _page_gallery2 = _interopRequireDefault(_page_gallery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31936,14 +31963,14 @@ var Dashboard = function (_React$Component) {
             var _props = this.props,
                 pages = _props.pages,
                 fields = _props.fields,
-                loading = _props.loading;
+                loading = _props.loading,
+                updatePage = _props.updatePage;
 
 
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
             // Create Page Tabs
             var tabHeads = ["Splash", "Technique", "Quote"];
-            // const tabs = Object.values(pages).map((page, idx) => {
             var tabs = tabHeads.map(function (page, idx) {
                 var klass = 'tab';
                 var key = 'key=' + idx;
@@ -31962,7 +31989,6 @@ var Dashboard = function (_React$Component) {
             var currentPage = pages[this.state.currentPage];
 
             // Set Fields for Current Page
-            debugger;
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 
@@ -32004,7 +32030,8 @@ var Dashboard = function (_React$Component) {
                     { className: 'fields_container' },
                     fieldItems,
                     fieldLogic
-                )
+                ),
+                _react2.default.createElement(_page_gallery2.default, { currentPage: currentPage, updatePage: updatePage })
             );
         }
     }]);
@@ -36546,6 +36573,69 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_masthead2.default);
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PageGallery = function (_React$Component) {
+    _inherits(PageGallery, _React$Component);
+
+    function PageGallery(props) {
+        _classCallCheck(this, PageGallery);
+
+        var _this = _possibleConstructorReturn(this, (PageGallery.__proto__ || Object.getPrototypeOf(PageGallery)).call(this, props));
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(PageGallery, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                mastImage = _props.mastImage,
+                images = _props.images;
+
+            debugger;
+
+            return _react2.default.createElement(
+                'section',
+                null,
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Page Gallery Section'
+                )
+            );
+        }
+    }]);
+
+    return PageGallery;
+}(_react2.default.Component);
+
+exports.default = PageGallery;
 
 /***/ })
 /******/ ]);
