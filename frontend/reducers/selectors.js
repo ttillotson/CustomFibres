@@ -3,5 +3,5 @@ export const selectPageFields = (state, page) => (
 );
 
 export const selectMastUrl = (state) => (
-    state.page["Splash"].imageUrls[0]
+    state.page["Splash"]
 );

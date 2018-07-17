@@ -6,6 +6,8 @@ class Api::PagesController < ApplicationController
 
     def show
         @page = Page.includes(:fields).find_by(name: params[:name])
-        @fields = Field.with_attached_images.where(page_id: @page.id)
+        @fields = Field.with_attached_images
+            .where(page_id: @page.id)
+            .order(:created_at)
     end
 end

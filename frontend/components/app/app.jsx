@@ -24,7 +24,7 @@ const App = () => {
                     <NavBar />
                 </section>
             </header>
-            <Route exact path='/' component={MastContainer} />
+            {/* <Route exact path='/' component={MastContainer} /> */}
             <Switch> 
                 <Route path='/technique' component={TechniqueContainer} />
                 <Route path='/showcase' component={ShowcaseContainer} />

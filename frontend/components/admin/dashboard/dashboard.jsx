@@ -72,6 +72,7 @@ class Dashboard extends React.Component {
         let currentPage = pages[this.state.currentPage];
 
         // Set Fields for Current Page
+        debugger;
         const fieldItems = currentPage.fieldIds.map(fieldId => {
             let field = fields[fieldId];
 

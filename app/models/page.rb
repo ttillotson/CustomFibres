@@ -13,5 +13,7 @@ class Page < ApplicationRecord
     class_name: :Field,
     foreign_key: :page_id
 
+    has_one_attached :mast_image
+
     has_many_attached :images
 end

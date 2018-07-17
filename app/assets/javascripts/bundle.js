@@ -2570,7 +2570,7 @@ var selectPageFields = exports.selectPageFields = function selectPageFields(stat
 };
 
 var selectMastUrl = exports.selectMastUrl = function selectMastUrl(state) {
-    return state.page["Splash"].imageUrls[0];
+    return state.page["Splash"];
 };
 
 /***/ }),
@@ -31035,7 +31035,6 @@ var App = function App() {
                 _react2.default.createElement(_nav_bar2.default, null)
             )
         ),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _masthead_container2.default }),
         _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
@@ -31963,6 +31962,7 @@ var Dashboard = function (_React$Component) {
             var currentPage = pages[this.state.currentPage];
 
             // Set Fields for Current Page
+            debugger;
             var fieldItems = currentPage.fieldIds.map(function (fieldId) {
                 var field = fields[fieldId];
 
