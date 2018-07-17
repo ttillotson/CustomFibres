@@ -36607,12 +36607,81 @@ var PageGallery = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (PageGallery.__proto__ || Object.getPrototypeOf(PageGallery)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            mastImage: _this.props.mastImage,
+            savedImages: _this.props.images,
+            newImages: []
+        };
         return _this;
     }
 
     _createClass(PageGallery, [{
-        key: 'render',
+        key: "handleFileInput",
+        value: function handleFileInput(e) {
+            var _this2 = this;
+
+            var fileArr = Array.from(e.target.files);
+            if (fileArr.length > 0) {
+                fileArr.forEach(function (file) {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+
+                    fileReader.onloadend = function () {
+                        var imageFile = file;
+                        var imageUrl = fileReader.result;
+                        var newImageObj = { file: imageFile, imageUrl: imageUrl };
+                        var newImageState = _this2.state.newImages;
+
+                        newImageState.push(newImageObj);
+                        _this2.setState({ newImages: newImageState });
+                    };
+                });
+            }
+        }
+    }, {
+        key: "renderImagePreview",
+        value: function renderImagePreview() {
+            var _this3 = this;
+
+            var combinedImages = this.state.savedImages.concat(this.state.newImages);
+
+            if (combinedImages.length > 0) {
+                return combinedImages.map(function (img, idx) {
+                    var klass = "image_preview";
+                    klass += img.signed_id ? "" : " new";
+
+                    return _react2.default.createElement(
+                        "li",
+                        { key: idx },
+                        _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
+                        _react2.default.createElement(
+                            "span",
+                            { className: "image_removal", onClick: function onClick() {
+                                    return _this3.removeImage(img.signed_id);
+                                } },
+                            "Remove"
+                        )
+                    );
+                });
+            } else {
+                return null;
+            }
+        }
+    }, {
+        key: "submitPage",
+        value: function submitPage(e) {
+            e.preventDefault();
+            var pageData = new FormData();
+
+            pageData.append("mast_image", this.state.mastImage);
+            this.state.newImages.forEach(function (img) {
+                return pageData.append('images[]', img.file);
+            });
+
+            this.props.updatePage(pageData);
+        }
+    }, {
+        key: "render",
         value: function render() {
             var _props = this.props,
                 mastImage = _props.mastImage,
@@ -36621,12 +36690,12 @@ var PageGallery = function (_React$Component) {
             debugger;
 
             return _react2.default.createElement(
-                'section',
+                "section",
                 null,
                 _react2.default.createElement(
-                    'p',
+                    "p",
                     null,
-                    'Page Gallery Section'
+                    "Page Gallery Section"
                 )
             );
         }
