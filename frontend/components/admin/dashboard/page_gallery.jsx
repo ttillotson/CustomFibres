@@ -5,44 +5,29 @@ class PageGallery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // mastImage: this.props.currentPage.mastImage,
             savedImages: this.props.currentPage.images,
             newImages: []
         };
         this.submitImages = this.submitImages.bind(this);
         this.submitMastImage = this.submitMastImage.bind(this);
+        this.processImages = this.processImages.bind(this);
         this.removeImage = this.removeImage.bind(this);
-        // this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
     submitMastImage(e) {
-        let fileReader = new FileReader();
-        const fileArr = Array.from(e.target.files);
-        // fileReader.readAsDataURL(e.target.files[0]);
+        let pageData = new FormData();
+        let imageFile = e.target.files[0];
 
-        // fileReader.onloadend = () => {
-            let pageData = new FormData();
-            // debugger;
-            let imageFile = e.target.files[0];
-            // let imageUrl = fileReader.result;
+        pageData.append("page_id", this.props.currentPage.id);
+        pageData.append("mast_image", imageFile);
 
-            pageData.append("page_id", this.props.currentPage.id);
-            pageData.append("mast_image", imageFile);
-
-            this.props.updatePage(pageData);
-
-            // Immediately send off Update Request
-            // Possibly Reset State
-
-            // this.setState({mastImage: imageUrl});
-        // };
-
+        this.props.updatePage(pageData);
     }
 
-    handleFileInput(e) {
+    processImages(e) {
         const fileArr = Array.from(e.target.files);
         // debugger;
-        if (fileArr.length > 0) {
+        // if (fileArr.length > 0) {
             fileArr.forEach(file => {
                 let fileReader = new FileReader();
                 fileReader.readAsDataURL(file);
@@ -57,12 +42,8 @@ class PageGallery extends React.Component {
                     this.setState({ newImages: newImageState });
                 };
             });
-        }
+        // }
     }
-
-    // renderMastPreview() {
-
-    // }
 
     renderImagePreview(type) {
         const { mastImage } = this.props.currentPage;
@@ -107,7 +88,6 @@ class PageGallery extends React.Component {
         e.preventDefault();
         const pageData = new FormData();
 
-        // pageData.append("mast_image", this.state.mastImage);
         this.state.newImages.forEach(img => 
             pageData.append('images[]', img.file)
         );
@@ -117,9 +97,6 @@ class PageGallery extends React.Component {
     }
 
     render() {
-        // const { mastImage, images } = this.props.currentPage;
-        // debugger;
-        
         return (
             <section>
                 <p>Page Gallery Section</p>
@@ -145,9 +122,10 @@ class PageGallery extends React.Component {
                         <input
                         type='file'
                         multiple={true}
-                        onChange={this.handleFileInput}
+                        onChange={this.processImages}
                         />
                     </section>
+                    
                 </section>
             </section>
         );

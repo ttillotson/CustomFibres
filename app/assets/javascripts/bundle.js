@@ -4676,52 +4676,45 @@ var FieldItem = function (_React$Component) {
             var _this3 = this;
 
             var fileArr = Array.from(e.target.files);
-            debugger;
-            if (fileArr.length > 0) {
-                fileArr.forEach(function (file) {
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(file);
+            fileArr.forEach(function (file) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
 
-                    fileReader.onloadend = function () {
-                        var imageFile = file;
-                        var imageUrl = fileReader.result;
-                        var newImageObj = { file: imageFile, imageUrl: imageUrl };
-                        var newImageState = _this3.state.newImages;
+                fileReader.onloadend = function () {
+                    var imageFile = file;
+                    var imageUrl = fileReader.result;
+                    var newImageObj = { file: imageFile, imageUrl: imageUrl };
+                    var newImageState = _this3.state.newImages;
 
-                        newImageState.push(newImageObj);
-                        _this3.setState({ newImages: newImageState });
-                    };
-                });
-            }
+                    newImageState.push(newImageObj);
+                    _this3.setState({ newImages: newImageState });
+                };
+            });
         }
     }, {
         key: "renderImagePreview",
         value: function renderImagePreview() {
             var _this4 = this;
 
-            var combinedImages = this.state.savedImages.concat(this.state.newImages);
+            var combinedImages = this.props.savedImages.concat(this.state.newImages);
 
-            if (combinedImages.length > 0) {
-                return combinedImages.map(function (img, idx) {
-                    var klass = "image_preview";
-                    klass += img.signed_id ? "" : " new";
+            return combinedImages.map(function (img, idx) {
+                var klass = "image_preview";
+                klass += img.signed_id ? "" : " new";
 
-                    return _react2.default.createElement(
-                        "li",
-                        { key: idx },
-                        _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
-                        _react2.default.createElement(
-                            "span",
-                            { className: "image_removal", onClick: function onClick() {
-                                    return _this4.removeImage(img.signed_id);
-                                } },
-                            "Remove"
-                        )
-                    );
-                });
-            } else {
-                return null;
-            }
+                return _react2.default.createElement(
+                    "li",
+                    { key: idx },
+                    _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "image_removal", onClick: function onClick() {
+                                return _this4.removeImage(img.signed_id);
+                            } },
+                        "Remove"
+                    )
+                );
+            });
         }
     }, {
         key: "removeForm",
@@ -4753,6 +4746,7 @@ var FieldItem = function (_React$Component) {
             });
 
             this.props.submitField(fieldData);
+            this.setState({ newImages: [] });
         }
     }, {
         key: "render",
@@ -4846,22 +4840,6 @@ var FieldItem = function (_React$Component) {
                     )
                 )
             );
-        }
-    }], [{
-        key: "getDerivedStateFromProps",
-        value: function getDerivedStateFromProps(props, state) {
-            if (props.savedImages.length !== state.savedImages.length) {
-                return {
-                    title: props.field.title,
-                    body: props.field.body,
-                    id: props.field.id,
-                    page_id: props.pageId,
-                    savedImages: props.savedImages,
-                    newImages: []
-                };
-            } else {
-                return null;
-            }
         }
     }]);
 
@@ -36641,70 +36619,51 @@ var PageGallery = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (PageGallery.__proto__ || Object.getPrototypeOf(PageGallery)).call(this, props));
 
         _this.state = {
-            // mastImage: this.props.currentPage.mastImage,
             savedImages: _this.props.currentPage.images,
             newImages: []
         };
         _this.submitImages = _this.submitImages.bind(_this);
         _this.submitMastImage = _this.submitMastImage.bind(_this);
+        _this.processImages = _this.processImages.bind(_this);
         _this.removeImage = _this.removeImage.bind(_this);
-        // this.renderImagePreview = this.renderImagePreview.bind(this);
         return _this;
     }
 
     _createClass(PageGallery, [{
         key: 'submitMastImage',
         value: function submitMastImage(e) {
-            var fileReader = new FileReader();
-            var fileArr = Array.from(e.target.files);
-            // fileReader.readAsDataURL(e.target.files[0]);
-
-            // fileReader.onloadend = () => {
             var pageData = new FormData();
-            // debugger;
             var imageFile = e.target.files[0];
-            // let imageUrl = fileReader.result;
 
             pageData.append("page_id", this.props.currentPage.id);
             pageData.append("mast_image", imageFile);
 
             this.props.updatePage(pageData);
-
-            // Immediately send off Update Request
-            // Possibly Reset State
-
-            // this.setState({mastImage: imageUrl});
-            // };
         }
     }, {
-        key: 'handleFileInput',
-        value: function handleFileInput(e) {
+        key: 'processImages',
+        value: function processImages(e) {
             var _this2 = this;
 
             var fileArr = Array.from(e.target.files);
             // debugger;
-            if (fileArr.length > 0) {
-                fileArr.forEach(function (file) {
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(file);
+            // if (fileArr.length > 0) {
+            fileArr.forEach(function (file) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
 
-                    fileReader.onloadend = function () {
-                        var imageFile = file;
-                        var imageUrl = fileReader.result;
-                        var newImageObj = { file: imageFile, imageUrl: imageUrl };
-                        var newImageState = _this2.state.newImages;
+                fileReader.onloadend = function () {
+                    var imageFile = file;
+                    var imageUrl = fileReader.result;
+                    var newImageObj = { file: imageFile, imageUrl: imageUrl };
+                    var newImageState = _this2.state.newImages;
 
-                        newImageState.push(newImageObj);
-                        _this2.setState({ newImages: newImageState });
-                    };
-                });
-            }
+                    newImageState.push(newImageObj);
+                    _this2.setState({ newImages: newImageState });
+                };
+            });
+            // }
         }
-
-        // renderMastPreview() {
-
-        // }
-
     }, {
         key: 'renderImagePreview',
         value: function renderImagePreview(type) {
@@ -36767,7 +36726,6 @@ var PageGallery = function (_React$Component) {
             e.preventDefault();
             var pageData = new FormData();
 
-            // pageData.append("mast_image", this.state.mastImage);
             this.state.newImages.forEach(function (img) {
                 return pageData.append('images[]', img.file);
             });
@@ -36778,9 +36736,6 @@ var PageGallery = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            // const { mastImage, images } = this.props.currentPage;
-            // debugger;
-
             return _react2.default.createElement(
                 'section',
                 null,
@@ -36830,7 +36785,7 @@ var PageGallery = function (_React$Component) {
                         _react2.default.createElement('input', {
                             type: 'file',
                             multiple: true,
-                            onChange: this.handleFileInput
+                            onChange: this.processImages
                         })
                     )
                 )

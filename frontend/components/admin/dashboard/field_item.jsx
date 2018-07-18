@@ -19,21 +19,6 @@ class FieldItem extends React.Component {
         // this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
-    static getDerivedStateFromProps(props, state){
-        if (props.savedImages.length !== state.savedImages.length) {
-            return ({ 
-                title: props.field.title,
-                body: props.field.body,
-                id: props.field.id,
-                page_id: props.pageId,
-                savedImages: props.savedImages,
-                newImages: []
-            });
-        } else {
-            return null;
-        }
-    }
-
     update(field) {
         return (e) => (
             this.setState({
@@ -44,43 +29,36 @@ class FieldItem extends React.Component {
 
     handleFileInput(e) {
         const fileArr = Array.from(e.target.files);
-        debugger
-        if (fileArr.length > 0) {
-            fileArr.forEach(file => {
-                let fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
+        fileArr.forEach(file => {
+            let fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            
+            fileReader.onloadend = () => {
+                let imageFile = file;
+                let imageUrl = fileReader.result;
+                let newImageObj = { file: imageFile, imageUrl: imageUrl };
+                let newImageState = this.state.newImages;
                 
-                fileReader.onloadend = () => {
-                    let imageFile = file;
-                    let imageUrl = fileReader.result;
-                    let newImageObj = { file: imageFile, imageUrl: imageUrl };
-                    let newImageState = this.state.newImages;
-                    
-                    newImageState.push(newImageObj);
-                    this.setState({ newImages: newImageState });
-                };
-            });
-        }
+                newImageState.push(newImageObj);
+                this.setState({ newImages: newImageState });
+            };
+        });
     }
 
     renderImagePreview() {
-        const combinedImages = this.state.savedImages.concat(this.state.newImages);
+        const combinedImages = this.props.savedImages.concat(this.state.newImages);
 
-        if (combinedImages.length > 0) {
-            return combinedImages.map((img, idx) => {
-                let klass = "image_preview";
-                klass += img.signed_id ? "" : " new";
+        return combinedImages.map((img, idx) => {
+            let klass = "image_preview";
+            klass += img.signed_id ? "" : " new";
 
-                return (
-                    <li key={idx}>
-                        <img className={ klass } src={img.imageUrl} />
-                        <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                    </li>
-                );
-            });
-        } else {
-            return null;
-        }
+            return (
+                <li key={idx}>
+                    <img className={ klass } src={img.imageUrl} />
+                    <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+                </li>
+            );
+        });
     }
 
     removeForm(e) {
@@ -109,6 +87,7 @@ class FieldItem extends React.Component {
         });
 
         this.props.submitField(fieldData);
+        this.setState({ newImages: [] });
 
     }
 
