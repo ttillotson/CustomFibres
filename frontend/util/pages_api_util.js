@@ -24,4 +24,13 @@ export const updatePage = (page) => (
     })
 );
 
-
+export const destroyImage = (payload) => (
+    $.ajax({
+        url: `/api/pages/${payload.imageId}/destroy_attached_image`,
+        method: `DELETE`,
+        data:  payload,
+        dataType: "json",
+        processData: false,
+        contentType: false
+    })
+);

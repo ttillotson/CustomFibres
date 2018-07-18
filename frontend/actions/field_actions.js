@@ -70,9 +70,9 @@ export const destroyField = (fieldId) => (dispatch) => {
     ));
 };
 
-export const destroyImage = (imageId) => (dispatch) => {
+export const destroyImage = (payload) => (dispatch) => {
     dispatch(startLoadingField());
-    return FieldAPIUtil.destroyImage(imageId).then(updatedField => (
+    return FieldAPIUtil.destroyImage(payload).then(updatedField => (
         dispatch(receiveField(updatedField))
     ), errors => (
         dispatch(receiveFieldErrors(errors.responseJSON))

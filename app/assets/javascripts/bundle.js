@@ -502,7 +502,7 @@ module.exports = merge;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.updatePage = exports.fetchPages = exports.fetchPage = exports.START_LOADING_PAGES = exports.START_LOADING_PAGE = exports.RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGE = exports.RECEIVE_PAGES = undefined;
+exports.destroyImage = exports.updatePage = exports.fetchPages = exports.fetchPage = exports.START_LOADING_PAGES = exports.START_LOADING_PAGE = exports.RECEIVE_PAGE_ERRORS = exports.RECEIVE_PAGE = exports.RECEIVE_PAGES = undefined;
 
 var _pages_api_util = __webpack_require__(181);
 
@@ -575,6 +575,17 @@ var updatePage = exports.updatePage = function updatePage(pageName) {
         dispatch(startLoadingPage());
         return PageAPIUtil.updatePage(pageName).then(function (ajaxPage) {
             return dispatch(receivePage(ajaxPage));
+        }, function (errors) {
+            return dispatch(receivePageErrors(errors.responseJSON));
+        });
+    };
+};
+
+var destroyImage = exports.destroyImage = function destroyImage(payload) {
+    return function (dispatch) {
+        dispatch(startLoadingPage());
+        return PageAPIUtil.destroyImage(payload).then(function (updatedPage) {
+            return dispatch(receivePage(updatedPage));
         }, function (errors) {
             return dispatch(receivePageErrors(errors.responseJSON));
         });
@@ -843,10 +854,10 @@ var destroyField = exports.destroyField = function destroyField(fieldId) {
     };
 };
 
-var destroyImage = exports.destroyImage = function destroyImage(imageId) {
+var destroyImage = exports.destroyImage = function destroyImage(payload) {
     return function (dispatch) {
         dispatch(startLoadingField());
-        return FieldAPIUtil.destroyImage(imageId).then(function (updatedField) {
+        return FieldAPIUtil.destroyImage(payload).then(function (updatedField) {
             return dispatch(receiveField(updatedField));
         }, function (errors) {
             return dispatch(receiveFieldErrors(errors.responseJSON));
@@ -4646,7 +4657,7 @@ var FieldItem = function (_React$Component) {
         _this.removeForm = _this.removeForm.bind(_this);
         _this.handleFileInput = _this.handleFileInput.bind(_this);
         _this.removeImage = _this.removeImage.bind(_this);
-        _this.renderImagePreview = _this.renderImagePreview.bind(_this);
+        // this.renderImagePreview = this.renderImagePreview.bind(this);
         return _this;
     }
 
@@ -4665,6 +4676,7 @@ var FieldItem = function (_React$Component) {
             var _this3 = this;
 
             var fileArr = Array.from(e.target.files);
+            debugger;
             if (fileArr.length > 0) {
                 fileArr.forEach(function (file) {
                     var fileReader = new FileReader();
@@ -4759,8 +4771,6 @@ var FieldItem = function (_React$Component) {
                 },
                 "Delete"
             );
-
-            console.log(this.state);
 
             var itemClass = this.state.id ? "form_item" : "form_item new";
 
@@ -26435,6 +26445,17 @@ var updatePage = exports.updatePage = function updatePage(page) {
     });
 };
 
+var destroyImage = exports.destroyImage = function destroyImage(payload) {
+    return $.ajax({
+        url: '/api/pages/' + payload.imageId + '/destroy_attached_image',
+        method: 'DELETE',
+        data: payload,
+        dataType: "json",
+        processData: false,
+        contentType: false
+    });
+};
+
 /***/ }),
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31850,6 +31871,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         clearErrors: function clearErrors(errors) {
             return dispatch((0, _session_actions.receiveErrors)(errors));
+        },
+        removeImage: function removeImage(imageId) {
+            return dispatch((0, _page_actions.destroyImage)(imageId));
         }
     };
 };
@@ -31964,7 +31988,8 @@ var Dashboard = function (_React$Component) {
                 pages = _props.pages,
                 fields = _props.fields,
                 loading = _props.loading,
-                updatePage = _props.updatePage;
+                updatePage = _props.updatePage,
+                removeImage = _props.removeImage;
 
 
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
@@ -32031,7 +32056,7 @@ var Dashboard = function (_React$Component) {
                     fieldItems,
                     fieldLogic
                 ),
-                _react2.default.createElement(_page_gallery2.default, { currentPage: currentPage, updatePage: updatePage })
+                _react2.default.createElement(_page_gallery2.default, { currentPage: currentPage, updatePage: updatePage, removeImage: removeImage })
             );
         }
     }]);
@@ -36587,11 +36612,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -36608,19 +36641,48 @@ var PageGallery = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (PageGallery.__proto__ || Object.getPrototypeOf(PageGallery)).call(this, props));
 
         _this.state = {
-            mastImage: _this.props.mastImage,
-            savedImages: _this.props.images,
+            // mastImage: this.props.currentPage.mastImage,
+            savedImages: _this.props.currentPage.images,
             newImages: []
         };
+        _this.submitImages = _this.submitImages.bind(_this);
+        _this.submitMastImage = _this.submitMastImage.bind(_this);
+        _this.removeImage = _this.removeImage.bind(_this);
+        // this.renderImagePreview = this.renderImagePreview.bind(this);
         return _this;
     }
 
     _createClass(PageGallery, [{
-        key: "handleFileInput",
+        key: 'submitMastImage',
+        value: function submitMastImage(e) {
+            var fileReader = new FileReader();
+            var fileArr = Array.from(e.target.files);
+            // fileReader.readAsDataURL(e.target.files[0]);
+
+            // fileReader.onloadend = () => {
+            var pageData = new FormData();
+            // debugger;
+            var imageFile = e.target.files[0];
+            // let imageUrl = fileReader.result;
+
+            pageData.append("page_id", this.props.currentPage.id);
+            pageData.append("mast_image", imageFile);
+
+            this.props.updatePage(pageData);
+
+            // Immediately send off Update Request
+            // Possibly Reset State
+
+            // this.setState({mastImage: imageUrl});
+            // };
+        }
+    }, {
+        key: 'handleFileInput',
         value: function handleFileInput(e) {
             var _this2 = this;
 
             var fileArr = Array.from(e.target.files);
+            // debugger;
             if (fileArr.length > 0) {
                 fileArr.forEach(function (file) {
                     var fileReader = new FileReader();
@@ -36638,64 +36700,139 @@ var PageGallery = function (_React$Component) {
                 });
             }
         }
+
+        // renderMastPreview() {
+
+        // }
+
     }, {
-        key: "renderImagePreview",
-        value: function renderImagePreview() {
+        key: 'renderImagePreview',
+        value: function renderImagePreview(type) {
             var _this3 = this;
 
+            var mastImage = this.props.currentPage.mastImage;
+
+
             var combinedImages = this.state.savedImages.concat(this.state.newImages);
+            if (type === "images") {
 
-            if (combinedImages.length > 0) {
-                return combinedImages.map(function (img, idx) {
-                    var klass = "image_preview";
-                    klass += img.signed_id ? "" : " new";
+                if (combinedImages.length > 0) {
+                    return combinedImages.map(function (img, idx) {
+                        var klass = "image_preview";
+                        klass += img.signed_id ? "" : " new";
 
-                    return _react2.default.createElement(
-                        "li",
-                        { key: idx },
-                        _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
-                        _react2.default.createElement(
-                            "span",
-                            { className: "image_removal", onClick: function onClick() {
-                                    return _this3.removeImage(img.signed_id);
-                                } },
-                            "Remove"
-                        )
-                    );
-                });
-            } else {
-                return null;
+                        return _react2.default.createElement(
+                            'li',
+                            { key: idx },
+                            _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
+                            _react2.default.createElement(
+                                'span',
+                                { className: 'image_removal', onClick: function onClick() {
+                                        return _this3.removeImage(img.signed_id);
+                                    } },
+                                'Remove'
+                            )
+                        );
+                    });
+                } else {
+                    return null;
+                }
+            } else if (type === "mastImage" && mastImage) {
+                return _react2.default.createElement(
+                    StyledMast,
+                    null,
+                    _react2.default.createElement('img', { src: mastImage.service_url, alt: 'Mast Image' }),
+                    _react2.default.createElement(
+                        'span',
+                        { onClick: function onClick() {
+                                return _this3.removeImage(mastImage.signed_id);
+                            } },
+                        'Remove'
+                    )
+                );
             }
         }
     }, {
-        key: "submitPage",
-        value: function submitPage(e) {
+        key: 'removeImage',
+        value: function removeImage(imageId) {
+            // e.preventDefault();
+            var target = new FormData();
+            target.append("imageId", imageId);
+            target.append("pageId", this.props.currentPage.id);
+            this.props.removeImage(target);
+        }
+    }, {
+        key: 'submitImages',
+        value: function submitImages(e) {
             e.preventDefault();
             var pageData = new FormData();
 
-            pageData.append("mast_image", this.state.mastImage);
+            // pageData.append("mast_image", this.state.mastImage);
             this.state.newImages.forEach(function (img) {
                 return pageData.append('images[]', img.file);
             });
+            pageData.append('name', this.props.currentPage.name);
 
             this.props.updatePage(pageData);
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
-            var _props = this.props,
-                mastImage = _props.mastImage,
-                images = _props.images;
-
-            debugger;
+            // const { mastImage, images } = this.props.currentPage;
+            // debugger;
 
             return _react2.default.createElement(
-                "section",
+                'section',
                 null,
                 _react2.default.createElement(
-                    "p",
+                    'p',
                     null,
-                    "Page Gallery Section"
+                    'Page Gallery Section'
+                ),
+                _react2.default.createElement(
+                    'section',
+                    null,
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Mast Image'
+                    ),
+                    _react2.default.createElement(
+                        'section',
+                        { className: 'image_input' },
+                        _react2.default.createElement(
+                            'ul',
+                            { className: 'image_list' },
+                            this.renderImagePreview("mastImage")
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'file',
+                            onChange: this.submitMastImage
+                        })
+                    )
+                ),
+                _react2.default.createElement(
+                    'section',
+                    null,
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Images'
+                    ),
+                    _react2.default.createElement(
+                        'section',
+                        { className: 'image_input' },
+                        _react2.default.createElement(
+                            'ul',
+                            { className: 'image_list' },
+                            this.renderImagePreview("images")
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'file',
+                            multiple: true,
+                            onChange: this.handleFileInput
+                        })
+                    )
                 )
             );
         }
@@ -36703,6 +36840,8 @@ var PageGallery = function (_React$Component) {
 
     return PageGallery;
 }(_react2.default.Component);
+
+var StyledMast = _styledComponents2.default.article(_templateObject);
 
 exports.default = PageGallery;
 

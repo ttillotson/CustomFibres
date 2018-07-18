@@ -12,12 +12,39 @@ class Api::PagesController < ApplicationController
     end
 
     def update
-        @page = Page.find(params[:page_id])
+        @page = Page.includes(:fields).find(params[:page_id])
+        @fields = Field.with_attached_images
+            .where(page_id: @page.id)
+            .order(:created_at)
 
-        if @page.update_attributes(images: params[:images], mast_image: params[:mast_image])
+        if params[:mast_image] 
+            @page.mast_image.purge 
+            @page.mast_image.attach(params[:mast_image])
             render :show
-        else
-            render json: @page.errors.full_messages, status: 422
+        elsif params[:images]
+            if @page.update_attributes(images: params[:images])
+                render :show
+            else
+                render json: @page.errors.full_messages, status: 422
+            end
         end
+    end
+
+    def destroy_attached_image
+        # Pull Blob && Attachment
+        @image = ActiveStorage::Blob.find_signed(params[:imageId])
+        @attachment = ActiveStorage::Attachment.find_by(blob_id: @image.id)
+        
+        # Destroy them
+        @image.purge
+        @attachment.destroy
+
+        # Eager load content 
+        @page = Page.find(params[:pageId])
+        @fields = Field.with_attached_images
+            .where(page_id: @page.id)
+            .order(:created_at)
+
+        render :show
     end
 end

@@ -54,3 +54,12 @@ export const updatePage = (pageName) => (dispatch) => {
         dispatch(receivePageErrors(errors.responseJSON))
     ));
 };
+
+export const destroyImage = (payload) => (dispatch) => {
+    dispatch(startLoadingPage());
+    return PageAPIUtil.destroyImage(payload).then(updatedPage => (
+        dispatch(receivePage(updatedPage))
+    ), errors => (
+        dispatch(receivePageErrors(errors.responseJSON))
+    ));
+};

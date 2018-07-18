@@ -16,7 +16,7 @@ class FieldItem extends React.Component {
         this.removeForm = this.removeForm.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
         this.removeImage = this.removeImage.bind(this);
-        this.renderImagePreview = this.renderImagePreview.bind(this);
+        // this.renderImagePreview = this.renderImagePreview.bind(this);
     }
 
     static getDerivedStateFromProps(props, state){
@@ -44,6 +44,7 @@ class FieldItem extends React.Component {
 
     handleFileInput(e) {
         const fileArr = Array.from(e.target.files);
+        debugger
         if (fileArr.length > 0) {
             fileArr.forEach(file => {
                 let fileReader = new FileReader();
@@ -117,8 +118,6 @@ class FieldItem extends React.Component {
         let deleteButton = <button onClick={this.removeForm}
                                 className='delete_item'
                                 >Delete</button>;
-
-        console.log(this.state);
 
         const itemClass = this.state.id ? "form_item" : "form_item new";
 

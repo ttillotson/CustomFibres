@@ -1,7 +1,7 @@
 import Dashboard from './dashboard';
 import { connect } from 'react-redux';
 import { signOut, receiveErrors } from '../../../actions/session_actions';
-import { fetchPages, fetchPage, updatePage } from '../../../actions/page_actions';
+import { fetchPages, fetchPage, updatePage, destroyImage } from '../../../actions/page_actions';
 
 
 const mapStateToProps = (state) => ({
@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchPage: (pageName) => dispatch(fetchPage(pageName)),
     updatePage: (page) => dispatch(updatePage(page)),
     clearErrors: (errors) => dispatch(receiveErrors(errors)),
+    removeImage: (imageId) => dispatch(destroyImage(imageId))
 });
 
 export default connect(

@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { pages, fields, loading, updatePage } = this.props;
+        const { pages, fields, loading, updatePage, removeImage } = this.props;
 
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
@@ -106,7 +106,7 @@ class Dashboard extends React.Component {
                     { fieldItems }
                     { fieldLogic }
                 </section>
-                <PageGallery currentPage={currentPage} updatePage={updatePage} />
+                <PageGallery currentPage={currentPage} updatePage={updatePage} removeImage={removeImage} />
             </main>
         );
     }
