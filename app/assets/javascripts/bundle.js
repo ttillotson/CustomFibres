@@ -36619,7 +36619,6 @@ var PageGallery = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (PageGallery.__proto__ || Object.getPrototypeOf(PageGallery)).call(this, props));
 
         _this.state = {
-            savedImages: _this.props.currentPage.images,
             newImages: []
         };
         _this.submitImages = _this.submitImages.bind(_this);
@@ -36646,8 +36645,7 @@ var PageGallery = function (_React$Component) {
             var _this2 = this;
 
             var fileArr = Array.from(e.target.files);
-            // debugger;
-            // if (fileArr.length > 0) {
+
             fileArr.forEach(function (file) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(file);
@@ -36662,40 +36660,36 @@ var PageGallery = function (_React$Component) {
                     _this2.setState({ newImages: newImageState });
                 };
             });
-            // }
         }
     }, {
         key: 'renderImagePreview',
         value: function renderImagePreview(type) {
             var _this3 = this;
 
-            var mastImage = this.props.currentPage.mastImage;
+            var _props$currentPage = this.props.currentPage,
+                mastImage = _props$currentPage.mastImage,
+                images = _props$currentPage.images;
 
 
-            var combinedImages = this.state.savedImages.concat(this.state.newImages);
+            var combinedImages = images.concat(this.state.newImages);
             if (type === "images") {
+                return combinedImages.map(function (img, idx) {
+                    var klass = "image_preview";
+                    klass += img.signed_id ? "" : " new";
 
-                if (combinedImages.length > 0) {
-                    return combinedImages.map(function (img, idx) {
-                        var klass = "image_preview";
-                        klass += img.signed_id ? "" : " new";
-
-                        return _react2.default.createElement(
-                            'li',
-                            { key: idx },
-                            _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'image_removal', onClick: function onClick() {
-                                        return _this3.removeImage(img.signed_id);
-                                    } },
-                                'Remove'
-                            )
-                        );
-                    });
-                } else {
-                    return null;
-                }
+                    return _react2.default.createElement(
+                        'li',
+                        { key: idx },
+                        _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'image_removal', onClick: function onClick() {
+                                    return _this3.removeImage(img.signed_id);
+                                } },
+                            'Remove'
+                        )
+                    );
+                });
             } else if (type === "mastImage" && mastImage) {
                 return _react2.default.createElement(
                     StyledMast,

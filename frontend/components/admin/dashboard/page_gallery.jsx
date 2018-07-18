@@ -5,7 +5,6 @@ class PageGallery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            savedImages: this.props.currentPage.images,
             newImages: []
         };
         this.submitImages = this.submitImages.bind(this);
@@ -26,46 +25,39 @@ class PageGallery extends React.Component {
 
     processImages(e) {
         const fileArr = Array.from(e.target.files);
-        // debugger;
-        // if (fileArr.length > 0) {
-            fileArr.forEach(file => {
-                let fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
+
+        fileArr.forEach(file => {
+            let fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            
+            fileReader.onloadend = () => {
+                let imageFile = file;
+                let imageUrl = fileReader.result;
+                let newImageObj = { file: imageFile, imageUrl: imageUrl };
+                let newImageState = this.state.newImages;
                 
-                fileReader.onloadend = () => {
-                    let imageFile = file;
-                    let imageUrl = fileReader.result;
-                    let newImageObj = { file: imageFile, imageUrl: imageUrl };
-                    let newImageState = this.state.newImages;
-                    
-                    newImageState.push(newImageObj);
-                    this.setState({ newImages: newImageState });
-                };
-            });
-        // }
+                newImageState.push(newImageObj);
+                this.setState({ newImages: newImageState });
+            };
+        });
     }
 
     renderImagePreview(type) {
-        const { mastImage } = this.props.currentPage;
+        const { mastImage, images } = this.props.currentPage;
 
-        const combinedImages = this.state.savedImages.concat(this.state.newImages);
+        const combinedImages = images.concat(this.state.newImages);
         if (type === "images") {
-
-            if (combinedImages.length > 0) {
-                return combinedImages.map((img, idx) => {
-                    let klass = "image_preview";
-                    klass += img.signed_id ? "" : " new";
-                    
-                    return (
-                        <li key={idx}>
-                            <img className={ klass } src={img.imageUrl} />
-                            <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                        </li>
-                    );
-                });
-            } else {
-                return null;
-            }
+            return combinedImages.map((img, idx) => {
+                let klass = "image_preview";
+                klass += img.signed_id ? "" : " new";
+                
+                return (
+                    <li key={idx}>
+                        <img className={ klass } src={img.imageUrl} />
+                        <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+                    </li>
+                );
+            });
         } else if (type === "mastImage" && mastImage) {
             return (
                 <StyledMast >
@@ -125,7 +117,7 @@ class PageGallery extends React.Component {
                         onChange={this.processImages}
                         />
                     </section>
-                    
+
                 </section>
             </section>
         );
