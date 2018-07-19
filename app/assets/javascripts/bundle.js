@@ -2490,6 +2490,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n            background-image: url(', ');\n            height: 300px;\n            max-width: 100vw;\n        '], ['\n            background-image: url(', ');\n            height: 300px;\n            max-width: 100vw;\n        ']);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -2502,7 +2504,13 @@ var _display_field_section = __webpack_require__(231);
 
 var _display_field_section2 = _interopRequireDefault(_display_field_section);
 
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2536,19 +2544,20 @@ var Template = function (_React$Component) {
             var _props = this.props,
                 loading = _props.loading,
                 fields = _props.fields,
-                pageName = _props.pageName,
-                pageTitle = _props.pageTitle,
-                extras = _props.extras;
+                page = _props.page,
+                extras = _props.extras,
+                pageTitle = _props.pageTitle;
 
 
             if (loading) return _react2.default.createElement(_loading_icon2.default, null);
 
+            if (!page) return null;
+
             var fieldItems = fields.map(function (field) {
                 return _react2.default.createElement(_display_field_section2.default, {
-                    title: field.title,
-                    body: field.body,
+                    field: field,
                     key: 'key=' + field.id,
-                    pageName: pageName
+                    pageName: page.name
                 });
             });
 
@@ -2560,12 +2569,23 @@ var Template = function (_React$Component) {
 
             var extraItems = extras ? extras : null;
 
+            var StyledMast = _styledComponents2.default.section(_templateObject, page.mastImage.service_url);
+
+            var mastImage = page.mastImage ? _react2.default.createElement('img', { src: page.mastImage.service_url }) : page.mastImage;
+
+            // debugger;
+
             return _react2.default.createElement(
-                'main',
-                { className: 'template_container' },
-                titleElement,
-                fieldItems,
-                extraItems
+                _react2.default.Fragment,
+                null,
+                mastImage,
+                _react2.default.createElement(
+                    'main',
+                    { className: 'template_container' },
+                    titleElement,
+                    fieldItems,
+                    extraItems
+                )
             );
         }
     }]);
@@ -4705,7 +4725,7 @@ var FieldItem = function (_React$Component) {
                 return _react2.default.createElement(
                     "li",
                     { key: idx },
-                    _react2.default.createElement("img", { className: klass, src: img.imageUrl }),
+                    _react2.default.createElement("img", { className: klass, src: img.service_url }),
                     _react2.default.createElement(
                         "span",
                         { className: "image_removal", onClick: function onClick() {
@@ -31039,10 +31059,8 @@ var _reactRouterDom = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const imageUrl = ;
-
-
 var App = function App() {
+
     return _react2.default.createElement(
         'main',
         { className: 'main_container' },
@@ -31101,6 +31119,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
+        page: page,
         pageName: "Splash",
         pageTitle: pageTitle
     };
@@ -31134,23 +31153,33 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-    var title = props.title,
-        body = props.body,
-        pageName = props.pageName;
+    var _props$field = props.field,
+        title = _props$field.title,
+        body = _props$field.body,
+        images = _props$field.images;
+    var pageName = props.pageName;
+
+
+    var displayImages = images.map(function (image) {
+        return _react2.default.createElement('img', { key: image.signed_url, className: 'field_image', src: image.service_url });
+    });
+
+    // debugger;
 
     return _react2.default.createElement(
-        "section",
-        { className: "field_item" },
+        'section',
+        { className: 'field_item' },
         _react2.default.createElement(
-            "h2",
-            { className: "field_title " + pageName },
+            'h2',
+            { className: 'field_title ' + pageName },
             title
         ),
         _react2.default.createElement(
-            "p",
-            { className: "field_body " + pageName },
+            'p',
+            { className: 'field_body ' + pageName },
             body
-        )
+        ),
+        displayImages
     );
 };
 
@@ -31185,6 +31214,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
+        page: page,
         pageName: "Technique",
         pageTitle: pageTitle
     };
@@ -31440,6 +31470,7 @@ var mapStateToProps = function mapStateToProps(state) {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
+        page: page,
         pageName: "Quote",
         pageTitle: pageTitle,
         endingExtras: [extraEl]

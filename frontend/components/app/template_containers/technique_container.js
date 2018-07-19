@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
+        page: page,
         pageName: "Technique",
         pageTitle: pageTitle,
     });

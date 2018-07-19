@@ -12,10 +12,11 @@ import {
     Switch
 } from 'react-router-dom';
 
-// const imageUrl = ;
-
 
 const App = () => {
+
+
+
     return (
         <main className='main_container'>
             <header className='app_header'>

@@ -54,7 +54,7 @@ class FieldItem extends React.Component {
 
             return (
                 <li key={idx}>
-                    <img className={ klass } src={img.imageUrl} />
+                    <img className={ klass } src={img.service_url} />
                     <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
                 </li>
             );

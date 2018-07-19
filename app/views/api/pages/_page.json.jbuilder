@@ -15,8 +15,7 @@ json.page do
 
         json.images do 
             json.array! page.images do |image|
-                json.imageUrl image.service_url
-                json.extract! image, :sign_id
+                json.extract! image, :sign_id, :service_url
             end
         end
     end

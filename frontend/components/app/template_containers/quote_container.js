@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
         fields: selectPageFields(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
+        page: page,
         pageName: "Quote",
         pageTitle: pageTitle,
         endingExtras: [extraEl]
