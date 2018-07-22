@@ -2490,7 +2490,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n            background-image: url(', ');\n            height: 300px;\n            max-width: 100vw;\n        '], ['\n            background-image: url(', ');\n            height: 300px;\n            max-width: 100vw;\n        ']);
+var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media (min-width: 361px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                }\n            '], ['\n                display: none;\n                @media (min-width: 361px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                }\n            ']);
 
 var _react = __webpack_require__(0);
 
@@ -2569,9 +2569,13 @@ var Template = function (_React$Component) {
 
             var extraItems = extras ? extras : null;
 
-            var StyledMast = _styledComponents2.default.section(_templateObject, page.mastImage.service_url);
+            // Setup Page's Mast; if it exists, set it
+            var mastImage = void 0;
+            if (page.mastImage) {
+                var StyledMast = _styledComponents2.default.section(_templateObject, page.mastImage.service_url);
 
-            var mastImage = page.mastImage ? _react2.default.createElement('img', { src: page.mastImage.service_url }) : page.mastImage;
+                mastImage = _react2.default.createElement(StyledMast, null);
+            }
 
             // debugger;
 
@@ -31161,7 +31165,7 @@ exports.default = function (props) {
 
 
     var displayImages = images.map(function (image) {
-        return _react2.default.createElement('img', { key: image.signed_url, className: 'field_image', src: image.service_url });
+        return _react2.default.createElement('img', { key: 'key=' + image.signed_id, className: 'field_image', src: image.service_url });
     });
 
     // debugger;

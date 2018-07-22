@@ -5,7 +5,7 @@ export default (props) => {
     const { pageName } = props;
 
     const displayImages = images.map(image => 
-        <img key={image.signed_url} className={'field_image'} src={image.service_url}/>
+        <img key={`key=${image.signed_id}`} className={'field_image'} src={image.service_url}/>
     );
 
     // debugger;

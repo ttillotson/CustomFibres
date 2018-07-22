@@ -38,13 +38,20 @@ class Template extends React.Component {
 
         const extraItems = extras ? extras : null;
 
-        const StyledMast = styled.section`
-            background-image: url(${page.mastImage.service_url});
-            height: 300px;
-            max-width: 100vw;
-        `;
-
-        const mastImage = page.mastImage ? <img src={page.mastImage.service_url} /> : page.mastImage;
+        // Setup Page's Mast; if it exists, set it
+        let mastImage;
+        if (page.mastImage) {
+            const StyledMast = styled.section`
+                display: none;
+                @media (min-width: 361px) {
+                    background-image: url(${page.mastImage.service_url});
+                    height: 300px;
+                    display: block;
+                }
+            `;
+            
+            mastImage = <StyledMast />;
+        }
 
         // debugger;
 
@@ -60,5 +67,7 @@ class Template extends React.Component {
         );
     }
 }
+
+
 
 export default Template;
