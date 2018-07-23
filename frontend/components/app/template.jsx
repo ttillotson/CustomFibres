@@ -47,6 +47,7 @@ class Template extends React.Component {
                     background-image: url(${page.mastImage.service_url});
                     height: 300px;
                     display: block;
+                    // max-width: 
                 }
             `;
             
