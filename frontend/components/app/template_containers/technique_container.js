@@ -5,7 +5,6 @@ import { selectPageFields } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
     const page = state.pages['Technique'];
-    const pageTitle = "Available Options";
 
     return ({
         fields: selectPageFields(state, page),
@@ -13,7 +12,6 @@ const mapStateToProps = (state, ownProps) => {
         errors: state.errors.pageLoading,
         page: page,
         pageName: "Technique",
-        pageTitle: pageTitle,
     });
 };
 

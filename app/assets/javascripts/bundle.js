@@ -2490,7 +2490,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media (min-width: 361px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media (min-width: 361px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            ']);
+var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media and screen (min-width: 769px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media and screen (min-width: 769px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            ']);
 
 var _react = __webpack_require__(0);
 
@@ -2545,8 +2545,7 @@ var Template = function (_React$Component) {
                 loading = _props.loading,
                 fields = _props.fields,
                 page = _props.page,
-                extras = _props.extras,
-                pageTitle = _props.pageTitle;
+                extras = _props.extras;
 
 
             if (loading) return _react2.default.createElement(_loading_icon2.default, null);
@@ -2561,11 +2560,7 @@ var Template = function (_React$Component) {
                 });
             });
 
-            var titleElement = _react2.default.createElement(
-                'h2',
-                { className: 'page_title' },
-                pageTitle
-            );
+            // const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
 
             var extraItems = extras ? extras : null;
 
@@ -2586,7 +2581,6 @@ var Template = function (_React$Component) {
                 _react2.default.createElement(
                     'main',
                     { className: 'template_container' },
-                    titleElement,
                     fieldItems,
                     extraItems
                 )
@@ -31212,15 +31206,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var page = state.pages['Technique'];
-    var pageTitle = "Available Options";
 
     return {
         fields: (0, _selectors.selectPageFields)(state, page),
         loading: state.loading.pageLoading,
         errors: state.errors.pageLoading,
         page: page,
-        pageName: "Technique",
-        pageTitle: pageTitle
+        pageName: "Technique"
     };
 };
 
@@ -31477,7 +31469,7 @@ var mapStateToProps = function mapStateToProps(state) {
         page: page,
         pageName: "Quote",
         pageTitle: pageTitle,
-        endingExtras: [extraEl]
+        extras: [extraEl]
     };
 };
 

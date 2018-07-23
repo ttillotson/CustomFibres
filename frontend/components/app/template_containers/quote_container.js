@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
         page: page,
         pageName: "Quote",
         pageTitle: pageTitle,
-        endingExtras: [extraEl]
+        extras: [extraEl]
     });
 };
 

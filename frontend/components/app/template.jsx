@@ -20,7 +20,7 @@ class Template extends React.Component {
     }
 
     render() {
-        const { loading, fields, page, extras, pageTitle } = this.props;
+        const { loading, fields, page, extras } = this.props;
 
         if (loading) return <LoadingIcon />;
 
@@ -34,7 +34,7 @@ class Template extends React.Component {
             />
         ));
 
-        const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
+        // const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
 
         const extraItems = extras ? extras : null;
 
@@ -43,7 +43,7 @@ class Template extends React.Component {
         if (page.mastImage) {
             const StyledMast = styled.section`
                 display: none;
-                @media (min-width: 361px) {
+                @media and screen (min-width: 769px) {
                     background-image: url(${page.mastImage.service_url});
                     height: 300px;
                     display: block;
@@ -60,7 +60,7 @@ class Template extends React.Component {
             <React.Fragment>
                 { mastImage }
                 <main className='template_container'>
-                    { titleElement }
+                    {/* { titleElement } */}
                     { fieldItems }
                     { extraItems }
                 </main>

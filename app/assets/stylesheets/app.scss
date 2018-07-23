@@ -18,12 +18,6 @@
         margin-bottom: 2px;
 
         .header_frame {
-
-            
-            .logo_container {
-                display: none;
-            }
-            
             .emblem_container {
                 padding: 1.5vh 0;
                 justify-content: center;
@@ -80,12 +74,75 @@
 }
 
 @media only screen and (min-width: 361px) {
-    .logo_container {
-        display: none;
+    #root {
+        background-color: rgb(82, 82, 82);
+    }
+
+    .main_container {
+        .app_header {
+            .header_frame {
+                flex-direction: column;
+                width: 85vw;
+                margin: auto;
+                
+                .emblem_container {
+                    margin: 0;
+                    padding-bottom: 0;
+
+                    .emblem {
+                        height: 50px;
+                    }
+                }
+
+                .app_nav{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0;
+                    align-items: center;
+                    letter-spacing: 0.5px;
+                    height: 7vh;
+
+                    a {
+                        display: block;
+                        font-size: 28px;
+                        padding: 0 15px;
+                    }
+                }
+            }
+        }
+        
+        .template_container {
+            padding: 5px 3vw;
+            
+            .page_title {
+                font-size: 3.5vh;
+            }
+
+            .field_item {
+                .field_body {
+                    font-size: 2.3vh;
+                }
+            }
+
+            .request_options {
+                
+                .quote_request {
+                    // border: 1px solid black;
+                    border-radius: 5px;
+                    background: #1D2226;
+                    font-size: 24px;
+                }
+    
+                .phone {
+                    height: 2vh;
+                    width: auto;
+                }
+            }
+        }
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
     #root {
         background-color: #9c9c9c;
     }
