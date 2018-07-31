@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Template from '../template';
 import { fetchPage } from '../../../actions/page_actions';
 import { selectPageFields } from '../../../reducers/selectors';
-import Showcase from './showcase';
+
 
 
 const mapStateToProps = (state) => {
@@ -27,5 +27,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Showcase);
-// )(Template);
+)(Template);

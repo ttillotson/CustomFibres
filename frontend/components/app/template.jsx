@@ -1,6 +1,7 @@
 import React from 'react';
 import LoadingIcon from '../shared/loading_icon';
 import DisplayFieldSection from './shared/display_field_section';
+import ImageIndex from '../shared/gallery_index';
 import styled from 'styled-components';
 
 
@@ -55,6 +56,24 @@ class Template extends React.Component {
             mastImage = <StyledMast src={page.mastImage.service_url} />;
         }
 
+        // Setup Page Images; If any exist, format them
+        let pageImages;
+        if (page.images) {
+            let rowSize = 1;
+            if (window.matchMedia("(min-width: 1200px)").matches) {
+                rowSize = 5;
+            } else if (window.matchMedia("(min-width: 992px)").matches) {
+                rowSize = 4;
+            } else if (window.matchMedia("(min-width: 768px)").matches) {
+                rowSize = 3;
+            } else if (window.matchMedia("(min-width: 480px)").matches) {
+                rowSize = 2;
+            }
+            pageImages = <ImageIndex images={page.images} display={true}
+                StyledComponent={StyledPageImage} rowSize={rowSize}/>;
+        }
+        
+
         // debugger;
 
         return (
@@ -64,12 +83,33 @@ class Template extends React.Component {
                     {/* { titleElement } */}
                     { fieldItems }
                     { extraItems }
+                    { pageImages }
                 </main>
             </React.Fragment>
         );
     }
 }
 
-
-
 export default Template;
+
+const StyledPageImage = styled.img`
+    width: 80vw;
+    margin: 1vh 1.5vw;
+
+    @media only screen and (min-width: 480px) {
+        width: 38vw;
+    }
+
+    @media only screen and (min-width: 768px) {
+        width: 24vw;
+    }
+
+    @media only screen and (min-width: 992px) {
+        width: 17vw;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        width: 14vw;
+        margin: 1vh 1vw;
+    }
+`;
