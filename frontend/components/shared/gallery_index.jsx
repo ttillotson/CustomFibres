@@ -22,7 +22,6 @@ export default (props) => {
                 </DisplayItem>
             );
         } else {
-            // let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return (
                 <li key={idx}>
                     <NewStyled src={img.imageUrl} alt={`Page Image`} /> 

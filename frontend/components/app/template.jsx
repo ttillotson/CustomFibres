@@ -32,6 +32,7 @@ class Template extends React.Component {
             field={field}
             key={`key=${field.id}`}
             pageName={page.name}
+            StyledImage={StyledImage}
             />
         ));
 
@@ -40,7 +41,7 @@ class Template extends React.Component {
         const extraItems = extras ? extras : null;
 
         // Setup Page's Mast; if it exists, set it
-        let mastImage;
+        let mastImage = null;
         if (page.mastImage) {
             const StyledMast = styled.img`
                 display: none;
@@ -70,11 +71,10 @@ class Template extends React.Component {
                 rowSize = 2;
             }
             pageImages = <ImageIndex images={page.images} display={true}
-                StyledComponent={StyledPageImage} rowSize={rowSize}/>;
+                StyledComponent={StyledImage} rowSize={rowSize}/>;
         }
-        
 
-        // debugger;
+
 
         return (
             <React.Fragment>
@@ -92,24 +92,25 @@ class Template extends React.Component {
 
 export default Template;
 
-const StyledPageImage = styled.img`
-    width: 80vw;
-    margin: 1vh 1.5vw;
+const StyledImage = styled.img`
+    height: 80vw;
+    width: auto;
+    margin: 1.5vw 1.5vw;
 
     @media only screen and (min-width: 480px) {
-        width: 38vw;
+        height: 38vw;
     }
 
     @media only screen and (min-width: 768px) {
-        width: 24vw;
+        height: 24vw;
     }
 
     @media only screen and (min-width: 992px) {
-        width: 17vw;
+        height: 17vw;
+        margin: 1vw 1vw;
     }
 
     @media only screen and (min-width: 1200px) {
-        width: 14vw;
-        margin: 1vh 1vw;
+        height: 14vw;
     }
 `;

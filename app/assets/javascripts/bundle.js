@@ -2491,7 +2491,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            ']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    width: 80vw;\n    margin: 1vh 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        width: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        width: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        width: 17vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        width: 14vw;\n        margin: 1vh 1vw;\n    }\n'], ['\n    width: 80vw;\n    margin: 1vh 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        width: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        width: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        width: 17vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        width: 14vw;\n        margin: 1vh 1vw;\n    }\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n    height: 80vw;\n    width: auto;\n    margin: 1.5vw 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        height: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        height: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        height: 17vw;\n        margin: 1vw 1vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        height: 14vw;\n    }\n'], ['\n    height: 80vw;\n    width: auto;\n    margin: 1.5vw 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        height: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        height: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        height: 17vw;\n        margin: 1vw 1vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        height: 14vw;\n    }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -2561,7 +2561,8 @@ var Template = function (_React$Component) {
                 return _react2.default.createElement(_display_field_section2.default, {
                     field: field,
                     key: 'key=' + field.id,
-                    pageName: page.name
+                    pageName: page.name,
+                    StyledImage: StyledImage
                 });
             });
 
@@ -2570,7 +2571,7 @@ var Template = function (_React$Component) {
             var extraItems = extras ? extras : null;
 
             // Setup Page's Mast; if it exists, set it
-            var mastImage = void 0;
+            var mastImage = null;
             if (page.mastImage) {
                 var StyledMast = _styledComponents2.default.img(_templateObject, page.mastImage.service_url);
 
@@ -2591,10 +2592,8 @@ var Template = function (_React$Component) {
                     rowSize = 2;
                 }
                 pageImages = _react2.default.createElement(_gallery_index2.default, { images: page.images, display: true,
-                    StyledComponent: StyledPageImage, rowSize: rowSize });
+                    StyledComponent: StyledImage, rowSize: rowSize });
             }
-
-            // debugger;
 
             return _react2.default.createElement(
                 _react2.default.Fragment,
@@ -2617,7 +2616,7 @@ var Template = function (_React$Component) {
 exports.default = Template;
 
 
-var StyledPageImage = _styledComponents2.default.img(_templateObject2);
+var StyledImage = _styledComponents2.default.img(_templateObject2);
 
 /***/ }),
 /* 46 */
@@ -31147,22 +31146,31 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _templateObject = _taggedTemplateLiteral(['\n    display: flex;\n    // justify-content: \n    // flex-direction: start;\n'], ['\n    display: flex;\n    // justify-content: \n    // flex-direction: start;\n']);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 exports.default = function (props) {
     var _props$field = props.field,
         title = _props$field.title,
         body = _props$field.body,
         images = _props$field.images;
-    var pageName = props.pageName;
+    var pageName = props.pageName,
+        StyledImage = props.StyledImage;
 
 
     var displayImages = images.map(function (image) {
-        return _react2.default.createElement('img', { key: 'key=' + image.signed_id, className: 'field_image', src: image.service_url });
+        return _react2.default.createElement(StyledImage, { key: 'key=' + image.signed_id, src: image.service_url });
     });
 
     // debugger;
@@ -31180,9 +31188,15 @@ exports.default = function (props) {
             { className: 'field_body ' + pageName },
             body
         ),
-        displayImages
+        _react2.default.createElement(
+            StyledImageContainer,
+            null,
+            displayImages
+        )
     );
 };
+
+var StyledImageContainer = _styledComponents2.default.article(_templateObject);
 
 /***/ }),
 /* 232 */
@@ -36732,7 +36746,6 @@ exports.default = function (props) {
                 _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' })
             );
         } else {
-            // let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return _react2.default.createElement(
                 'li',
                 { key: idx },
