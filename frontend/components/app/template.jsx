@@ -41,17 +41,18 @@ class Template extends React.Component {
         // Setup Page's Mast; if it exists, set it
         let mastImage;
         if (page.mastImage) {
-            const StyledMast = styled.section`
+            const StyledMast = styled.img`
                 display: none;
-                @media and screen (min-width: 769px) {
-                    background-image: url(${page.mastImage.service_url});
-                    height: 300px;
+                @media only screen and (min-width: 769px) {
+
+                    // src: ${page.mastImage.service_url};
+                    height: 250px;
                     display: block;
                     // max-width: 
                 }
             `;
             
-            mastImage = <StyledMast />;
+            mastImage = <StyledMast src={page.mastImage.service_url} />;
         }
 
         // debugger;

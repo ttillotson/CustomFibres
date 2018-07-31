@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         if (loading.pageLoading || !Object.values(pages).length ) return <LoadingIcon />;
 
         // Create Page Tabs
-        const tabHeads = ["Splash", "Technique", "Quote"];
+        const tabHeads = ["Splash", "Technique", "Showcase", "Quote"];
         const tabs = tabHeads.map((page, idx) => {
             let klass = 'tab';
             let key = `key=${idx}`;

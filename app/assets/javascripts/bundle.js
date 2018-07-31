@@ -2490,7 +2490,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media and screen (min-width: 769px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media and screen (min-width: 769px) {\n                    background-image: url(', ');\n                    height: 300px;\n                    display: block;\n                    // max-width: \n                }\n            ']);
+var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            ']);
 
 var _react = __webpack_require__(0);
 
@@ -2567,9 +2567,9 @@ var Template = function (_React$Component) {
             // Setup Page's Mast; if it exists, set it
             var mastImage = void 0;
             if (page.mastImage) {
-                var StyledMast = _styledComponents2.default.section(_templateObject, page.mastImage.service_url);
+                var StyledMast = _styledComponents2.default.img(_templateObject, page.mastImage.service_url);
 
-                mastImage = _react2.default.createElement(StyledMast, null);
+                mastImage = _react2.default.createElement(StyledMast, { src: page.mastImage.service_url });
             }
 
             // debugger;
@@ -32000,7 +32000,7 @@ var Dashboard = function (_React$Component) {
             if (loading.pageLoading || !Object.values(pages).length) return _react2.default.createElement(_loading_icon2.default, null);
 
             // Create Page Tabs
-            var tabHeads = ["Splash", "Technique", "Quote"];
+            var tabHeads = ["Splash", "Technique", "Showcase", "Quote"];
             var tabs = tabHeads.map(function (page, idx) {
                 var klass = 'tab';
                 var key = 'key=' + idx;
