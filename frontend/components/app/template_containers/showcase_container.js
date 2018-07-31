@@ -5,7 +5,6 @@ import { fetchPage } from '../../../actions/page_actions';
 import { selectPageFields } from '../../../reducers/selectors';
 
 
-
 const mapStateToProps = (state) => {
     const page = state.pages['Showcase'];
     const pageTitle = "";

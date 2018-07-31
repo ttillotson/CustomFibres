@@ -1,5 +1,6 @@
 import React from 'react';
-// import { merge } from 'lodash/merge';
+import styled from 'styled-components';
+import ImageIndex from '../../shared/gallery_index';
 
 class FieldItem extends React.Component {
     constructor(props) {
@@ -48,17 +49,28 @@ class FieldItem extends React.Component {
     renderImagePreview() {
         const combinedImages = this.props.savedImages.concat(this.state.newImages);
 
-        return combinedImages.map((img, idx) => {
-            let klass = "image_preview";
-            klass += img.signed_id ? "" : " new";
+        // return combinedImages.map((img, idx) => {
+        //     let klass = "image_preview";
+        //     klass += img.signed_id ? "" : " new";
 
-            return (
-                <li key={idx}>
-                    <img className={ klass } src={img.service_url} />
-                    <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                </li>
-            );
-        });
+        //     return (
+        //         <li key={idx}>
+        //             <img className={ klass } src={img.service_url} />
+        //             <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+        //         </li>
+        //     );
+        // });
+        return (
+            [
+                <ImageIndex key={0} images={this.props.savedImages} 
+                    StyledComponent={StyledImage} 
+                    removeImage={this.removeImage} rowSize={4} />,
+                <ImageIndex key={1} images={this.state.newImages} 
+                    StyledComponent={StyledImage} 
+                    removeImage={this.removeNewImage} rowSize={4} />
+            ]
+        );
+
     }
 
     removeForm(e) {
@@ -123,9 +135,9 @@ class FieldItem extends React.Component {
                 <section className={ itemClass }>
                     <label>Images</label>
                     <section className='image_input'>
-                        <ul className='image_list'>
+                        <StyledList className='image_list'>
                             { this.renderImagePreview() }
-                        </ul>
+                        </StyledList>
                         <input
                         type='file'
                         multiple={true}
@@ -151,3 +163,11 @@ class FieldItem extends React.Component {
 }
 
 export default FieldItem;
+
+const StyledImage = styled.img`
+    max-width: 150px;
+`;
+
+const StyledList = styled.ul`
+    flex-direction: column;
+`;

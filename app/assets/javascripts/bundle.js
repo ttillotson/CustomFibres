@@ -4633,11 +4633,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _gallery_index = __webpack_require__(261);
+
+var _gallery_index2 = _interopRequireDefault(_gallery_index);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -4646,8 +4659,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import { merge } from 'lodash/merge';
 
 var FieldItem = function (_React$Component) {
     _inherits(FieldItem, _React$Component);
@@ -4674,7 +4685,7 @@ var FieldItem = function (_React$Component) {
     }
 
     _createClass(FieldItem, [{
-        key: "update",
+        key: 'update',
         value: function update(field) {
             var _this2 = this;
 
@@ -4683,7 +4694,7 @@ var FieldItem = function (_React$Component) {
             };
         }
     }, {
-        key: "handleFileInput",
+        key: 'handleFileInput',
         value: function handleFileInput(e) {
             var _this3 = this;
 
@@ -4704,38 +4715,35 @@ var FieldItem = function (_React$Component) {
             });
         }
     }, {
-        key: "renderImagePreview",
+        key: 'renderImagePreview',
         value: function renderImagePreview() {
-            var _this4 = this;
-
             var combinedImages = this.props.savedImages.concat(this.state.newImages);
 
-            return combinedImages.map(function (img, idx) {
-                var klass = "image_preview";
-                klass += img.signed_id ? "" : " new";
+            // return combinedImages.map((img, idx) => {
+            //     let klass = "image_preview";
+            //     klass += img.signed_id ? "" : " new";
 
-                return _react2.default.createElement(
-                    "li",
-                    { key: idx },
-                    _react2.default.createElement("img", { className: klass, src: img.service_url }),
-                    _react2.default.createElement(
-                        "span",
-                        { className: "image_removal", onClick: function onClick() {
-                                return _this4.removeImage(img.signed_id);
-                            } },
-                        "Remove"
-                    )
-                );
-            });
+            //     return (
+            //         <li key={idx}>
+            //             <img className={ klass } src={img.service_url} />
+            //             <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+            //         </li>
+            //     );
+            // });
+            return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: this.props.savedImages,
+                StyledComponent: StyledImage,
+                removeImage: this.removeImage, rowSize: 4 }), _react2.default.createElement(_gallery_index2.default, { key: 1, images: this.state.newImages,
+                StyledComponent: StyledImage,
+                removeImage: this.removeNewImage, rowSize: 4 })];
         }
     }, {
-        key: "removeForm",
+        key: 'removeForm',
         value: function removeForm(e) {
             e.preventDefault();
             this.props.removeField(this.state.id);
         }
     }, {
-        key: "removeImage",
+        key: 'removeImage',
         value: function removeImage(imageId) {
             // e.preventDefault();
             var target = new FormData();
@@ -4744,7 +4752,7 @@ var FieldItem = function (_React$Component) {
             this.props.removeImage(target);
         }
     }, {
-        key: "submitForm",
+        key: 'submitForm',
         value: function submitForm(e) {
             e.preventDefault();
             var fieldData = new FormData();
@@ -4761,93 +4769,93 @@ var FieldItem = function (_React$Component) {
             this.setState({ newImages: [] });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var lastUpdated = _react2.default.createElement(
-                "span",
+                'span',
                 null,
-                "Last Updated: ",
+                'Last Updated: ',
                 this.props.field.last_updated
             );
 
             var deleteButton = _react2.default.createElement(
-                "button",
+                'button',
                 { onClick: this.removeForm,
-                    className: "delete_item"
+                    className: 'delete_item'
                 },
-                "Delete"
+                'Delete'
             );
 
             var itemClass = this.state.id ? "form_item" : "form_item new";
 
             return _react2.default.createElement(
-                "form",
-                { className: "edit_field" },
+                'form',
+                { className: 'edit_field' },
                 _react2.default.createElement(
-                    "section",
+                    'section',
                     { className: itemClass },
                     _react2.default.createElement(
-                        "label",
+                        'label',
                         null,
-                        "Title"
+                        'Title'
                     ),
-                    _react2.default.createElement("input", {
-                        type: "text",
+                    _react2.default.createElement('input', {
+                        type: 'text',
                         value: this.state.title,
                         onChange: this.update('title')
                     })
                 ),
                 _react2.default.createElement(
-                    "section",
+                    'section',
                     { className: itemClass },
                     _react2.default.createElement(
-                        "label",
+                        'label',
                         null,
-                        "Body"
+                        'Body'
                     ),
-                    _react2.default.createElement("textarea", {
-                        className: "field_body",
+                    _react2.default.createElement('textarea', {
+                        className: 'field_body',
                         value: this.state.body,
                         onChange: this.update("body")
                     })
                 ),
                 _react2.default.createElement(
-                    "section",
+                    'section',
                     { className: itemClass },
                     _react2.default.createElement(
-                        "label",
+                        'label',
                         null,
-                        "Images"
+                        'Images'
                     ),
                     _react2.default.createElement(
-                        "section",
-                        { className: "image_input" },
+                        'section',
+                        { className: 'image_input' },
                         _react2.default.createElement(
-                            "ul",
-                            { className: "image_list" },
+                            StyledList,
+                            { className: 'image_list' },
                             this.renderImagePreview()
                         ),
-                        _react2.default.createElement("input", {
-                            type: "file",
+                        _react2.default.createElement('input', {
+                            type: 'file',
                             multiple: true,
                             onChange: this.handleFileInput
                         })
                     )
                 ),
                 _react2.default.createElement(
-                    "section",
+                    'section',
                     { className: 'form_logic_section' },
                     this.state.id ? lastUpdated : null,
                     _react2.default.createElement(
-                        "section",
-                        { className: "form_buttons" },
+                        'section',
+                        { className: 'form_buttons' },
                         this.state.id ? deleteButton : null,
                         _react2.default.createElement(
-                            "button",
+                            'button',
                             { onClick: this.submitForm,
-                                className: "save_item"
+                                className: 'save_item'
                             },
-                            "Save"
+                            'Save'
                         )
                     )
                 )
@@ -4859,6 +4867,11 @@ var FieldItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FieldItem;
+
+
+var StyledImage = _styledComponents2.default.img(_templateObject);
+
+var StyledList = _styledComponents2.default.ul(_templateObject2);
 
 /***/ }),
 /* 85 */
@@ -31019,10 +31032,6 @@ var _splash_container = __webpack_require__(230);
 
 var _splash_container2 = _interopRequireDefault(_splash_container);
 
-var _masthead_container = __webpack_require__(259);
-
-var _masthead_container2 = _interopRequireDefault(_masthead_container);
-
 var _technique_container = __webpack_require__(232);
 
 var _technique_container2 = _interopRequireDefault(_technique_container);
@@ -32087,38 +32096,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_field_item2.default);
 
 /***/ }),
-/* 250 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _templateObject = _taggedTemplateLiteral(['\n        width: 100%;\n    '], ['\n        width: 100%;\n    ']);
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _styledComponents = __webpack_require__(251);
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-exports.default = function (props) {
-    // debugger;
-    var StyledMastHead = _styledComponents2.default.img(_templateObject);
-
-    return _react2.default.createElement(StyledMastHead, { src: props.imageUrl });
-};
-
-/***/ }),
+/* 250 */,
 /* 251 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36459,35 +36437,7 @@ exports.isStrictMode = isStrictMode;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 259 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _masthead = __webpack_require__(250);
-
-var _masthead2 = _interopRequireDefault(_masthead);
-
-var _selectors = __webpack_require__(46);
-
-var _reactRedux = __webpack_require__(5);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-    return {
-        imageUrl: (0, _selectors.selectMastUrl)(state)
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_masthead2.default);
-
-/***/ }),
+/* 259 */,
 /* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
