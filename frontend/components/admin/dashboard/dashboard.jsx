@@ -2,7 +2,7 @@ import React from 'react';
 import AdminHeading from './admin_heading';
 import FieldItemContainer from './field_item_container';
 import NewFieldItemContainer from './new_field_item_container';
-import LoadingIcon from '../../loading_icon';
+import LoadingIcon from '../../shared/loading_icon';
 import PageGallery from './page_gallery';
 
 class Dashboard extends React.Component {

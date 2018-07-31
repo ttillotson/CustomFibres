@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingIcon from '../loading_icon';
+import LoadingIcon from '../shared/loading_icon';
 import DisplayFieldSection from './shared/display_field_section';
 import styled from 'styled-components';
 

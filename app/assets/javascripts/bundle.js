@@ -2496,7 +2496,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _loading_icon = __webpack_require__(83);
+var _loading_icon = __webpack_require__(262);
 
 var _loading_icon2 = _interopRequireDefault(_loading_icon);
 
@@ -4594,12 +4594,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 83 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/travist/Projects/Custom_Fibres/frontend/components/loading_icon.jsx'");
-
-/***/ }),
+/* 83 */,
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31887,7 +31882,7 @@ var _new_field_item_container = __webpack_require__(249);
 
 var _new_field_item_container2 = _interopRequireDefault(_new_field_item_container);
 
-var _loading_icon = __webpack_require__(83);
+var _loading_icon = __webpack_require__(262);
 
 var _loading_icon2 = _interopRequireDefault(_loading_icon);
 
@@ -36591,7 +36586,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    max-width: 150px;\n    \n'], ['\n    max-width: 150px;\n    \n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
 
 var _react = __webpack_require__(0);
@@ -36601,6 +36596,10 @@ var _react2 = _interopRequireDefault(_react);
 var _styledComponents = __webpack_require__(251);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _gallery_index = __webpack_require__(261);
+
+var _gallery_index2 = _interopRequireDefault(_gallery_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36675,46 +36674,43 @@ var PageGallery = function (_React$Component) {
 
             var combinedImages = images.concat(this.state.newImages);
             if (type === "images") {
-                var styledImages = [];
-                var mappedImages = combinedImages.map(function (img, idx) {
-                    if (img.signed_id) {
-                        return _react2.default.createElement(
-                            'li',
-                            { key: idx },
-                            _react2.default.createElement(StyledImage, { src: img.service_url, alt: 'Page Image' }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'image_removal', onClick: function onClick() {
-                                        return _this3.removeImage(img.signed_id);
-                                    } },
-                                'Remove'
-                            )
-                        );
-                    } else {
-                        return _react2.default.createElement(
-                            'li',
-                            { key: idx },
-                            _react2.default.createElement(StyledImage, { src: img.imageUrl, alt: 'Page Image' })
-                        );
-                    }
-                });
-                debugger;
+                return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: images, StyledComponent: StyledImage, rowSize: 4 }), _react2.default.createElement(_gallery_index2.default, { key: 1, images: this.state.newImages, StyledComponent: StyledImage, rowSize: 4 })];
 
-                while (mappedImages.length > 0) {
-                    var row = [];
-                    for (var i = 0; i < 4; i++) {
-                        row.push(mappedImages.shift());
-                    }
-                    styledImages.push(row);
-                    // console.log(combinedImages.length);
-                }
-                return styledImages.map(function (row, i) {
-                    return _react2.default.createElement(
-                        'ul',
-                        { key: i },
-                        row
-                    );
-                });
+                // const styledImages = [];
+                // let mappedImages = combinedImages.map((img, idx) => {
+                //     if (img.signed_id) {
+                //         return (
+                //             <li key={idx}>
+                //                 {/* <img className={ klass } src={img.service_url} /> */}
+                //                 <StyledImage src={img.service_url} alt={`Page Image`} /> 
+                //                 <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+                //             </li>
+                //         );
+                //     } else {
+                //         return (
+                //             <li key={idx}>
+                //                 <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
+                //                 {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
+                //             </li>
+                //         );
+
+                //     }
+                // });
+                // debugger;
+
+                // while (mappedImages.length > 0) {
+                //     let row = [];
+                //     for (let i = 0; i < 4; i++) {
+                //         row.push(mappedImages.shift());
+                //     }
+                //     styledImages.push(row);
+                //     // console.log(combinedImages.length);
+                // }
+                // return styledImages.map((row, i) => (
+                //     <ul key={i}>
+                //         { row }
+                //     </ul>
+                // ));
             } else if (type === "mastImage" && mastImage) {
                 return _react2.default.createElement(
                     StyledMast,
@@ -36827,6 +36823,114 @@ var StyledImage = _styledComponents2.default.img(_templateObject2);
 var SaveButton = _styledComponents2.default.button(_templateObject3);
 
 exports.default = PageGallery;
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n    max-width: 150px;\n    border: 2px solid green;\n'], ['\n    max-width: 150px;\n    border: 2px solid green;\n']);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+exports.default = function (props) {
+    var images = props.images,
+        StyledComponent = props.StyledComponent,
+        rowSize = props.rowSize;
+
+
+    var styledImages = [];
+    var mappedImages = images.map(function (img, idx) {
+        if (img.signed_id) {
+            return _react2.default.createElement(
+                'li',
+                { key: idx },
+                _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' }),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'image_removal', onClick: function onClick() {
+                            return undefined.removeImage(img.signed_id);
+                        } },
+                    'Remove'
+                )
+            );
+        } else {
+            return _react2.default.createElement(
+                'li',
+                { key: idx },
+                _react2.default.createElement(NewStyled, { src: img.imageUrl, alt: 'Page Image' })
+            );
+        }
+    });
+    // debugger;
+
+    while (mappedImages.length > 0) {
+        var row = [];
+        for (var i = 0; i < rowSize; i++) {
+            row.push(mappedImages.shift());
+        }
+        styledImages.push(row);
+        // console.log(combinedImages.length);
+    }
+    return styledImages.map(function (row, i) {
+        return _react2.default.createElement(
+            'ul',
+            { key: i },
+            row
+        );
+    });
+};
+
+var NewStyled = _styledComponents2.default.img(_templateObject);
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'section',
+        { className: 'loader_container' },
+        _react2.default.createElement(
+            'div',
+            { className: 'loader' },
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' }),
+            _react2.default.createElement('div', { className: 'circle' })
+        )
+    );
+};
 
 /***/ })
 /******/ ]);

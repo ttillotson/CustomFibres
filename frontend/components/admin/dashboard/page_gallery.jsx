@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ImageIndex from '../../shared/gallery_index';
 
 class PageGallery extends React.Component {
     constructor(props) {
@@ -47,41 +48,48 @@ class PageGallery extends React.Component {
 
         const combinedImages = images.concat(this.state.newImages);
         if (type === "images") {
-            const styledImages = [];
-            let mappedImages = combinedImages.map((img, idx) => {
-                if (img.signed_id) {
-                    return (
-                        <li key={idx}>
-                            {/* <img className={ klass } src={img.service_url} /> */}
-                            <StyledImage src={img.service_url} alt={`Page Image`} /> 
-                            <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                        </li>
-                    );
-                } else {
-                    return (
-                        <li key={idx}>
-                            <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
-                            {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
-                        </li>
-                    );
+            return (
+                [
+                    <ImageIndex key={0} images={images} StyledComponent={StyledImage} rowSize={4} />,
+                    <ImageIndex key={1} images={this.state.newImages} StyledComponent={StyledImage} rowSize={4} />
+                ]
+            );
 
-                }
-            });
-            debugger;
+            // const styledImages = [];
+            // let mappedImages = combinedImages.map((img, idx) => {
+            //     if (img.signed_id) {
+            //         return (
+            //             <li key={idx}>
+            //                 {/* <img className={ klass } src={img.service_url} /> */}
+            //                 <StyledImage src={img.service_url} alt={`Page Image`} /> 
+            //                 <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+            //             </li>
+            //         );
+            //     } else {
+            //         return (
+            //             <li key={idx}>
+            //                 <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
+            //                 {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
+            //             </li>
+            //         );
 
-            while (mappedImages.length > 0) {
-                let row = [];
-                for (let i = 0; i < 4; i++) {
-                    row.push(mappedImages.shift());
-                }
-                styledImages.push(row);
-                // console.log(combinedImages.length);
-            }
-            return styledImages.map((row, i) => (
-                <ul key={i}>
-                    { row }
-                </ul>
-            ));
+            //     }
+            // });
+            // debugger;
+
+            // while (mappedImages.length > 0) {
+            //     let row = [];
+            //     for (let i = 0; i < 4; i++) {
+            //         row.push(mappedImages.shift());
+            //     }
+            //     styledImages.push(row);
+            //     // console.log(combinedImages.length);
+            // }
+            // return styledImages.map((row, i) => (
+            //     <ul key={i}>
+            //         { row }
+            //     </ul>
+            // ));
         } else if (type === "mastImage" && mastImage) {
             return (
                 <StyledMast >
@@ -162,7 +170,6 @@ const StyledMast = styled.article`
 
 const StyledImage = styled.img`
     max-width: 150px;
-    
 `;
 
 const SaveButton = styled.button`
