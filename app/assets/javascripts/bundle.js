@@ -31205,25 +31205,50 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(5);
+
+var _template = __webpack_require__(45);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _page_actions = __webpack_require__(7);
+
+var _selectors = __webpack_require__(46);
+
 var _showcase = __webpack_require__(234);
 
 var _showcase2 = _interopRequireDefault(_showcase);
 
-var _reactRedux = __webpack_require__(5);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {};
-};
-// import {} from ''; // API Calls
+    var page = state.pages['Showcase'];
+    var pageTitle = "";
 
+    return {
+        fields: (0, _selectors.selectPageFields)(state, page),
+        loading: state.loading.pageLoading,
+        errors: state.errors.pageLoading,
+        page: page,
+        pageName: "Showcase",
+        pageTitle: pageTitle
+    };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        fetchPage: function fetchPage(pageName) {
+            return dispatch((0, _page_actions.fetchPage)(pageName));
+        }
+    };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_showcase2.default);
+// )(Template);
 
 /***/ }),
 /* 234 */
@@ -31238,21 +31263,40 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            ']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    width: 250px;\n    margin: 1vh 0;\n\n    @media only screen and (min-width: 480px) {\n\n    }\n\n    @media only screen and (min-width: 769px) {\n\n    }\n'], ['\n    width: 250px;\n    margin: 1vh 0;\n\n    @media only screen and (min-width: 480px) {\n\n    }\n\n    @media only screen and (min-width: 769px) {\n\n    }\n']);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _showcase_item = __webpack_require__(235);
+var _loading_icon = __webpack_require__(262);
 
-var _showcase_item2 = _interopRequireDefault(_showcase_item);
+var _loading_icon2 = _interopRequireDefault(_loading_icon);
+
+var _display_field_section = __webpack_require__(231);
+
+var _display_field_section2 = _interopRequireDefault(_display_field_section);
+
+var _gallery_index = __webpack_require__(261);
+
+var _gallery_index2 = _interopRequireDefault(_gallery_index);
+
+var _styledComponents = __webpack_require__(251);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import ShowcaseItem from './showcase_item';
+
 
 var Showcase = function (_React$Component) {
     _inherits(Showcase, _React$Component);
@@ -31266,19 +31310,77 @@ var Showcase = function (_React$Component) {
     _createClass(Showcase, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            // API Call
+            window.scrollTo(0, 0);
+
+            // Only Request if Store doesn't already have it
+            // Having static content enables this behavior
+            if (!Object.values(this.props.fields).length) {
+                this.props.fetchPage(this.props.pageName);
+            }
         }
     }, {
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                loading = _props.loading,
+                fields = _props.fields,
+                page = _props.page,
+                extras = _props.extras;
+
+
+            if (loading) return _react2.default.createElement(_loading_icon2.default, null);
+
+            if (!page) return null;
+
+            var fieldItems = fields.map(function (field) {
+                return _react2.default.createElement(_display_field_section2.default, {
+                    field: field,
+                    key: 'key=' + field.id,
+                    pageName: page.name
+                });
+            });
+
+            // const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
+
+            var extraItems = extras ? extras : null;
+
+            // Setup Page's Mast; if it exists, set it
+            var mastImage = void 0;
+            if (page.mastImage) {
+                var StyledMast = _styledComponents2.default.img(_templateObject, page.mastImage.service_url);
+
+                mastImage = _react2.default.createElement(StyledMast, { src: page.mastImage.service_url });
+            }
+
+            // Setup Page Images; If any exist, format them
+            var pageImages = void 0;
+            if (page.images) {
+                var rowSize = 1;
+                if (window.matchMedia("(min-width: 480px)").matches) {
+                    rowSize = 2;
+                } else if (window.matchMedia("(min-width: 769px)").matches) {
+                    rowSize = 4;
+                } else if (window.matchMedia("(min-width: 992px)").matches) {
+                    rowSize = 5;
+                } else if (window.matchMedia("(min-width: 1200px)").matches) {
+                    rowSize = 5;
+                }
+                pageImages = _react2.default.createElement(_gallery_index2.default, { images: page.images,
+                    StyledComponent: StyledPageImage, rowSize: rowSize });
+            }
+
+            // debugger;
 
             return _react2.default.createElement(
-                'section',
-                { className: 'showcase_container' },
+                _react2.default.Fragment,
+                null,
+                mastImage,
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    ' Showcase Page'
+                    'main',
+                    { className: 'template_container' },
+                    fieldItems,
+                    extraItems,
+                    pageImages
                 )
             );
         }
@@ -31289,26 +31391,11 @@ var Showcase = function (_React$Component) {
 
 exports.default = Showcase;
 
-/***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
-
-exports.default = function (_ref) {
-    _objectDestructuringEmpty(_ref);
-
-    return React.createElement('article', { className: 'work_sample' });
-};
+var StyledPageImage = _styledComponents2.default.img(_templateObject2);
 
 /***/ }),
+/* 235 */,
 /* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36818,7 +36905,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n'], ['\n    position: relative;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n    margin: auto;\n'], ['\n    position: relative;\n    margin: auto;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n'], ['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n\n'], ['\n    display: flex;\n    justify-content: space-between;\n\n']);

@@ -43,6 +43,7 @@ export default (props) => {
 
 const RelativeItem = styled.li`
     position: relative;
+    margin: auto;
 `;
 
 const StyledRemove = styled.span`

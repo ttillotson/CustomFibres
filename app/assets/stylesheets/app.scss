@@ -58,8 +58,6 @@
 
         .field_item {
             padding-bottom: 3vh;
-            // &.
-
             
             .field_title {
                 font-size: 3vh;
@@ -73,7 +71,7 @@
     }
 }
 
-@media only screen and (min-width: 361px) {
+@media only screen and (min-width: 480px) {
     #root {
         background-color: rgb(82, 82, 82);
     }
