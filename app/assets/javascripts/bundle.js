@@ -31264,7 +31264,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            '], ['\n                display: none;\n                @media only screen and (min-width: 769px) {\n\n                    // src: ', ';\n                    height: 250px;\n                    display: block;\n                    // max-width: \n                }\n            ']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    width: 250px;\n    margin: 1vh 0;\n\n    @media only screen and (min-width: 480px) {\n\n    }\n\n    @media only screen and (min-width: 769px) {\n\n    }\n'], ['\n    width: 250px;\n    margin: 1vh 0;\n\n    @media only screen and (min-width: 480px) {\n\n    }\n\n    @media only screen and (min-width: 769px) {\n\n    }\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n    width: 80vw;\n    margin: 1vh 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        width: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        width: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        width: 17vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        width: 14vw;\n        margin: 1vh 1vw;\n    }\n'], ['\n    width: 80vw;\n    margin: 1vh 1.5vw;\n\n    @media only screen and (min-width: 480px) {\n        width: 38vw;\n    }\n\n    @media only screen and (min-width: 768px) {\n        width: 24vw;\n    }\n\n    @media only screen and (min-width: 992px) {\n        width: 17vw;\n    }\n\n    @media only screen and (min-width: 1200px) {\n        width: 14vw;\n        margin: 1vh 1vw;\n    }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -31356,16 +31356,16 @@ var Showcase = function (_React$Component) {
             var pageImages = void 0;
             if (page.images) {
                 var rowSize = 1;
-                if (window.matchMedia("(min-width: 480px)").matches) {
-                    rowSize = 2;
-                } else if (window.matchMedia("(min-width: 769px)").matches) {
-                    rowSize = 4;
+                if (window.matchMedia("(min-width: 1200px)").matches) {
+                    rowSize = 5;
                 } else if (window.matchMedia("(min-width: 992px)").matches) {
-                    rowSize = 5;
-                } else if (window.matchMedia("(min-width: 1200px)").matches) {
-                    rowSize = 5;
+                    rowSize = 4;
+                } else if (window.matchMedia("(min-width: 768px)").matches) {
+                    rowSize = 3;
+                } else if (window.matchMedia("(min-width: 480px)").matches) {
+                    rowSize = 2;
                 }
-                pageImages = _react2.default.createElement(_gallery_index2.default, { images: page.images,
+                pageImages = _react2.default.createElement(_gallery_index2.default, { images: page.images, display: true,
                     StyledComponent: StyledPageImage, rowSize: rowSize });
             }
 
@@ -36906,9 +36906,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n    margin: auto;\n'], ['\n    position: relative;\n    margin: auto;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n'], ['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n\n'], ['\n    display: flex;\n    justify-content: space-between;\n\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n    // margin: 0 1.5vw;\n'], ['\n    // margin: 0 1.5vw;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n'], ['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    // justify-content: space-between;\n    justify-content: center;\n\n'], ['\n    display: flex;\n    // justify-content: space-between;\n    justify-content: center;\n\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36926,38 +36927,39 @@ exports.default = function (props) {
     var images = props.images,
         StyledComponent = props.StyledComponent,
         rowSize = props.rowSize,
-        removeImage = props.removeImage;
+        removeImage = props.removeImage,
+        display = props.display;
 
 
     var styledImages = [];
     var mappedImages = images.map(function (img, idx) {
-        if (img.signed_id) {
-            var removeImageTag = _react2.default.createElement(
-                StyledRemove,
-                { onClick: function onClick() {
-                        return removeImage(img.signed_id);
-                    } },
-                '\xD7'
-            );
+        var removeImageTag = _react2.default.createElement(
+            StyledRemove,
+            { onClick: function onClick() {
+                    return removeImage(img.signed_id);
+                } },
+            '\xD7'
+        );
+        if (removeImage && img.signed_id) {
             return _react2.default.createElement(
                 RelativeItem,
                 { key: idx },
                 _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' }),
-                removeImage ? removeImageTag : null
+                removeImageTag
+            );
+        } else if (img.signed_id) {
+            return _react2.default.createElement(
+                DisplayItem,
+                { key: idx },
+                _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' })
             );
         } else {
-            var _removeImageTag = _react2.default.createElement(
-                'span',
-                { className: 'image_removal', onClick: function onClick() {
-                        return removeImage(img.signed_id);
-                    } },
-                '\xD7'
-            );
+            // let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return _react2.default.createElement(
                 'li',
                 { key: idx },
                 _react2.default.createElement(NewStyled, { src: img.imageUrl, alt: 'Page Image' }),
-                removeImage ? _removeImageTag : null
+                removeImage ? removeImageTag : null
             );
         }
     });
@@ -36980,11 +36982,13 @@ exports.default = function (props) {
 
 var RelativeItem = _styledComponents2.default.li(_templateObject);
 
-var StyledRemove = _styledComponents2.default.span(_templateObject2);
+var DisplayItem = _styledComponents2.default.li(_templateObject2);
 
-var NewStyled = _styledComponents2.default.img(_templateObject3, window.innerWidth / 6);
+var StyledRemove = _styledComponents2.default.span(_templateObject3);
 
-var StyledRow = _styledComponents2.default.ul(_templateObject4);
+var NewStyled = _styledComponents2.default.img(_templateObject4, window.innerWidth / 6);
+
+var StyledRow = _styledComponents2.default.ul(_templateObject5);
 
 /***/ }),
 /* 262 */

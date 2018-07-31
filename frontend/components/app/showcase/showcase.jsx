@@ -60,16 +60,16 @@ class Showcase extends React.Component {
         let pageImages;
         if (page.images) {
             let rowSize = 1;
-            if (window.matchMedia("(min-width: 480px)").matches) {
-                rowSize = 2;
-            } else if (window.matchMedia("(min-width: 769px)").matches) {
-                rowSize = 4;
+            if (window.matchMedia("(min-width: 1200px)").matches) {
+                rowSize = 5;
             } else if (window.matchMedia("(min-width: 992px)").matches) {
-                rowSize = 5;
-            } else if (window.matchMedia("(min-width: 1200px)").matches) {
-                rowSize = 5;
+                rowSize = 4;
+            } else if (window.matchMedia("(min-width: 768px)").matches) {
+                rowSize = 3;
+            } else if (window.matchMedia("(min-width: 480px)").matches) {
+                rowSize = 2;
             }
-            pageImages = <ImageIndex images={page.images} 
+            pageImages = <ImageIndex images={page.images} display={true}
                 StyledComponent={StyledPageImage} rowSize={rowSize}/>;
         }
 
@@ -92,14 +92,23 @@ class Showcase extends React.Component {
 export default Showcase;
 
 const StyledPageImage = styled.img`
-    width: 250px;
-    margin: 1vh 0;
+    width: 80vw;
+    margin: 1vh 1.5vw;
 
     @media only screen and (min-width: 480px) {
-
+        width: 38vw;
     }
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
+        width: 24vw;
+    }
 
+    @media only screen and (min-width: 992px) {
+        width: 17vw;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        width: 14vw;
+        margin: 1vh 1vw;
     }
 `;

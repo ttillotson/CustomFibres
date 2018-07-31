@@ -3,20 +3,26 @@ import styled from 'styled-components';
 
 
 export default (props) => {
-    const {images, StyledComponent, rowSize, removeImage} = props;
+    const {images, StyledComponent, rowSize, removeImage, display} = props;
 
     const styledImages = [];
     let mappedImages = images.map((img, idx) => {
-        if (img.signed_id) {
-            let removeImageTag = <StyledRemove onClick={() => removeImage(img.signed_id)}>&times;</StyledRemove>;
+        let removeImageTag = <StyledRemove onClick={() => removeImage(img.signed_id)}>&times;</StyledRemove>;
+        if (removeImage && img.signed_id) {
             return (
                 <RelativeItem key={idx}>
                     <StyledComponent src={img.service_url} alt={`Page Image`} /> 
-                    { removeImage ? removeImageTag : null }
+                    { removeImageTag }
                 </RelativeItem>
             );
+        } else if(img.signed_id) {
+            return (
+                <DisplayItem key={idx}>
+                    <StyledComponent src={img.service_url} alt={`Page Image`} /> 
+                </DisplayItem>
+            );
         } else {
-            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
+            // let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return (
                 <li key={idx}>
                     <NewStyled src={img.imageUrl} alt={`Page Image`} /> 
@@ -46,6 +52,10 @@ const RelativeItem = styled.li`
     margin: auto;
 `;
 
+const DisplayItem = styled.li`
+    // margin: 0 1.5vw;
+`;
+
 const StyledRemove = styled.span`
     position: absolute;
     top: 0;
@@ -63,6 +73,7 @@ const NewStyled = styled.img`
 
 const StyledRow = styled.ul`
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: center;
 
 `;
