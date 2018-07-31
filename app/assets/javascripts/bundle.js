@@ -36626,6 +36626,7 @@ var PageGallery = function (_React$Component) {
         _this.submitMastImage = _this.submitMastImage.bind(_this);
         _this.processImages = _this.processImages.bind(_this);
         _this.removeImage = _this.removeImage.bind(_this);
+        _this.removeNewImage = _this.removeNewImage.bind(_this);
         return _this;
     }
 
@@ -36674,43 +36675,11 @@ var PageGallery = function (_React$Component) {
 
             var combinedImages = images.concat(this.state.newImages);
             if (type === "images") {
-                return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: images, StyledComponent: StyledImage, rowSize: 4 }), _react2.default.createElement(_gallery_index2.default, { key: 1, images: this.state.newImages, StyledComponent: StyledImage, rowSize: 4 })];
-
-                // const styledImages = [];
-                // let mappedImages = combinedImages.map((img, idx) => {
-                //     if (img.signed_id) {
-                //         return (
-                //             <li key={idx}>
-                //                 {/* <img className={ klass } src={img.service_url} /> */}
-                //                 <StyledImage src={img.service_url} alt={`Page Image`} /> 
-                //                 <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                //             </li>
-                //         );
-                //     } else {
-                //         return (
-                //             <li key={idx}>
-                //                 <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
-                //                 {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
-                //             </li>
-                //         );
-
-                //     }
-                // });
-                // debugger;
-
-                // while (mappedImages.length > 0) {
-                //     let row = [];
-                //     for (let i = 0; i < 4; i++) {
-                //         row.push(mappedImages.shift());
-                //     }
-                //     styledImages.push(row);
-                //     // console.log(combinedImages.length);
-                // }
-                // return styledImages.map((row, i) => (
-                //     <ul key={i}>
-                //         { row }
-                //     </ul>
-                // ));
+                return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: images,
+                    StyledComponent: StyledImage,
+                    removeImage: this.removeImage, rowSize: 4 }), _react2.default.createElement(_gallery_index2.default, { key: 1, images: this.state.newImages,
+                    StyledComponent: StyledImage,
+                    removeImage: this.removeNewImage, rowSize: 4 })];
             } else if (type === "mastImage" && mastImage) {
                 return _react2.default.createElement(
                     StyledMast,
@@ -36734,6 +36703,14 @@ var PageGallery = function (_React$Component) {
             target.append("imageId", imageId);
             target.append("page_id", this.props.currentPage.id);
             this.props.removeImage(target);
+        }
+    }, {
+        key: 'removeNewImage',
+        value: function removeNewImage(imageId) {
+            var newImages = this.state.newImages.filter(function (img) {
+                return img.imgUrl !== imageId;
+            });
+            this.setState({ newImages: newImages });
         }
     }, {
         key: 'submitImages',
@@ -36835,7 +36812,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    max-width: 150px;\n    border: 2px solid green;\n'], ['\n    max-width: 150px;\n    border: 2px solid green;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n\n'], ['\n    display: flex;\n    justify-content: space-between;\n\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36852,52 +36830,62 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 exports.default = function (props) {
     var images = props.images,
         StyledComponent = props.StyledComponent,
-        rowSize = props.rowSize;
+        rowSize = props.rowSize,
+        removeImage = props.removeImage;
 
 
     var styledImages = [];
     var mappedImages = images.map(function (img, idx) {
         if (img.signed_id) {
+            var removeImageTag = _react2.default.createElement(
+                'span',
+                { className: 'image_removal', onClick: function onClick() {
+                        return removeImage(img.signed_id);
+                    } },
+                'Remove'
+            );
             return _react2.default.createElement(
                 'li',
                 { key: idx },
                 _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' }),
-                _react2.default.createElement(
-                    'span',
-                    { className: 'image_removal', onClick: function onClick() {
-                            return undefined.removeImage(img.signed_id);
-                        } },
-                    'Remove'
-                )
+                removeImage ? removeImageTag : null
             );
         } else {
+            var _removeImageTag = _react2.default.createElement(
+                'span',
+                { className: 'image_removal', onClick: function onClick() {
+                        return removeImage(img.signed_id);
+                    } },
+                'Remove'
+            );
             return _react2.default.createElement(
                 'li',
                 { key: idx },
-                _react2.default.createElement(NewStyled, { src: img.imageUrl, alt: 'Page Image' })
+                _react2.default.createElement(NewStyled, { src: img.imageUrl, alt: 'Page Image' }),
+                removeImage ? _removeImageTag : null
             );
         }
     });
-    // debugger;
 
     while (mappedImages.length > 0) {
         var row = [];
         for (var i = 0; i < rowSize; i++) {
-            row.push(mappedImages.shift());
+            row.push(mappedImages.pop());
         }
         styledImages.push(row);
-        // console.log(combinedImages.length);
     }
     return styledImages.map(function (row, i) {
         return _react2.default.createElement(
-            'ul',
+            StyledRow,
             { key: i },
             row
         );
     });
 };
 
-var NewStyled = _styledComponents2.default.img(_templateObject);
+var NewStyled = _styledComponents2.default.img(_templateObject, window.innerWidth / 6);
+
+var StyledRow = _styledComponents2.default.ul(_templateObject2);
 
 /***/ }),
 /* 262 */

@@ -12,6 +12,7 @@ class PageGallery extends React.Component {
         this.submitMastImage = this.submitMastImage.bind(this);
         this.processImages = this.processImages.bind(this);
         this.removeImage = this.removeImage.bind(this);
+        this.removeNewImage = this.removeNewImage.bind(this);
     }
 
     submitMastImage(e) {
@@ -50,46 +51,14 @@ class PageGallery extends React.Component {
         if (type === "images") {
             return (
                 [
-                    <ImageIndex key={0} images={images} StyledComponent={StyledImage} rowSize={4} />,
-                    <ImageIndex key={1} images={this.state.newImages} StyledComponent={StyledImage} rowSize={4} />
+                    <ImageIndex key={0} images={images} 
+                        StyledComponent={StyledImage} 
+                        removeImage={this.removeImage} rowSize={4} />,
+                    <ImageIndex key={1} images={this.state.newImages} 
+                        StyledComponent={StyledImage} 
+                        removeImage={this.removeNewImage} rowSize={4} />
                 ]
             );
-
-            // const styledImages = [];
-            // let mappedImages = combinedImages.map((img, idx) => {
-            //     if (img.signed_id) {
-            //         return (
-            //             <li key={idx}>
-            //                 {/* <img className={ klass } src={img.service_url} /> */}
-            //                 <StyledImage src={img.service_url} alt={`Page Image`} /> 
-            //                 <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-            //             </li>
-            //         );
-            //     } else {
-            //         return (
-            //             <li key={idx}>
-            //                 <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
-            //                 {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
-            //             </li>
-            //         );
-
-            //     }
-            // });
-            // debugger;
-
-            // while (mappedImages.length > 0) {
-            //     let row = [];
-            //     for (let i = 0; i < 4; i++) {
-            //         row.push(mappedImages.shift());
-            //     }
-            //     styledImages.push(row);
-            //     // console.log(combinedImages.length);
-            // }
-            // return styledImages.map((row, i) => (
-            //     <ul key={i}>
-            //         { row }
-            //     </ul>
-            // ));
         } else if (type === "mastImage" && mastImage) {
             return (
                 <StyledMast >
@@ -106,6 +75,11 @@ class PageGallery extends React.Component {
         target.append("imageId", imageId);
         target.append("page_id", this.props.currentPage.id);
         this.props.removeImage(target);
+    }
+
+    removeNewImage(imageId) {
+        let newImages = this.state.newImages.filter(img => img.imgUrl !== imageId);
+        this.setState({ newImages: newImages });
     }
 
     submitImages(e) {
