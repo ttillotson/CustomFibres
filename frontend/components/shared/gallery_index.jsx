@@ -8,7 +8,7 @@ export default (props) => {
     const styledImages = [];
     let mappedImages = images.map((img, idx) => {
         if (img.signed_id) {
-            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>Remove</span>;
+            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return (
                 <li key={idx}>
                     <StyledComponent src={img.service_url} alt={`Page Image`} /> 
@@ -16,7 +16,7 @@ export default (props) => {
                 </li>
             );
         } else {
-            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>Remove</span>;
+            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
             return (
                 <li key={idx}>
                     <NewStyled src={img.imageUrl} alt={`Page Image`} /> 

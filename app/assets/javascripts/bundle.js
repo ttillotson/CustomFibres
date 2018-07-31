@@ -36842,7 +36842,7 @@ exports.default = function (props) {
                 { className: 'image_removal', onClick: function onClick() {
                         return removeImage(img.signed_id);
                     } },
-                'Remove'
+                '\xD7'
             );
             return _react2.default.createElement(
                 'li',
@@ -36856,7 +36856,7 @@ exports.default = function (props) {
                 { className: 'image_removal', onClick: function onClick() {
                         return removeImage(img.signed_id);
                     } },
-                'Remove'
+                '\xD7'
             );
             return _react2.default.createElement(
                 'li',
