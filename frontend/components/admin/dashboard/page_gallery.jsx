@@ -53,7 +53,8 @@ class PageGallery extends React.Component {
                 
                 return (
                     <li key={idx}>
-                        <img className={ klass } src={img.imageUrl} />
+                        {/* <img className={ klass } src={img.service_url} /> */}
+                        <StyledImage src={img.service_url} alt={`Page Image`} /> 
                         <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
                     </li>
                 );
@@ -72,7 +73,7 @@ class PageGallery extends React.Component {
         // e.preventDefault();
         const target = new FormData();
         target.append("imageId", imageId);
-        target.append("pageId", this.props.currentPage.id);
+        target.append("page_id", this.props.currentPage.id);
         this.props.removeImage(target);
     }
 
@@ -83,7 +84,7 @@ class PageGallery extends React.Component {
         this.state.newImages.forEach(img => 
             pageData.append('images[]', img.file)
         );
-        pageData.append('name', this.props.currentPage.name);
+        pageData.append('page_id', this.props.currentPage.id);
 
         this.props.updatePage(pageData);
     }
@@ -117,7 +118,7 @@ class PageGallery extends React.Component {
                         onChange={this.processImages}
                         />
                     </section>
-
+                    <SaveButton onClick={this.submitImages}>Save</SaveButton>
                 </section>
             </section>
         );
@@ -134,6 +135,15 @@ const StyledMast = styled.article`
     span:hover {
         cursor: pointer;
     }
+`;
+
+const StyledImage = styled.img`
+    max-width: 150px;
+    
+`;
+
+const SaveButton = styled.button`
+
 `;
 
 export default PageGallery;

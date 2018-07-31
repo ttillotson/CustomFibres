@@ -36617,7 +36617,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    max-width: 150px;\n    \n'], ['\n    max-width: 150px;\n    \n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36707,7 +36709,7 @@ var PageGallery = function (_React$Component) {
                     return _react2.default.createElement(
                         'li',
                         { key: idx },
-                        _react2.default.createElement('img', { className: klass, src: img.imageUrl }),
+                        _react2.default.createElement(StyledImage, { src: img.service_url, alt: 'Page Image' }),
                         _react2.default.createElement(
                             'span',
                             { className: 'image_removal', onClick: function onClick() {
@@ -36738,7 +36740,7 @@ var PageGallery = function (_React$Component) {
             // e.preventDefault();
             var target = new FormData();
             target.append("imageId", imageId);
-            target.append("pageId", this.props.currentPage.id);
+            target.append("page_id", this.props.currentPage.id);
             this.props.removeImage(target);
         }
     }, {
@@ -36750,7 +36752,7 @@ var PageGallery = function (_React$Component) {
             this.state.newImages.forEach(function (img) {
                 return pageData.append('images[]', img.file);
             });
-            pageData.append('name', this.props.currentPage.name);
+            pageData.append('page_id', this.props.currentPage.id);
 
             this.props.updatePage(pageData);
         }
@@ -36808,6 +36810,11 @@ var PageGallery = function (_React$Component) {
                             multiple: true,
                             onChange: this.processImages
                         })
+                    ),
+                    _react2.default.createElement(
+                        SaveButton,
+                        { onClick: this.submitImages },
+                        'Save'
                     )
                 )
             );
@@ -36818,6 +36825,10 @@ var PageGallery = function (_React$Component) {
 }(_react2.default.Component);
 
 var StyledMast = _styledComponents2.default.article(_templateObject);
+
+var StyledImage = _styledComponents2.default.img(_templateObject2);
+
+var SaveButton = _styledComponents2.default.button(_templateObject3);
 
 exports.default = PageGallery;
 
