@@ -8,12 +8,12 @@ export default (props) => {
     const styledImages = [];
     let mappedImages = images.map((img, idx) => {
         if (img.signed_id) {
-            let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
+            let removeImageTag = <StyledRemove onClick={() => removeImage(img.signed_id)}>&times;</StyledRemove>;
             return (
-                <li key={idx}>
+                <RelativeItem key={idx}>
                     <StyledComponent src={img.service_url} alt={`Page Image`} /> 
                     { removeImage ? removeImageTag : null }
-                </li>
+                </RelativeItem>
             );
         } else {
             let removeImageTag = <span className='image_removal' onClick={() => removeImage(img.signed_id)}>&times;</span>;
@@ -40,6 +40,20 @@ export default (props) => {
         </StyledRow>
     ));
 };
+
+const RelativeItem = styled.li`
+    position: relative;
+`;
+
+const StyledRemove = styled.span`
+    position: absolute;
+    top: 0;
+    right: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+`;
 
 const NewStyled = styled.img`
     max-width: ${window.innerWidth / 6}px;

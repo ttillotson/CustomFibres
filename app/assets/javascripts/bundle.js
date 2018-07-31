@@ -36586,8 +36586,10 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36730,14 +36732,14 @@ var PageGallery = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'section',
-                null,
+                { className: 'page_gallery' },
                 _react2.default.createElement(
                     'p',
                     null,
                     'Page Gallery Section'
                 ),
                 _react2.default.createElement(
-                    'section',
+                    StyledPageItem,
                     null,
                     _react2.default.createElement(
                         'label',
@@ -36759,7 +36761,7 @@ var PageGallery = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    'section',
+                    StyledPageItem,
                     null,
                     _react2.default.createElement(
                         'label',
@@ -36770,7 +36772,7 @@ var PageGallery = function (_React$Component) {
                         'section',
                         { className: 'image_input' },
                         _react2.default.createElement(
-                            'ul',
+                            StyledList,
                             { className: 'image_list' },
                             this.renderImagePreview("images")
                         ),
@@ -36779,12 +36781,12 @@ var PageGallery = function (_React$Component) {
                             multiple: true,
                             onChange: this.processImages
                         })
-                    ),
-                    _react2.default.createElement(
-                        SaveButton,
-                        { onClick: this.submitImages },
-                        'Save'
                     )
+                ),
+                _react2.default.createElement(
+                    SaveButton,
+                    { onClick: this.submitImages },
+                    'Save'
                 )
             );
         }
@@ -36795,9 +36797,13 @@ var PageGallery = function (_React$Component) {
 
 var StyledMast = _styledComponents2.default.article(_templateObject);
 
-var StyledImage = _styledComponents2.default.img(_templateObject2);
+var StyledPageItem = _styledComponents2.default.section(_templateObject2);
 
-var SaveButton = _styledComponents2.default.button(_templateObject3);
+var StyledImage = _styledComponents2.default.img(_templateObject3);
+
+var StyledList = _styledComponents2.default.ul(_templateObject4);
+
+var SaveButton = _styledComponents2.default.button(_templateObject5);
 
 exports.default = PageGallery;
 
@@ -36812,8 +36818,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n\n'], ['\n    display: flex;\n    justify-content: space-between;\n\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n'], ['\n    position: relative;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n'], ['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n\n'], ['\n    display: flex;\n    justify-content: space-between;\n\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36838,14 +36846,14 @@ exports.default = function (props) {
     var mappedImages = images.map(function (img, idx) {
         if (img.signed_id) {
             var removeImageTag = _react2.default.createElement(
-                'span',
-                { className: 'image_removal', onClick: function onClick() {
+                StyledRemove,
+                { onClick: function onClick() {
                         return removeImage(img.signed_id);
                     } },
                 '\xD7'
             );
             return _react2.default.createElement(
-                'li',
+                RelativeItem,
                 { key: idx },
                 _react2.default.createElement(StyledComponent, { src: img.service_url, alt: 'Page Image' }),
                 removeImage ? removeImageTag : null
@@ -36883,9 +36891,13 @@ exports.default = function (props) {
     });
 };
 
-var NewStyled = _styledComponents2.default.img(_templateObject, window.innerWidth / 6);
+var RelativeItem = _styledComponents2.default.li(_templateObject);
 
-var StyledRow = _styledComponents2.default.ul(_templateObject2);
+var StyledRemove = _styledComponents2.default.span(_templateObject2);
+
+var NewStyled = _styledComponents2.default.img(_templateObject3, window.innerWidth / 6);
+
+var StyledRow = _styledComponents2.default.ul(_templateObject4);
 
 /***/ }),
 /* 262 */

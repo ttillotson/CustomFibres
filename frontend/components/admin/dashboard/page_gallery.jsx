@@ -96,10 +96,10 @@ class PageGallery extends React.Component {
 
     render() {
         return (
-            <section>
+            <section className={'page_gallery'}>
                 <p>Page Gallery Section</p>
 
-                <section>
+                <StyledPageItem>
                     <label>Mast Image</label>
                     <section className='image_input'>
                         <ul className='image_list'>
@@ -110,21 +110,21 @@ class PageGallery extends React.Component {
                         onChange={this.submitMastImage}
                         />
                     </section>
-                </section>
-                <section>
+                </StyledPageItem>
+                <StyledPageItem>
                     <label>Images</label>
                     <section className='image_input'>
-                        <ul className='image_list'>
+                        <StyledList className='image_list'>
                             { this.renderImagePreview("images") }
-                        </ul>
+                        </StyledList>
                         <input
                         type='file'
                         multiple={true}
                         onChange={this.processImages}
                         />
                     </section>
-                    <SaveButton onClick={this.submitImages}>Save</SaveButton>
-                </section>
+                </StyledPageItem>
+                <SaveButton onClick={this.submitImages}>Save</SaveButton>
             </section>
         );
     }
@@ -142,12 +142,23 @@ const StyledMast = styled.article`
     }
 `;
 
+const StyledPageItem = styled.section`
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh 0;
+`;
+
 const StyledImage = styled.img`
     max-width: 150px;
 `;
 
-const SaveButton = styled.button`
+const StyledList = styled.ul`
+    flex-direction: column;
+`;
 
+const SaveButton = styled.button`
+    background-color: rgba(115, 255, 22, 0.815);
+    margin: 5px;
 `;
 
 export default PageGallery;
