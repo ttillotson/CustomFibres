@@ -47,18 +47,41 @@ class PageGallery extends React.Component {
 
         const combinedImages = images.concat(this.state.newImages);
         if (type === "images") {
-            return combinedImages.map((img, idx) => {
-                let klass = "image_preview";
-                klass += img.signed_id ? "" : " new";
-                
-                return (
-                    <li key={idx}>
-                        {/* <img className={ klass } src={img.service_url} /> */}
-                        <StyledImage src={img.service_url} alt={`Page Image`} /> 
-                        <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
-                    </li>
-                );
+            const styledImages = [];
+            let mappedImages = combinedImages.map((img, idx) => {
+                if (img.signed_id) {
+                    return (
+                        <li key={idx}>
+                            {/* <img className={ klass } src={img.service_url} /> */}
+                            <StyledImage src={img.service_url} alt={`Page Image`} /> 
+                            <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span>
+                        </li>
+                    );
+                } else {
+                    return (
+                        <li key={idx}>
+                            <StyledImage src={img.imageUrl} alt={`Page Image`} /> 
+                            {/* <span className='image_removal' onClick={() => this.removeImage(img.signed_id)}>Remove</span> */}
+                        </li>
+                    );
+
+                }
             });
+            debugger;
+
+            while (mappedImages.length > 0) {
+                let row = [];
+                for (let i = 0; i < 4; i++) {
+                    row.push(mappedImages.shift());
+                }
+                styledImages.push(row);
+                // console.log(combinedImages.length);
+            }
+            return styledImages.map((row, i) => (
+                <ul key={i}>
+                    { row }
+                </ul>
+            ));
         } else if (type === "mastImage" && mastImage) {
             return (
                 <StyledMast >

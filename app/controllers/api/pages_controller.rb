@@ -40,7 +40,7 @@ class Api::PagesController < ApplicationController
         @attachment.destroy
 
         # Eager load content 
-        @page = Page.find(params[:pageId])
+        @page = Page.find(params[:page_id])
         @fields = Field.with_attached_images
             .where(page_id: @page.id)
             .order(:created_at)

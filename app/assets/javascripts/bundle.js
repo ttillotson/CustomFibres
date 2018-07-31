@@ -4595,36 +4595,9 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 
 /***/ }),
 /* 83 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-    return _react2.default.createElement(
-        'section',
-        { className: 'loader_container' },
-        _react2.default.createElement(
-            'div',
-            { className: 'loader' },
-            _react2.default.createElement('div', { className: 'circle' }),
-            _react2.default.createElement('div', { className: 'circle' }),
-            _react2.default.createElement('div', { className: 'circle' }),
-            _react2.default.createElement('div', { className: 'circle' }),
-            _react2.default.createElement('div', { className: 'circle' })
-        )
-    );
-};
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/travist/Projects/Custom_Fibres/frontend/components/loading_icon.jsx'");
 
 /***/ }),
 /* 84 */
@@ -36702,21 +36675,44 @@ var PageGallery = function (_React$Component) {
 
             var combinedImages = images.concat(this.state.newImages);
             if (type === "images") {
-                return combinedImages.map(function (img, idx) {
-                    var klass = "image_preview";
-                    klass += img.signed_id ? "" : " new";
+                var styledImages = [];
+                var mappedImages = combinedImages.map(function (img, idx) {
+                    if (img.signed_id) {
+                        return _react2.default.createElement(
+                            'li',
+                            { key: idx },
+                            _react2.default.createElement(StyledImage, { src: img.service_url, alt: 'Page Image' }),
+                            _react2.default.createElement(
+                                'span',
+                                { className: 'image_removal', onClick: function onClick() {
+                                        return _this3.removeImage(img.signed_id);
+                                    } },
+                                'Remove'
+                            )
+                        );
+                    } else {
+                        return _react2.default.createElement(
+                            'li',
+                            { key: idx },
+                            _react2.default.createElement(StyledImage, { src: img.imageUrl, alt: 'Page Image' })
+                        );
+                    }
+                });
+                debugger;
 
+                while (mappedImages.length > 0) {
+                    var row = [];
+                    for (var i = 0; i < 4; i++) {
+                        row.push(mappedImages.shift());
+                    }
+                    styledImages.push(row);
+                    // console.log(combinedImages.length);
+                }
+                return styledImages.map(function (row, i) {
                     return _react2.default.createElement(
-                        'li',
-                        { key: idx },
-                        _react2.default.createElement(StyledImage, { src: img.service_url, alt: 'Page Image' }),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'image_removal', onClick: function onClick() {
-                                    return _this3.removeImage(img.signed_id);
-                                } },
-                            'Remove'
-                        )
+                        'ul',
+                        { key: i },
+                        row
                     );
                 });
             } else if (type === "mastImage" && mastImage) {
