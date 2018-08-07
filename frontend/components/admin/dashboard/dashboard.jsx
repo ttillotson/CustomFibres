@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             currentPage: "Splash",
-            newField: false
+            newField: false,
         };
         this.handleSignOut = this.handleSignOut.bind(this);
         this.updateTab = this.updateTab.bind(this);
@@ -102,6 +102,7 @@ class Dashboard extends React.Component {
                         {tabs}
                     </ul>
                 </nav>
+                <FieldTitle currentPage={currentPage} updatePage={updatePage} />
                 <section className={'fields_container'}>
                     { fieldItems }
                     { fieldLogic }

@@ -1,6 +1,6 @@
 json.page do 
     json.set! page.name do 
-        json.extract! page, :id, :name
+        json.extract! page, :id, :name, :title
         json.fieldIds do 
             json.array! fields.pluck(:id).uniq
         end
