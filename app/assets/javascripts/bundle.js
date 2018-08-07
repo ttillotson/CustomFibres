@@ -4064,10 +4064,11 @@ var Template = function (_React$Component) {
 
             if (!page) return null;
 
-            var fieldItems = fields.map(function (field) {
+            var fieldItems = fields.map(function (field, idx) {
                 return _react2.default.createElement(_display_field_section2.default, {
                     field: field,
                     key: 'key=' + field.id,
+                    idx: idx,
                     pageName: page.name,
                     StyledImage: StyledImage
                 });
@@ -33643,7 +33644,8 @@ exports.default = function (props) {
         body = _props$field.body,
         images = _props$field.images;
     var pageName = props.pageName,
-        StyledImage = props.StyledImage;
+        StyledImage = props.StyledImage,
+        idx = props.idx;
 
 
     var displayImages = images.map(function (image) {
@@ -33651,10 +33653,12 @@ exports.default = function (props) {
     });
 
     // debugger;
+    var klass = 'field_item';
+    if (idx > 0 && idx % 2 === 0) klass += ' reverse';
 
     return _react2.default.createElement(
         'section',
-        { className: 'field_item' },
+        { className: klass },
         _react2.default.createElement(
             'article',
             { className: 'field_text' },

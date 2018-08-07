@@ -27,10 +27,11 @@ class Template extends React.Component {
 
         if (!page) return null;
 
-        const fieldItems = fields.map(field => (
+        const fieldItems = fields.map((field, idx) => (
             <DisplayFieldSection
             field={field}
             key={`key=${field.id}`}
+            idx={idx}
             pageName={page.name}
             StyledImage={StyledImage}
             />
