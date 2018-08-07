@@ -2,7 +2,9 @@
     font-family: 'PT Sans', sans-serif;
     min-height: 100vh;
     color: white;
-    background: #718387;
+    // background: #718387;
+    // background: #a6babe;
+    background-color: #d4d4d4;
 }
 
 .main_container {
@@ -73,7 +75,7 @@
 
 @media only screen and (min-width: 480px) {
     #root {
-        background-color: rgb(82, 82, 82);
+        // background-color: rgb(82, 82, 82);
     }
 
     .main_container {
@@ -143,7 +145,8 @@
 
 @media only screen and (min-width: 769px) {
     #root {
-        background-color: #9c9c9c;
+        // background-color: #9c9c9c;
+        background-color: #d4d4d4;
     }
     
     .main_container {
@@ -186,7 +189,7 @@
         }
         
         .template_container {
-            background-color: rgb(82, 82, 82);
+            // background-color: rgb(82, 82, 82);
             padding: 0 3vw;
             padding-bottom: 3vh;
             min-height: 89.8vh;

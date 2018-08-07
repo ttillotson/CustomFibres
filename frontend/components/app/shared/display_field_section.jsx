@@ -13,8 +13,10 @@ export default (props) => {
 
     return (
         <section className="field_item">
-            <h2 className={`field_title `  + pageName}>{title}</h2>
-            <p className={`field_body ` + pageName}>{body}</p>
+            <article className={`field_text`}>
+                <h2 className={`field_title `  + pageName}>{title}</h2>
+                <p className={`field_body ` + pageName}>{body}</p>
+            </article>
             <StyledImageContainer>
                 { displayImages }
             </StyledImageContainer>
@@ -24,6 +26,5 @@ export default (props) => {
 
 const StyledImageContainer = styled.article`
     display: flex;
-    // justify-content: 
-    // flex-direction: start;
+    flex-direction: column;
 `;

@@ -21,7 +21,7 @@ class Template extends React.Component {
     }
 
     render() {
-        const { loading, fields, page, extras } = this.props;
+        const { loading, fields, page, extras, StyledTemplate } = this.props;
 
         if (loading) return <LoadingIcon />;
 
@@ -47,10 +47,8 @@ class Template extends React.Component {
                 display: none;
                 @media only screen and (min-width: 769px) {
 
-                    // src: ${page.mastImage.service_url};
                     height: 250px;
                     display: block;
-                    // max-width: 
                 }
             `;
             
@@ -75,18 +73,31 @@ class Template extends React.Component {
         }
 
 
-
-        return (
-            <React.Fragment>
-                { mastImage }
-                <main className='template_container'>
-                    {/* { titleElement } */}
-                    { fieldItems }
-                    { extraItems }
-                    { pageImages }
-                </main>
-            </React.Fragment>
-        );
+        if (StyledTemplate) {
+            return (
+                <StyledTemplate>
+                    { mastImage }
+                    <main className='template_container'>
+                        {/* { titleElement } */}
+                        { fieldItems }
+                        { extraItems }
+                        { pageImages }
+                    </main>
+                </StyledTemplate>
+            ); 
+        } else {
+            return (
+                <React.Fragment>
+                    { mastImage }
+                    <main className='template_container'>
+                        {/* { titleElement } */}
+                        { fieldItems }
+                        { extraItems }
+                        { pageImages }
+                    </main>
+                </React.Fragment>
+            );
+        }
     }
 }
 
