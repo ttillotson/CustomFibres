@@ -15,6 +15,10 @@ const StyledTemplate = styled.div`
             }
         }
 
+        .reverse {
+            flex-direction: row-reverse;
+        }
+
 
 
     }

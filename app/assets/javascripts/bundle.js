@@ -33572,7 +33572,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    @media only screen and (min-width: 769px) {\n        .field_item {\n            display: flex;\n            justify-content: space-between;\n\n            .field_text {\n                width: 30vw;\n            }\n        }\n\n\n\n    }\n'], ['\n    @media only screen and (min-width: 769px) {\n        .field_item {\n            display: flex;\n            justify-content: space-between;\n\n            .field_text {\n                width: 30vw;\n            }\n        }\n\n\n\n    }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    @media only screen and (min-width: 769px) {\n        .field_item {\n            display: flex;\n            justify-content: space-between;\n\n            .field_text {\n                width: 30vw;\n            }\n        }\n\n        .reverse {\n            flex-direction: row-reverse;\n        }\n\n\n\n    }\n'], ['\n    @media only screen and (min-width: 769px) {\n        .field_item {\n            display: flex;\n            justify-content: space-between;\n\n            .field_text {\n                width: 30vw;\n            }\n        }\n\n        .reverse {\n            flex-direction: row-reverse;\n        }\n\n\n\n    }\n']);
 
 var _reactRedux = __webpack_require__(5);
 
