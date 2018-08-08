@@ -7150,6 +7150,12 @@ var _gallery_index = __webpack_require__(49);
 
 var _gallery_index2 = _interopRequireDefault(_gallery_index);
 
+var _shared_styled_components = __webpack_require__(260);
+
+var styledComponents = _interopRequireWildcard(_shared_styled_components);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -7273,6 +7279,11 @@ var FieldItem = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            // Styled Components
+            var DashInputSection = styledComponents.DashInputSection;
+            var DeleteButton = styledComponents.DeleteButton;
+            var SaveButton = styledComponents.SaveButton;
+
             var lastUpdated = _react2.default.createElement(
                 'span',
                 null,
@@ -7281,49 +7292,48 @@ var FieldItem = function (_React$Component) {
             );
 
             var deleteButton = _react2.default.createElement(
-                'button',
-                { onClick: this.removeForm,
-                    className: 'delete_item'
-                },
+                DeleteButton,
+                { onClick: this.removeForm },
                 'Delete'
             );
 
-            var itemClass = this.state.id ? "form_item" : "form_item new";
+            var inputClass = this.state.id ? "" : "new";
 
             return _react2.default.createElement(
                 'form',
                 { className: 'edit_field' },
                 _react2.default.createElement(
-                    'section',
-                    { className: itemClass },
+                    DashInputSection,
+                    null,
                     _react2.default.createElement(
                         'label',
                         null,
                         'Title'
                     ),
                     _react2.default.createElement('input', {
+                        className: inputClass,
                         type: 'text',
                         value: this.state.title,
                         onChange: this.update('title')
                     })
                 ),
                 _react2.default.createElement(
-                    'section',
-                    { className: itemClass },
+                    DashInputSection,
+                    null,
                     _react2.default.createElement(
                         'label',
                         null,
                         'Body'
                     ),
                     _react2.default.createElement('textarea', {
-                        className: 'field_body',
+                        className: inputClass,
                         value: this.state.body,
                         onChange: this.update("body")
                     })
                 ),
                 _react2.default.createElement(
-                    'section',
-                    { className: itemClass },
+                    DashInputSection,
+                    null,
                     _react2.default.createElement(
                         'label',
                         null,
@@ -7338,6 +7348,7 @@ var FieldItem = function (_React$Component) {
                             this.renderImagePreview()
                         ),
                         _react2.default.createElement('input', {
+                            className: inputClass,
                             type: 'file',
                             multiple: true,
                             onChange: this.handleFileInput
@@ -7353,10 +7364,8 @@ var FieldItem = function (_React$Component) {
                         { className: 'form_buttons' },
                         this.state.id ? deleteButton : null,
                         _react2.default.createElement(
-                            'button',
-                            { onClick: this.submitForm,
-                                className: 'save_item'
-                            },
+                            SaveButton,
+                            null,
                             'Save'
                         )
                     )
@@ -36931,12 +36940,13 @@ exports.default = PageGallery;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.DashSection = exports.DashForm = exports.DashInput = exports.SaveButton = undefined;
+exports.DeleteButton = exports.SaveButton = exports.DashInputSection = exports.DashForm = exports.DashSection = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n\n'], ['\n\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    .edit_field {\n        border-bottom: 2px solid #96A392;\n        padding: 15px 0;\n        \n        .form_item {\n            display: flex;\n            justify-content: space-between;\n            padding: 0 20px;\n            font-size: 2vh;\n            padding: 1vh 0;\n            \n            label {\n                font-size: 2.3vh;\n            }\n            \n            input, textarea {\n                width: 80%;\n            }\n            \n            .field_body {\n                min-height: 120px;\n                vertical-align: top;\n            }\n        }\n        \n        .new {\n            input, textarea {\n                background-color: rgb(98, 98, 98);\n                padding: 3px 5px;\n                border-radius: 5px;\n            }\n\n        }\n    }\n'], ['\n    .edit_field {\n        border-bottom: 2px solid #96A392;\n        padding: 15px 0;\n        \n        .form_item {\n            display: flex;\n            justify-content: space-between;\n            padding: 0 20px;\n            font-size: 2vh;\n            padding: 1vh 0;\n            \n            label {\n                font-size: 2.3vh;\n            }\n            \n            input, textarea {\n                width: 80%;\n            }\n            \n            .field_body {\n                min-height: 120px;\n                vertical-align: top;\n            }\n        }\n        \n        .new {\n            input, textarea {\n                background-color: rgb(98, 98, 98);\n                padding: 3px 5px;\n                border-radius: 5px;\n            }\n\n        }\n    }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']);
 
 var _styledComponents = __webpack_require__(14);
 
@@ -36946,13 +36956,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject);
+// Large Components
+var DashSection = exports.DashSection = _styledComponents2.default.section(_templateObject);
+var DashForm = exports.DashForm = _styledComponents2.default.form(_templateObject2);
 
-var DashInput = exports.DashInput = _styledComponents2.default.input(_templateObject2);
+// Mid Components
+var DashInputSection = exports.DashInputSection = _styledComponents2.default.section(_templateObject3);
 
-var DashForm = exports.DashForm = _styledComponents2.default.form(_templateObject3);
+// Small Components
+var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject4);
 
-var DashSection = exports.DashSection = _styledComponents2.default.section(_templateObject4);
+var DeleteButton = exports.DeleteButton = _styledComponents2.default.button(_templateObject5);
 
 /***/ }),
 /* 261 */

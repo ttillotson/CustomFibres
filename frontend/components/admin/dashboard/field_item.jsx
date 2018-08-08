@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ImageIndex from '../../shared/gallery_index';
+import * as styledComponents from './shared_styled_components';
 
 class FieldItem extends React.Component {
     constructor(props) {
@@ -104,56 +105,64 @@ class FieldItem extends React.Component {
     }
 
     render() {
+        // Styled Components
+        const DashInputSection = styledComponents.DashInputSection;
+        const DeleteButton = styledComponents.DeleteButton;
+        const SaveButton = styledComponents.SaveButton;
+
         let lastUpdated = <span>Last Updated: {this.props.field.last_updated}</span>;
 
-        let deleteButton = <button onClick={this.removeForm}
-                                className='delete_item'
-                                >Delete</button>;
+        let deleteButton = <DeleteButton onClick={this.removeForm}>
+                                Delete
+                            </DeleteButton>;
 
-        const itemClass = this.state.id ? "form_item" : "form_item new";
+        const inputClass = this.state.id ? "" : "new";                        
 
         return (
             <form className='edit_field'>
-                <section className={ itemClass }>
+                <DashInputSection>
                     <label>Title</label>
                     <input 
+                    className={inputClass}
                     type='text'
                     value={this.state.title}
                     onChange={this.update('title')}
                     />
-                </section>
+                </DashInputSection>
 
-                <section className={ itemClass }>
+                <DashInputSection>
                     <label>Body</label>
                     <textarea 
-                    className='field_body'
+                    className={inputClass}
                     value={this.state.body}
                     onChange={this.update("body")}
                     />
-                </section>
+                </DashInputSection>
 
-                <section className={ itemClass }>
+                <DashInputSection>
                     <label>Images</label>
                     <section className='image_input'>
                         <StyledList className='image_list'>
                             { this.renderImagePreview() }
                         </StyledList>
                         <input
+                        className={inputClass}
                         type='file'
                         multiple={true}
                         onChange={this.handleFileInput}
                         />
                     </section>
-                </section>
+                </DashInputSection>
 
                 <section className={'form_logic_section'}>
                     { this.state.id ? lastUpdated : null }
                     <section className="form_buttons" >
                         { this.state.id ? deleteButton : null }
 
-                        <button onClick={this.submitForm}
+                        <SaveButton>Save</SaveButton>
+                        {/* <button onClick={this.submitForm}
                                 className='save_item'
-                                >Save</button>
+                                >Save</button> */}
                     </section>
                 </section>
                 
