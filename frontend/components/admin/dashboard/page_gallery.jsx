@@ -97,8 +97,10 @@ class PageGallery extends React.Component {
 
     render() {
         const SaveButton = styledComponents.SaveButton;
+        const DashSection = styledComponents.DashSection;
+
         return (
-            <section className={'page_gallery'}>
+            <DashSection>
                 <p>Page Gallery Section</p>
 
                 <StyledPageItem>
@@ -127,7 +129,7 @@ class PageGallery extends React.Component {
                     </section>
                 </StyledPageItem>
                 <SaveButton onClick={this.submitImages}>Save</SaveButton>
-            </section>
+            </DashSection>
         );
     }
 }

@@ -4,7 +4,8 @@ import FieldItemContainer from './field_item_container';
 import NewFieldItemContainer from './new_field_item_container';
 import LoadingIcon from '../../shared/loading_icon';
 import PageGallery from './page_gallery';
-import FieldTitle from './field_title';
+import PageTitle from './page_title';
+import * as styledComponents from './shared_styled_components';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -95,6 +96,9 @@ class Dashboard extends React.Component {
 
         const fieldLogic = this.state.newField ? newFieldItem : addButton ;
 
+        // Styled Components
+        const DashSection = styledComponents.DashSection;
+
         return (
             <main className='dashboard_container'>
                 <AdminHeading signOut={this.handleSignOut} />
@@ -103,11 +107,13 @@ class Dashboard extends React.Component {
                         {tabs}
                     </ul>
                 </nav>
-                <FieldTitle currentPage={currentPage} updatePage={updatePage} />
-                <section className={'fields_container'}>
+                <PageTitle currentPage={currentPage} updatePage={updatePage} />
+                {/* <section className={'fields_container'}> */}
+                <DashSection>
                     { fieldItems }
                     { fieldLogic }
-                </section>
+                </DashSection>
+                {/* </section> */}
                 <PageGallery currentPage={currentPage} updatePage={updatePage} removeImage={removeImage} />
             </main>
         );

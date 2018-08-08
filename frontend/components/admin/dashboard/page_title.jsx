@@ -31,22 +31,27 @@ class FieldTitle extends React.Component {
 
     render() {
         const SaveButton = styledComponents.SaveButton;
+        const DashSection = styledComponents.DashSection;
+        const DashForm = styledComponents.DashForm;
+
         return (
-            <form className="edit_page_title">
-                <section className='page_title'>
-                    <label>Page Title</label>
-                    <input 
-                    type="text" 
-                    value={this.state.title}
-                    onChange={this.updateTitle}
-                    />
-                </section>
-                <section className='form_logic_section'>
-                    <SaveButton onClick={this.submitTitle}
-                            className='save_item'
-                            >Save</SaveButton>
-                </section>
-            </form>
+            <DashSection>
+                <DashForm className="edit_page_title">
+                    <section className='page_title'>
+                        <label>Page Title</label>
+                        <input 
+                        type="text" 
+                        value={this.state.title}
+                        onChange={this.updateTitle}
+                        />
+                    </section>
+                    <section className='form_logic_section'>
+                        <SaveButton onClick={this.submitTitle}
+                                className='save_item'
+                                >Save</SaveButton>
+                    </section>
+                </DashForm>
+            </DashSection>
         );
     }
 }
