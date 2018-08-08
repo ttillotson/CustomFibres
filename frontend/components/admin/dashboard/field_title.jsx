@@ -1,4 +1,5 @@
 import React from 'react';
+import * as styledComponents from './shared_styled_components';
 
 class FieldTitle extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class FieldTitle extends React.Component {
     }
 
     render() {
-
+        const SaveButton = styledComponents.SaveButton;
         return (
             <form className="edit_page_title">
                 <section className='page_title'>
@@ -41,9 +42,9 @@ class FieldTitle extends React.Component {
                     />
                 </section>
                 <section className='form_logic_section'>
-                    <button onClick={this.submitTitle}
+                    <SaveButton onClick={this.submitTitle}
                             className='save_item'
-                            >Save</button>
+                            >Save</SaveButton>
                 </section>
             </form>
         );

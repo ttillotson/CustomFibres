@@ -9,7 +9,6 @@ export default (props) => {
         <StyledImage key={`key=${image.signed_id}`} src={image.service_url}/>
     );
 
-    // debugger;
     let klass = 'field_item';
     if (idx % 2) klass += ' reverse';
 

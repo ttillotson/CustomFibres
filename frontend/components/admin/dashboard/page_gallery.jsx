@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ImageIndex from '../../shared/gallery_index';
+import * as styledComponents from './shared_styled_components';
 
 class PageGallery extends React.Component {
     constructor(props) {
@@ -95,6 +96,7 @@ class PageGallery extends React.Component {
     }
 
     render() {
+        const SaveButton = styledComponents.SaveButton;
         return (
             <section className={'page_gallery'}>
                 <p>Page Gallery Section</p>
@@ -154,11 +156,6 @@ const StyledImage = styled.img`
 
 const StyledList = styled.ul`
     flex-direction: column;
-`;
-
-const SaveButton = styled.button`
-    background-color: rgba(115, 255, 22, 0.815);
-    margin: 5px;
 `;
 
 export default PageGallery;

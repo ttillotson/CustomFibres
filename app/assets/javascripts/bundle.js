@@ -33658,7 +33658,6 @@ exports.default = function (props) {
         return _react2.default.createElement(StyledImage, { key: 'key=' + image.signed_id, src: image.service_url });
     });
 
-    // debugger;
     var klass = 'field_item';
     if (idx % 2) klass += ' reverse';
 
@@ -36686,8 +36685,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36700,6 +36698,12 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _gallery_index = __webpack_require__(49);
 
 var _gallery_index2 = _interopRequireDefault(_gallery_index);
+
+var _shared_styled_components = __webpack_require__(260);
+
+var styledComponents = _interopRequireWildcard(_shared_styled_components);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36828,6 +36832,7 @@ var PageGallery = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var SaveButton = styledComponents.SaveButton;
             return _react2.default.createElement(
                 'section',
                 { className: 'page_gallery' },
@@ -36901,8 +36906,6 @@ var StyledImage = _styledComponents2.default.img(_templateObject3);
 
 var StyledList = _styledComponents2.default.ul(_templateObject4);
 
-var SaveButton = _styledComponents2.default.button(_templateObject5);
-
 exports.default = PageGallery;
 
 /***/ }),
@@ -36921,6 +36924,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _shared_styled_components = __webpack_require__(260);
+
+var styledComponents = _interopRequireWildcard(_shared_styled_components);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36968,7 +36977,7 @@ var FieldTitle = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-
+            var SaveButton = styledComponents.SaveButton;
             return _react2.default.createElement(
                 'form',
                 { className: 'edit_page_title' },
@@ -36990,7 +36999,7 @@ var FieldTitle = function (_React$Component) {
                     'section',
                     { className: 'form_logic_section' },
                     _react2.default.createElement(
-                        'button',
+                        SaveButton,
                         { onClick: this.submitTitle,
                             className: 'save_item'
                         },
@@ -37005,6 +37014,34 @@ var FieldTitle = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FieldTitle;
+
+/***/ }),
+/* 259 */,
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.DashForm = exports.SaveButton = undefined;
+
+var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    \n'], ['\n    \n']);
+
+var _styledComponents = __webpack_require__(14);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject);
+
+var DashForm = exports.DashForm = _styledComponents2.default.form(_templateObject2);
 
 /***/ })
 /******/ ]);
