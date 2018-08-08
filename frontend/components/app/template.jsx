@@ -27,20 +27,6 @@ class Template extends React.Component {
 
         if (!page) return null;
 
-        const fieldItems = fields.map((field, idx) => (
-            <DisplayFieldSection
-            field={field}
-            key={`key=${field.id}`}
-            idx={idx}
-            pageName={page.name}
-            StyledImage={StyledImage}
-            />
-        ));
-
-        // const titleElement = <h2 className='page_title'>{pageTitle}</h2>;
-
-        const extraItems = extras ? extras : null;
-
         // Setup Page's Mast; if it exists, set it
         let mastImage = null;
         if (page.mastImage) {
@@ -55,6 +41,22 @@ class Template extends React.Component {
             
             mastImage = <StyledMast src={page.mastImage.service_url} />;
         }
+
+        const pageTitle = <h2 className='page_title'>{page.title}</h2>;
+        
+
+        const fieldItems = fields.map((field, idx) => (
+            <DisplayFieldSection
+            field={field}
+            key={`key=${field.id}`}
+            idx={idx}
+            pageName={page.name}
+            StyledImage={StyledImage}
+            />
+        ));
+
+        const extraItems = extras ? extras : null;
+
 
         // Setup Page Images; If any exist, format them
         let pageImages;
@@ -79,7 +81,7 @@ class Template extends React.Component {
                 <StyledTemplate>
                     { mastImage }
                     <main className='template_container'>
-                        {/* { titleElement } */}
+                        { pageTitle }
                         { fieldItems }
                         { extraItems }
                         { pageImages }
@@ -91,7 +93,7 @@ class Template extends React.Component {
                 <React.Fragment>
                     { mastImage }
                     <main className='template_container'>
-                        {/* { titleElement } */}
+                        { pageTitle }
                         { fieldItems }
                         { extraItems }
                         { pageImages }

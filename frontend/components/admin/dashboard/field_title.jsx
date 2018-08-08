@@ -3,14 +3,29 @@ import React from 'react';
 class FieldTitle extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            title: "",
+            page_id: props.currentPage.id,
+            // name: props.currentPage.name,
+            title: props.currentPage.title,
         };
         this.updateTitle = this.updateTitle.bind(this);
+        this.submitTitle = this.submitTitle.bind(this);
     }
 
     updateTitle(e) {
+        console.log(this.state)
         return this.setState({ title: e.target.value });
+    }
+
+    submitTitle(e) {
+        e.preventDefault();
+        const pageData = new FormData();
+
+        pageData.append('page_id', this.props.currentPage.id);
+        pageData.append('title', this.state.title);
+
+        this.props.updatePage(pageData);
     }
 
     render() {

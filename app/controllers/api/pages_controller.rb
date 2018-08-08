@@ -27,6 +27,12 @@ class Api::PagesController < ApplicationController
             else
                 render json: @page.errors.full_messages, status: 422
             end
+        elsif params[:title]
+            if @page.update_attributes(title: params[:title])
+                render :show
+            else
+                render json: @page.errors.full_messages, status: 422
+            end
         end
     end
 

@@ -4,6 +4,7 @@ import FieldItemContainer from './field_item_container';
 import NewFieldItemContainer from './new_field_item_container';
 import LoadingIcon from '../../shared/loading_icon';
 import PageGallery from './page_gallery';
+import FieldTitle from './field_title';
 
 class Dashboard extends React.Component {
     constructor(props) {

@@ -11,7 +11,7 @@ export default (props) => {
 
     // debugger;
     let klass = 'field_item';
-    if (idx > 0 && idx % 2 === 0) klass += ' reverse';
+    if (idx % 2) klass += ' reverse';
 
     return (
         <section className={klass}>
