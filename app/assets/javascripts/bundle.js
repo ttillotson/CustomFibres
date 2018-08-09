@@ -4187,8 +4187,8 @@ var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 8
     _templateObject6 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n    max-width: 150px;\n    z-index: 2;\n'], ['\n    max-width: 150px;\n    z-index: 2;\n']);
+    _templateObject9 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']);
 
 var _styledComponents = __webpack_require__(11);
 
@@ -36777,9 +36777,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36871,6 +36869,8 @@ var PageGallery = function (_React$Component) {
                 images = _props$currentPage.images;
 
 
+            var StyledImage = styledComponents.StyledImage;
+
             var combinedImages = images.concat(this.state.newImages);
             if (type === "images") {
                 return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: images,
@@ -36930,6 +36930,7 @@ var PageGallery = function (_React$Component) {
             var DashSection = styledComponents.DashSection;
             var ImageGallerySection = styledComponents.ImageGallerySection;
             var ImageInputSection = styledComponents.ImageInputSection;
+            var ImageList = styledComponents.ImageList;
             var ImageInput = styledComponents.ImageInput;
 
             return _react2.default.createElement(
@@ -36949,10 +36950,10 @@ var PageGallery = function (_React$Component) {
                         'Mast Image'
                     ),
                     _react2.default.createElement(
-                        'section',
-                        { className: 'image_input' },
+                        ImageGallerySection,
+                        null,
                         _react2.default.createElement(
-                            'ul',
+                            ImageList,
                             { className: 'image_list' },
                             this.renderImagePreview("mastImage")
                         ),
@@ -36983,7 +36984,7 @@ var PageGallery = function (_React$Component) {
                         ImageGallerySection,
                         null,
                         _react2.default.createElement(
-                            StyledList,
+                            ImageList,
                             { className: 'image_list' },
                             this.renderImagePreview("images")
                         ),
@@ -37019,9 +37020,13 @@ var StyledMast = _styledComponents2.default.article(_templateObject);
 
 var StyledPageItem = _styledComponents2.default.section(_templateObject2);
 
-var StyledImage = _styledComponents2.default.img(_templateObject3);
+// const StyledImage = styled.img`
+//     max-width: 150px;
+// `;
 
-var StyledList = _styledComponents2.default.ul(_templateObject4);
+// const StyledList = styled.ul`
+//     flex-direction: column;
+// `;
 
 exports.default = PageGallery;
 

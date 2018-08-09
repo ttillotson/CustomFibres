@@ -48,6 +48,8 @@ class PageGallery extends React.Component {
     renderImagePreview(type) {
         const { mastImage, images } = this.props.currentPage;
 
+        const StyledImage = styledComponents.StyledImage;
+
         const combinedImages = images.concat(this.state.newImages);
         if (type === "images") {
             return (
@@ -100,7 +102,9 @@ class PageGallery extends React.Component {
         const DashSection = styledComponents.DashSection;
         const ImageGallerySection = styledComponents.ImageGallerySection;
         const ImageInputSection = styledComponents.ImageInputSection;
+        const ImageList = styledComponents.ImageList;
         const ImageInput = styledComponents.ImageInput;
+        
 
         return (
             <DashSection>
@@ -108,10 +112,10 @@ class PageGallery extends React.Component {
 
                 <StyledPageItem>
                     <label>Mast Image</label>
-                    <section className='image_input'>
-                        <ul className='image_list'>
+                    <ImageGallerySection>
+                        <ImageList className='image_list'>
                             { this.renderImagePreview("mastImage") }
-                        </ul>
+                        </ImageList>
                         <ImageInputSection>
                             <ImageInput
                             type='file'
@@ -120,14 +124,14 @@ class PageGallery extends React.Component {
                             <p>Click Here to Add An Image!</p>
                         </ImageInputSection>
 
-                    </section>
+                    </ImageGallerySection>
                 </StyledPageItem>
                 <StyledPageItem>
                     <label>Images</label>
                     <ImageGallerySection>
-                        <StyledList className='image_list'>
+                        <ImageList className='image_list'>
                             { this.renderImagePreview("images") }
-                        </StyledList>
+                        </ImageList>
                         <ImageInputSection>
                             <ImageInput
                             type='file'
@@ -161,12 +165,12 @@ const StyledPageItem = styled.section`
     padding: 1vh 0;
 `;
 
-const StyledImage = styled.img`
-    max-width: 150px;
-`;
+// const StyledImage = styled.img`
+//     max-width: 150px;
+// `;
 
-const StyledList = styled.ul`
-    flex-direction: column;
-`;
+// const StyledList = styled.ul`
+//     flex-direction: column;
+// `;
 
 export default PageGallery;

@@ -108,12 +108,10 @@ class Dashboard extends React.Component {
                     </ul>
                 </nav>
                 <PageTitle currentPage={currentPage} updatePage={updatePage} />
-                {/* <section className={'fields_container'}> */}
                 <DashSection>
                     { fieldItems }
                     { fieldLogic }
                 </DashSection>
-                {/* </section> */}
                 <PageGallery currentPage={currentPage} updatePage={updatePage} removeImage={removeImage} />
             </main>
         );

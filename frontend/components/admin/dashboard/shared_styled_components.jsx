@@ -82,11 +82,11 @@ export const ImageInput = styled.input`
     background: white;
     position: absolute;
     top: 0;
+    left: 0;
     z-index: 1;
 `;
 
 export const StyledImage = styled.img`
     max-width: 150px;
-    z-index: 2;
 `;
 
