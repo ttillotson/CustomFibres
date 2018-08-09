@@ -55,6 +55,11 @@ export const ImageGallerySection = styled.section`
 
 export const ImageInputSection = styled.section`
     text-align: center;
+    cursor: pointer;
+    p {
+        font-size: 20px;
+        color: grey;
+    }
 `;
 
 // Small Components

@@ -4183,7 +4183,7 @@ var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 8
     _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[\'text\'], input[\'textarea\'] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[\'text\'], input[\'textarea\'] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 80%;\n    position: relative;\n'], ['\n    width: 80%;\n    position: relative;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    text-align: center;\n'], ['\n    text-align: center;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n']);
@@ -36911,6 +36911,8 @@ var PageGallery = function (_React$Component) {
         value: function render() {
             var SaveButton = styledComponents.SaveButton;
             var DashSection = styledComponents.DashSection;
+            var ImageInputSection = styledComponents.ImageInputSection;
+            var ImageInput = styledComponents.ImageInput;
 
             return _react2.default.createElement(
                 DashSection,
@@ -36936,10 +36938,19 @@ var PageGallery = function (_React$Component) {
                             { className: 'image_list' },
                             this.renderImagePreview("mastImage")
                         ),
-                        _react2.default.createElement('input', {
-                            type: 'file',
-                            onChange: this.submitMastImage
-                        })
+                        _react2.default.createElement(
+                            ImageInputSection,
+                            null,
+                            _react2.default.createElement(ImageInput, {
+                                type: 'file',
+                                onChange: this.submitMastImage
+                            }),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Click Here to Add An Image!'
+                            )
+                        )
                     )
                 ),
                 _react2.default.createElement(
@@ -36958,11 +36969,20 @@ var PageGallery = function (_React$Component) {
                             { className: 'image_list' },
                             this.renderImagePreview("images")
                         ),
-                        _react2.default.createElement('input', {
-                            type: 'file',
-                            multiple: true,
-                            onChange: this.processImages
-                        })
+                        _react2.default.createElement(
+                            ImageInputSection,
+                            null,
+                            _react2.default.createElement(ImageInput, {
+                                type: 'file',
+                                multiple: true,
+                                onChange: this.processImages
+                            }),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Click Here to Add Images!'
+                            )
+                        )
                     )
                 ),
                 _react2.default.createElement(
@@ -37085,9 +37105,7 @@ var FieldTitle = function (_React$Component) {
                         { className: 'form_logic_section' },
                         _react2.default.createElement(
                             SaveButton,
-                            { onClick: this.submitTitle,
-                                className: 'save_item'
-                            },
+                            { onClick: this.submitTitle },
                             'Save'
                         )
                     )

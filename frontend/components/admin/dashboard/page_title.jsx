@@ -46,9 +46,9 @@ class FieldTitle extends React.Component {
                         />
                     </section>
                     <section className='form_logic_section'>
-                        <SaveButton onClick={this.submitTitle}
-                                className='save_item'
-                                >Save</SaveButton>
+                        <SaveButton onClick={this.submitTitle}>
+                            Save
+                        </SaveButton>
                     </section>
                 </DashForm>
             </DashSection>

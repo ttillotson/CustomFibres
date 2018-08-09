@@ -98,6 +98,8 @@ class PageGallery extends React.Component {
     render() {
         const SaveButton = styledComponents.SaveButton;
         const DashSection = styledComponents.DashSection;
+        const ImageInputSection = styledComponents.ImageInputSection;
+        const ImageInput = styledComponents.ImageInput;
 
         return (
             <DashSection>
@@ -109,10 +111,18 @@ class PageGallery extends React.Component {
                         <ul className='image_list'>
                             { this.renderImagePreview("mastImage") }
                         </ul>
-                        <input
+                        {/* <input
                         type='file'
                         onChange={this.submitMastImage}
-                        />
+                        /> */}
+                        <ImageInputSection>
+                            <ImageInput
+                            type='file'
+                            onChange={this.submitMastImage}
+                            />
+                            <p>Click Here to Add An Image!</p>
+                        </ImageInputSection>
+
                     </section>
                 </StyledPageItem>
                 <StyledPageItem>
@@ -121,11 +131,20 @@ class PageGallery extends React.Component {
                         <StyledList className='image_list'>
                             { this.renderImagePreview("images") }
                         </StyledList>
-                        <input
+                        {/* <input
                         type='file'
                         multiple={true}
                         onChange={this.processImages}
-                        />
+                        /> */}
+                        <ImageInputSection>
+                            <ImageInput
+                            type='file'
+                            multiple={true}
+                            onChange={this.processImages}
+                            />
+                            <p>Click Here to Add Images!</p>
+                        </ImageInputSection>
+
                     </section>
                 </StyledPageItem>
                 <SaveButton onClick={this.submitImages}>Save</SaveButton>
