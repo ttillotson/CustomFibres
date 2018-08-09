@@ -29,7 +29,7 @@ export const DashInputSection = styled.section`
         font-size: 2.3vh;
     }
     
-    input['text'], input['textarea'] {
+    input[type="text"] {
         width: 80%;
     }
     
