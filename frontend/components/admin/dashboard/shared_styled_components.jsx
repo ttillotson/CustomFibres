@@ -65,7 +65,24 @@ export const ImageInputSection = styled.section`
 `;
 
 export const FormLogicSection = styled.section`
-    
+    display: flex; 
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    span {
+        padding-top: 5px;
+    }
+
+    section {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        
+        button {
+            margin-right: 5px;
+        }
+        
+    }
 `;
 
 // Small Components

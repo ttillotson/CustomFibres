@@ -34,6 +34,7 @@ class FieldTitle extends React.Component {
         const DashSection = styledComponents.DashSection;
         const DashInputSection = styledComponents.DashInputSection;
         const DashForm = styledComponents.DashForm;
+        const FormLogicSection = styledComponents.FormLogicSection;
 
         return (
             <DashSection>
@@ -46,11 +47,11 @@ class FieldTitle extends React.Component {
                         onChange={this.updateTitle}
                         />
                     </DashInputSection>
-                    <section className='form_logic_section'>
+                    <FormLogicSection>
                         <SaveButton onClick={this.submitTitle}>
                             Save
                         </SaveButton>
-                    </section>
+                    </FormLogicSection>
                 </DashForm>
             </DashSection>
         );

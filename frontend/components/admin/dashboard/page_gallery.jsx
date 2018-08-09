@@ -98,12 +98,13 @@ class PageGallery extends React.Component {
     }
 
     render() {
-        const SaveButton = styledComponents.SaveButton;
         const DashSection = styledComponents.DashSection;
+        const FormLogicSection = styledComponents.FormLogicSection;
         const ImageGallerySection = styledComponents.ImageGallerySection;
         const ImageInputSection = styledComponents.ImageInputSection;
         const ImageList = styledComponents.ImageList;
         const ImageInput = styledComponents.ImageInput;
+        const SaveButton = styledComponents.SaveButton;
         
 
         return (
@@ -142,7 +143,9 @@ class PageGallery extends React.Component {
                         </ImageInputSection>
                     </ImageGallerySection>
                 </StyledPageItem>
-                <SaveButton onClick={this.submitImages}>Save</SaveButton>
+                <FormLogicSection>
+                    <SaveButton onClick={this.submitImages}>Save</SaveButton>
+                </FormLogicSection>
             </DashSection>
         );
     }

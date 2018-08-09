@@ -109,6 +109,7 @@ class FieldItem extends React.Component {
     render() {
         // Styled Components
         const FieldForm = styledComponents.FieldForm;
+        const FormLogicSection = styledComponents.FormLogicSection;
         const DashInputSection = styledComponents.DashInputSection;
         const DeleteButton = styledComponents.DeleteButton;
         const SaveButton = styledComponents.SaveButton;
@@ -164,17 +165,14 @@ class FieldItem extends React.Component {
                     </ImageGallerySection>
                 </DashInputSection>
 
-                <section className={'form_logic_section'}>
-                    { this.state.id ? lastUpdated : null }
+                <FormLogicSection>
                     <section className="form_buttons" >
                         { this.state.id ? deleteButton : null }
 
-                        <SaveButton>Save</SaveButton>
-                        {/* <button onClick={this.submitForm}
-                                className='save_item'
-                                >Save</button> */}
+                        <SaveButton onClick={this.submitForm}>Save</SaveButton>
                     </section>
-                </section>
+                    { this.state.id ? lastUpdated : null }
+                </FormLogicSection>
             </FieldForm>
         );
     }

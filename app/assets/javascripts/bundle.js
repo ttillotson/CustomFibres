@@ -4185,7 +4185,7 @@ var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 8
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 80%;\n    position: relative;\n'], ['\n    width: 80%;\n    position: relative;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    flex-direction: column;\n'], ['\n    display: flex;\n    flex-direction: column;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n    \n'], ['\n    \n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n    display: flex; \n    justify-content: space-between;\n    flex-direction: row-reverse;\n\n    span {\n        padding-top: 5px;\n    }\n\n    section {\n        flex-grow: 1;\n        display: flex;\n        justify-content: flex-end;\n        \n        button {\n            margin-right: 5px;\n        }\n        \n    }\n'], ['\n    display: flex; \n    justify-content: space-between;\n    flex-direction: row-reverse;\n\n    span {\n        padding-top: 5px;\n    }\n\n    section {\n        flex-grow: 1;\n        display: flex;\n        justify-content: flex-end;\n        \n        button {\n            margin-right: 5px;\n        }\n        \n    }\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
     _templateObject9 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
     _templateObject10 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n']),
@@ -7336,6 +7336,7 @@ var FieldItem = function (_React$Component) {
         value: function render() {
             // Styled Components
             var FieldForm = styledComponents.FieldForm;
+            var FormLogicSection = styledComponents.FormLogicSection;
             var DashInputSection = styledComponents.DashInputSection;
             var DeleteButton = styledComponents.DeleteButton;
             var SaveButton = styledComponents.SaveButton;
@@ -7425,19 +7426,19 @@ var FieldItem = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    'section',
-                    { className: 'form_logic_section' },
-                    this.state.id ? lastUpdated : null,
+                    FormLogicSection,
+                    null,
                     _react2.default.createElement(
                         'section',
                         { className: 'form_buttons' },
                         this.state.id ? deleteButton : null,
                         _react2.default.createElement(
                             SaveButton,
-                            null,
+                            { onClick: this.submitForm },
                             'Save'
                         )
-                    )
+                    ),
+                    this.state.id ? lastUpdated : null
                 )
             );
         }
@@ -36914,12 +36915,13 @@ var PageGallery = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var SaveButton = styledComponents.SaveButton;
             var DashSection = styledComponents.DashSection;
+            var FormLogicSection = styledComponents.FormLogicSection;
             var ImageGallerySection = styledComponents.ImageGallerySection;
             var ImageInputSection = styledComponents.ImageInputSection;
             var ImageList = styledComponents.ImageList;
             var ImageInput = styledComponents.ImageInput;
+            var SaveButton = styledComponents.SaveButton;
 
             return _react2.default.createElement(
                 DashSection,
@@ -36993,9 +36995,13 @@ var PageGallery = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    SaveButton,
-                    { onClick: this.submitImages },
-                    'Save'
+                    FormLogicSection,
+                    null,
+                    _react2.default.createElement(
+                        SaveButton,
+                        { onClick: this.submitImages },
+                        'Save'
+                    )
                 )
             );
         }
@@ -37091,6 +37097,7 @@ var FieldTitle = function (_React$Component) {
             var DashSection = styledComponents.DashSection;
             var DashInputSection = styledComponents.DashInputSection;
             var DashForm = styledComponents.DashForm;
+            var FormLogicSection = styledComponents.FormLogicSection;
 
             return _react2.default.createElement(
                 DashSection,
@@ -37113,8 +37120,8 @@ var FieldTitle = function (_React$Component) {
                         })
                     ),
                     _react2.default.createElement(
-                        'section',
-                        { className: 'form_logic_section' },
+                        FormLogicSection,
+                        null,
                         _react2.default.createElement(
                             SaveButton,
                             { onClick: this.submitTitle },
