@@ -4179,7 +4179,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.StyledImage = exports.ImageInput = exports.DeleteButton = exports.SaveButton = exports.FormLogicSection = exports.ImageInputSection = exports.ImageList = exports.ImageGallerySection = exports.DashInputSection = exports.FieldForm = exports.DashForm = exports.DashSection = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n\n    h3 {\n        font-size: 20px;\n        margin-bottom: 2vh;\n    }\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n\n    h3 {\n        font-size: 20px;\n        margin-bottom: 2vh;\n    }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[type="text"] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[type="text"] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 80%;\n    position: relative;\n'], ['\n    width: 80%;\n    position: relative;\n']),
@@ -5131,11 +5131,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n    margin: auto;\n'], ['\n    position: relative;\n    margin: auto;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n    position: relative;\n    margin-right: 2vw;\n'], ['\n    position: relative;\n    margin-right: 2vw;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    // margin: 0 1.5vw;\n'], ['\n    // margin: 0 1.5vw;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n'], ['\n    position: absolute;\n    top: 0;\n    right: 8px;\n    font-size: 20px;\n    font-weight: 700;\n    color: #000;\n    cursor: pointer;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    max-width: ', 'px;\n    border: 2px solid green;\n'], ['\n    max-width: ', 'px;\n    border: 2px solid green;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: center;\n    z-index: 2;\n'], ['\n    display: flex;\n    justify-content: center;\n    z-index: 2;\n']);
+    _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    z-index: 2;\n    margin-bottom: 2vw;\n'], ['\n    display: flex;\n    z-index: 2;\n    margin-bottom: 2vw;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -36916,6 +36916,7 @@ var PageGallery = function (_React$Component) {
         key: 'render',
         value: function render() {
             var DashSection = styledComponents.DashSection;
+            var DashInputSection = styledComponents.DashInputSection;
             var FormLogicSection = styledComponents.FormLogicSection;
             var ImageGallerySection = styledComponents.ImageGallerySection;
             var ImageInputSection = styledComponents.ImageInputSection;
@@ -36927,12 +36928,12 @@ var PageGallery = function (_React$Component) {
                 DashSection,
                 null,
                 _react2.default.createElement(
-                    'p',
+                    'h3',
                     null,
                     'Page Gallery Section'
                 ),
                 _react2.default.createElement(
-                    StyledPageItem,
+                    DashInputSection,
                     null,
                     _react2.default.createElement(
                         'label',
@@ -36963,7 +36964,7 @@ var PageGallery = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    StyledPageItem,
+                    DashInputSection,
                     null,
                     _react2.default.createElement(
                         'label',

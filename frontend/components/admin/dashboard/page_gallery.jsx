@@ -99,6 +99,7 @@ class PageGallery extends React.Component {
 
     render() {
         const DashSection = styledComponents.DashSection;
+        const DashInputSection = styledComponents.DashInputSection;
         const FormLogicSection = styledComponents.FormLogicSection;
         const ImageGallerySection = styledComponents.ImageGallerySection;
         const ImageInputSection = styledComponents.ImageInputSection;
@@ -109,9 +110,9 @@ class PageGallery extends React.Component {
 
         return (
             <DashSection>
-                <p>Page Gallery Section</p>
+                <h3>Page Gallery Section</h3>
 
-                <StyledPageItem>
+                <DashInputSection>
                     <label>Mast Image</label>
                     <ImageGallerySection>
                         <ImageList className='image_list'>
@@ -126,8 +127,8 @@ class PageGallery extends React.Component {
                         </ImageInputSection>
 
                     </ImageGallerySection>
-                </StyledPageItem>
-                <StyledPageItem>
+                </DashInputSection>
+                <DashInputSection>
                     <label>Images</label>
                     <ImageGallerySection>
                         <ImageList className='image_list'>
@@ -142,7 +143,7 @@ class PageGallery extends React.Component {
                             <p>Click Here to Add Images!</p>
                         </ImageInputSection>
                     </ImageGallerySection>
-                </StyledPageItem>
+                </DashInputSection>
                 <FormLogicSection>
                     <SaveButton onClick={this.submitImages}>Save</SaveButton>
                 </FormLogicSection>

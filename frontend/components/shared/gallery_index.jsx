@@ -48,7 +48,7 @@ export default (props) => {
 
 const RelativeItem = styled.li`
     position: relative;
-    margin: auto;
+    margin-right: 2vw;
 `;
 
 const DisplayItem = styled.li`
@@ -72,6 +72,6 @@ const NewStyled = styled.img`
 
 const StyledRow = styled.ul`
     display: flex;
-    justify-content: center;
     z-index: 2;
+    margin-bottom: 2vw;
 `;

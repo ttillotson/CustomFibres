@@ -6,6 +6,11 @@ export const DashSection = styled.section`
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding: 2vh 2vw;
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 2vh;
+    }
 `;
 export const DashForm = styled.form`
     border-bottom: 2px solid #96A392;
