@@ -64,6 +64,10 @@ export const ImageInputSection = styled.section`
     }
 `;
 
+export const FormLogicSection = styled.section`
+    
+`;
+
 // Small Components
 export const SaveButton = styled.button`
     background-color: rgba(115, 255, 22, 0.815);

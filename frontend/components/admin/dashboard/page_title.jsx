@@ -32,19 +32,20 @@ class FieldTitle extends React.Component {
     render() {
         const SaveButton = styledComponents.SaveButton;
         const DashSection = styledComponents.DashSection;
+        const DashInputSection = styledComponents.DashInputSection;
         const DashForm = styledComponents.DashForm;
 
         return (
             <DashSection>
                 <DashForm className="edit_page_title">
-                    <section className='page_title'>
+                    <DashInputSection>
                         <label>Page Title</label>
                         <input 
                         type="text" 
                         value={this.state.title}
                         onChange={this.updateTitle}
                         />
-                    </section>
+                    </DashInputSection>
                     <section className='form_logic_section'>
                         <SaveButton onClick={this.submitTitle}>
                             Save

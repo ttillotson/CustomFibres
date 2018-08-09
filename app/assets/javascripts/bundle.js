@@ -4177,7 +4177,7 @@ var selectMastUrl = exports.selectMastUrl = function selectMastUrl(state) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.StyledImage = exports.ImageInput = exports.DeleteButton = exports.SaveButton = exports.ImageInputSection = exports.ImageList = exports.ImageGallerySection = exports.DashInputSection = exports.FieldForm = exports.DashForm = exports.DashSection = undefined;
+exports.StyledImage = exports.ImageInput = exports.DeleteButton = exports.SaveButton = exports.FormLogicSection = exports.ImageInputSection = exports.ImageList = exports.ImageGallerySection = exports.DashInputSection = exports.FieldForm = exports.DashForm = exports.DashSection = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n']),
@@ -4185,10 +4185,11 @@ var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 8
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 80%;\n    position: relative;\n'], ['\n    width: 80%;\n    position: relative;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    flex-direction: column;\n'], ['\n    display: flex;\n    flex-direction: column;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']);
+    _templateObject7 = _taggedTemplateLiteral(['\n    \n'], ['\n    \n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
+    _templateObject9 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 1;\n']),
+    _templateObject11 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']);
 
 var _styledComponents = __webpack_require__(11);
 
@@ -4213,14 +4214,16 @@ var ImageList = exports.ImageList = _styledComponents2.default.ul(_templateObjec
 
 var ImageInputSection = exports.ImageInputSection = _styledComponents2.default.section(_templateObject6);
 
+var FormLogicSection = exports.FormLogicSection = _styledComponents2.default.section(_templateObject7);
+
 // Small Components
-var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject7);
+var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject8);
 
-var DeleteButton = exports.DeleteButton = _styledComponents2.default.button(_templateObject8);
+var DeleteButton = exports.DeleteButton = _styledComponents2.default.button(_templateObject9);
 
-var ImageInput = exports.ImageInput = _styledComponents2.default.input(_templateObject9);
+var ImageInput = exports.ImageInput = _styledComponents2.default.input(_templateObject10);
 
-var StyledImage = exports.StyledImage = _styledComponents2.default.img(_templateObject10);
+var StyledImage = exports.StyledImage = _styledComponents2.default.img(_templateObject11);
 
 /***/ }),
 /* 34 */
@@ -7444,21 +7447,6 @@ var FieldItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FieldItem;
-
-// const StyledFieldForm = styled.form`
-//     border-bottom: 2px solid #96A392;
-//     padding: 15px 0;
-// `;
-
-// const StyledImage = styled.img`
-//     max-width: 150px;
-//     z-index: 2;
-// `;
-
-// const StyledImageList = styled.ul`
-//     display: flex;
-//     flex-direction: column;
-// `;
 
 /***/ }),
 /* 89 */
@@ -37101,6 +37089,7 @@ var FieldTitle = function (_React$Component) {
         value: function render() {
             var SaveButton = styledComponents.SaveButton;
             var DashSection = styledComponents.DashSection;
+            var DashInputSection = styledComponents.DashInputSection;
             var DashForm = styledComponents.DashForm;
 
             return _react2.default.createElement(
@@ -37110,8 +37099,8 @@ var FieldTitle = function (_React$Component) {
                     DashForm,
                     { className: 'edit_page_title' },
                     _react2.default.createElement(
-                        'section',
-                        { className: 'page_title' },
+                        DashInputSection,
+                        null,
                         _react2.default.createElement(
                             'label',
                             null,

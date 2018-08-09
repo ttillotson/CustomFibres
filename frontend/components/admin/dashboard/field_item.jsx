@@ -62,7 +62,7 @@ class FieldItem extends React.Component {
         //     );
         // });
         const StyledImage = styledComponents.StyledImage;
-        
+
         return (
             [
                 <ImageIndex key={0} images={this.props.savedImages} 
@@ -181,18 +181,3 @@ class FieldItem extends React.Component {
 }
 
 export default FieldItem;
-
-// const StyledFieldForm = styled.form`
-//     border-bottom: 2px solid #96A392;
-//     padding: 15px 0;
-// `;
-
-// const StyledImage = styled.img`
-//     max-width: 150px;
-//     z-index: 2;
-// `;
-
-// const StyledImageList = styled.ul`
-//     display: flex;
-//     flex-direction: column;
-// `;
