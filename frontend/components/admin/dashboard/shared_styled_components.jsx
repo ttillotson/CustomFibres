@@ -32,7 +32,7 @@ export const DashInputSection = styled.section`
         font-size: 2.3vh;
     }
     
-    input {
+    input['text'], input['textarea'] {
         width: 80%;
     }
     
@@ -48,6 +48,15 @@ export const DashInputSection = styled.section`
     }
 `;
 
+export const ImageGallerySection = styled.section`
+    width: 80%;
+    position: relative;
+`;
+
+export const ImageInputSection = styled.section`
+    text-align: center;
+`;
+
 // Small Components
 export const SaveButton = styled.button`
     background-color: rgba(115, 255, 22, 0.815);
@@ -57,4 +66,14 @@ export const SaveButton = styled.button`
 export const DeleteButton = styled.button`
     background-color: red;
     margin: 5px;
+`;
+
+export const ImageInput = styled.input`
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: white;
+    position: absolute;
+    top: 0;
+    z-index: 1;
 `;

@@ -109,6 +109,9 @@ class FieldItem extends React.Component {
         const DashInputSection = styledComponents.DashInputSection;
         const DeleteButton = styledComponents.DeleteButton;
         const SaveButton = styledComponents.SaveButton;
+        const ImageInput = styledComponents.ImageInput;
+        const ImageGallerySection = styledComponents.ImageGallerySection;
+        const ImageInputSection = styledComponents.ImageInputSection;
 
         let lastUpdated = <span>Last Updated: {this.props.field.last_updated}</span>;
 
@@ -141,17 +144,20 @@ class FieldItem extends React.Component {
 
                 <DashInputSection>
                     <label>Images</label>
-                    <section className='image_input'>
+                    <ImageGallerySection>
                         <StyledList className='image_list'>
                             { this.renderImagePreview() }
                         </StyledList>
-                        <input
-                        className={inputClass}
-                        type='file'
-                        multiple={true}
-                        onChange={this.handleFileInput}
-                        />
-                    </section>
+                        <ImageInputSection>
+                            <ImageInput
+                            className={inputClass}
+                            type='file'
+                            multiple={true}
+                            onChange={this.handleFileInput}
+                            />
+                            <p>Click Here to Add Images!</p>
+                        </ImageInputSection>
+                    </ImageGallerySection>
                 </DashInputSection>
 
                 <section className={'form_logic_section'}>
@@ -175,8 +181,10 @@ export default FieldItem;
 
 const StyledImage = styled.img`
     max-width: 150px;
+    z-index: 2;
 `;
 
 const StyledList = styled.ul`
+    display: flex;
     flex-direction: column;
 `;

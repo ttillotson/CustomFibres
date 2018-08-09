@@ -72,7 +72,6 @@ const NewStyled = styled.img`
 
 const StyledRow = styled.ul`
     display: flex;
-    // justify-content: space-between;
     justify-content: center;
-
+    z-index: 2;
 `;

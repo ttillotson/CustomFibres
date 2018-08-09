@@ -173,23 +173,4 @@
 }
 .image_input {
     width: 80%;
-    
-    .image_list {
-        display: flex;
-
-        .image_preview {
-            max-height: 120px;
-            width: auto;
-        }
-
-        .image_removal:hover {
-            &:hover {
-                cursor: pointer;
-            }
-        } 
-
-        .new {
-            border: 3px solid green;
-        }
-    }
 }
