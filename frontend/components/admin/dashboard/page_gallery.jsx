@@ -98,6 +98,7 @@ class PageGallery extends React.Component {
     render() {
         const SaveButton = styledComponents.SaveButton;
         const DashSection = styledComponents.DashSection;
+        const ImageGallerySection = styledComponents.ImageGallerySection;
         const ImageInputSection = styledComponents.ImageInputSection;
         const ImageInput = styledComponents.ImageInput;
 
@@ -111,10 +112,6 @@ class PageGallery extends React.Component {
                         <ul className='image_list'>
                             { this.renderImagePreview("mastImage") }
                         </ul>
-                        {/* <input
-                        type='file'
-                        onChange={this.submitMastImage}
-                        /> */}
                         <ImageInputSection>
                             <ImageInput
                             type='file'
@@ -127,15 +124,10 @@ class PageGallery extends React.Component {
                 </StyledPageItem>
                 <StyledPageItem>
                     <label>Images</label>
-                    <section className='image_input'>
+                    <ImageGallerySection>
                         <StyledList className='image_list'>
                             { this.renderImagePreview("images") }
                         </StyledList>
-                        {/* <input
-                        type='file'
-                        multiple={true}
-                        onChange={this.processImages}
-                        /> */}
                         <ImageInputSection>
                             <ImageInput
                             type='file'
@@ -144,8 +136,7 @@ class PageGallery extends React.Component {
                             />
                             <p>Click Here to Add Images!</p>
                         </ImageInputSection>
-
-                    </section>
+                    </ImageGallerySection>
                 </StyledPageItem>
                 <SaveButton onClick={this.submitImages}>Save</SaveButton>
             </DashSection>
@@ -154,7 +145,6 @@ class PageGallery extends React.Component {
 }
 
 const StyledMast = styled.article`
-
     img {
         max-height: 180px;
         width: auto;

@@ -61,6 +61,8 @@ class FieldItem extends React.Component {
         //         </li>
         //     );
         // });
+        const StyledImage = styledComponents.StyledImage;
+        
         return (
             [
                 <ImageIndex key={0} images={this.props.savedImages} 
@@ -106,12 +108,14 @@ class FieldItem extends React.Component {
 
     render() {
         // Styled Components
+        const FieldForm = styledComponents.FieldForm;
         const DashInputSection = styledComponents.DashInputSection;
         const DeleteButton = styledComponents.DeleteButton;
         const SaveButton = styledComponents.SaveButton;
-        const ImageInput = styledComponents.ImageInput;
         const ImageGallerySection = styledComponents.ImageGallerySection;
         const ImageInputSection = styledComponents.ImageInputSection;
+        const ImageInput = styledComponents.ImageInput;
+        const ImageList = styledComponents.ImageList;
 
         let lastUpdated = <span>Last Updated: {this.props.field.last_updated}</span>;
 
@@ -122,7 +126,7 @@ class FieldItem extends React.Component {
         const inputClass = this.state.id ? "" : "new";                        
 
         return (
-            <form className='edit_field'>
+            <FieldForm>
                 <DashInputSection>
                     <label>Title</label>
                     <input 
@@ -145,9 +149,9 @@ class FieldItem extends React.Component {
                 <DashInputSection>
                     <label>Images</label>
                     <ImageGallerySection>
-                        <StyledList className='image_list'>
+                        <ImageList className='image_list'>
                             { this.renderImagePreview() }
-                        </StyledList>
+                        </ImageList>
                         <ImageInputSection>
                             <ImageInput
                             className={inputClass}
@@ -171,20 +175,24 @@ class FieldItem extends React.Component {
                                 >Save</button> */}
                     </section>
                 </section>
-                
-            </form>
+            </FieldForm>
         );
     }
 }
 
 export default FieldItem;
 
-const StyledImage = styled.img`
-    max-width: 150px;
-    z-index: 2;
-`;
+// const StyledFieldForm = styled.form`
+//     border-bottom: 2px solid #96A392;
+//     padding: 15px 0;
+// `;
 
-const StyledList = styled.ul`
-    display: flex;
-    flex-direction: column;
-`;
+// const StyledImage = styled.img`
+//     max-width: 150px;
+//     z-index: 2;
+// `;
+
+// const StyledImageList = styled.ul`
+//     display: flex;
+//     flex-direction: column;
+// `;

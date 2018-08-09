@@ -4177,16 +4177,18 @@ var selectMastUrl = exports.selectMastUrl = function selectMastUrl(state) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ImageInput = exports.DeleteButton = exports.SaveButton = exports.ImageInputSection = exports.ImageGallerySection = exports.DashInputSection = exports.DashForm = exports.DashSection = undefined;
+exports.StyledImage = exports.ImageInput = exports.DeleteButton = exports.SaveButton = exports.ImageInputSection = exports.ImageList = exports.ImageGallerySection = exports.DashInputSection = exports.FieldForm = exports.DashForm = exports.DashSection = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n'], ['\n    background-color: rgb(82, 82, 82);\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n    padding: 2vh 2vw;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n        \n    // .new {\n    //     input, textarea {\n    //         background-color: rgb(98, 98, 98);\n    //         padding: 3px 5px;\n    //         border-radius: 5px;\n    //     }\n    // }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n'], ['\n    border-bottom: 2px solid #96A392;\n    padding: 15px 0;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[\'text\'], input[\'textarea\'] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 0 20px;\n    font-size: 2vh;\n    padding: 1vh 0;\n    \n    label {\n        font-size: 2.3vh;\n    }\n    \n    input[\'text\'], input[\'textarea\'] {\n        width: 80%;\n    }\n    \n    textarea {\n        width: 80%;\n        min-height: 120px;\n        vertical-align: top;\n    }\n    .new {\n        background-color: rgb(98, 98, 98);\n        padding: 3px 5px;\n        border-radius: 5px;\n    }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 80%;\n    position: relative;\n'], ['\n    width: 80%;\n    position: relative;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n']);
+    _templateObject5 = _taggedTemplateLiteral(['\n    display: flex;\n    flex-direction: column;\n'], ['\n    display: flex;\n    flex-direction: column;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n'], ['\n    text-align: center;\n    cursor: pointer;\n    p {\n        font-size: 20px;\n        color: grey;\n    }\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n'], ['\n    background-color: rgba(115, 255, 22, 0.815);\n    margin: 5px;\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n    background-color: red;\n    margin: 5px;\n'], ['\n    background-color: red;\n    margin: 5px;\n']),
+    _templateObject9 = _taggedTemplateLiteral(['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n'], ['\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    background: white;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n    max-width: 150px;\n    z-index: 2;\n'], ['\n    max-width: 150px;\n    z-index: 2;\n']);
 
 var _styledComponents = __webpack_require__(11);
 
@@ -4200,19 +4202,25 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var DashSection = exports.DashSection = _styledComponents2.default.section(_templateObject);
 var DashForm = exports.DashForm = _styledComponents2.default.form(_templateObject2);
 
+var FieldForm = exports.FieldForm = _styledComponents2.default.form(_templateObject2);
+
 // Mid Components
 var DashInputSection = exports.DashInputSection = _styledComponents2.default.section(_templateObject3);
 
 var ImageGallerySection = exports.ImageGallerySection = _styledComponents2.default.section(_templateObject4);
 
-var ImageInputSection = exports.ImageInputSection = _styledComponents2.default.section(_templateObject5);
+var ImageList = exports.ImageList = _styledComponents2.default.ul(_templateObject5);
+
+var ImageInputSection = exports.ImageInputSection = _styledComponents2.default.section(_templateObject6);
 
 // Small Components
-var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject6);
+var SaveButton = exports.SaveButton = _styledComponents2.default.button(_templateObject7);
 
-var DeleteButton = exports.DeleteButton = _styledComponents2.default.button(_templateObject7);
+var DeleteButton = exports.DeleteButton = _styledComponents2.default.button(_templateObject8);
 
-var ImageInput = exports.ImageInput = _styledComponents2.default.input(_templateObject8);
+var ImageInput = exports.ImageInput = _styledComponents2.default.input(_templateObject9);
+
+var StyledImage = exports.StyledImage = _styledComponents2.default.img(_templateObject10);
 
 /***/ }),
 /* 34 */
@@ -7182,9 +7190,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n    max-width: 150px;\n    z-index: 2;\n'], ['\n    max-width: 150px;\n    z-index: 2;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    flex-direction: column;\n'], ['\n    display: flex;\n    flex-direction: column;\n']);
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -7204,8 +7209,6 @@ var styledComponents = _interopRequireWildcard(_shared_styled_components);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -7285,6 +7288,8 @@ var FieldItem = function (_React$Component) {
             //         </li>
             //     );
             // });
+            var StyledImage = styledComponents.StyledImage;
+
             return [_react2.default.createElement(_gallery_index2.default, { key: 0, images: this.props.savedImages,
                 StyledComponent: StyledImage,
                 removeImage: this.removeImage, rowSize: 4 }), _react2.default.createElement(_gallery_index2.default, { key: 1, images: this.state.newImages,
@@ -7327,12 +7332,14 @@ var FieldItem = function (_React$Component) {
         key: 'render',
         value: function render() {
             // Styled Components
+            var FieldForm = styledComponents.FieldForm;
             var DashInputSection = styledComponents.DashInputSection;
             var DeleteButton = styledComponents.DeleteButton;
             var SaveButton = styledComponents.SaveButton;
-            var ImageInput = styledComponents.ImageInput;
             var ImageGallerySection = styledComponents.ImageGallerySection;
             var ImageInputSection = styledComponents.ImageInputSection;
+            var ImageInput = styledComponents.ImageInput;
+            var ImageList = styledComponents.ImageList;
 
             var lastUpdated = _react2.default.createElement(
                 'span',
@@ -7350,8 +7357,8 @@ var FieldItem = function (_React$Component) {
             var inputClass = this.state.id ? "" : "new";
 
             return _react2.default.createElement(
-                'form',
-                { className: 'edit_field' },
+                FieldForm,
+                null,
                 _react2.default.createElement(
                     DashInputSection,
                     null,
@@ -7393,7 +7400,7 @@ var FieldItem = function (_React$Component) {
                         ImageGallerySection,
                         null,
                         _react2.default.createElement(
-                            StyledList,
+                            ImageList,
                             { className: 'image_list' },
                             this.renderImagePreview()
                         ),
@@ -7438,10 +7445,20 @@ var FieldItem = function (_React$Component) {
 
 exports.default = FieldItem;
 
+// const StyledFieldForm = styled.form`
+//     border-bottom: 2px solid #96A392;
+//     padding: 15px 0;
+// `;
 
-var StyledImage = _styledComponents2.default.img(_templateObject);
+// const StyledImage = styled.img`
+//     max-width: 150px;
+//     z-index: 2;
+// `;
 
-var StyledList = _styledComponents2.default.ul(_templateObject2);
+// const StyledImageList = styled.ul`
+//     display: flex;
+//     flex-direction: column;
+// `;
 
 /***/ }),
 /* 89 */
@@ -36759,7 +36776,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n'], ['\n    img {\n        max-height: 180px;\n        width: auto;\n    }\n\n    span:hover {\n        cursor: pointer;\n    }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n'], ['\n    display: flex;\n    justify-content: space-between;\n    padding: 1vh 0;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    max-width: 150px;\n'], ['\n    max-width: 150px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    flex-direction: column;\n'], ['\n    flex-direction: column;\n']);
@@ -36911,6 +36928,7 @@ var PageGallery = function (_React$Component) {
         value: function render() {
             var SaveButton = styledComponents.SaveButton;
             var DashSection = styledComponents.DashSection;
+            var ImageGallerySection = styledComponents.ImageGallerySection;
             var ImageInputSection = styledComponents.ImageInputSection;
             var ImageInput = styledComponents.ImageInput;
 
@@ -36962,8 +36980,8 @@ var PageGallery = function (_React$Component) {
                         'Images'
                     ),
                     _react2.default.createElement(
-                        'section',
-                        { className: 'image_input' },
+                        ImageGallerySection,
+                        null,
                         _react2.default.createElement(
                             StyledList,
                             { className: 'image_list' },

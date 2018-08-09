@@ -10,14 +10,11 @@ export const DashSection = styled.section`
 export const DashForm = styled.form`
     border-bottom: 2px solid #96A392;
     padding: 15px 0;
-        
-    // .new {
-    //     input, textarea {
-    //         background-color: rgb(98, 98, 98);
-    //         padding: 3px 5px;
-    //         border-radius: 5px;
-    //     }
-    // }
+`;
+
+export const FieldForm = styled.form`
+    border-bottom: 2px solid #96A392;
+    padding: 15px 0;
 `;
 
 // Mid Components
@@ -53,6 +50,11 @@ export const ImageGallerySection = styled.section`
     position: relative;
 `;
 
+export const ImageList = styled.ul`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const ImageInputSection = styled.section`
     text-align: center;
     cursor: pointer;
@@ -82,3 +84,9 @@ export const ImageInput = styled.input`
     top: 0;
     z-index: 1;
 `;
+
+export const StyledImage = styled.img`
+    max-width: 150px;
+    z-index: 2;
+`;
+
